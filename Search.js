@@ -28,6 +28,11 @@ const Search = () => {
   const [index, setIndex] = useState(0);
   const [keyword, setKeyword] = useState('');
   const [send, setSend] = useState(false);
+  const [message, setMessage] = useState('');
+  const toDatabase = () => {
+    setMessage(keyword);
+    setSend(true);
+  };
 
   return (
     <View style={styles.searchFrame}>
@@ -40,9 +45,9 @@ const Search = () => {
       <Searchbar
         placeholder="Search"
         onChangeText={text => setKeyword(text)}
-        onIconPress={() => setSend(true)}
+        onIconPress={toDatabase}
       />
-      {send ? <Database input={keyword} /> : null}
+      {send ? <Database input={message} /> : null}
     </View>
   );
 };

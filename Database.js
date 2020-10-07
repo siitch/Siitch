@@ -30,7 +30,7 @@ const Database = ({input}) => {
   }
   useEffect(() => {
     readData();
-  }, []);
+  }, [input]);
   const readData = () => {
     firebase
       .database()
@@ -40,11 +40,15 @@ const Database = ({input}) => {
   return (
     <View>
       <Text>{input}</Text>
-      {Object.keys(data).map(ind => (
-        <Text key={ind}>
-          {ind}: {data[ind]}
-        </Text>
-      ))}
+      {data == null ? (
+        <Text>No data</Text>
+      ) : (
+        Object.keys(data).map(ind => (
+          <Text key={ind}>
+            {ind}: {data[ind]}
+          </Text>
+        ))
+      )}
     </View>
   );
 };
