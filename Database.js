@@ -13,8 +13,8 @@ import {
   TextInput,
 } from 'react-native';
 
-const Database = () => {
-  const [test, setTest] = useState({});
+const Database = ({input}) => {
+  const [data, setData] = useState({});
   var config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
     authDomain: 'siitch-6b176.firebaseapp.com',
@@ -34,14 +34,15 @@ const Database = () => {
   const readData = () => {
     firebase
       .database()
-      .ref('Beef')
-      .on('value', get => setTest(get.val()));
+      .ref(input)
+      .on('value', get => setData(get.val()));
   };
   return (
     <View>
-      {Object.keys(test).map(ind => (
-        <Text>
-          {ind}: {test[ind]}
+      <Text>{input}</Text>
+      {Object.keys(data).map(ind => (
+        <Text key={ind}>
+          {ind}: {data[ind]}
         </Text>
       ))}
     </View>
