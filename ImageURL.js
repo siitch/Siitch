@@ -1,0 +1,17 @@
+export const images = {
+  meats: require('./images/Beef.png'),
+  everyday_food: require('./images/hamburger.jpg'),
+  seeds: require('./images/sunflower_seeds.png'),
+  drinks_all: require('./images/coffee_small.png'),
+  fruits: require('./images/apple.png'),
+  everyday_items: require('./images/jeans.png'),
+  grains: require('./images/rye.png'),
+  alcoholic_drinks: require('./images/wine.png'),
+  vegetables: require('./images/broccolli.png'),
+  nuts_beans: require('./images/pistachios.png'),
+  oils: require('./images/sesame_oil_small.png'),
+  non_alcoholic_drinks: require('./images/milk.png'),
+  water_drops: require('./images/water_drops.png'),
+  landing_image: require('./images/LandingPage_Image_2x.png'),
+  logo: require('./images/SiitchLogo_large.png'),
+};
