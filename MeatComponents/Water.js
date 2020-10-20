@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,Component,PropTypes} from 'react';
 import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
@@ -15,13 +15,13 @@ import {
   TextInput,
   Pressable,
   TouchableHighlight,
+  Alert
 } from 'react-native';
 
 const Water = inputData => {
   const waterInGallon = Math.round(
     (parseInt(inputData.inputData['Liters per kg'], 10) * 0.2642) / 2.205,
   );
-
   return (
     <View>
       <ScrollView>
@@ -59,7 +59,6 @@ const Water = inputData => {
             style={{width: 200, height: 200}}
           />
         </View>
-
         <View style={{alignItems: 'center', marginTop: '2%'}}>
           <View
             style={{
@@ -136,26 +135,29 @@ const Water = inputData => {
             {'\n'}Drinking Water{'\n'} & Cleaning needs
           </Text>
         </View>
-
         <View
           style={{
             flex: 1,
             flexDirection: 'row',
             marginTop: '7%',
-            alignContent: 'center',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-evenly',
           }}>
           <View
             style={{
-              width: 100,
+              width: width/4,
               height: 100,
-              marginLeft: '10%',
               borderRadius: 20,
               backgroundColor: '#6dbd64',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Rain</Text>
+            <TouchableOpacity onPress={() => Alert.alert(
+              'Rain',
+              'Rain water (Green water): The amount of rainwater required to make an item.'
+              )}>
+            <View style={{alignItems: 'center'}}>
+              <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Rain</Text>
+            </View>
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Text
@@ -172,16 +174,20 @@ const Water = inputData => {
                 </Text>
               </View>
             </View>
+            </TouchableOpacity>
           </View>
           <View
             style={{
-              width: 100,
+              width: width/4,
               height: 100,
               borderRadius: 20,
-              marginLeft: '5%',
               backgroundColor: '#3AADFA',
               alignItems: 'center',
             }}>
+            <TouchableOpacity onPress={() => Alert.alert(
+              'Irrigation',
+              'Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item.'
+              )}>
             <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Irrigation</Text>
             <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -199,19 +205,22 @@ const Water = inputData => {
                 </Text>
               </View>
             </View>
+          </TouchableOpacity>
           </View>
           <View
             style={{
-              width: 100,
+              width: width/4,
               height: 100,
               borderRadius: 20,
-              marginLeft: '5%',
-              marginRight: '7%',
               backgroundColor: '#bfbfbf',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Cleaning</Text>
-            <View style={{alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => Alert.alert(
+              'Cleaning',
+              'Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards. Definitions: www.watercalculator.org'
+              )}>
+              <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Cleaning</Text>
+              <View style={{alignItems: 'center'}}>
               <View style={{flexDirection: 'row'}}>
                 <Text
                   style={{
@@ -225,8 +234,9 @@ const Water = inputData => {
                 <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
                   gal
                 </Text>
+                </View>
               </View>
-            </View>
+          </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

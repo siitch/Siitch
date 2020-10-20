@@ -25,4 +25,12 @@ export const images = {
   recycle_select: require('./images/Navigation_Icons/Recycle_icon_brown.png'),
   vs: require('./images/Navigation_Icons/VS_BW_3x.png'),
   vs_select: require('./images/Navigation_Icons/VS_blue_3x.png'),
+
+  //Beef VS page
+  pig_vs: require('./images/Meats/pig_small.png'),
+  beef_steak: require('./images/BeefPage/beef_steak.png'),
+  goat: require('./images/Meats/goat.png'),
+  tofu: require('./images/tofu.png')
+
+
 };
