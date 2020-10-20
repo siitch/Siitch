@@ -7,7 +7,7 @@ import Search from './Search';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Dimensions} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -18,6 +18,8 @@ import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
 
 import {images} from './ImageURL';
+const DeviceHeight = Dimensions.get('window').height;
+const DeviceWidth = Dimensions.get('window').width;
 
 state = {
   search: '',
@@ -131,12 +133,80 @@ const App = () => {
     }
     setGetData(route.params);
     return (
-      <Tab.Navigator>
-        <Tab.Screen name="Water" component={WaterPage} />
+      <Tab.Navigator tabBarOptions={{style: {height: DeviceHeight / 8}}}>
+        <Tab.Screen
+          name="Water"
+          component={WaterPage}
+          options={{
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={images.water_drop_click}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ) : (
+                <Image
+                  source={images.water_drop}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ),
+          }}
+        />
         <Tab.Screen name="Vs" component={Vs} />
-        <Tab.Screen name="Grass" component={Grass} />
-        <Tab.Screen name="Heart" component={Heart} />
-        <Tab.Screen name="Recycle" component={Recycle} />
+        <Tab.Screen
+          name="Grass"
+          component={Grass}
+          options={{
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={images.grass_select}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ) : (
+                <Image
+                  source={images.grass}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Heart"
+          component={Heart}
+          options={{
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={images.heart_select}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ) : (
+                <Image
+                  source={images.heart}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Recycle"
+          component={Recycle}
+          options={{
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={images.recycle_select}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ) : (
+                <Image
+                  source={images.recycle}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ),
+          }}
+        />
       </Tab.Navigator>
     );
   };
@@ -148,7 +218,11 @@ const App = () => {
           component={HomeTabs}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Search" component={searchDetail} />
+        <Stack.Screen
+          name="Search"
+          component={searchDetail}
+          options={{headerBackTitleVisible: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

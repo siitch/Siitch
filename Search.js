@@ -140,9 +140,12 @@ const Search = ({searchData, navigation}) => {
                 key={url.name}
                 onPress={() => readData(url.name)}
                 activeOpacity={1}
-                underlayColor="#ffffff">
+                underlayColor="transparent">
                 <View style={styles.eachAvatar}>
-                  <Avatar.Image source={url.image} />
+                  <Avatar.Image
+                    source={url.image}
+                    style={{backgroundColor: 'white'}}
+                  />
                 </View>
               </TouchableHighlight>
             ))}
