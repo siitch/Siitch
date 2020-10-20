@@ -33,7 +33,7 @@ const Vs = () => {
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
             One Pound {'\n'} of this
         </Text>
-        <Text style={{fontSize: 20, fontWeight: 'bold',color: 'white',marginLeft: '5%'}}>=</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold',color: 'white',marginLeft: '15%'}}>=</Text>
         <Text style={{fontSize: 20, fontWeight: 'bold',color: 'white',marginLeft: '5%'}}>
             This many gallons{'\n'} of water
         </Text>
