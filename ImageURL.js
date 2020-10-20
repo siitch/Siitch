@@ -23,4 +23,6 @@ export const images = {
   heart: require('./images/Navigation_Icons/Health_icon_B&W.png'),
   recycle: require('./images/Navigation_Icons/Recycle_icon_B&W.png'),
   recycle_select: require('./images/Navigation_Icons/Recycle_icon_brown.png'),
+  vs: require('./images/Navigation_Icons/VS_BW_3x.png'),
+  vs_select: require('./images/Navigation_Icons/VS_blue_3x.png'),
 };

@@ -4,6 +4,7 @@ import Recycle from './MeatComponents/Recycle';
 import Heart from './MeatComponents/Heart';
 import Water from './MeatComponents/Water';
 import Search from './Search';
+import Compare from './Comparing/Compare';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
@@ -113,6 +114,20 @@ const App = () => {
             ),
           }}
         />
+        <Tab.Screen
+          name="Compare"
+          component={Compare}
+          options={{
+            tabBarLabel: 'Compare',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="calculator"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     );
   };
@@ -152,7 +167,24 @@ const App = () => {
               ),
           }}
         />
-        <Tab.Screen name="Vs" component={Vs} />
+        <Tab.Screen
+          name="Vs"
+          component={Vs}
+          options={{
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={images.vs_select}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ) : (
+                <Image
+                  source={images.vs}
+                  style={{width: DeviceWidth / 7, height: DeviceHeight / 12}}
+                />
+              ),
+          }}
+        />
         <Tab.Screen
           name="Grass"
           component={Grass}
