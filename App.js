@@ -8,7 +8,7 @@ import Compare from './Comparing/Compare';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
-import {View, Text, Image, Dimensions} from 'react-native';
+import {View, Text, Image, Dimensions, Button} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -137,18 +137,10 @@ const App = () => {
     return <Water inputData={getData} />;
   };
   const searchDetail = ({navigation, route}) => {
-    console.log('searchDetail');
-    console.log(route.params);
-    if (route.params === null) {
-      return (
-        <View>
-          <Text>No Data</Text>
-        </View>
-      );
-    }
     setGetData(route.params);
     return (
-      <Tab.Navigator tabBarOptions={{style: {height: DeviceHeight / 8}}}>
+      <Tab.Navigator
+        tabBarOptions={{style: {height: DeviceHeight / 8}, showLabel: false}}>
         <Tab.Screen
           name="Water"
           component={WaterPage}
@@ -246,14 +238,22 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="HomeStack"
           component={HomeTabs}
           options={{headerShown: false}}
         />
         <Stack.Screen
           name="Search"
           component={searchDetail}
-          options={{headerBackTitleVisible: false}}
+          options={({navigation}) => ({
+            headerBackTitleVisible: false,
+            headerRight: () => (
+              <Button
+                onPress={() => navigation.navigate('Home')}
+                title="Home"
+              />
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

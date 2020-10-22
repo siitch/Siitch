@@ -18,6 +18,7 @@ import {
   TextInput,
   Pressable,
   TouchableHighlight,
+  Alert,
 } from 'react-native';
 
 import {styles} from './Ranking/Styles';
@@ -121,7 +122,15 @@ const Search = ({searchData, navigation}) => {
     firebase
       .database()
       .ref(image)
-      .on('value', get => navigation.navigate('Search', get.val()));
+      .on('value', get =>
+        get.val() === null ? (
+          <View>
+            {Alert.alert('Error!', "Can't find result for this keyword")}
+          </View>
+        ) : (
+          navigation.navigate('Search', get.val())
+        ),
+      );
   };
   return (
     <View style={styles.searchFrame}>
