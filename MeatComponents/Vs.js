@@ -22,6 +22,7 @@ import {
 const Vs = () => {
   return (
     <View>
+      <ScrollView>
       <View style={{
           flexDirection: 'row',
           width: width,
@@ -79,7 +80,7 @@ const Vs = () => {
         justifyContent: 'center',
         alignItems: 'center',
         }}>
-        <ImageIcon category='Goat' image = {images.goat}/>
+        <ImageIcon category='Goat' image = {images.chicken}/>
         <View style={{width:width/3,alignItems: 'center',}}>
           <Image
             source={require('./../images/WaterDrop_BLUE.png')}
@@ -87,7 +88,7 @@ const Vs = () => {
           />
         </View>
         <View style={{flexDirection: 'row',width:width/3,alignItems: 'center'}}>
-            <Text style={{fontSize: 26, fontWeight: 'bold',color:'#3AADFA',lineHeight: 30}}>662</Text>
+            <Text style={{fontSize: 26, fontWeight: 'bold',color:'#3AADFA',lineHeight: 30}}>518</Text>
             <Text style={{fontSize: 15, marginLeft: '2%',lineHeight: 37}}>gal</Text>
         </View>
       </View>
@@ -108,6 +109,7 @@ const Vs = () => {
             <Text style={{fontSize: 15, marginLeft: '2%',lineHeight: 37}}>gal</Text>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };
