@@ -5,6 +5,7 @@ import Heart from './MeatComponents/Heart';
 import Water from './MeatComponents/Water';
 import Search from './Search';
 import Compare from './Comparing/Compare';
+import NormalSearch from './NormalSearchingComponents/NormalSearch';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
@@ -132,106 +133,121 @@ const App = () => {
     );
   };
   const WaterPage = ({nagivation, route}) => {
-    console.log('WaterPage');
-    console.log(getData);
     return <Water inputData={getData} />;
   };
+  const HeartPage = ({navigation}) => {
+    return <Heart inputData={getData} />;
+  };
   const searchDetail = ({navigation, route}) => {
-    setGetData(route.params);
+    setGetData(route.params.value);
+    let detail = true;
+    if (
+      route.params.name !== 'Beef' &&
+      route.params.name !== 'Jeans' &&
+      route.params.name !== 'Makeup'
+    ) {
+      detail = false;
+    }
+    console.log(route.params.name);
+    if (detail) {
+      return (
+        <Tab.Navigator
+          tabBarOptions={{style: {height: DeviceHeight / 8}, showLabel: false}}>
+          <Tab.Screen
+            name="Water"
+            component={WaterPage}
+            options={{
+              tabBarIcon: ({focused}) =>
+                focused ? (
+                  <Image
+                    source={images.water_drop_click}
+                    style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                  />
+                ) : (
+                  <Image
+                    source={images.water_drop}
+                    style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                  />
+                ),
+            }}
+          />
+          <Tab.Screen
+            name="Vs"
+            component={Vs}
+            options={{
+              tabBarIcon: ({focused}) =>
+                focused ? (
+                  <Image
+                    source={images.vs_select}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ) : (
+                  <Image
+                    source={images.vs}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ),
+            }}
+          />
+          <Tab.Screen
+            name="Grass"
+            component={Grass}
+            options={{
+              tabBarIcon: ({focused}) =>
+                focused ? (
+                  <Image
+                    source={images.grass_select}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ) : (
+                  <Image
+                    source={images.grass}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ),
+            }}
+          />
+          <Tab.Screen
+            name="Heart"
+            component={HeartPage}
+            options={{
+              tabBarIcon: ({focused}) =>
+                focused ? (
+                  <Image
+                    source={images.heart_select}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ) : (
+                  <Image
+                    source={images.heart}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ),
+            }}
+          />
+          <Tab.Screen
+            name="Recycle"
+            component={Recycle}
+            options={{
+              tabBarIcon: ({focused}) =>
+                focused ? (
+                  <Image
+                    source={images.recycle_select}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ) : (
+                  <Image
+                    source={images.recycle}
+                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                  />
+                ),
+            }}
+          />
+        </Tab.Navigator>
+      );
+    }
     return (
-      <Tab.Navigator
-        tabBarOptions={{style: {height: DeviceHeight / 8}, showLabel: false}}>
-        <Tab.Screen
-          name="Water"
-          component={WaterPage}
-          options={{
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Image
-                  source={images.water_drop_click}
-                  style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
-                />
-              ) : (
-                <Image
-                  source={images.water_drop}
-                  style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
-                />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Vs"
-          component={Vs}
-          options={{
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Image
-                  source={images.vs_select}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ) : (
-                <Image
-                  source={images.vs}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Grass"
-          component={Grass}
-          options={{
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Image
-                  source={images.grass_select}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ) : (
-                <Image
-                  source={images.grass}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Heart"
-          component={Heart}
-          options={{
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Image
-                  source={images.heart_select}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ) : (
-                <Image
-                  source={images.heart}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ),
-          }}
-        />
-        <Tab.Screen
-          name="Recycle"
-          component={Recycle}
-          options={{
-            tabBarIcon: ({focused}) =>
-              focused ? (
-                <Image
-                  source={images.recycle_select}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ) : (
-                <Image
-                  source={images.recycle}
-                  style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                />
-              ),
-          }}
-        />
-      </Tab.Navigator>
+      <NormalSearch name={route.params.name} inputData={route.params.value} />
     );
   };
   return (
