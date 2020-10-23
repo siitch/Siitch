@@ -32,19 +32,19 @@ const Recycle = () => {
         <Image
           source={images.meats}
           style={{
-            marginLeft: Width / 20,
-            marginRight: Width / 20,
+            marginLeft: Width / 30,
+            marginRight: Width / 30,
             width: Width / 4,
             height: Height / 8.5,
           }}
         />
         <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
-          Time to grow
+          Time to {'\n'}grow
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
         <Text
           style={{
-            marginLeft: Width / 20,
+            marginLeft: Width / 30,
             width: Width / 3.5,
             fontSize: 20,
             textAlign: 'center',
@@ -61,8 +61,8 @@ const Recycle = () => {
         <Image
           source={images.compost}
           style={{
-            marginLeft: Width / 20,
-            marginRight: Width / 20,
+            marginLeft: Width / 30,
+            marginRight: Width / 30,
             width: Width / 4,
             height: Height / 8.5,
           }}
@@ -73,7 +73,7 @@ const Recycle = () => {
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
         <Text
           style={{
-            marginLeft: Width / 20,
+            marginLeft: Width / 30,
             textAlign: 'center',
             width: Width / 3.5,
             fontSize: 20,
@@ -91,19 +91,19 @@ const Recycle = () => {
         <Image
           source={images.clock}
           style={{
-            marginLeft: Width / 20,
-            marginRight: Width / 20,
+            marginLeft: Width / 30,
+            marginRight: Width / 30,
             width: Width / 4,
             height: Height / 8.5,
           }}
         />
         <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
-          Time to decompose
+          Time to{'\n'}decompose
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
         <Text
           style={{
-            marginLeft: Width / 20,
+            marginLeft: Width / 30,
             width: Width / 3.5,
             fontSize: 20,
             textAlign: 'center',

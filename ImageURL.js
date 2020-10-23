@@ -31,7 +31,11 @@ export const images = {
   beef_steak: require('./images/BeefPage/beef_steak.png'),
   goat: require('./images/Meats/goat.png'),
   tofu: require('./images/tofu.png'),
+  chicken: require('./images/chicken.png'),
+  car: require('./images/Beef_Earth/car_1x.png'),
+
   //Beef Recycle page
   compost: require('./images/Compost.png'),
   clock: require('./images/clock.png'),
+  
 };
