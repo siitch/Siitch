@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
+import {images} from '../ImageURL';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,13 +12,20 @@ import {
   Linking,
   TextInput,
   Pressable,
-  TouchableHighlight,
+  Image,
+  Dimensions,
 } from 'react-native';
-
-const Heart = () => {
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
+const Heart = inputData => {
   return (
-    <View>
-      <Text>Heart Page</Text>
+    <View style={{paddingTop: Height / 20}}>
+      <View style={{flexDirection: 'row'}}>
+        <Text style={{width: Width / 1.2}}>
+          {inputData.inputData['Search Health Page']}
+        </Text>
+        <Image source={images.heart_small} />
+      </View>
     </View>
   );
 };

@@ -34,4 +34,6 @@ export const images = {
   //Beef Recycle page
   compost: require('./images/Compost.png'),
   clock: require('./images/clock.png'),
+  //health
+  heart_small: require('./images/heart_small.png'),
 };

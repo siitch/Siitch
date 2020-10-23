@@ -128,7 +128,7 @@ const Search = ({searchData, navigation}) => {
             {Alert.alert('Error!', "Can't find result for this keyword")}
           </View>
         ) : (
-          navigation.navigate('Search', get.val())
+          navigation.navigate('Search', {name: image, value: get.val()})
         ),
       );
   };
