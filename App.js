@@ -6,6 +6,19 @@ import Water from './MeatComponents/Water';
 import Search from './Search';
 import Compare from './Comparing/Compare';
 import NormalSearch from './NormalSearchingComponents/NormalSearch';
+// Jeans import
+import JeansWater from './JeansComponents/JeansWater';
+import JeansVs from './JeansComponents/JeansVs';
+import JeansRecycle from './JeansComponents/JeansRecycle';
+import JeansHeart from './JeansComponents/JeansHeart';
+import JeansGrass from './JeansComponents/JeansGrass';
+// Makeup import
+import MakeupWater from './MakeupComponents/MakeupWater';
+import MakeupVs from './MakeupComponents/MakeupVs';
+import MakeupRecycle from './MakeupComponents/MakeupRecycle';
+import MakeupHeart from './MakeupComponents/MakeupHeart';
+import MakeupGrass from './MakeupComponents/MakeupGrass';
+//
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
@@ -67,6 +80,7 @@ const HomeStackScreen = () => (
 const App = () => {
   const [status, setStatus] = useState(true);
   const [getData, setGetData] = useState({});
+  const [keyword, setKeyword] = useState('');
   const GoToSearch = ({navigation}) => {
     return <Search searchData={searchData} navigation={navigation} />;
   };
@@ -132,11 +146,50 @@ const App = () => {
       </Tab.Navigator>
     );
   };
-  const WaterPage = ({nagivation, route}) => {
-    return <Water inputData={getData} />;
+  const WaterPage = ({nagivation}) => {
+    if (keyword === 'Beef') {
+      return <Water inputData={getData} />;
+    } else if (keyword === 'Jeans') {
+      return <JeansWater inputData={getData} />;
+    } else {
+      return <MakeupWater inputData={getData} />;
+    }
   };
   const HeartPage = ({navigation}) => {
-    return <Heart inputData={getData} />;
+    if (keyword === 'Beef') {
+      return <Heart inputData={getData} />;
+    } else if (keyword === 'Jeans') {
+      return <JeansHeart inputData={getData} />;
+    } else {
+      return <MakeupHeart inputData={getData} />;
+    }
+  };
+  const VsPage = ({navigation}) => {
+    if (keyword === 'Beef') {
+      return <Vs inputData={getData} />;
+    } else if (keyword === 'Jeans') {
+      return <JeansVs inputData={getData} />;
+    } else {
+      return <MakeupVs inputData={getData} />;
+    }
+  };
+  const RecyclePage = ({navigation}) => {
+    if (keyword === 'Beef') {
+      return <Recycle inputData={getData} />;
+    } else if (keyword === 'Jeans') {
+      return <JeansRecycle inputData={getData} />;
+    } else {
+      return <MakeupRecycle inputData={getData} />;
+    }
+  };
+  const GrassPage = ({navigation}) => {
+    if (keyword === 'Beef') {
+      return <Grass inputData={getData} />;
+    } else if (keyword === 'Jeans') {
+      return <JeansGrass inputData={getData} />;
+    } else {
+      return <MakeupGrass inputData={getData} />;
+    }
   };
   const searchDetail = ({navigation, route}) => {
     setGetData(route.params.value);
@@ -148,6 +201,7 @@ const App = () => {
     ) {
       detail = false;
     }
+    setKeyword(route.params.name);
     console.log(route.params.name);
     if (detail) {
       return (
@@ -173,7 +227,7 @@ const App = () => {
           />
           <Tab.Screen
             name="Vs"
-            component={Vs}
+            component={VsPage}
             options={{
               tabBarIcon: ({focused}) =>
                 focused ? (
@@ -191,7 +245,7 @@ const App = () => {
           />
           <Tab.Screen
             name="Grass"
-            component={Grass}
+            component={GrassPage}
             options={{
               tabBarIcon: ({focused}) =>
                 focused ? (
@@ -227,7 +281,7 @@ const App = () => {
           />
           <Tab.Screen
             name="Recycle"
-            component={Recycle}
+            component={RecyclePage}
             options={{
               tabBarIcon: ({focused}) =>
                 focused ? (

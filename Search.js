@@ -115,7 +115,9 @@ const Search = ({searchData, navigation}) => {
     if (keyword === '') {
       return;
     } else {
-      readData(keyword);
+      let deliver =
+        keyword.charAt(0).toUpperCase() + keyword.slice(1).toLowerCase();
+      readData(deliver);
     }
   };
   const readData = image => {

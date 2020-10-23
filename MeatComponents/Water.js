@@ -1,4 +1,4 @@
-import React, {useState, useEffect,Component,PropTypes} from 'react';
+import React, {useState, useEffect, Component, PropTypes} from 'react';
 import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
@@ -15,13 +15,10 @@ import {
   TextInput,
   Pressable,
   TouchableHighlight,
-  Alert
+  Alert,
 } from 'react-native';
 
 const Water = inputData => {
-  const waterInGallon = Math.round(
-    (parseInt(inputData.inputData['Liters per kg'], 10) * 0.2642) / 2.205,
-  );
   return (
     <View>
       <ScrollView>
@@ -46,7 +43,7 @@ const Water = inputData => {
                 color: '#3AADFA',
                 lineHeight: 30,
               }}>
-              {waterInGallon}
+              {inputData.inputData['Global Gallon p lb']}
             </Text>
             <Text style={{fontSize: 15, marginLeft: '5%', lineHeight: 37}}>
               gal
@@ -145,98 +142,109 @@ const Water = inputData => {
           }}>
           <View
             style={{
-              width: width/4,
+              width: width / 4,
               height: 100,
               borderRadius: 20,
               backgroundColor: '#6dbd64',
               alignItems: 'center',
             }}>
-            <TouchableOpacity onPress={() => Alert.alert(
-              'Rain',
-              'Rain water (Green water): The amount of rainwater required to make an item.'
-              )}>
-            <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Rain</Text>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    color: 'white',
-                    lineHeight: 30,
-                  }}>
-                  1,727
-                </Text>
-                <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
-                  gal
-                </Text>
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert(
+                  'Rain',
+                  'Rain water (Green water): The amount of rainwater required to make an item.',
+                )
+              }>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Rain</Text>
               </View>
-            </View>
+              <View style={{alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                      color: 'white',
+                      lineHeight: 30,
+                    }}>
+                    1,727
+                  </Text>
+                  <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
+                    gal
+                  </Text>
+                </View>
+              </View>
             </TouchableOpacity>
           </View>
           <View
             style={{
-              width: width/4,
+              width: width / 4,
               height: 100,
               borderRadius: 20,
               backgroundColor: '#3AADFA',
               alignItems: 'center',
             }}>
-            <TouchableOpacity onPress={() => Alert.alert(
-              'Irrigation',
-              'Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item.'
-              )}>
-            <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Irrigation</Text>
-            <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    color: 'white',
-                    lineHeight: 30,
-                  }}>
-                  66
-                </Text>
-                <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
-                  gal
-                </Text>
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert(
+                  'Irrigation',
+                  'Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item.',
+                )
+              }>
+              <Text style={{fontSize: 20, color: 'white'}}>
+                {'\n'}Irrigation
+              </Text>
+              <View style={{alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                      color: 'white',
+                      lineHeight: 30,
+                    }}>
+                    66
+                  </Text>
+                  <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
+                    gal
+                  </Text>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
           </View>
           <View
             style={{
-              width: width/4,
+              width: width / 4,
               height: 100,
               borderRadius: 20,
               backgroundColor: '#bfbfbf',
               alignItems: 'center',
             }}>
-            <TouchableOpacity onPress={() => Alert.alert(
-              'Cleaning',
-              'Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards. Definitions: www.watercalculator.org'
-              )}>
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert(
+                  'Cleaning',
+                  'Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards. Definitions: www.watercalculator.org',
+                )
+              }>
               <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Cleaning</Text>
               <View style={{alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    color: 'white',
-                    lineHeight: 30,
-                  }}>
-                  54
-                </Text>
-                <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
-                  gal
-                </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Text
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                      color: 'white',
+                      lineHeight: 30,
+                    }}>
+                    54
+                  </Text>
+                  <Text style={{fontSize: 15, color: 'white', lineHeight: 37}}>
+                    gal
+                  </Text>
                 </View>
               </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

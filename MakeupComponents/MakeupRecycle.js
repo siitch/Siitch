@@ -14,11 +14,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const NormalSearch = ({name, inputData}) => {
+const MakeupRecycle = ({inputData}) => {
   return (
     <View>
-      <Text>{name}</Text>
+      <Text>MakeupRecycle</Text>
     </View>
   );
 };
-export default NormalSearch;
+export default MakeupRecycle;

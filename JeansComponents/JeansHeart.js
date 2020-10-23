@@ -14,11 +14,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const NormalSearch = ({name, inputData}) => {
+const JeansHeart = ({inputData}) => {
   return (
     <View>
-      <Text>{name}</Text>
+      <Text>JeansHeart</Text>
     </View>
   );
 };
-export default NormalSearch;
+export default JeansHeart;
