@@ -39,4 +39,17 @@ export const images = {
   clock: require('./images/clock.png'),
   // Beef Heart page
   heart_small: require('./images/heart_small.png'),
+  // Jeans water page
+  jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
+  truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
+  // Vs
+  jeansVs: require('./images/Jeans/VS_Page/jeans_small.png'),
+  shoes: require('./images/Jeans/VS_Page/brown_shoes.png'),
+  socks: require('./images/Jeans/VS_Page/socks.png'),
+  tshirt: require('./images/Jeans/VS_Page/TShirt.png'),
+  water: require('./images/WaterDrop_BLUE.png'),
+  // makeup water
+  makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
+  coconut: require('./images/Makeup_Image_Folder/Coconut-Icon.png'),
+  cocoa: require('./images/Makeup_Image_Folder/Cocoa-butter-icon.png'),
 };

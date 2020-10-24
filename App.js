@@ -152,7 +152,7 @@ const App = () => {
     } else if (keyword === 'Jeans') {
       return <JeansWater inputData={getData} />;
     } else {
-      return <MakeupWater inputData={getData} />;
+      return <MakeupWater />;
     }
   };
   const HeartPage = ({navigation}) => {
@@ -161,7 +161,7 @@ const App = () => {
     } else if (keyword === 'Jeans') {
       return <JeansHeart inputData={getData} />;
     } else {
-      return <MakeupHeart inputData={getData} />;
+      return <MakeupHeart />;
     }
   };
   const VsPage = ({navigation}) => {
@@ -170,7 +170,7 @@ const App = () => {
     } else if (keyword === 'Jeans') {
       return <JeansVs inputData={getData} />;
     } else {
-      return <MakeupVs inputData={getData} />;
+      return <MakeupVs />;
     }
   };
   const RecyclePage = ({navigation}) => {
@@ -179,7 +179,7 @@ const App = () => {
     } else if (keyword === 'Jeans') {
       return <JeansRecycle inputData={getData} />;
     } else {
-      return <MakeupRecycle inputData={getData} />;
+      return <MakeupRecycle />;
     }
   };
   const GrassPage = ({navigation}) => {
@@ -188,7 +188,7 @@ const App = () => {
     } else if (keyword === 'Jeans') {
       return <JeansGrass inputData={getData} />;
     } else {
-      return <MakeupGrass inputData={getData} />;
+      return <MakeupGrass />;
     }
   };
   const searchDetail = ({navigation, route}) => {

@@ -125,7 +125,7 @@ const Search = ({searchData, navigation}) => {
       .database()
       .ref(image)
       .on('value', get =>
-        get.val() === null ? (
+        get.val() === null && image !== 'Makeup' ? (
           <View>
             {Alert.alert('Error!', "Can't find result for this keyword")}
           </View>
