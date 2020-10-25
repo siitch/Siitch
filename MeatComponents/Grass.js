@@ -3,6 +3,7 @@ import {Appbar} from 'react-native-paper';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
 import { ImageIcon } from './ImageIcon';
+import { ArrowIcon } from './ArrowIcon';
 
 import {
   SafeAreaView,
@@ -55,17 +56,56 @@ const Grass = () => {
           alignItems: 'flex-start'
           }}>
           
-          <ImageIcon category='car' image = {images.car}/>
-        
+          <Image style = {{width: 150, height: 150,marginTop:'10%'}}
+                source={images.car}
+                resizeMode="contain"
+            />
+          <View style={{
+          flexDirection: 'column',
+          marginTop:'15%'
+          }}>
+            <View style={{
+              flexDirection: 'row',
+              alignItems:'flex-start'
+              }}>
+              <View style={{
+                flexDirection: 'column',
+                alignItems:'flex-start'
+                }}>
+                <Text style={{fontWeight:'bold',paddingLeft: 9,}}>29 mi.</Text>
+                <ArrowIcon/>
+              </View>
+              <Image style = {{width: 50, height: 50,marginLeft:'40%'}}
+                source={images.steak_small}
+                resizeMode="contain"
+                />
+            </View>
+            <View style={{
+              flexDirection: 'row',
+              alignItems:'flex-start',
+              }}>
+              <View style={{
+                flexDirection: 'column',
+                alignItems:'flex-start'
+                }}>
+                <Text style={{fontWeight:'bold',paddingLeft: 9,}}>3 mi.</Text>
+                <ArrowIcon/>
+              </View>
+              <Image style = {{width: 50, height: 50,marginLeft:'40%'}}
+                source={images.broccolli}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
         </View>
         <View style={{alignItems:'center'}}>
-        <View  style={{flexDirection: 'row', width: width/1.4,}}>
+        <View  style={{flexDirection: 'row', width: width/1.4}}>
           <Text>
             The pollution generated in producing a typical 8 ounce steak is equivalent to driving a small car for 29 milies.
           </Text>
         </View>
         </View>
-        </ScrollView>
+      </ScrollView>
     </View>
   );
 };

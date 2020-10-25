@@ -33,6 +33,8 @@ export const images = {
   tofu: require('./images/tofu.png'),
   chicken: require('./images/chicken.png'),
   car: require('./images/Beef_Earth/car_1x.png'),
+  steak_small: require('./images/Beef_Earth/steak_small.png'),
+  broccolli: require('./images/Vegetables/broccolli.png'),
 
   //Beef Recycle page
   compost: require('./images/Compost.png'),
