@@ -20,7 +20,7 @@ import {images} from '../ImageURL';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const MakeupWater = ({inputData}) => {
+const MakeupWater = ({inputData, navigation}) => {
   const [expand, setExpand] = useState(false);
   return (
     <View style={{alignItems: 'center', marginTop: Height / 20}}>
@@ -122,6 +122,21 @@ const MakeupWater = ({inputData}) => {
           </View>
         </View>
       )}
+      <TouchableHighlight
+        onPress={() => navigation.navigate('What')}
+        activeOpacity={1}
+        underlayColor="#00FF00"
+        style={{
+          backgroundColor: '#00FF00',
+          width: Width / 2,
+          height: Height / 15,
+          alignItems: 'center',
+          borderRadius: 10,
+          marginLeft: Width / 4,
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+      </TouchableHighlight>
     </View>
   );
 };

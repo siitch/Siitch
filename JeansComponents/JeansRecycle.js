@@ -12,14 +12,15 @@ import {
   TextInput,
   Image,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import {images} from '../ImageURL';
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-const JeansRecycle = ({inputData}) => {
+const JeansRecycle = ({inputData, navigation}) => {
   return (
-    <View style={{flexDirection: 'column', flex: 1}}>
+    <ScrollView style={{flexDirection: 'column', flex: 1}}>
       <View
         style={{
           paddingTop: Height / 20,
@@ -110,7 +111,22 @@ const JeansRecycle = ({inputData}) => {
           10 - 12 Months
         </Text>
       </View>
-    </View>
+      <TouchableHighlight
+        onPress={() => navigation.navigate('What')}
+        activeOpacity={1}
+        underlayColor="#00FF00"
+        style={{
+          backgroundColor: '#00FF00',
+          width: Width / 2,
+          height: Height / 15,
+          alignItems: 'center',
+          borderRadius: 10,
+          marginLeft: Width / 4,
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+      </TouchableHighlight>
+    </ScrollView>
   );
 };
 export default JeansRecycle;

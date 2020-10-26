@@ -17,8 +17,10 @@ import {
   TouchableHighlight,
   Alert,
 } from 'react-native';
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 
-const Water = inputData => {
+const Water = ({inputData, navigation}) => {
   return (
     <View>
       <ScrollView>
@@ -43,7 +45,7 @@ const Water = inputData => {
                 color: '#3AADFA',
                 lineHeight: 30,
               }}>
-              {inputData.inputData['Global Gallon p lb']}
+              {inputData['Global Gallon p lb']}
             </Text>
             <Text style={{fontSize: 15, marginLeft: '5%', lineHeight: 37}}>
               gal
@@ -247,6 +249,21 @@ const Water = inputData => {
             </TouchableOpacity>
           </View>
         </View>
+        <TouchableHighlight
+          onPress={() => navigation.navigate('What')}
+          activeOpacity={1}
+          underlayColor="#00FF00"
+          style={{
+            backgroundColor: '#00FF00',
+            width: Width / 2,
+            height: Height / 15,
+            alignItems: 'center',
+            borderRadius: 10,
+            marginLeft: Width / 4,
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+        </TouchableHighlight>
       </ScrollView>
     </View>
   );

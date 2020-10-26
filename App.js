@@ -6,18 +6,21 @@ import Water from './MeatComponents/Water';
 import Search from './Search';
 import Compare from './Comparing/Compare';
 import NormalSearch from './NormalSearchingComponents/NormalSearch';
+import What from './MeatComponents/What';
 // Jeans import
 import JeansWater from './JeansComponents/JeansWater';
 import JeansVs from './JeansComponents/JeansVs';
 import JeansRecycle from './JeansComponents/JeansRecycle';
 import JeansHeart from './JeansComponents/JeansHeart';
 import JeansGrass from './JeansComponents/JeansGrass';
+import WhatJeans from './JeansComponents/WhatJeans';
 // Makeup import
 import MakeupWater from './MakeupComponents/MakeupWater';
 import MakeupVs from './MakeupComponents/MakeupVs';
 import MakeupRecycle from './MakeupComponents/MakeupRecycle';
 import MakeupHeart from './MakeupComponents/MakeupHeart';
 import MakeupGrass from './MakeupComponents/MakeupGrass';
+import WhatMakeUp from './MakeupComponents/WhatMakeUp';
 //
 import 'react-native-gesture-handler';
 import React from 'react';
@@ -35,10 +38,6 @@ import {RankStackScreen} from './Ranking/Ranking';
 import {images} from './ImageURL';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
-
-state = {
-  search: '',
-};
 
 function HomeScreen() {
   return (
@@ -84,8 +83,16 @@ const App = () => {
   const GoToSearch = ({navigation}) => {
     return <Search searchData={searchData} navigation={navigation} />;
   };
+  const toWhat = () => {
+    if (keyword === 'Beef') {
+      return <What />;
+    } else if (keyword === 'Jeans') {
+      return <WhatJeans />;
+    } else {
+      return <WhatMakeUp />;
+    }
+  };
   const searchData = get => {
-    console.log('searchData');
     setGetData(get);
   };
   const HomeTabs = () => {
@@ -146,51 +153,52 @@ const App = () => {
       </Tab.Navigator>
     );
   };
-  const WaterPage = ({nagivation}) => {
+  const WaterPage = ({navigation}) => {
     if (keyword === 'Beef') {
-      return <Water inputData={getData} />;
+      return <Water inputData={getData} navigation={navigation} />;
     } else if (keyword === 'Jeans') {
-      return <JeansWater inputData={getData} />;
+      return <JeansWater inputData={getData} navigation={navigation} />;
     } else {
-      return <MakeupWater />;
+      return <MakeupWater navigation={navigation} />;
     }
   };
   const HeartPage = ({navigation}) => {
     if (keyword === 'Beef') {
-      return <Heart inputData={getData} />;
+      return <Heart inputData={getData} navigation={navigation} />;
     } else if (keyword === 'Jeans') {
-      return <JeansHeart inputData={getData} />;
+      return <JeansHeart inputData={getData} navigation={navigation} />;
     } else {
-      return <MakeupHeart />;
+      return <MakeupHeart navigation={navigation} />;
     }
   };
   const VsPage = ({navigation}) => {
     if (keyword === 'Beef') {
-      return <Vs inputData={getData} />;
+      return <Vs inputData={getData} navigation={navigation} />;
     } else if (keyword === 'Jeans') {
-      return <JeansVs inputData={getData} />;
+      return <JeansVs inputData={getData} navigation={navigation} />;
     } else {
-      return <MakeupVs />;
+      return <MakeupVs navigation={navigation} />;
     }
   };
   const RecyclePage = ({navigation}) => {
     if (keyword === 'Beef') {
-      return <Recycle inputData={getData} />;
+      return <Recycle inputData={getData} navigation={navigation} />;
     } else if (keyword === 'Jeans') {
-      return <JeansRecycle inputData={getData} />;
+      return <JeansRecycle inputData={getData} navigation={navigation} />;
     } else {
-      return <MakeupRecycle />;
+      return <MakeupRecycle navigation={navigation} />;
     }
   };
   const GrassPage = ({navigation}) => {
     if (keyword === 'Beef') {
-      return <Grass inputData={getData} />;
+      return <Grass inputData={getData} navigation={navigation} />;
     } else if (keyword === 'Jeans') {
-      return <JeansGrass inputData={getData} />;
+      return <JeansGrass inputData={getData} navigation={navigation} />;
     } else {
-      return <MakeupGrass />;
+      return <MakeupGrass navigation={navigation} />;
     }
   };
+
   const searchDetail = ({navigation, route}) => {
     setGetData(route.params.value);
     let detail = true;
@@ -325,6 +333,7 @@ const App = () => {
             ),
           })}
         />
+        <Stack.Screen name="What" component={toWhat} />
       </Stack.Navigator>
     </NavigationContainer>
   );

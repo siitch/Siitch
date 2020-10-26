@@ -13,10 +13,13 @@ import {
   Pressable,
   TouchableHighlight,
   Image,
+  Dimensions,
 } from 'react-native';
 import {images} from '../ImageURL';
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 
-const JeansWater = ({inputData}) => {
+const JeansWater = ({inputData, navigation}) => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center', marginTop: '2%'}}>
@@ -79,6 +82,21 @@ const JeansWater = ({inputData}) => {
         }}>
         <Text>2247 gal. to grow the cotton</Text>
       </View>
+      <TouchableHighlight
+        onPress={() => navigation.navigate('What')}
+        activeOpacity={1}
+        underlayColor="#00FF00"
+        style={{
+          backgroundColor: '#00FF00',
+          width: Width / 2,
+          height: Height / 15,
+          alignItems: 'center',
+          borderRadius: 10,
+          marginLeft: Width / 4,
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+      </TouchableHighlight>
     </ScrollView>
   );
 };

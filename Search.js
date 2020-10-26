@@ -144,6 +144,10 @@ const Search = ({searchData, navigation}) => {
           onIconPress={toDatabase}
           style={{width: 250}}
         />
+        <Text style={{marginTop: 10, marginBottom: 10}}>
+          For prototype, only Beef, Jeans & Makeup search {'\n'} pages are
+          active. We're curious what you think.
+        </Text>
         {catImage.map((row, i) => (
           <View key={i} style={styles.avatarView}>
             {row.map(url => (

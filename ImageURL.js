@@ -52,4 +52,6 @@ export const images = {
   makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
   coconut: require('./images/Makeup_Image_Folder/Coconut-Icon.png'),
   cocoa: require('./images/Makeup_Image_Folder/Cocoa-butter-icon.png'),
+  // makeup heart
+  perfume: require('./images/Makeup_Image_Folder/makeup-cream-pink-icon.png'),
 };

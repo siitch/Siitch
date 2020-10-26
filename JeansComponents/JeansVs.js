@@ -26,9 +26,9 @@ const arr = [
   {name: 'socks', water: 244, picture: images.socks},
 ];
 
-const JeansVs = ({inputData}) => {
+const JeansVs = ({inputData, navigation}) => {
   return (
-    <View>
+    <ScrollView>
       <View
         style={{
           backgroundColor: '#00adef',
@@ -96,7 +96,22 @@ const JeansVs = ({inputData}) => {
           </View>
         </View>
       ))}
-    </View>
+      <TouchableHighlight
+        onPress={() => navigation.navigate('What')}
+        activeOpacity={1}
+        underlayColor="#00FF00"
+        style={{
+          backgroundColor: '#00FF00',
+          width: Width / 2,
+          height: Height / 15,
+          alignItems: 'center',
+          borderRadius: 10,
+          marginLeft: Width / 4,
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+      </TouchableHighlight>
+    </ScrollView>
   );
 };
 export default JeansVs;

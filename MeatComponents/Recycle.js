@@ -19,7 +19,7 @@ import {images} from '../ImageURL';
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-const Recycle = () => {
+const Recycle = ({navigation}) => {
   return (
     <View style={{flexDirection: 'column', flex: 1}}>
       <View
@@ -112,6 +112,21 @@ const Recycle = () => {
           2 Months
         </Text>
       </View>
+      <TouchableHighlight
+        onPress={() => navigation.navigate('What')}
+        activeOpacity={1}
+        underlayColor="#00FF00"
+        style={{
+          backgroundColor: '#00FF00',
+          width: Width / 2,
+          height: Height / 15,
+          alignItems: 'center',
+          borderRadius: 10,
+          marginLeft: Width / 4,
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+      </TouchableHighlight>
     </View>
   );
 };
