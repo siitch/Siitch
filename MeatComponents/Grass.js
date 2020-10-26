@@ -5,6 +5,7 @@ const {width, height} = Dimensions.get('screen');
 import {ImageIcon} from './ImageIcon';
 import What from './What';
 import {createStackNavigator} from '@react-navigation/stack';
+import {ArrowIcon} from './ArrowIcon';
 
 import {
   SafeAreaView,
@@ -71,7 +72,55 @@ const Grass = ({inputData, navigation}) => {
             justifyContent: 'flex-start',
             alignItems: 'flex-start',
           }}>
-          <ImageIcon category="car" image={images.car} />
+          <Image
+            style={{width: 150, height: 150, marginTop: '10%'}}
+            source={images.car}
+            resizeMode="contain"
+          />
+          <View
+            style={{
+              flexDirection: 'column',
+              marginTop: '15%',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+              }}>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}>
+                <Text style={{fontWeight: 'bold', paddingLeft: 9}}>29 mi.</Text>
+                <ArrowIcon />
+              </View>
+              <Image
+                style={{width: 50, height: 50, marginLeft: '40%'}}
+                source={images.steak_small}
+                resizeMode="contain"
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+              }}>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}>
+                <Text style={{fontWeight: 'bold', paddingLeft: 9}}>3 mi.</Text>
+                <ArrowIcon />
+              </View>
+              <Image
+                style={{width: 50, height: 50, marginLeft: '40%'}}
+                source={images.broccolli}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
         </View>
         <View style={{alignItems: 'center'}}>
           <View style={{flexDirection: 'row', width: width / 1.4}}>
