@@ -34,6 +34,7 @@ const JeansWater = ({inputData, navigation}) => {
         <Image
           source={require('./../images/WaterDrop_BLUE.png')}
           style={{width: 20, height: 20}}
+          resizeMode='contain'
         />
         <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
           <Text
@@ -51,7 +52,7 @@ const JeansWater = ({inputData, navigation}) => {
         </View>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Image source={images.jeans} style={{width: 200, height: 200}} />
+        <Image source={images.jeans} style={{width: 200, height: 200}}  resizeMode="contain" />
       </View>
       <View style={{alignItems: 'center', marginTop: '2%'}}>
         <View
@@ -67,6 +68,7 @@ const JeansWater = ({inputData, navigation}) => {
           <Image
             source={images.truck}
             style={{width: 120, height: 120, alignItems: 'center'}}
+            resizeMode='contain'
           />
           <Text style={{fontSize: 18, marginLeft: '5%', color: 'white'}}>
             Context {'\n'} 3,000 gallon tank
@@ -85,15 +87,17 @@ const JeansWater = ({inputData, navigation}) => {
       <TouchableHighlight
         onPress={() => navigation.navigate('What')}
         activeOpacity={1}
-        underlayColor="#00FF00"
+        underlayColor="#8DC73F"
         style={{
-          backgroundColor: '#00FF00',
-          width: Width / 2,
-          height: Height / 15,
+          backgroundColor: '#8DC73F',
+          width: Width - (Width/5),
+          height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
-          marginLeft: Width / 4,
+          marginLeft: Width / 10,
+          marginRight: Width / 10,
           justifyContent: 'center',
+          marginTop:'10%'
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>

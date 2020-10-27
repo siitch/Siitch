@@ -42,12 +42,14 @@ const Grass = ({inputData, navigation}) => {
             <Image
               source={require('./../images/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150, marginLeft: '10%'}}
+              resizeMode='contain'
             />
           </View>
           <View style={{width: '50%', flexDirection: 'column'}}>
             <Image
               source={require('./../images/Beef_Earth/treestump_small.png')}
               style={{width: 50, height: 50, marginLeft: '60%'}}
+              resizeMode='contain'
             />
             <View>
               <Text style={{fontSize: 14}}>
@@ -133,15 +135,17 @@ const Grass = ({inputData, navigation}) => {
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
-          underlayColor="#00FF00"
+          underlayColor="#8DC73F"
           style={{
-            backgroundColor: '#00FF00',
-            width: Width / 2,
-            height: Height / 15,
+            backgroundColor: '#8DC73F',
+            width: Width - (Width/5),
+            height: Height / 20,
             alignItems: 'center',
             borderRadius: 10,
-            marginLeft: Width / 4,
+            marginLeft: Width / 10,
+            marginRight: Width / 10,
             justifyContent: 'center',
+            marginTop:'10%'
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>

@@ -36,6 +36,7 @@ const Water = ({inputData, navigation}) => {
           <Image
             source={require('./../images/WaterDrop_BLUE.png')}
             style={{width: 20, height: 20}}
+            resizeMode='contain'
           />
           <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
             <Text
@@ -56,6 +57,7 @@ const Water = ({inputData, navigation}) => {
           <Image
             source={require('./../images/BeefPage/beef_steak.png')}
             style={{width: 200, height: 200}}
+            resizeMode='contain'
           />
         </View>
         <View style={{alignItems: 'center', marginTop: '2%'}}>
@@ -72,6 +74,7 @@ const Water = ({inputData, navigation}) => {
             <Image
               source={require('./../images/BeefPage/2000gal_truck.png')}
               style={{width: 120, height: 120, alignItems: 'center'}}
+              resizeMode='contain'
             />
             <Text style={{fontSize: 18, marginLeft: '5%', color: 'white'}}>
               Context {'\n'} 2,000 gallon tank
@@ -84,6 +87,7 @@ const Water = ({inputData, navigation}) => {
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
               style={{width: 20, height: 20}}
+              resizeMode='contain'
             />
             ?
           </Text>
@@ -108,10 +112,12 @@ const Water = ({inputData, navigation}) => {
           <Image
             source={require('./../images/Beef_Water/rain_wheat.png')}
             style={{width: '35%', height: 250}}
+            resizeMode='contain'
           />
           <Image
             source={require('./../images/Beef_Water/cows_hose.png')}
             style={{marginLeft: '10%', width: '35%', height: 250}}
+            resizeMode='contain'
           />
         </View>
         <View
@@ -252,15 +258,17 @@ const Water = ({inputData, navigation}) => {
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
-          underlayColor="#00FF00"
+          underlayColor="#8DC73F"
           style={{
-            backgroundColor: '#00FF00',
-            width: Width / 2,
-            height: Height / 15,
+            backgroundColor: '#8DC73F',
+            width: Width - (Width/5),
+            height: Height / 20,
             alignItems: 'center',
             borderRadius: 10,
-            marginLeft: Width / 4,
+            marginLeft: Width / 10,
+            marginRight: Width / 10,
             justifyContent: 'center',
+            marginTop:'10%'
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>

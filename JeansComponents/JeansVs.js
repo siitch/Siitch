@@ -44,6 +44,7 @@ const JeansVs = ({inputData, navigation}) => {
               width: Width / 6,
               textAlign: 'center',
               fontSize: 20,
+              fontWeight: 'bold',
               marginLeft: Width / 10,
             }}>
             One of these
@@ -64,6 +65,7 @@ const JeansVs = ({inputData, navigation}) => {
               width: Width / 2,
               textAlign: 'center',
               fontSize: 20,
+              fontWeight: 'bold',
             }}>
             This many gallons of water
           </Text>
@@ -85,10 +87,12 @@ const JeansVs = ({inputData, navigation}) => {
               height: Height / 9,
               marginRight: Width / 20,
             }}
+            resizeMode='contain'
           />
           <Image
             source={images.water}
             style={{width: Width / 15, height: Height / 23}}
+            resizeMode='contain'
           />
           <View>
             <Text style={{color: '#00adef'}}>{row.water} gallons</Text>
@@ -99,15 +103,17 @@ const JeansVs = ({inputData, navigation}) => {
       <TouchableHighlight
         onPress={() => navigation.navigate('What')}
         activeOpacity={1}
-        underlayColor="#00FF00"
+        underlayColor="#8DC73F"
         style={{
-          backgroundColor: '#00FF00',
-          width: Width / 2,
-          height: Height / 15,
+          backgroundColor: '#8DC73F',
+          width: Width - (Width/5),
+          height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
-          marginLeft: Width / 4,
+          marginLeft: Width / 10,
+          marginRight: Width / 10,
           justifyContent: 'center',
+          marginTop:'10%'
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>

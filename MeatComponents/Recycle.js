@@ -21,6 +21,7 @@ const Width = Dimensions.get('window').width;
 
 const Recycle = ({navigation}) => {
   return (
+    <ScrollView>
     <View style={{flexDirection: 'column', flex: 1}}>
       <View
         style={{
@@ -37,6 +38,7 @@ const Recycle = ({navigation}) => {
             width: Width / 4,
             height: Height / 8.5,
           }}
+          resizeMode='contain'
         />
         <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
           Time to {'\n'}grow
@@ -65,9 +67,11 @@ const Recycle = ({navigation}) => {
             marginRight: Width / 30,
             width: Width / 4,
             height: Height / 8.5,
+            marginTop:'20%',
           }}
+          resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
+        <Text style={{width: 130, textAlign: 'center', fontSize: 20,marginTop:'20%',}}>
           Compostable?
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -77,6 +81,7 @@ const Recycle = ({navigation}) => {
             textAlign: 'center',
             width: Width / 3.5,
             fontSize: 20,
+            marginTop:'20%',
           }}>
           Professional Only
         </Text>
@@ -95,9 +100,11 @@ const Recycle = ({navigation}) => {
             marginRight: Width / 30,
             width: Width / 4,
             height: Height / 8.5,
+            marginTop:'20%',
           }}
+          resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
+        <Text style={{width: 130, textAlign: 'center', fontSize: 20, marginTop:'20%',}}>
           Time to{'\n'}decompose
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -108,6 +115,7 @@ const Recycle = ({navigation}) => {
             fontSize: 20,
             textAlign: 'center',
             alignItems: 'center',
+            marginTop:'20%',
           }}>
           2 Months
         </Text>
@@ -115,19 +123,22 @@ const Recycle = ({navigation}) => {
       <TouchableHighlight
         onPress={() => navigation.navigate('What')}
         activeOpacity={1}
-        underlayColor="#00FF00"
+        underlayColor="#8DC73F"
         style={{
-          backgroundColor: '#00FF00',
-          width: Width / 2,
-          height: Height / 15,
+          backgroundColor: '#8DC73F',
+          width: Width - (Width/5),
+          height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
-          marginLeft: Width / 4,
+          marginLeft: Width / 10,
+          marginRight: Width / 10,
           justifyContent: 'center',
+          marginTop:'10%'
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
     </View>
+  </ScrollView>
   );
 };
 export default Recycle;

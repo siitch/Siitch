@@ -224,11 +224,13 @@ const App = () => {
                   <Image
                     source={images.water_drop_click}
                     style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ) : (
                   <Image
                     source={images.water_drop}
                     style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ),
             }}
@@ -242,11 +244,13 @@ const App = () => {
                   <Image
                     source={images.vs_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ) : (
                   <Image
                     source={images.vs}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ),
             }}
@@ -260,11 +264,13 @@ const App = () => {
                   <Image
                     source={images.grass_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ) : (
                   <Image
                     source={images.grass}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ),
             }}
@@ -278,11 +284,13 @@ const App = () => {
                   <Image
                     source={images.heart_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ) : (
                   <Image
                     source={images.heart}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ),
             }}
@@ -296,11 +304,13 @@ const App = () => {
                   <Image
                     source={images.recycle_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ) : (
                   <Image
                     source={images.recycle}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    resizeMode='contain'
                   />
                 ),
             }}

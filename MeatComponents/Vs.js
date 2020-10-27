@@ -28,29 +28,38 @@ const Vs = ({navigation}) => {
           style={{
             flexDirection: 'row',
             width: width,
-            height: 100,
-            backgroundColor: '#3AADFA',
+            height: Height / 10,
+            backgroundColor: '#00ADEF',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+          <Text style={{
+            color: 'white',
+            width: Width / 3,
+            textAlign: 'center',
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginLeft: Width / 20,
+          }}>
             One Pound {'\n'} of this
           </Text>
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: 'bold',
               color: 'white',
-              marginLeft: '15%',
+              marginLeft: Width / 30,
+              textAlign: 'center',
+              fontSize: 20,
             }}>
             =
           </Text>
           <Text
             style={{
+              color: 'white',
+              marginLeft: Width / 20,
+              width: Width / 2,
+              textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
-              color: 'white',
-              marginLeft: '5%',
             }}>
             This many gallons{'\n'} of water
           </Text>
@@ -192,15 +201,17 @@ const Vs = ({navigation}) => {
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
-          underlayColor="#00FF00"
+          underlayColor="#8DC73F"
           style={{
-            backgroundColor: '#00FF00',
-            width: Width / 2,
-            height: Height / 15,
+            backgroundColor: '#8DC73F',
+            width: Width - (Width/5),
+            height: Height / 20,
             alignItems: 'center',
             borderRadius: 10,
-            marginLeft: Width / 4,
+            marginLeft: Width / 10,
+            marginRight: Width / 10,
             justifyContent: 'center',
+            marginTop:'10%'
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>

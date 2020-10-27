@@ -34,6 +34,7 @@ export const images = {
   chicken: require('./images/chicken.png'),
   car: require('./images/Beef_Earth/car_1x.png'),
   steak_small: require('./images/Beef_Earth/steak_small.png'),
+  steak_large: require('./images/Beef_Earth/steak_large.png'),
   broccolli: require('./images/Vegetables/broccolli.png'),
 
   //Beef Recycle page
@@ -44,6 +45,9 @@ export const images = {
   // Jeans water page
   jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
   truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
+  portion: require('./images/Beef_WhatCanIDo/portion_size_small.png'),
+  suv: require('./images/Beef_WhatCanIDo/white_SUV_pixabay.png'),
+  milk:require('./images/Beef_WhatCanIDo/milk_large.png'),
   // Vs
   jeansVs: require('./images/Jeans/VS_Page/jeans_small.png'),
   shoes: require('./images/Jeans/VS_Page/brown_shoes.png'),

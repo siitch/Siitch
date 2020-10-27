@@ -24,15 +24,17 @@ const MakeupVs = ({inputData, navigation}) => {
       <TouchableHighlight
         onPress={() => navigation.navigate('What')}
         activeOpacity={1}
-        underlayColor="#00FF00"
+        underlayColor="#8DC73F"
         style={{
-          backgroundColor: '#00FF00',
-          width: Width / 2,
-          height: Height / 15,
+          backgroundColor: '#8DC73F',
+          width: Width - (Width/5),
+          height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
-          marginLeft: Width / 4,
+          marginLeft: Width / 10,
+          marginRight: Width / 10,
           justifyContent: 'center',
+          marginTop:'10%'
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
