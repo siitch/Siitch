@@ -40,14 +40,14 @@ const Grass = ({inputData, navigation}) => {
           }}>
           <View style={{width: '50%'}}>
             <Image
-              source={require('./../images/Beef_Earth/graphic_large.png')}
+              source={require('./../images/Beef/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150, marginLeft: '10%'}}
               resizeMode='contain'
             />
           </View>
           <View style={{width: '50%', flexDirection: 'column'}}>
             <Image
-              source={require('./../images/Beef_Earth/treestump_small.png')}
+              source={require('./../images/Beef/Beef_Earth/treestump_small.png')}
               style={{width: 50, height: 50, marginLeft: '60%'}}
               resizeMode='contain'
             />

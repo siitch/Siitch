@@ -55,7 +55,7 @@ const Water = ({inputData, navigation}) => {
         </View>
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <Image
-            source={require('./../images/BeefPage/beef_steak.png')}
+            source={require('./../images/Beef/BeefPage/beef_steak.png')}
             style={{width: 200, height: 200}}
             resizeMode='contain'
           />
@@ -72,7 +72,7 @@ const Water = ({inputData, navigation}) => {
               alignItems: 'center',
             }}>
             <Image
-              source={require('./../images/BeefPage/2000gal_truck.png')}
+              source={require('./../images/Beef/BeefPage/2000gal_truck.png')}
               style={{width: 120, height: 120, alignItems: 'center'}}
               resizeMode='contain'
             />
@@ -110,12 +110,12 @@ const Water = ({inputData, navigation}) => {
             justifyContent: 'center',
           }}>
           <Image
-            source={require('./../images/Beef_Water/rain_wheat.png')}
+            source={require('./../images/Beef/Beef_Water/rain_wheat.png')}
             style={{width: '35%', height: 250}}
             resizeMode='contain'
           />
           <Image
-            source={require('./../images/Beef_Water/cows_hose.png')}
+            source={require('./../images/Beef/Beef_Water/cows_hose.png')}
             style={{marginLeft: '10%', width: '35%', height: 250}}
             resizeMode='contain'
           />

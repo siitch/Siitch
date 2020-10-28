@@ -28,13 +28,13 @@ export const images = {
 
   //Beef VS page
   pig_vs: require('./images/Meats/pig_small.png'),
-  beef_steak: require('./images/BeefPage/beef_steak.png'),
+  beef_steak: require('./images/Beef/BeefPage/beef_steak.png'),
   goat: require('./images/Meats/goat.png'),
   tofu: require('./images/tofu.png'),
   chicken: require('./images/chicken.png'),
-  car: require('./images/Beef_Earth/car_1x.png'),
-  steak_small: require('./images/Beef_Earth/steak_small.png'),
-  steak_large: require('./images/Beef_Earth/steak_large.png'),
+  car: require('./images/Beef/Beef_Earth/car_1x.png'),
+  steak_small: require('./images/Beef/Beef_Earth/steak_small.png'),
+  steak_large: require('./images/Beef/Beef_Earth/steak_large.png'),
   broccolli: require('./images/Vegetables/broccolli.png'),
 
   //Beef Recycle page
@@ -45,9 +45,9 @@ export const images = {
   // Jeans water page
   jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
   truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
-  portion: require('./images/Beef_WhatCanIDo/portion_size_small.png'),
-  suv: require('./images/Beef_WhatCanIDo/white_SUV_pixabay.png'),
-  milk: require('./images/Beef_WhatCanIDo/milk_large.png'),
+  portion: require('./images/Beef/Beef_WhatCanIDo/portion_size_small.png'),
+  suv: require('./images/Beef/Beef_WhatCanIDo/white_SUV_pixabay.png'),
+  milk: require('./images/Beef/Beef_WhatCanIDo/milk_large.png'),
   waterBackground: require('./images/Jeans/Main_Page/Mainpage_background_3x.png'),
   // Jeans Earth
   earthBackground: require('./images/Jeans/Earth_Page/Earth_background_3x_trimmed.png'),
