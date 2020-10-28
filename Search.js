@@ -33,13 +33,8 @@ const Search = ({searchData, navigation}) => {
       {image: require('./images2/Meat.png'), name: 'Beef'},
       {image: require('./images2/jeans.png'), name: 'Jeans'},
       {image: require('./images2/makeup.png'), name: 'Makeup'},
-      {image: require('./images2/okra.png'), name: 'Okra'},
     ],
     [
-      {
-        image: require('./images2/potato_chips.png'),
-        name: '(Bag of) Potato chips',
-      },
       {
         image: require('./images2/chocolate.png'),
         name: '100 gram chocolate bar',
@@ -51,7 +46,6 @@ const Search = ({searchData, navigation}) => {
       {image: require('./images2/bananas.png'), name: 'Bananas'},
       {image: require('./images2/blackberry.png'), name: 'Blackberries'},
       {image: require('./images2/bread.png'), name: 'Bread'},
-      {image: require('./images2/broccolli.png'), name: 'Broccoli'},
     ],
     [
       {
@@ -60,7 +54,6 @@ const Search = ({searchData, navigation}) => {
       },
       {image: require('./images2/cabbage.png'), name: 'Cabbage'},
       {image: require('./images2/car_pix.png'), name: 'Car'},
-      {image: require('./images2/carrot.png'), name: 'Carrots & turnips'},
     ],
     [
       {
@@ -69,33 +62,46 @@ const Search = ({searchData, navigation}) => {
       },
       {image: require('./images2/celery.png'), name: 'Celery'},
       {image: require('./images2/cheese.png'), name: 'Cheese'},
-      {image: require('./images2/chilis.png'), name: 'Chilis and peppers'},
     ],
     [
       {image: require('./images2/yogurt-regular-small.png'), name: 'Yogurt'},
       {image: require('./images2/watermelon.png'), name: 'Watermelon'},
       {image: require('./images2/zucchini.jpg'), name: 'Zucchini'},
-      {image: require('./images2/ketchup.png'), name: 'Tomato ketchup'},
     ],
     [
       {image: require('./images2/tomato.png'), name: 'Tomato'},
       {image: require('./images2/sweet_potato.png'), name: 'Sweet Potato'},
       {image: require('./images2/toast_small.png'), name: 'Toast'},
-      {
-        image: require('./images2/suede_shoes.jpg'),
-        name: 'Suede shoes (made from lambskin)',
-      },
     ],
     [
       {image: require('./images2/squash.jpg'), name: 'Squash'},
       {image: require('./images2/spinach_small.png'), name: 'Spinach'},
       {image: require('./images2/strawberry.png'), name: 'Strawberry'},
-      {image: require('./images2/rice_white_1.png'), name: 'Rice'},
     ],
     [
       {image: require('./images2/pig_small.png'), name: 'Pork'},
       {image: require('./images2/pasta_3.png'), name: 'Pasta'},
       {image: require('./images2/potato.png'), name: 'Potato'},
+    ],
+    [
+      {image: require('./images2/okra.png'), name: 'Okra'},
+      {
+        image: require('./images2/potato_chips.png'),
+        name: '(Bag of) Potato chips',
+      },
+      {image: require('./images2/broccolli.png'), name: 'Broccoli'},
+    ],
+    [
+      {image: require('./images2/carrot.png'), name: 'Carrots & turnips'},
+      {image: require('./images2/chilis.png'), name: 'Chilis and peppers'},
+      {image: require('./images2/ketchup.png'), name: 'Tomato ketchup'},
+    ],
+    [
+      {
+        image: require('./images2/suede_shoes.jpg'),
+        name: 'Suede shoes (made from lambskin)',
+      },
+      {image: require('./images2/rice_white_1.png'), name: 'Rice'},
     ],
   ];
   var config = {
@@ -155,7 +161,8 @@ const Search = ({searchData, navigation}) => {
                 key={url.name}
                 onPress={() => readData(url.name)}
                 activeOpacity={1}
-                underlayColor="transparent">
+                underlayColor="transparent"
+                style={{marginLeft: 25}}>
                 <View style={styles.eachAvatar}>
                   <Avatar.Image
                     source={url.image}

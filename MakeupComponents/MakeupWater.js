@@ -23,7 +23,9 @@ const Height = Dimensions.get('window').height;
 const MakeupWater = ({inputData, navigation}) => {
   const [expand, setExpand] = useState(false);
   return (
-    <View style={{alignItems: 'center', marginTop: Height / 20}}>
+    <ScrollView
+      style={{marginTop: Height / 20}}
+      contentContainerStyle={{alignItems: 'center'}}>
       {!expand ? (
         <View>
           <Text style={{width: Width / 1.2, textAlign: 'center', fontSize: 25}}>
@@ -128,18 +130,18 @@ const MakeupWater = ({inputData, navigation}) => {
         underlayColor="#8DC73F"
         style={{
           backgroundColor: '#8DC73F',
-          width: Width - (Width/5),
+          width: Width - Width / 5,
           height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
           marginLeft: Width / 10,
           marginRight: Width / 10,
           justifyContent: 'center',
-          marginTop:'10%'
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
-    </View>
+    </ScrollView>
   );
 };
 export default MakeupWater;

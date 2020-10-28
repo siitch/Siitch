@@ -14,6 +14,7 @@ import {
   TouchableHighlight,
   Image,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import {images} from '../ImageURL';
 const Width = Dimensions.get('window').width;
@@ -34,7 +35,7 @@ const JeansWater = ({inputData, navigation}) => {
         <Image
           source={require('./../images/WaterDrop_BLUE.png')}
           style={{width: 20, height: 20}}
-          resizeMode='contain'
+          resizeMode="contain"
         />
         <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
           <Text
@@ -52,7 +53,11 @@ const JeansWater = ({inputData, navigation}) => {
         </View>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Image source={images.jeans} style={{width: 200, height: 200}}  resizeMode="contain" />
+        <Image
+          source={images.jeans}
+          style={{width: 200, height: 200}}
+          resizeMode="contain"
+        />
       </View>
       <View style={{alignItems: 'center', marginTop: '2%'}}>
         <View
@@ -68,7 +73,7 @@ const JeansWater = ({inputData, navigation}) => {
           <Image
             source={images.truck}
             style={{width: 120, height: 120, alignItems: 'center'}}
-            resizeMode='contain'
+            resizeMode="contain"
           />
           <Text style={{fontSize: 18, marginLeft: '5%', color: 'white'}}>
             Context {'\n'} 3,000 gallon tank
@@ -77,12 +82,20 @@ const JeansWater = ({inputData, navigation}) => {
       </View>
       <View
         style={{
-          width: 100,
-          height: 80,
-          backgroundColor: 'green',
-          borderRadius: 100,
-        }}>
-        <Text>2247 gal. to grow the cotton</Text>
+          width: '100%',
+          height: 1,
+          backgroundColor: 'black',
+          marginTop: 20,
+          marginBottom: 20,
+        }}
+      />
+
+      <View>
+        <ImageBackground
+          source={images.waterBackground}
+          style={{width: Width, height: Height}}>
+          <Text>test</Text>
+        </ImageBackground>
       </View>
       <TouchableHighlight
         onPress={() => navigation.navigate('What')}
@@ -90,14 +103,14 @@ const JeansWater = ({inputData, navigation}) => {
         underlayColor="#8DC73F"
         style={{
           backgroundColor: '#8DC73F',
-          width: Width - (Width/5),
+          width: Width - Width / 5,
           height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
           marginLeft: Width / 10,
           marginRight: Width / 10,
           justifyContent: 'center',
-          marginTop:'10%'
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>

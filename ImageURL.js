@@ -47,7 +47,16 @@ export const images = {
   truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
   portion: require('./images/Beef_WhatCanIDo/portion_size_small.png'),
   suv: require('./images/Beef_WhatCanIDo/white_SUV_pixabay.png'),
-  milk:require('./images/Beef_WhatCanIDo/milk_large.png'),
+  milk: require('./images/Beef_WhatCanIDo/milk_large.png'),
+  waterBackground: require('./images/Jeans/Main_Page/Mainpage_background_3x.png'),
+  // Jeans Earth
+  earthBackground: require('./images/Jeans/Earth_Page/Earth_background_3x_trimmed.png'),
+  cotton: require('./images/Jeans/Earth_Page/cotton_1x.png'),
+  percent: require('./images/Jeans/Earth_Page/65%_1x.png'),
+  drain: require('./images/Jeans/Earth_Page/blue_drain_1x.png'),
+  //Jeans What can i do
+  thrift: require('./images/Jeans/WhatCanIDo/thrift_store.jpg'),
+  purpose: require('./images/Jeans/WhatCanIDo/shop_with_purpose.jpg'),
   // Vs
   jeansVs: require('./images/Jeans/VS_Page/jeans_small.png'),
   shoes: require('./images/Jeans/VS_Page/brown_shoes.png'),
