@@ -2,7 +2,7 @@ import React, {useState, useEffect, Component, PropTypes} from 'react';
 import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
-import {ImageIcon} from './ImageIcon';
+import {ImageIcon} from '../ImageIcon';
 
 import {
   SafeAreaView,

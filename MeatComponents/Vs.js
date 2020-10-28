@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 const {width, height} = Dimensions.get('screen');
 import {images} from '../ImageURL';
-import {ImageIcon} from './ImageIcon';
+import {ImageIcon} from '../ImageIcon';
 import {
   SafeAreaView,
   StyleSheet,

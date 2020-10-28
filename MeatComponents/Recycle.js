@@ -16,7 +16,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {images} from '../ImageURL';
-import {ImageIcon} from './ImageIcon';
+import {ImageIcon} from '../ImageIcon';
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 

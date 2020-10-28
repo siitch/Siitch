@@ -73,6 +73,19 @@ export const images = {
   socks: require('./images/Jeans/VS_Page/socks.png'),
   tshirt: require('./images/Jeans/VS_Page/TShirt.png'),
   water: require('./images/WaterDrop_BLUE.png'),
+
+  //Jeans Brands
+  ref: require('./images/Jeans/Company_logos/ref_1x.png'),
+  outland: require('./images/Jeans/Company_logos/outland_1x.png'),
+  patagonia: require('./images/Jeans/Company_logos/patagonia_1x.png'),
+  boyish: require('./images/Jeans/Company_logos/boyish_1x.png'),
+  outerknown: require('./images/Jeans/Company_logos/outerknown_1x.png'),
+  amourvert: require('./images/Jeans/Company_logos/amour_vert_1x.png'),
+  citizens: require('./images/Jeans/Company_logos/citizens_of_humanity_1x.png'),
+  triarchy: require('./images/Jeans/Company_logos/triarchy_1x.png'),
+  //dl: require('./images/Jeans/Company_logos/boca_1x.png'),
+  //g_star: require('./images/Jeans/Company_logos/gardein_1x.png'),
+
   // makeup water
   makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
   coconut: require('./images/Makeup_Image_Folder/Coconut-Icon.png'),

@@ -7,7 +7,6 @@ export const ArrowIconCol = () => {
              <View
                 style={styles.wrapper}>
                 <View style={styles.rectangle}></View>
-                <View style={styles.rectangle}></View>
                 <View style={styles.triangle}></View>
             </View>
            </View>
@@ -20,21 +19,15 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         paddingLeft: 9,
-        paddingTop: 0,
-        marginTop: 0
-
     },
     rectangle: {
         width:2,
         backgroundColor: "#EF7A6A",
-        margin: 0,
-        height: 60,
+        height: 90,
         borderColor:"#EF7A6A"
-
     },
+
     triangle: {
-        width: 0,
-        height: 0,
         backgroundColor: 'transparent',
         borderStyle: 'solid',
         borderLeftWidth: 7,
@@ -46,9 +39,7 @@ const styles = StyleSheet.create({
         transform: [
             { rotate: '180deg' }
         ],
-        margin: 0,
         marginTop: -6,
-        borderWidth: 0,
         borderColor:"#EF7A6A"
     }
 });

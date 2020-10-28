@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
-import {ImageIcon} from './ImageIcon';
+import {ImageIcon} from '../ImageIcon';
 import What from './What';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ArrowIcon} from './ArrowIcon';

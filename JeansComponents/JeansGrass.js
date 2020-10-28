@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
+import {ImageIcon} from '../ImageIcon';
 import {
   SafeAreaView,
   StyleSheet,
@@ -58,6 +59,31 @@ const JeansGrass = ({inputData, navigation}) => {
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
+      <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+        <Text style={{fontSize:16,width:Width/1.3}}>U.S.A companies, as recommended by
+          <Text style={{color:'#00ADEF'}}> Good On You, </Text>
+          in random order.
+        </Text>
+      </View>
+      <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.ref}></ImageIcon>
+            <ImageIcon category='brand' image={images.outland}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.patagonia}></ImageIcon>
+            <ImageIcon category='brand' image={images.boyish}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.outerknown}></ImageIcon>
+            <ImageIcon category='brand' image={images.amourvert}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.citizens}></ImageIcon>
+            <ImageIcon category='brand' image={images.triarchy}></ImageIcon>
+          </View>
+      </View>
     </ScrollView>
   );
 };
