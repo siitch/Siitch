@@ -215,6 +215,28 @@ const Vs = ({navigation}) => {
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+        </View>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

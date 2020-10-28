@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 import {images} from '../ImageURL';
 import What from './What';
-import {ArrowIconCol} from './ArrowIconCol'
+import {ArrowIconCol} from './ArrowIconCol';
+import {ImageIcon} from './ImageIcon';
 import {
   SafeAreaView,
   StyleSheet,
@@ -22,6 +23,7 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const Heart = ({navigation, inputData}) => {
   return (
+    <ScrollView>
     <View style={{paddingTop: Height / 20}}>
       <View style={{flexDirection: 'row'}}>
         <Text style={{width: Width / 1.2}}>
@@ -62,7 +64,30 @@ const Heart = ({navigation, inputData}) => {
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
+      <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+        </View>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          </View>
+        </View>
     </View>
+  </ScrollView>
   );
 };
 export default Heart;

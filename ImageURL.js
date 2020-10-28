@@ -42,6 +42,16 @@ export const images = {
   clock: require('./images/clock.png'),
   // Beef Heart page
   heart_small: require('./images/heart_small.png'),
+  //Beef Brands
+  impossible: require('./images/Beef/Company_logos/impossible_burger_1x.png'),
+  beyond_meat: require('./images/Beef/Company_logos/beyond_meat_1x.png'),
+  lightlife: require('./images/Beef/Company_logos/lightlife_1x.png'),
+  hungry_planet: require('./images/Beef/Company_logos/hungry_planet_1x.png'),
+  nextlevel: require('./images/Beef/Company_logos/next_level_1x.png'),
+  quorn: require('./images/Beef/Company_logos/quorn_1x.png'),
+  boca: require('./images/Beef/Company_logos/boca_1x.png'),
+  gardein: require('./images/Beef/Company_logos/gardein_1x.png'),
+
   // Jeans water page
   jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
   truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),

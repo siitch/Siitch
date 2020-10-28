@@ -89,7 +89,9 @@ const What = () => {
       </View>
       </View>
       
-      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%'}}>Plan your meals, and plan for leftovers so you don’t waste meat, or any dairy product</Text>
+      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%'}}>
+      <Text onPress={() => Linking.openURL('https://www.figma.com/exit?url=https%3A%2F%2Fwww.thekitchn.com%2Fthe-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')} style={{color:'#00ADEF'}}>Plan your meals, </Text>
+         and plan for leftovers so you don’t waste meat, or any dairy product</Text>
       <View style={{
         height: Height / 7,
         backgroundColor: '#8DC73F',
