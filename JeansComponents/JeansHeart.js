@@ -29,41 +29,47 @@ const JeansHeart = ({inputData, navigation}) => {
         underlayColor="#8DC73F"
         style={{
           backgroundColor: '#8DC73F',
-          width: Width - (Width/5),
+          width: Width - Width / 5,
           height: Height / 20,
           alignItems: 'center',
           borderRadius: 10,
           marginLeft: Width / 10,
           marginRight: Width / 10,
           justifyContent: 'center',
-          marginTop:'10%'
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
-      <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
-        <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-        <Text style={{fontSize:16,width:Width/1.3}}>U.S.A companies, as recommended by
-          <Text style={{color:'#00ADEF'}}> Good On You, </Text>
+      <View
+        style={{
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '5%',
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
+        <Text style={{fontSize: 16, width: Width / 1.3}}>
+          U.S.A companies, as recommended by
+          <Text style={{color: '#00ADEF'}}> Good On You, </Text>
           in random order.
         </Text>
       </View>
-      <View  style={{flexDirection:'column',alignItems:'center'}}>
-          <View style={{flexDirection:'row',marginLeft:'5%'}}>
-            <ImageIcon category='brand' image={images.ref}></ImageIcon>
-            <ImageIcon category='brand' image={images.outland}></ImageIcon>
-          </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.patagonia}></ImageIcon>
-            <ImageIcon category='brand' image={images.boyish}></ImageIcon>
-          </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.outerknown}></ImageIcon>
-            <ImageIcon category='brand' image={images.amourvert}></ImageIcon>
-          </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.citizens}></ImageIcon>
-            <ImageIcon category='brand' image={images.triarchy}></ImageIcon>
-          </View>
+      <View style={{flexDirection: 'column', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', marginLeft: '5%'}}>
+          <ImageIcon category="brand" image={images.ref} />
+          <ImageIcon category="brand" image={images.outland} />
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
+          <ImageIcon category="brand" image={images.patagonia} />
+          <ImageIcon category="brand" image={images.boyish} />
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
+          <ImageIcon category="brand" image={images.outerknown} />
+          <ImageIcon category="brand" image={images.amourvert} />
+        </View>
+        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
+          <ImageIcon category="brand" image={images.citizens} />
+          <ImageIcon category="brand" image={images.triarchy} />
+        </View>
       </View>
     </ScrollView>
   );
