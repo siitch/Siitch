@@ -92,11 +92,11 @@ const JeansVs = ({inputData, navigation}) => {
           />
           <Image
             source={images.water}
-            style={{width: Width / 15, height: Height / 23}}
+            style={{width: Width / 15, height: Height / 23, marginLeft:'20%'}}
             resizeMode='contain'
           />
           <View>
-            <Text style={{color: '#00adef'}}>{row.water} gallons</Text>
+            <Text style={{color: '#00adef',fontWeight:'bold',fontSize:20}}>{row.water} gallons</Text>
             <Text>{row.name}</Text>
           </View>
         </View>

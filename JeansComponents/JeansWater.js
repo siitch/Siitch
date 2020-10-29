@@ -81,21 +81,69 @@ const JeansWater = ({inputData, navigation}) => {
           </Text>
         </View>
       </View>
+      <View style={{alignItems:'center'}}>
       <View
         style={{
-          width: '100%',
+          width: '90%',
           height: 1,
-          backgroundColor: 'black',
+          backgroundColor: '#D3D3D3',
           marginTop: 20,
           marginBottom: 20,
         }}
       />
+      </View>
 
       <View>
         <ImageBackground
           source={images.waterBackground}
-          style={{width: Width, height: Height}}>
-          <Text>test</Text>
+          style={{width: Width, height: Height/2}}>
+          <View style={{flexDirection: 'row', marginTop: 20}}>
+            <View>
+              <Text style={{fontWeight:'bold', fontSize: 24,color:'white',marginLeft:10}}>2,247 gal.</Text>
+            </View>
+            <View style={{flexDirection:'column',marginLeft:10}}>
+              <Text style={{fontSize:20,color:'white'}}>to grow the cotton</Text>
+              <Text style={{fontSize:14,color:'white'}}>- worldwide average</Text> 
+            </View>
+            <Image source={images.rain} style={{resizeMode: 'cover',marginLeft:10,marginTop:-10}} />
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <Image source={images.blue_plus} style={{resizeMode: 'cover',marginLeft:10,marginTop:-30}} />
+            <Image source={images.cotton} style={{resizeMode: 'cover', width:95,height:95,marginTop:-30,marginLeft:'40%'}} />
+          </View>
+          <View style={{flexDirection:'row',marginLeft:10,marginTop:15,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>165 gal.</Text>
+              <Text style={{fontSize:16,color:'white',width:Width/1.5,marginLeft:'5%'}}>to dilute pesticides & fertilizers that go with cotton growing</Text> 
+          </View>
+          <View style={{flexDirection:'row',marginLeft:10,marginTop:5,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>97 gal.</Text>
+              <Text style={{fontSize:16,color:'white',width:Width/1.5,marginLeft:'5%'}}>to treat chemicals that treat the raw cotton</Text> 
+          </View>
+          <View style={{flexDirection:'row',marginLeft:10,marginTop:5,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>95 gal.</Text>
+              <Text style={{fontSize:16,color:'white',width:Width/1.5,marginLeft:'5%'}}>to treat bleach, dye, fabric print</Text> 
+          </View>
+          <View style={{flexDirection:'row',marginLeft:10,marginTop:5,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>238 gal.</Text>
+              <Text style={{fontSize:16,color:'white',width:Width/1.5,marginLeft:'5%'}}>to thin out chemical streams</Text> 
+          </View>
+          <View style={{flexDirection:'row',marginLeft:10,marginTop:5,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>36 gal.</Text>
+              <Text style={{fontSize:16,color:'white',width:Width/1.5,marginLeft:'5%'}}>to finish it</Text> 
+          </View>
+          <View
+            style={{
+            width: Width/4,
+            height: 1,
+            backgroundColor: 'white',
+            marginTop: 15,
+            marginLeft:10,
+          }}
+          />
+          <View style={{flexDirection:'row',marginLeft:10,alignItems:'center'}}>
+              <Text style={{fontSize:20,fontWeight:'bold',color:'white',width:Width/4,textAlign:'right'}}>2866 gal.</Text>
+              <Text style={{fontSize:12,color:'white',width:Width/1.5,marginLeft:'45%',marginTop:30}}>- Kostigen, 2010</Text> 
+          </View>
         </ImageBackground>
       </View>
       <TouchableHighlight
