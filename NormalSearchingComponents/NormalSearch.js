@@ -12,13 +12,18 @@ import {
   TextInput,
   Pressable,
   TouchableHighlight,
+  Image
 } from 'react-native';
 
 const NormalSearch = ({name, inputData}) => {
+  const imageURL = name + '.png';
   return (
-    <View>
-      <Text>{name}</Text>
-    </View>
+    <ScrollView>
+      <View style={{alignItems: 'center'}}><Text>{name}</Text></View> 
+      <View style={{marginLeft: 20}}>
+        {Object.keys(inputData).map((key, i) => inputData[key] !== '' ? <Text key={i} style={{marginTop: 10}}>{key}: {inputData[key]}</Text> : null)}
+      </View>
+    </ScrollView>
   );
 };
 export default NormalSearch;

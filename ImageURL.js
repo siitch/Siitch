@@ -101,5 +101,6 @@ export const images = {
   coconut: require('./images/Makeup_Image_Folder/Coconut-Icon.png'),
   cocoa: require('./images/Makeup_Image_Folder/Cocoa-butter-icon.png'),
   // makeup heart
-  perfume: require('./images/Makeup_Image_Folder/makeup-cream-pink-icon.png'),
+  perfume: require('./images/Makeup_Image_Folder/Health_Page/Resources_icon_3x.png'),
+  exclamation: require('./images/Makeup_Image_Folder/Health_Page/exclamation_mark_3x.png'),
 };
