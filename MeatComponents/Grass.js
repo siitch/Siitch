@@ -42,14 +42,14 @@ const Grass = ({inputData, navigation}) => {
             <Image
               source={require('./../images/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150, marginLeft: '10%'}}
-              resizeMode='contain'
+              resizeMode="contain"
             />
           </View>
           <View style={{width: '50%', flexDirection: 'column'}}>
             <Image
               source={require('./../images/Beef_Earth/treestump_small.png')}
               style={{width: 50, height: 50, marginLeft: '60%'}}
-              resizeMode='contain'
+              resizeMode="contain"
             />
             <View>
               <Text style={{fontSize: 14}}>
@@ -95,7 +95,7 @@ const Grass = ({inputData, navigation}) => {
                   alignItems: 'flex-start',
                 }}>
                 <Text style={{fontWeight: 'bold', paddingLeft: 9}}>29 mi.</Text>
-                <ArrowIcon />
+                <ArrowIcon w={120} />
               </View>
               <Image
                 style={{width: 50, height: 50, marginLeft: '40%'}}
@@ -114,7 +114,7 @@ const Grass = ({inputData, navigation}) => {
                   alignItems: 'flex-start',
                 }}>
                 <Text style={{fontWeight: 'bold', paddingLeft: 9}}>3 mi.</Text>
-                <ArrowIcon />
+                <ArrowIcon w={30} />
               </View>
               <Image
                 style={{width: 50, height: 50, marginLeft: '40%'}}
@@ -138,14 +138,14 @@ const Grass = ({inputData, navigation}) => {
           underlayColor="#8DC73F"
           style={{
             backgroundColor: '#8DC73F',
-            width: Width - (Width/5),
+            width: Width - Width / 5,
             height: Height / 20,
             alignItems: 'center',
             borderRadius: 10,
             marginLeft: Width / 10,
             marginRight: Width / 10,
             justifyContent: 'center',
-            marginTop:'10%'
+            marginTop: '10%',
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
