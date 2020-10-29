@@ -64,6 +64,7 @@ export const images = {
   cotton: require('./images/Jeans/Earth_Page/cotton_1x.png'),
   percent: require('./images/Jeans/Earth_Page/65%_1x.png'),
   drain: require('./images/Jeans/Earth_Page/blue_drain_1x.png'),
+  dollar: require('./images/Jeans/Earth_Page/white_dollar_1x.png'),
   //Jeans What can i do
   thrift: require('./images/Jeans/WhatCanIDo/thrift_store.jpg'),
   purpose: require('./images/Jeans/WhatCanIDo/shop_with_purpose.jpg'),
@@ -74,6 +75,10 @@ export const images = {
   tshirt: require('./images/Jeans/VS_Page/TShirt.png'),
   water: require('./images/WaterDrop_BLUE.png'),
 
+  //Jeans Heart/Health
+  jeans_health: require('./images/Jeans/Health_Page/health_page_300pix_wide.jpg'),
+  jeans_health_folded: require('./images/Jeans/Health_Page/Health_jeans_200pix_wide.jpg'),
+
   //Jeans Brands
   ref: require('./images/Jeans/Company_logos/ref_1x.png'),
   outland: require('./images/Jeans/Company_logos/outland_1x.png'),
@@ -83,8 +88,8 @@ export const images = {
   amourvert: require('./images/Jeans/Company_logos/amour_vert_1x.png'),
   citizens: require('./images/Jeans/Company_logos/citizens_of_humanity_1x.png'),
   triarchy: require('./images/Jeans/Company_logos/triarchy_1x.png'),
-  //dl: require('./images/Jeans/Company_logos/boca_1x.png'),
-  //g_star: require('./images/Jeans/Company_logos/gardein_1x.png'),
+  dl: require('./images/Jeans/Company_logos/DL_1x.png'),
+  g_star: require('./images/Jeans/Company_logos/GStar_1x.png'),
 
   // makeup water
   makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
