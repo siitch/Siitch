@@ -4,7 +4,7 @@ import Recycle from './MeatComponents/Recycle';
 import Heart from './MeatComponents/Heart';
 import Water from './MeatComponents/Water';
 import Search from './Search';
-import Compare from './Comparing/Compare';
+import Compare, {compareScreen} from './Comparing/Compare';
 import NormalSearch from './NormalSearchingComponents/NormalSearch';
 import What from './MeatComponents/What';
 // Jeans import
@@ -138,7 +138,7 @@ const App = () => {
         />
         <Tab.Screen
           name="Compare"
-          component={Compare}
+          component={compareScreen}
           options={{
             tabBarLabel: 'Compare',
             tabBarIcon: ({color, size}) => (
