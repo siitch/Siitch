@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
-import {ImageIcon} from './ImageIcon';
+import {ImageIcon} from '../ImageIcon';
 import What from './What';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ArrowIcon} from './ArrowIcon';
@@ -40,14 +40,14 @@ const Grass = ({inputData, navigation}) => {
           }}>
           <View style={{width: '50%'}}>
             <Image
-              source={require('./../images/Beef_Earth/graphic_large.png')}
+              source={require('./../images/Beef/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150, marginLeft: '10%'}}
               resizeMode="contain"
             />
           </View>
           <View style={{width: '50%', flexDirection: 'column'}}>
             <Image
-              source={require('./../images/Beef_Earth/treestump_small.png')}
+              source={require('./../images/Beef/Beef_Earth/treestump_small.png')}
               style={{width: 50, height: 50, marginLeft: '60%'}}
               resizeMode="contain"
             />
@@ -149,6 +149,28 @@ const Grass = ({inputData, navigation}) => {
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+        </View>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

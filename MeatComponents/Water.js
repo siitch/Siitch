@@ -2,6 +2,7 @@ import React, {useState, useEffect, Component, PropTypes} from 'react';
 import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
+import {ImageIcon} from '../ImageIcon';
 
 import {
   SafeAreaView,
@@ -17,6 +18,7 @@ import {
   TouchableHighlight,
   Alert,
 } from 'react-native';
+import { images } from '../ImageURL';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -55,7 +57,7 @@ const Water = ({inputData, navigation}) => {
         </View>
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <Image
-            source={require('./../images/BeefPage/beef_steak.png')}
+            source={require('./../images/Beef/BeefPage/beef_steak.png')}
             style={{width: 200, height: 200}}
             resizeMode='contain'
           />
@@ -72,7 +74,7 @@ const Water = ({inputData, navigation}) => {
               alignItems: 'center',
             }}>
             <Image
-              source={require('./../images/BeefPage/2000gal_truck.png')}
+              source={require('./../images/Beef/BeefPage/2000gal_truck.png')}
               style={{width: 120, height: 120, alignItems: 'center'}}
               resizeMode='contain'
             />
@@ -110,12 +112,12 @@ const Water = ({inputData, navigation}) => {
             justifyContent: 'center',
           }}>
           <Image
-            source={require('./../images/Beef_Water/rain_wheat.png')}
+            source={require('./../images/Beef/Beef_Water/rain_wheat.png')}
             style={{width: '35%', height: 250}}
             resizeMode='contain'
           />
           <Image
-            source={require('./../images/Beef_Water/cows_hose.png')}
+            source={require('./../images/Beef/Beef_Water/cows_hose.png')}
             style={{marginLeft: '10%', width: '35%', height: 250}}
             resizeMode='contain'
           />
@@ -270,8 +272,30 @@ const Water = ({inputData, navigation}) => {
             justifyContent: 'center',
             marginTop:'10%'
           }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+          <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+        </View>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

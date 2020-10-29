@@ -23,18 +23,18 @@ const What = () => {
   return (
     <ScrollView style={{}}>
       <View style={{width:Width,alignItems:'center',marginTop:'5%'}}>
-        <Text style={{fontSize:24,alignContent:'center',fontWeight:'bold'}}>What Can I do?</Text>
+        <Text style={{fontSize:24,alignContent:'center'}}>What Can I do?</Text>
       </View>
-      <Text style={{fontSize:18,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Frequency</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Frequency</Text>
       <Text style={{fontSize:14,marginLeft:'5%'}}>Try saving red meat for special occasions</Text>
       <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',marginRight:'5%'}}>Take it at your own pace. If you eat meat twice a day, try eating it once a day</Text>
-      <Text style={{fontSize:18,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Portion Size</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Portion Size</Text>
       <Image source={images.portion} style={{marginLeft:'10%',marginTop:'5%'}} resizeMode='contain'/>
       <Text style={{fontSize:14,marginLeft:'5%'}}>Reducing portion size will save you money and help you lose weight</Text>
-      <Text style={{fontSize:18,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Replace</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Replace</Text>
       <Text style={{fontSize:14,marginLeft:'5%'}}>Try healthier meats, like fish or poultry</Text>
       <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%'}}>Try meat-alternative products</Text>
-      <Text style={{fontSize:18,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Explore</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Explore</Text>
       <Text style={{fontSize:14,marginLeft:'5%'}}>Explore new plant-based recipes</Text>
       <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%'}}>Find the vegetables that work for your pallete. Examples: marinated portobello mushrooms, grilled peppers, eggplant, sweet potato tacos, black bean burgers, pinto beans, chickpeas, lentils, edamame...</Text>
       <Text style={{fontSize:12,marginTop:'1%',marginLeft:'5%',fontWeight:'bold'}}>(Talk to your doctor before changing diets)</Text>
@@ -62,7 +62,7 @@ const What = () => {
         </View>  
       </View>
       <View>
-        <Text style={{fontSize:18,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Don’t Waste Meat</Text>
+        <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Don’t Waste Meat</Text>
         <View style={{flexDirection:'row',alignItems:'center',marginTop:'5%'}}>
         <Image source={images.milk} resizeMode='contain' />
         <Image source={images.steak_large} style={{marginLeft:'10%'}} resizeMode='contain' />
@@ -89,7 +89,9 @@ const What = () => {
       </View>
       </View>
       
-      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%'}}>Plan your meals, and plan for leftovers so you don’t waste meat, or any dairy product</Text>
+      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%'}}>
+      <Text onPress={() => Linking.openURL('https://www.figma.com/exit?url=https%3A%2F%2Fwww.thekitchn.com%2Fthe-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')} style={{color:'#00ADEF'}}>Plan your meals, </Text>
+         and plan for leftovers so you don’t waste meat, or any dairy product</Text>
       <View style={{
         height: Height / 7,
         backgroundColor: '#8DC73F',

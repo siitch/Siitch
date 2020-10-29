@@ -28,13 +28,13 @@ export const images = {
 
   //Beef VS page
   pig_vs: require('./images/Meats/pig_small.png'),
-  beef_steak: require('./images/BeefPage/beef_steak.png'),
+  beef_steak: require('./images/Beef/BeefPage/beef_steak.png'),
   goat: require('./images/Meats/goat.png'),
   tofu: require('./images/tofu.png'),
   chicken: require('./images/chicken.png'),
-  car: require('./images/Beef_Earth/car_1x.png'),
-  steak_small: require('./images/Beef_Earth/steak_small.png'),
-  steak_large: require('./images/Beef_Earth/steak_large.png'),
+  car: require('./images/Beef/Beef_Earth/car_1x.png'),
+  steak_small: require('./images/Beef/Beef_Earth/steak_small.png'),
+  steak_large: require('./images/Beef/Beef_Earth/steak_large.png'),
   broccolli: require('./images/Vegetables/broccolli.png'),
 
   //Beef Recycle page
@@ -42,12 +42,22 @@ export const images = {
   clock: require('./images/clock.png'),
   // Beef Heart page
   heart_small: require('./images/heart_small.png'),
+  //Beef Brands
+  impossible: require('./images/Beef/Company_logos/impossible_burger_1x.png'),
+  beyond_meat: require('./images/Beef/Company_logos/beyond_meat_1x.png'),
+  lightlife: require('./images/Beef/Company_logos/lightlife_1x.png'),
+  hungry_planet: require('./images/Beef/Company_logos/hungry_planet_1x.png'),
+  nextlevel: require('./images/Beef/Company_logos/next_level_1x.png'),
+  quorn: require('./images/Beef/Company_logos/quorn_1x.png'),
+  boca: require('./images/Beef/Company_logos/boca_1x.png'),
+  gardein: require('./images/Beef/Company_logos/gardein_1x.png'),
+
   // Jeans water page
   jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
   truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
-  portion: require('./images/Beef_WhatCanIDo/portion_size_small.png'),
-  suv: require('./images/Beef_WhatCanIDo/white_SUV_pixabay.png'),
-  milk: require('./images/Beef_WhatCanIDo/milk_large.png'),
+  portion: require('./images/Beef/Beef_WhatCanIDo/portion_size_small.png'),
+  suv: require('./images/Beef/Beef_WhatCanIDo/white_SUV_pixabay.png'),
+  milk: require('./images/Beef/Beef_WhatCanIDo/milk_large.png'),
   waterBackground: require('./images/Jeans/Main_Page/Mainpage_background_3x.png'),
   // Jeans Earth
   earthBackground: require('./images/Jeans/Earth_Page/Earth_background_3x_trimmed.png'),
@@ -63,6 +73,19 @@ export const images = {
   socks: require('./images/Jeans/VS_Page/socks.png'),
   tshirt: require('./images/Jeans/VS_Page/TShirt.png'),
   water: require('./images/WaterDrop_BLUE.png'),
+
+  //Jeans Brands
+  ref: require('./images/Jeans/Company_logos/ref_1x.png'),
+  outland: require('./images/Jeans/Company_logos/outland_1x.png'),
+  patagonia: require('./images/Jeans/Company_logos/patagonia_1x.png'),
+  boyish: require('./images/Jeans/Company_logos/boyish_1x.png'),
+  outerknown: require('./images/Jeans/Company_logos/outerknown_1x.png'),
+  amourvert: require('./images/Jeans/Company_logos/amour_vert_1x.png'),
+  citizens: require('./images/Jeans/Company_logos/citizens_of_humanity_1x.png'),
+  triarchy: require('./images/Jeans/Company_logos/triarchy_1x.png'),
+  //dl: require('./images/Jeans/Company_logos/boca_1x.png'),
+  //g_star: require('./images/Jeans/Company_logos/gardein_1x.png'),
+
   // makeup water
   makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
   coconut: require('./images/Makeup_Image_Folder/Coconut-Icon.png'),

@@ -23,7 +23,7 @@ const WhatJeans = () => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-        <Text style={{marginTop: 20, fontSize: 25}}>What Can I do?</Text>
+        <Text style={{marginTop: 20, fontSize: 24}}>What Can I do?</Text>
       </View>
       <View style={{marginLeft: 15}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Reduce</Text>
@@ -62,6 +62,7 @@ const WhatJeans = () => {
             fontWeight: 'bold',
             color: 'white',
             marginTop: 10,
+            marginLeft: 10,
           }}>
           Donate or shop at Thrift Stores
         </Text>
@@ -105,7 +106,7 @@ const WhatJeans = () => {
                   fontSize: 15,
                   color: 'white',
                   fontWeight: 'bold',
-                  width: Width / 2,
+                  width: Width / 2.3,
                   marginTop: 10,
                 }}>
                 reduces the water and carbon footprint of each pair of jeans.
@@ -153,13 +154,13 @@ const WhatJeans = () => {
         <View
           style={{
             flexDirection: 'column',
-            marginLeft: 30,
-            width: Width / 2.5,
-            marginTop: Height / 20,
+            marginLeft: 20,
+            width: Width / 2.3,
+            marginTop: Height / 30,
           }}>
           <Text
             style={{
-              fontSize: 25,
+              fontSize: 24,
               color: 'white',
               fontWeight: 'bold',
             }}>
@@ -179,20 +180,20 @@ const WhatJeans = () => {
       {/* green part end */}
       <View
         style={{
-          marginTop: Height / 20,
+          marginTop: Height / 10,
           marginLeft: 15,
         }}>
         <Text style={{fontSize: 25, fontWeight: 'bold'}}>Ask</Text>
         <Text>
           Ask your favorite brands to do better, Email them or use social media.
         </Text>
-        <Text style={{fontSize: 25, fontWeight: 'bold'}}>Avoid</Text>
+        <Text style={{fontSize: 25, fontWeight: 'bold',marginTop:'5%'}}>Avoid</Text>
         <Text>
           Avoid jeans made with regular cotton, Organic cotton is grown without
           harmful pesticides leaving the soil healthier. Other Benefits of
           growing organic v.s regular cotton:{' '}
         </Text>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row',marginTop:'5%'}}>
           <Text>--</Text>
           <Text>45% reduction in CO2</Text>
         </View>
@@ -213,6 +214,7 @@ const WhatJeans = () => {
         style={{
           flexDirection: 'row',
           marginLeft: (3 * Width) / 4,
+          marginTop:'3%'
         }}>
         <Text style={{fontSize: 10}}>-</Text>
         <Text style={{fontSize: 10}}>Soil Associtation org, Patagonia</Text>

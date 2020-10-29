@@ -3,6 +3,10 @@ import {Appbar} from 'react-native-paper';
 import {images} from '../ImageURL';
 import What from './What';
 import {ArrowIconCol} from './ArrowIconCol';
+<<<<<<< HEAD
+=======
+import {ImageIcon} from '../ImageIcon';
+>>>>>>> 1fb284acb38377b6fc290d17f2c7f880e54b3701
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,14 +24,36 @@ import {
 } from 'react-native';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
+const low = 90;
+const hight = 120;
 const Heart = ({navigation, inputData}) => {
   return (
+    <ScrollView>
     <View style={{paddingTop: Height / 20}}>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={{width: Width / 1.2}}>
-          {inputData['Search Health Page']}
+      <View style={{flexDirection: 'row',marginLeft:10}}>
+        <Text style={{width: Width / 1.3}}>
+          Reducing red meat intake can have numerous health benefits, including a lower risk of developing type 2 diabetes, cardiovascular disease, and certain cancers.
         </Text>
+<<<<<<< HEAD
         <Image source={images.heart_small} resizeMode="contain" />
+=======
+        <Image source={images.heart_small} resizeMode='contain'/>
+      </View>
+      <Text style={{marginLeft:'40%',marginTop:'2%',fontSize:12}}>- News Medical Life Sciences</Text>
+      <View style={{width: '100%', height: 2, backgroundColor: '#EF7A6A',marginTop:'10%'}} />
+      <View style={{flexDirection:'row'}}>
+      <View style={{flexDirection:'column',width:Width/3, alignItems:'center'}}>
+      <ArrowIconCol passHeight={low}></ArrowIconCol>
+      <Text style={{alignItems:'center'}}>Type 2{'\n'} Diabetes</Text>
+      </View>
+      <View style={{flexDirection:'column',width:Width/3,alignItems:'center'}}>
+      <ArrowIconCol passHeight={hight}></ArrowIconCol>
+      <Text style={{alignItems:'center',marginLeft: '10%'}}>Cardiovascular{'\n'}Disease</Text>
+      </View>
+      <View style={{flexDirection:'column',width:Width/3,alignItems:'center'}}>
+      <ArrowIconCol passHeight={low}></ArrowIconCol>
+      <Text style={{alignItems:'center'}}>Certain{'\n'}Cancers</Text>
+>>>>>>> 1fb284acb38377b6fc290d17f2c7f880e54b3701
       </View>
       <View
         style={{
@@ -86,7 +112,30 @@ const Heart = ({navigation, inputData}) => {
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
+      <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+        <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+      </View>
+      <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          </View>
+          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
+            <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          </View>
+      </View>
     </View>
+  </ScrollView>
   );
 };
 export default Heart;
