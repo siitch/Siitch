@@ -37,7 +37,7 @@ const Search = ({searchData, navigation}) => {
     [
       {
         image: require('./images2/chocolate.png'),
-        name: '100 gram chocolate bar',
+        name: 'Chocolate',
       },
       {image: require('./images2/artichoke.png'), name: 'Artichokes'},
       {image: require('./images2/asparagus.jpg'), name: 'Asparagus'},
@@ -58,7 +58,7 @@ const Search = ({searchData, navigation}) => {
     [
       {
         image: require('./images2/cauliflower.png'),
-        name: 'Cauliflower & headed broccoli',
+        name: 'Cauliflower',
       },
       {image: require('./images2/celery.png'), name: 'Celery'},
       {image: require('./images2/cheese.png'), name: 'Cheese'},
@@ -87,19 +87,19 @@ const Search = ({searchData, navigation}) => {
       {image: require('./images2/okra.png'), name: 'Okra'},
       {
         image: require('./images2/potato_chips.png'),
-        name: '(Bag of) Potato chips',
+        name: 'Potato chips',
       },
       {image: require('./images2/broccolli.png'), name: 'Broccoli'},
     ],
     [
-      {image: require('./images2/carrot.png'), name: 'Carrots & turnips'},
-      {image: require('./images2/chilis.png'), name: 'Chilis and peppers'},
+      {image: require('./images2/carrot.png'), name: 'Carrots'},
+      {image: require('./images2/chilis.png'), name: 'Chilis'},
       {image: require('./images2/ketchup.png'), name: 'Tomato ketchup'},
     ],
     [
       {
         image: require('./images2/suede_shoes.jpg'),
-        name: 'Suede shoes (made from lambskin)',
+        name: 'Suede shoes',
       },
       {image: require('./images2/rice_white_1.png'), name: 'Rice'},
     ],
