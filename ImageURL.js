@@ -103,4 +103,16 @@ export const images = {
   // makeup heart
   perfume: require('./images/Makeup_Image_Folder/Health_Page/Resources_icon_3x.png'),
   exclamation: require('./images/Makeup_Image_Folder/Health_Page/exclamation_mark_3x.png'),
+  // makeup recycle
+  moisture: require('./images/Makeup_Image_Folder/Recycle_Page/Moisturizer_pot.png'),
+  //makeup earth
+  label: require('./images/Makeup_Image_Folder/Earth_Page/Earthtop_3x_blue_background.png'),
+  frog: require('./images/Makeup_Image_Folder/Earth_Page/frog_fish_3x.png'),
+  //makeup vs
+  vsMeat: require('./images/Makeup_Image_Folder/VS_Page/Meat_icon_256x256.png'),
+  drug: require('./images/Makeup_Image_Folder/VS_Page/Drug_icon_256x256.png'),
+  needle: require('./images/Makeup_Image_Folder/VS_Page/Vaccine_icon_256x256.png'),
+  chemicals: require('./images/Makeup_Image_Folder/VS_Page/Chemicals_icon_256x256.png'),
+  FDA: require('./images/Makeup_Image_Folder/VS_Page/FDA_3x.png'),
+  questionMark: require('./images/Makeup_Image_Folder/VS_Page/question_mark_3x.png'),
 };

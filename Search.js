@@ -166,7 +166,7 @@ const Search = ({searchData, navigation}) => {
                 <View style={styles.eachAvatar}>
                   <Avatar.Image
                     source={url.image}
-                    style={{backgroundColor: 'white'}}
+                    style={{backgroundColor: 'grey'}}
                   />
                 </View>
               </TouchableHighlight>
