@@ -154,21 +154,37 @@ const Grass = ({inputData, navigation}) => {
           <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
         </View>
         <View  style={{flexDirection:'column',alignItems:'center'}}>
-          <View style={{flexDirection:'row',marginLeft:'5%'}}>
+          <View style={{flexDirection:'row'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
             <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+            </TouchableHighlight>
           </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
-            <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://lightlife.com/')}}>
+              <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.hungryplanetfoods.com/')}}>
+              <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
+            </TouchableHighlight>
           </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
-            <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.nextlevelburger.com/')}}>
+              <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.quorn.us/')}}>
+              <ImageIcon category='brand' image={images.quorn}></ImageIcon>
+            </TouchableHighlight>
           </View>
-          <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.boca}></ImageIcon>
-            <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.bocaburger.com/')}}>
+              <ImageIcon category='brand' image={images.boca}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.gardein.com/')}}>
+              <ImageIcon category='brand' image={images.gardein}></ImageIcon>
+            </TouchableHighlight>
           </View>
         </View>
       </ScrollView>

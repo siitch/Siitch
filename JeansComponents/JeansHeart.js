@@ -70,28 +70,48 @@ const JeansHeart = ({inputData, navigation}) => {
           in random order.
         </Text>
       </View>
-      <View style={{flexDirection: 'column', alignItems: 'center'}}>
-        <View style={{flexDirection: 'row', marginLeft: '5%'}}>
-          <ImageIcon category="brand" image={images.ref} />
-          <ImageIcon category="brand" image={images.outland} />
+      <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.thereformation.com/')}}>
+              <ImageIcon category='brand' image={images.ref}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.outlanddenim.com/')}}>
+              <ImageIcon category='brand' image={images.outland}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.patagonia.com/home/')}}>
+              <ImageIcon category='brand' image={images.patagonia}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.boyish.com/')}}>
+              <ImageIcon category='brand' image={images.boyish}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.outerknown.com/')}}>
+              <ImageIcon category='brand' image={images.outerknown}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://amourvert.com/')}}>
+              <ImageIcon category='brand' image={images.amourvert}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://citizensofhumanity.com/')}}>
+              <ImageIcon category='brand' image={images.citizens}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://triarchy.com/')}}>
+              <ImageIcon category='brand' image={images.triarchy}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.dl1961.com/')}}>
+              <ImageIcon category='brand' image={images.dl}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.g-star.com/en_us')}}>
+              <ImageIcon category='brand' image={images.g_star}></ImageIcon>
+            </TouchableHighlight>
+          </View>
         </View>
-        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
-          <ImageIcon category="brand" image={images.patagonia} />
-          <ImageIcon category="brand" image={images.boyish} />
-        </View>
-        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
-          <ImageIcon category="brand" image={images.outerknown} />
-          <ImageIcon category="brand" image={images.amourvert} />
-        </View>
-        <View style={{flexDirection: 'row', marginLeft: '5%', marginTop: '5%'}}>
-          <ImageIcon category="brand" image={images.citizens} />
-          <ImageIcon category="brand" image={images.triarchy} />
-        </View>
-        <View style={{flexDirection:'row',marginLeft:'5%',marginTop:'5%'}}>
-            <ImageIcon category='brand' image={images.dl}></ImageIcon>
-            <ImageIcon category='brand' image={images.g_star}></ImageIcon>
-        </View>
-      </View>
     </ScrollView>
   );
 };
