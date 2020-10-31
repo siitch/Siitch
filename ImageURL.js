@@ -153,7 +153,7 @@ export const images = {
   waterless: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Waterless_icons_1x.png'),
   donotpour: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Do_not_pour_combined_1.png'),
   upcycle: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Upcycle_logo_256pix_wide.png'),
-  recycle: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Recycle_logo_256x256.png'),
+  recycle_mk: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Recycle_logo_256x256.png'),
   Know_Your_Labels: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Know_Your_Labels.png'),
   green_dollar: require('./images/Makeup_Image_Folder/What_Can_I_Do_Page/Green_dollar_1x.png'),
 
