@@ -23,7 +23,7 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const Heart = ({navigation, inputData}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'white'}}>
     <View style={{paddingTop: Height / 20}}>
       <View style={{flexDirection: 'row',marginLeft:10}}>
         <Text style={{width: Width / 1.3}}>

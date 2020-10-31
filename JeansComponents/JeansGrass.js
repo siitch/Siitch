@@ -22,7 +22,7 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const JeansGrass = ({inputData, navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <ImageBackground
         source={images.earthBackground}
         style={{width: Width, height: Height/1.5}}

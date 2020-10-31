@@ -29,7 +29,7 @@ const arr = [
 
 const JeansVs = ({inputData, navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View
         style={{
           backgroundColor: '#00adef',

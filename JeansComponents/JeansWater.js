@@ -23,7 +23,7 @@ const Height = Dimensions.get('window').height;
 
 const JeansWater = ({inputData, navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{alignItems: 'center', marginTop: '2%'}}>
         <Text style={{fontWeight: 'bold', fontSize: 20}}>One pair Jeans</Text>
       </View>

@@ -22,7 +22,7 @@ const Height = Dimensions.get('window').height;
 
 const JeansHeart = ({inputData, navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{flexDirection:'row',marginTop:'5%'}}>
         <Image source={images.jeans_health} style={{height:250,marginLeft:-60}} resizeMode="contain" />
         <View style={{flexDirection:'column',width:Width/2,marginLeft:-60}}>

@@ -17,12 +17,14 @@ import {
   Image,
 } from 'react-native';
 import {images} from '../ImageURL';
+import {ImageIcon} from '../ImageIcon';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 const MakeupWater = ({inputData, navigation}) => {
   const [expand, setExpand] = useState(false);
   return (
+    <View style={{backgroundColor:'#FFFFFF'}}>
     <ScrollView
       style={{marginTop: Height / 20}}
       contentContainerStyle={{alignItems: 'center'}}>
@@ -133,7 +135,100 @@ const MakeupWater = ({inputData, navigation}) => {
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
+      <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
+        <Text style={{fontSize:16,width:Width/1.1}}>Many companies make sustainable makeup. Here’s a few to get started, as recommended and rated by
+          <Text onPress={() => Linking.openURL('https://www.sustainablejungle.com/best-of-sustainable-beauty/zero-waste-make-up/')} style={{color:'#00ADEF'}}> Sustainable Jungle. </Text>
+        </Text>
+      </View>
+      <View  style={{flexDirection:'column',alignItems:'center'}}>
+          <View style={{flexDirection:'row'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.thereformation.com/')}}>
+              <ImageIcon category='brand' image={images.axiology_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.outlanddenim.com/')}}>
+              <ImageIcon category='brand' image={images.dab_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.axiology_rate}></Image>
+            <Image source={images.dab_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.patagonia.com/home/')}}>
+              <ImageIcon category='brand' image={images.fat_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.boyish.com/')}}>
+              <ImageIcon category='brand' image={images.plant_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.fat_rate}></Image>
+            <Image source={images.plant_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.outerknown.com/')}}>
+              <ImageIcon category='brand' image={images.nudi_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://amourvert.com/')}}>
+              <ImageIcon category='brand' image={images.elate_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.nudi_rate}></Image>
+            <Image source={images.elate_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://citizensofhumanity.com/')}}>
+              <ImageIcon category='brand' image={images.cleanfaced_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://triarchy.com/')}}>
+              <ImageIcon category='brand' image={images.sea_witch_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.cleanfaced_rate}></Image>
+            <Image source={images.sea_witch_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.dl1961.com/')}}>
+              <ImageIcon category='brand' image={images.percent100_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.g-star.com/en_us')}}>
+              <ImageIcon category='brand' image={images.phb_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.percent100_rate}></Image>
+            <Image source={images.phb_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://citizensofhumanity.com/')}}>
+              <ImageIcon category='brand' image={images.odylique_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://triarchy.com/')}}>
+              <ImageIcon category='brand' image={images.vyana_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.odylique_rate}></Image>
+            <Image source={images.vyana_rate}></Image>
+          </View>
+          <View style={{flexDirection:'row',marginTop:'5%'}}>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.dl1961.com/')}}>
+              <ImageIcon category='brand' image={images.dirty_logo}></ImageIcon>
+            </TouchableHighlight>
+            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.g-star.com/en_us')}}>
+              <ImageIcon category='brand' image={images.neek_logo}></ImageIcon>
+            </TouchableHighlight>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <Image source={images.dirty_rate}></Image>
+            <Image source={images.neek_rate}></Image>
+          </View>
+        </View>
     </ScrollView>
+    </View>
   );
 };
 export default MakeupWater;

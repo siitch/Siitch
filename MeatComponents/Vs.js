@@ -22,7 +22,7 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const Vs = ({navigation}) => {
   return (
-    <View>
+    <View style={{backgroundColor:'white'}}>
       <ScrollView>
         <View
           style={{

@@ -28,7 +28,7 @@ const Height = Dimensions.get('window').height;
 
 const Grass = ({inputData, navigation}) => {
   return (
-    <View>
+    <View style={{backgroundColor:'#FFFFFF'}}>
       <ScrollView>
         <View
           style={{

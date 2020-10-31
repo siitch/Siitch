@@ -21,7 +21,7 @@ const Width = Dimensions.get('window').width;
 
 const What = () => {
   return (
-    <ScrollView style={{}}>
+    <ScrollView style={{backgroundColor:'white'}}>
       <View style={{width:Width,alignItems:'center',marginTop:'5%'}}>
         <Text style={{fontSize:24,alignContent:'center'}}>What Can I do?</Text>
       </View>

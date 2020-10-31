@@ -18,7 +18,7 @@ import {
 
 const NormalSearch = ({name, inputData}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{alignItems: 'center'}}>
         <Image source={Profiles[name]} />
         <Text style={{fontSize: 25, fontWeight: 'bold'}}>{name}</Text>

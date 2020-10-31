@@ -22,7 +22,7 @@ const Width = Dimensions.get('window').width;
 
 const Recycle = ({navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'white'}}>
     <View style={{flexDirection: 'column', flex: 1}}>
       <View
         style={{

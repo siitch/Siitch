@@ -24,7 +24,7 @@ const MakeupHeart = ({inputData, navigation}) => {
   const [expand2, setExpand2] = useState(false);
   const [expand3, setExpand3] = useState(false);
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{marginTop: Height / 20, alignItems: 'center'}}>
         <Text style={{fontSize: 25}}>1400 V.S 30</Text>
         <Text style={{fontSize: 20}}>

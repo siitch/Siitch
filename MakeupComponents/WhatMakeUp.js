@@ -24,7 +24,7 @@ const WhatMakeUp = () => {
   const [expand1, setExpand1] = useState(false);
   const [expand2, setExpand2] = useState(false);
   return (
-    <ScrollView style={{}}>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{width:Width,alignItems:'center',marginTop:'5%'}}>
         <Text style={{fontSize:24,alignContent:'center'}}>What Can I do?</Text>
       </View>
@@ -178,7 +178,7 @@ const WhatMakeUp = () => {
         <Text onPress={() => Linking.openURL('https://homehacks.co/upcycle-old-perfume-bottles/')} style={{color:'#00ADEF'}}> 15 ways to upcycle old perfume bottles by HomeHacks.</Text>
         </Text>
         <View style={{alignItems:'center',marginTop:'10%'}}>
-          <Image source={images.recycle} style={{width:100,height:100}} resizeMode='contain'/>
+          <Image source={images.recycle_mk} style={{width:100,height:100}} resizeMode='contain'/>
         </View>
         <Text style={{fontSize:20,alignContent:'center',fontWeight:'bold',marginLeft:'10%',marginTop:'5%'}}>Recyle</Text>
         <Text style={{alignContent:'center',marginLeft:'10%',marginTop:'2%',marginRight:'10%'}}>Recycling is complicated. Gone are the days where we could simply throw things in the recycle container. How to make a difference:</Text>

@@ -21,7 +21,7 @@ const Width = Dimensions.get('window').width;
 
 const WhatJeans = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View style={{alignItems: 'center'}}>
         <Text style={{marginTop: 20, fontSize: 24}}>What Can I do?</Text>
       </View>

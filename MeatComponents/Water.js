@@ -24,7 +24,7 @@ const Height = Dimensions.get('window').height;
 
 const Water = ({inputData, navigation}) => {
   return (
-    <View>
+    <View style={{backgroundColor:'white'}}>
       <ScrollView>
         <View style={{alignItems: 'center', marginTop: '2%'}}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>One Pound Beef</Text>

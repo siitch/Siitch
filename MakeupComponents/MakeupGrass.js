@@ -21,7 +21,7 @@ const Height = Dimensions.get('window').height;
 
 const MakeupGrass = ({inputData, navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View
         style={{
           width: Width,

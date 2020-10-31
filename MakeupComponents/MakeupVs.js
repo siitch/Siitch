@@ -30,7 +30,8 @@ const itemArr = [
 
 const MakeupVs = ({inputData, navigation}) => {
   return (
-    <View style={{alignItems: 'center', marginTop: Height / 20}}>
+    <View style={{backgroundColor:'#FFFFFF'}}>
+    <View style={{alignItems: 'center', marginTop: Height / 20, backgroundColor:'#FFFFFF'}}>
       <Text style={{fontSize: 25}}>Who is regulating?</Text>
       <View style={{marginLeft: 20, marginRight: 20}}>
         {itemArr.map((item, index) => (
@@ -78,6 +79,7 @@ const MakeupVs = ({inputData, navigation}) => {
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>
+    </View>
     </View>
   );
 };

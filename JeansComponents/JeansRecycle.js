@@ -21,7 +21,7 @@ const Width = Dimensions.get('window').width;
 
 const JeansRecycle = ({inputData, navigation}) => {
   return (
-    <ScrollView style={{flexDirection: 'column', flex: 1}}>
+    <ScrollView style={{flexDirection: 'column', flex: 1,backgroundColor:'#FFFFFF'}}>
       <View
         style={{
           paddingTop: Height / 20,

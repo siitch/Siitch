@@ -139,6 +139,7 @@ const Search = ({searchData, navigation}) => {
       );
   };
   return (
+    <View style={{backgroundColor:'#FFFFFF'}}>
     <View style={styles.searchFrame}>
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <Text style={styles.title}>Search</Text>
@@ -172,6 +173,7 @@ const Search = ({searchData, navigation}) => {
           </View>
         ))}
       </ScrollView>
+    </View>
     </View>
   );
 };
