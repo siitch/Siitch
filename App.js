@@ -25,7 +25,7 @@ import WhatMakeUp from './MakeupComponents/WhatMakeUp';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
-import {View, Text, Image, Dimensions, Button} from 'react-native';
+import {View, Text, Image, Dimensions, Button, ScrollView} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -36,30 +36,39 @@ import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
 import {CalculateStackScreen} from './Calculate/Calculate';
 
+import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
 function HomeScreen() {
   return (
+    <ScrollView style={{backgroundColor: 'white'}}>
     <View style={styles.MainContainer}>
+      <Image style={styles.alpha} source={Profiles.alpha} resizeMode="contain" />
       <View style={styles.center}>
-        <Image style={styles.logo} source={images.logo} />
+        <Image style={styles.logo} source={Profiles.logo} resizeMode="contain" />
       </View>
 
       <Text style={styles.text}>Make Good Choices For Our Planet</Text>
-      <View>
-        <Image
-          style={{width: 350, height: 350, marginLeft: '3%'}}
-          source={images.landing_image}
-          resizeMode="contain"
-        />
+      <View style={{ alignItems: 'center' }}>
+      <Image
+          style={{width: DeviceWidth*0.8, height: 350}}
+          source={Profiles.landing_image}
+          resizeMode= 'contain'
+      />
       </View>
       <Text style={styles.bottomtext}>
-        See the environmental cost of what you buy, so you can make a difference
-        everyday
+        See the environmental cost of
+      </Text>
+      <Text style={styles.bottomtext}>
+        what you buy, so you can make
+      </Text>
+      <Text style={styles.bottomtext}>
+        a difference every day
       </Text>
     </View>
+    </ScrollView>
   );
 }
 
@@ -154,7 +163,7 @@ const App = () => {
             tabBarLabel: 'Compare',
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons
-                name="calculator"
+                name="scale-balance"
                 color={color}
                 size={size}
               />
