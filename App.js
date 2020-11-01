@@ -230,7 +230,6 @@ const App = () => {
       detail = false;
     }
     setKeyword(route.params.name);
-    console.log(route.params.name);
     if (detail) {
       return (
         <Tab.Navigator

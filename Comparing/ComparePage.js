@@ -130,7 +130,6 @@ else{
 
 var path1 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/tea.png'
 var path2 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/coffee_small.png'
-console.log(f1.ImageURL)
 
 
   return (
@@ -174,8 +173,6 @@ console.log(f1.ImageURL)
 
 
 function getTextStyle(val1, val2) {
-  console.log(val1)
-  console.log(val2)
   if(parseInt(val1) <= parseInt(val2)) {
    return {
     borderColor: '#6dbd64', borderRadius: 40 ,borderWidth: 5,width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:10, justifyContent:'center', alignItems:'center', marginTop:50, transform: [{scale: 0.8}]
