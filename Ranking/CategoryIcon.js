@@ -5,13 +5,13 @@ const DeviceWidth = Dimensions.get('window').width;
 
 export const CategoryIcon = ({category, image}) => {
     return(
-        <View flex center style={{width: DeviceWidth*0.25, height: DeviceWidth*0.3, marginBottom:10, marginLeft:10}} >
+        <View flex center style={{width: DeviceWidth*0.25, height: DeviceWidth*0.3, marginBottom:10, marginLeft:5, marginRight:5, alignItems: 'center'}} >
             <Image
-                style = {{width: 40, height: 40, marginTop: '15%',marginLeft: '15%'}}
+                style = {{width: 40, height: 40, marginTop: '15%'}}
                 source={image}
                 resizeMode="contain"
             />
-        <Text style={{fontSize:15, marginLeft: '20%'}}>{category}</Text>
+            <Text style={{fontSize:16, minWidth: 100, textAlign: 'center', marginTop: '15%'}}>{category}</Text>
         </View> 
     )
 }

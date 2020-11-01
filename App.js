@@ -34,6 +34,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
+import {CalculateStackScreen} from './Calculate/Calculate';
 
 import {images} from './ImageURL';
 const DeviceHeight = Dimensions.get('window').height;
@@ -119,6 +120,16 @@ const App = () => {
                 color={color}
                 size={size}
               />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Calculate" 
+          component={CalculateStackScreen}
+          options={{
+            tabBarLabel: 'Calculate',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons name="calculator" color={color} size={size} />
             ),
           }}
         />

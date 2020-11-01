@@ -19,6 +19,7 @@ import {
   Pressable,
   TouchableHighlight,
   Alert,
+  Image
 } from 'react-native';
 
 import {styles} from './Ranking/Styles';
@@ -147,7 +148,7 @@ const Search = ({searchData, navigation}) => {
           placeholder="Search"
           onChangeText={text => setKeyword(text)}
           onIconPress={toDatabase}
-          style={{width: 250}}
+          style={{width: 250, marginBottom: 20}}
         />
         <Text style={{marginTop: 10, marginBottom: 10}}>
           For prototype, only Beef, Jeans & Makeup search {'\n'} pages are
@@ -163,15 +164,23 @@ const Search = ({searchData, navigation}) => {
                 underlayColor="transparent"
                 style={{marginLeft: 25}}>
                 <View style={styles.eachAvatar}>
-                  <Avatar.Image
+                  <Image
                     source={url.image}
-                    style={{backgroundColor: 'grey'}}
+                    style={{
+                      backgroundColor: 'white', 
+                      width: 60, 
+                      height: 60,
+                      marginBottom: 10
+                    }}
+                    resizeMode='contain'
                   />
+                  <Text style={{maxWidth: 100}}>{url.name}</Text>
                 </View>
               </TouchableHighlight>
             ))}
           </View>
         ))}
+        <View style={{marginBottom: 40}}></View>
       </ScrollView>
     </View>
     </View>
