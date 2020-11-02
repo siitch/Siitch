@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
       marginTop: 20,
     },
     title: {
-      color: '#00adef',
+      color: 'black',
       fontWeight: 'bold',
-      fontSize: 50,
+      fontSize: 30,
       marginTop: 40,
-      marginBottom: 10
+      marginBottom: 20
     },
     MainContainer: {
       flex: 1,

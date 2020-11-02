@@ -31,11 +31,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-  title: {
-    color: '#00adef',
-    fontWeight: 'bold',
-    fontSize: 50,
-  },
   databaseView: {
     width: 350,
   },
@@ -67,9 +62,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    color: '#00adef',
+    color: 'black',
     fontWeight: 'bold',
-    fontSize: 50,
+    fontSize: 30,
   },
   MainContainer: {
     flex: 1,
