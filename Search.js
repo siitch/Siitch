@@ -19,10 +19,12 @@ import {
   Pressable,
   TouchableHighlight,
   Alert,
+  Dimensions,
   Image
 } from 'react-native';
 
 import {styles} from './Ranking/Styles';
+const DeviceWidth = Dimensions.get('window').width;
 
 const Search = ({searchData, navigation}) => {
   const [index, setIndex] = useState(0);
@@ -148,7 +150,14 @@ const Search = ({searchData, navigation}) => {
           placeholder="Search"
           onChangeText={text => setKeyword(text)}
           onIconPress={toDatabase}
-          style={{width: 250, marginBottom: 20}}
+          style={{borderColor: '#80CAFF',
+          marginTop: 20,
+          height: 50,
+          borderWidth: 2,
+          borderRadius: 20, 
+          width: DeviceWidth*0.7,
+          textAlign: 'center',
+          fontSize: 20}}
         />
         <Text style={{marginTop: 10, marginBottom: 10}}>
           For prototype, only Beef, Jeans & Makeup search {'\n'} pages are

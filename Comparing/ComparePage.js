@@ -138,7 +138,7 @@ console.log(f1.ImageURL)
 
 
   return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
         {/* <View>
           <Text>This is the compare details page.</Text>
           <Text>itemId: {JSON.stringify(prod1)}</Text>
