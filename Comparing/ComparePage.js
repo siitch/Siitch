@@ -19,9 +19,13 @@ let sortable = [];
 export const comparePage = ({route, navigation}) => {
   const { prod1 } = route.params;
   const { prod2 } = route.params;
+  if (prod1 === ""){
+      alert("No ")
+  }
 
   const [fetched1, handleFetch1] = useState(false);
   const [fetched2, handleFetch2] = useState(false);
+
 
   const [currentprod1, changeprod1] = useState('');
   const [currentprod2, changeprod2] = useState('');
@@ -110,7 +114,7 @@ else if (f1['Global Gallon p lb'] != ""){
   selectedcategory1 = 'Global Gallon p lb'
 }
 else{
-  selectedcategory1 = "Carbon"
+  selectedcategory1 = "Time to decompose"
 }
 
 let selectedcategory2 = ""
@@ -122,7 +126,7 @@ else if (f2['Global Gallon p lb'] != ""){
   selectedcategory2 = 'Global Gallon p lb'
 }
 else{
-  selectedcategory2 = "Carbon"
+  selectedcategory2 = "Time to decompose"
 }
 
 
@@ -130,6 +134,7 @@ else{
 
 var path1 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/tea.png'
 var path2 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/coffee_small.png'
+console.log(f1.ImageURL)
 
 
   return (
@@ -145,14 +150,14 @@ var path2 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/coffee_small.png'
 
         </View> */}
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
-          <Text style={{fontSize:20,fontWeight:'bold'}}> {JSON.stringify(prod1)} vs. {JSON.stringify(prod2)}</Text>
+          <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} vs. {prod2}</Text>
         </View>
         <View  style={{flexDirection:'row',alignItems:'center'}}>
           <View flex center style={getTextStyle(f1[selectedcategory1], f2[selectedcategory2])}>
             <Image source = {Profiles[prod1]}
               style = {{width: 200, height: 200, marginTop: '10%',alignItems:'center'}}
               resizeMode="contain"/>
-              <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f1[selectedcategory1]} gallons</Text>
+              <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f1[selectedcategory1]} {f1['Metric to display']}</Text>
               <Text style={{textAlign: 'center',fontSize:20}}>{f1['Measurement1']}</Text>
               <Text style={{textAlign: 'center',fontSize:20}}>{f1['Size']}</Text>
               
@@ -161,10 +166,15 @@ var path2 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/coffee_small.png'
             <Image source = {Profiles[prod2]} 
               style = {{width: 200, height: 200, marginTop: '10%',alignItems:'center'}}
               resizeMode="contain"/>
-              <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f2[selectedcategory2]} gallons</Text>
+              <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f2[selectedcategory2]} {f2['Metric to display']}</Text>
               <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Measurement1']}</Text>
               <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Size']}</Text>
           </View>
+          
+        </View>
+        <View style={{marginTop: '10%'}}>
+          <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f1['Notes to appear']}</Text>
+          <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Notes to appear']}</Text>
         </View>
       </ScrollView>
 
@@ -173,6 +183,8 @@ var path2 = '../images/Drinks_NonAlcoholic/Drinks_NonAlcoholic/coffee_small.png'
 
 
 function getTextStyle(val1, val2) {
+  console.log(val1)
+  console.log(val2)
   if(parseInt(val1) <= parseInt(val2)) {
    return {
     borderColor: '#6dbd64', borderRadius: 40 ,borderWidth: 5,width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:10, justifyContent:'center', alignItems:'center', marginTop:50, transform: [{scale: 0.8}]
