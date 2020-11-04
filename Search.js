@@ -33,9 +33,9 @@ const Search = ({searchData, navigation}) => {
   const Tab = createBottomTabNavigator();
   const catImage = [
     [
-      {image: require('./images2/Meat.png'), name: 'Beef'},
-      {image: require('./images2/jeans.png'), name: 'Jeans'},
-      {image: require('./images2/makeup.png'), name: 'Makeup'},
+      {image: require('./images/Beef/beef_search_page.png'), name: 'Beef'},
+      {image: require('./images/Beef/jeans_search_page.png'), name: 'Jeans'},
+      {image: require('./images/Beef/makeup_search_page.png'), name: 'Makeup'},
     ],
     [
       {

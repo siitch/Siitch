@@ -70,7 +70,7 @@ const Vs = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ImageIcon category="Beef" image={images.beef_steak} />
+          <Image source={images.beef_steak} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
           <View style={{width: width / 3, alignItems: 'center'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
@@ -78,15 +78,14 @@ const Vs = ({navigation}) => {
             />
           </View>
 
-          <View
-            style={{
+          <View style={{
               flexDirection: 'row',
               width: width / 3,
               alignItems: 'center',
             }}>
             <Text
               style={{
-                fontSize: 26,
+                fontSize: 24,
                 fontWeight: 'bold',
                 color: '#3AADFA',
                 lineHeight: 30,
@@ -104,7 +103,7 @@ const Vs = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ImageIcon category="pig_vs" image={images.pig_vs} />
+          <Image source={images.pig_vs} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
           <View style={{width: width / 3, alignItems: 'center'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
@@ -120,7 +119,7 @@ const Vs = ({navigation}) => {
             }}>
             <Text
               style={{
-                fontSize: 26,
+                fontSize: 24,
                 fontWeight: 'bold',
                 color: '#3AADFA',
                 lineHeight: 30,
@@ -138,7 +137,7 @@ const Vs = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ImageIcon category="Goat" image={images.chicken} />
+          <Image source={images.chicken} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
           <View style={{width: width / 3, alignItems: 'center'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
@@ -153,7 +152,7 @@ const Vs = ({navigation}) => {
             }}>
             <Text
               style={{
-                fontSize: 26,
+                fontSize: 24,
                 fontWeight: 'bold',
                 color: '#3AADFA',
                 lineHeight: 30,
@@ -171,7 +170,7 @@ const Vs = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ImageIcon category="tofu" image={images.tofu} />
+          <Image  source={images.tofu} style={{width:60,height:60,marginTop: '2%',marginLeft: '10%'}} resizeMode='contain'/>
           <View style={{width: width / 3, alignItems: 'center'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
@@ -186,7 +185,7 @@ const Vs = ({navigation}) => {
             }}>
             <Text
               style={{
-                fontSize: 26,
+                fontSize: 24,
                 fontWeight: 'bold',
                 color: '#3AADFA',
                 lineHeight: 30,
@@ -198,34 +197,38 @@ const Vs = ({navigation}) => {
             </Text>
           </View>
         </View>
+        <View style={{alignItems: 'center'}}>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
           underlayColor="#8DC73F"
           style={{
             backgroundColor: '#8DC73F',
-            width: Width - (Width/5),
-            height: Height / 20,
-            alignItems: 'center',
-            borderRadius: 10,
-            marginLeft: Width / 10,
-            marginRight: Width / 10,
-            justifyContent: 'center',
-            marginTop:'10%'
+            height: 50,
+            borderWidth: 2,
+            borderColor: '#8DC73F',
+            borderRadius: 20, 
+            width: Width*0.9,
+            textAlign: 'center',
+            fontSize: 20,
+            marginTop:'10%',
+            alignItems:'center',
+            justifyContent:'center'
           }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+          <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
           <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center'}}>
+        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>

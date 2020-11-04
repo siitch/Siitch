@@ -32,8 +32,9 @@ const Water = ({inputData, navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'center',
+            alignItems:'baseline',
             marginTop: '2%',
+            justifyContent:'center'
           }}>
           <Image
             source={require('./../images/WaterDrop_BLUE.png')}
@@ -58,11 +59,11 @@ const Water = ({inputData, navigation}) => {
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <Image
             source={require('./../images/Beef/BeefPage/beef_steak.png')}
-            style={{width: 200, height: 200}}
+            style={{width: 200, height: 200,marginTop:'-10%'}}
             resizeMode='contain'
           />
         </View>
-        <View style={{alignItems: 'center', marginTop: '2%'}}>
+        <View style={{alignItems: 'center'}}>
           <View
             style={{
               flexDirection: 'row',
@@ -72,6 +73,7 @@ const Water = ({inputData, navigation}) => {
               backgroundColor: '#3AADFA',
               justifyContent: 'center',
               alignItems: 'center',
+              marginTop:'-5%'
             }}>
             <Image
               source={require('./../images/Beef/BeefPage/2000gal_truck.png')}
@@ -96,7 +98,7 @@ const Water = ({inputData, navigation}) => {
         </View>
         <View style={{alignItems: 'center'}}>
           <View style={{width: 250}}>
-            <Text style={{fontSize: 14}}>
+            <Text style={{fontSize: 16}}>
               The food cattle eats accounts for 98% of beef's water footprint.
             </Text>
           </View>
@@ -110,17 +112,23 @@ const Water = ({inputData, navigation}) => {
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'center',
+            marginTop:'5%',
+            width:width
           }}>
+          <View style={{width:width/2,alignItems:'center'}}>
           <Image
             source={require('./../images/Beef/Beef_Water/rain_wheat.png')}
-            style={{width: '35%', height: 250}}
+            style= {{width:150, height:200}}
             resizeMode='contain'
           />
+          </View>
+          <View style={{width:width/2,alignItems:'center'}}>
           <Image
             source={require('./../images/Beef/Beef_Water/cows_hose.png')}
-            style={{marginLeft: '10%', width: '35%', height: 250}}
+            style= {{width:150, height:200}}
             resizeMode='contain'
           />
+          </View>
         </View>
         <View
           style={{
@@ -129,18 +137,21 @@ const Water = ({inputData, navigation}) => {
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems:'center',
+            justifyContent:'center'
           }}>
-          <Text style={{fontSize: 14}}>
+          <View style={{flexDirection:'column',alignItems:'center',width:width/2}}>
             <Text style={{fontWeight: 'bold', fontSize: 18}}>98%</Text>
-            {'\n'}Rain & irrigation{'\n'} to grow crops
-          </Text>
-          <Text style={{fontSize: 14, marginLeft: '15%'}}>
+            <Text style={{fontSize: 16}}>
+            Rain & irrigation{'\n'} to grow crops
+            </Text>
+          </View>
+          <View style={{flexDirection:'column',alignItems:'center',width:width/2}}>
             <Text style={{fontWeight: 'bold', fontSize: 18}}>2%</Text>
-            {'\n'}Drinking Water{'\n'} & Cleaning needs
-          </Text>
+            <Text style={{fontSize: 16}}>
+              Drinking Water{'\n'} & Cleaning needs
+            </Text>
+          </View>
         </View>
         <View
           style={{
@@ -257,34 +268,38 @@ const Water = ({inputData, navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={{alignItems: 'center'}}>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
           underlayColor="#8DC73F"
           style={{
             backgroundColor: '#8DC73F',
-            width: Width - (Width/5),
-            height: Height / 20,
-            alignItems: 'center',
-            borderRadius: 10,
-            marginLeft: Width / 10,
-            marginRight: Width / 10,
-            justifyContent: 'center',
-            marginTop:'10%'
+            height: 50,
+            borderWidth: 2,
+            borderColor: '#8DC73F',
+            borderRadius: 20, 
+            width: Width*0.9,
+            textAlign: 'center',
+            fontSize: 20,
+            marginTop:'10%',
+            alignItems:'center',
+            justifyContent:'center'
           }}>
           <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
           <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center'}}>
+        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+            <Image source={images.beyond_meat} style={{width:150,height:150}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>

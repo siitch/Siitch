@@ -34,34 +34,35 @@ const Grass = ({inputData, navigation}) => {
           style={{
             flexDirection: 'row',
             width: width,
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            marginTop: '10%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '3%',
+            marginLeft:20,
           }}>
-          <View style={{width: '50%'}}>
+          <View style={{width: width/2}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/graphic_large.png')}
-              style={{width: 150, height: 150, marginLeft: '10%'}}
+              style={{width: 150, height: 150,}}
               resizeMode="contain"
             />
           </View>
-          <View style={{width: '50%', flexDirection: 'column'}}>
+          <View style={{width: width/2, flexDirection: 'column'}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/treestump_small.png')}
-              style={{width: 50, height: 50, marginLeft: '60%'}}
+              style={{width: 50, height: 50,marginTop:-25,marginLeft:90}}
               resizeMode="contain"
             />
-            <View>
+            <View style={{alignItems:'center',marginTop:5,marginLeft:'-10%',marginRight:30}}>
               <Text style={{fontSize: 14}}>
                 Livestock production uses 75% of earth’s agricultural land and
                 is a leading driver for global deforestation.
               </Text>
               <Text
-                style={{fontWeight: 'bold', fontSize: 10, marginLeft: '15%'}}>
+                style={{fontWeight: 'bold', fontSize: 10}}>
                 - Climate Nexus;
               </Text>
               <Text
-                style={{fontWeight: 'bold', fontSize: 10, marginLeft: '20%'}}>
+                style={{fontWeight: 'bold', fontSize: 10}}>
                 Our World in Data
               </Text>
             </View>
@@ -73,9 +74,10 @@ const Grass = ({inputData, navigation}) => {
             width: width,
             justifyContent: 'flex-start',
             alignItems: 'flex-start',
+            marginLeft:20,
           }}>
           <Image
-            style={{width: 150, height: 150, marginTop: '10%'}}
+            style={{width: 150, height: 150}}
             source={images.car}
             resizeMode="contain"
           />
@@ -88,6 +90,7 @@ const Grass = ({inputData, navigation}) => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'flex-start',
+                marginTop:'-15%'
               }}>
               <View
                 style={{
@@ -95,10 +98,10 @@ const Grass = ({inputData, navigation}) => {
                   alignItems: 'flex-start',
                 }}>
                 <Text style={{fontWeight: 'bold', paddingLeft: 9}}>29 mi.</Text>
-                <ArrowIcon w={120} />
+                <ArrowIcon w={120}/>
               </View>
               <Image
-                style={{width: 50, height: 50, marginLeft: '40%'}}
+                style={{width: 50, height: 50, marginLeft: '35%'}}
                 source={images.steak_small}
                 resizeMode="contain"
               />
@@ -117,49 +120,53 @@ const Grass = ({inputData, navigation}) => {
                 <ArrowIcon w={30} />
               </View>
               <Image
-                style={{width: 50, height: 50, marginLeft: '40%'}}
+                style={{width: 50, height: 50, marginLeft: '35%'}}
                 source={images.broccolli}
                 resizeMode="contain"
               />
             </View>
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
-          <View style={{flexDirection: 'row', width: width / 1.4}}>
+        <View style={{alignItems: 'center',width:width,marginTop:-10}}>
+          <View style={{flexDirection: 'row', width: width / 1.5}}>
             <Text>
               The pollution generated in producing a typical 8 ounce steak is
               equivalent to driving a small car for 29 milies.
             </Text>
           </View>
         </View>
+        <View style={{alignItems: 'center',marginTop:-15}}>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
           underlayColor="#8DC73F"
           style={{
             backgroundColor: '#8DC73F',
-            width: Width - Width / 5,
-            height: Height / 20,
-            alignItems: 'center',
-            borderRadius: 10,
-            marginLeft: Width / 10,
-            marginRight: Width / 10,
-            justifyContent: 'center',
-            marginTop: '10%',
+            height: 50,
+            borderWidth: 2,
+            borderColor: '#8DC73F',
+            borderRadius: 20, 
+            width: Width*0.9,
+            textAlign: 'center',
+            fontSize: 20,
+            marginTop:'10%',
+            alignItems:'center',
+            justifyContent:'center'
           }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
+          <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
+        </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
           <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center'}}>
+        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>

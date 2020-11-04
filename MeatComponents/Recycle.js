@@ -26,7 +26,7 @@ const Recycle = ({navigation}) => {
     <View style={{flexDirection: 'column', flex: 1}}>
       <View
         style={{
-          paddingTop: Height / 20,
+          paddingTop: 10,
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
@@ -37,11 +37,11 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 8.5,
+            height: Height / 10,
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 20}}>
+        <Text style={{width: 130, textAlign: 'center', fontSize: 16}}>
           Time to {'\n'}grow
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -49,7 +49,7 @@ const Recycle = ({navigation}) => {
           style={{
             marginLeft: Width / 30,
             width: Width / 3.5,
-            fontSize: 20,
+            fontSize: 16,
             textAlign: 'center',
           }}>
           3 yrs
@@ -67,12 +67,12 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 8.5,
-            marginTop:'20%',
+            height: Height / 10,
+            marginTop:'10%',
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 20,marginTop:'20%',}}>
+        <Text style={{width: 130, textAlign: 'center', fontSize: 16,marginTop:'10%',}}>
           Compostable?
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -81,8 +81,8 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             textAlign: 'center',
             width: Width / 3.5,
-            fontSize: 20,
-            marginTop:'20%',
+            fontSize: 16,
+            marginTop:'10%',
           }}>
           Professional Only
         </Text>
@@ -100,12 +100,12 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 8.5,
-            marginTop:'20%',
+            height: Height / 10,
+            marginTop:'10%',
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 20, marginTop:'20%',}}>
+        <Text style={{width: 130, textAlign: 'center', fontSize: 16, marginTop:'10%',}}>
           Time to{'\n'}decompose
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -113,7 +113,7 @@ const Recycle = ({navigation}) => {
           style={{
             marginLeft: Width / 30,
             width: Width / 3.5,
-            fontSize: 20,
+            fontSize: 16,
             textAlign: 'center',
             alignItems: 'center',
             marginTop:'20%',
@@ -121,34 +121,38 @@ const Recycle = ({navigation}) => {
           2 Months
         </Text>
       </View>
-      <TouchableHighlight
-        onPress={() => navigation.navigate('What')}
-        activeOpacity={1}
-        underlayColor="#8DC73F"
-        style={{
-          backgroundColor: '#8DC73F',
-          width: Width - (Width/5),
-          height: Height / 20,
-          alignItems: 'center',
-          borderRadius: 10,
-          marginLeft: Width / 10,
-          marginRight: Width / 10,
-          justifyContent: 'center',
-          marginTop:'10%'
-        }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
-      </TouchableHighlight>
+      <View style={{alignItems: 'center',marginTop:-35}}>
+        <TouchableHighlight
+          onPress={() => navigation.navigate('What')}
+          activeOpacity={1}
+          underlayColor="#8DC73F"
+          style={{
+            backgroundColor: '#8DC73F',
+            height: 50,
+            borderWidth: 2,
+            borderColor: '#8DC73F',
+            borderRadius: 20, 
+            width: Width*0.9,
+            textAlign: 'center',
+            fontSize: 20,
+            marginTop:'10%',
+            alignItems:'center',
+            justifyContent:'center'
+          }}>
+          <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
+        </TouchableHighlight>
+        </View>
       <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
           <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center'}}>
+        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <ImageIcon category='brand' image={images.beyond_meat}></ImageIcon>
+            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>

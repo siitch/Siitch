@@ -6,7 +6,6 @@ export const ArrowIcon = ({widthArrow, w}) => {
     <View
       style={{
         flexDirection: 'row',
-        marginTop: '10%',
         alignItems: 'flex-start',
       }}>
       <View style={styles.wrapper}>
