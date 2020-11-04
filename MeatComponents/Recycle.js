@@ -37,7 +37,7 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 10,
+            height: Height / 11,
           }}
           resizeMode='contain'
         />
@@ -67,7 +67,7 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 10,
+            height: Height / 11,
             marginTop:'10%',
           }}
           resizeMode='contain'
@@ -100,7 +100,7 @@ const Recycle = ({navigation}) => {
             marginLeft: Width / 30,
             marginRight: Width / 30,
             width: Width / 4,
-            height: Height / 10,
+            height: Height / 11,
             marginTop:'10%',
           }}
           resizeMode='contain'

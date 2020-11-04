@@ -26,11 +26,11 @@ const Heart = ({navigation, inputData}) => {
     <ScrollView style={{backgroundColor:'white'}}>
     <View style={{paddingTop: Height / 20,width:Width}}>
       <View style={{flexDirection: 'row',alignItems:'center',marginLeft:20}}>
-        <Text style={{width: Width / 1.3,width:Width*2/3}}>
+        <Text style={{width: Width / 1.3,width:Width*3/4}}>
           Reducing red meat intake can have numerous health benefits, including a lower risk of developing type 2 diabetes, cardiovascular disease, and certain cancers.
         </Text>
-        <View style={{width:Width/3,alignItems:'center'}}>
-        <Image source={images.heart_small} style={{marginLeft:-10,marginTop:-20}} resizeMode='contain'/>
+        <View style={{width:Width/4,alignItems:'center'}}>
+        <Image source={images.heart_small} style={{marginLeft:-30,marginTop:-15}} resizeMode='contain'/>
         </View>
       </View>
       <Text style={{marginLeft:'40%',marginTop:'2%',fontSize:12}}>- News Medical Life Sciences</Text>
@@ -58,7 +58,7 @@ const Heart = ({navigation, inputData}) => {
             width: Width / 3,
             alignItems: 'center',
           }}>
-          <ArrowIconCol h={130} />
+          <ArrowIconCol h={150} />
           <Text style={{alignItems: 'center', fontSize:16, marginLeft: '10%'}}>
             Cardiovascular{'\n'}Disease
           </Text>

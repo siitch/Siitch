@@ -39,20 +39,20 @@ const Grass = ({inputData, navigation}) => {
             marginTop: '3%',
             marginLeft:20,
           }}>
-          <View style={{width: width/2}}>
+          <View style={{width: width/3}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150,}}
               resizeMode="contain"
             />
           </View>
-          <View style={{width: width/2, flexDirection: 'column'}}>
+          <View style={{width: width*2/3, marginLeft:15, flexDirection: 'column'}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/treestump_small.png')}
-              style={{width: 50, height: 50,marginTop:-25,marginLeft:90}}
+              style={{width: 50, height: 50,marginTop:-20,marginLeft:150}}
               resizeMode="contain"
             />
-            <View style={{alignItems:'center',marginTop:5,marginLeft:'-10%',marginRight:30}}>
+            <View style={{alignItems:'center',marginTop:10,marginRight:30}}>
               <Text style={{fontSize: 14}}>
                 Livestock production uses 75% of earth’s agricultural land and
                 is a leading driver for global deforestation.
