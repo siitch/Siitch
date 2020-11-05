@@ -150,10 +150,10 @@ else{
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} vs. {prod2}</Text>
         </View>
-        <View  style={{flexDirection:'row',alignItems:'center'}}>
+        <View  style={{flexDirection:'row',alignItems:'center', marginTop:1}}>
           <View flex center style={getTextStyle(f1[selectedcategory1], f2[selectedcategory2])}>
             <Image source = {Profiles[prod1]}
-              style = {{width: 200, height: 200, marginTop: '10%',alignItems:'center'}}
+              style = {{width: 200, height: 200, marginTop: '2%',alignItems:'center'}}
               resizeMode="contain"/>
               <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f1[selectedcategory1]} {f1['Metric to display']}</Text>
               <Text style={{textAlign: 'center',fontSize:20}}>{f1['Measurement1']}</Text>
@@ -162,7 +162,7 @@ else{
           </View>
           <View flex center style={getTextStyle(f2[selectedcategory2], f1[selectedcategory1])}>
             <Image source = {Profiles[prod2]} 
-              style = {{width: 200, height: 200, marginTop: '10%',alignItems:'center'}}
+              style = {{width: 200, height: 200, marginTop: '2%',alignItems:'center'}}
               resizeMode="contain"/>
               <Text style={{textAlign: 'center',fontSize:30,fontWeight:'bold'}}>{f2[selectedcategory2]} {f2['Metric to display']}</Text>
               <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Measurement1']}</Text>
@@ -170,7 +170,7 @@ else{
           </View>
           
         </View>
-        <View style={{marginTop: '5%', alignItems: 'center', marginBottom:'30%'}}>
+        <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
           <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f1['Notes to appear']}</Text>
           <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Notes to appear']}</Text>
 
@@ -185,7 +185,7 @@ else{
               <View style={{}}>
                 <Text>The gallons of water it takes to make one pound of these items:</Text>
                 
-                <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between", marginTop:'5%'}}>
                   <View style={{width:DeviceWidth/6}}><Text></Text></View>
                   <View style={{width:DeviceWidth/6}}>
                   <Image source = {Profiles['green water']}
@@ -282,12 +282,12 @@ else{
 function getTextStyle(val1, val2) {
   if(parseInt(val1) <= parseInt(val2)) {
    return {
-    borderColor: '#6dbd64', borderRadius: 40 ,borderWidth: 5,width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:10, justifyContent:'center', alignItems:'center', marginTop:50, transform: [{scale: 0.8}]
+    borderColor: '#6dbd64', borderRadius: 40 ,borderWidth: 5,width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:2, justifyContent:'center', alignItems:'center', marginTop:5, transform: [{scale: 0.8}]
 
    }
   } else {
     return {
-      width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:10, justifyContent:'center', alignItems:'center', marginTop:50, transform: [{scale: 0.8}]
+      width: DeviceWidth*0.3, height: DeviceWidth*0.9, marginBottom:2, justifyContent:'center', alignItems:'center', marginTop:5, transform: [{scale: 0.8}]
 
     }
   }
