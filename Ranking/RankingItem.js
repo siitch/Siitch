@@ -25,7 +25,7 @@ export const RankingItem = ({ max, cost, item, image, unit }) => {
                     height={10}
                     borderColor="white"
                     paddingTop={25}
-                    color="#00adef"
+                    color="#81CAFF"
                 />
             </View>
             <View style={{flexDirection: 'row'}}>

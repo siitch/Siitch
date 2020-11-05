@@ -107,10 +107,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
     modalView: {
-      margin: 20,
+      marginLeft: 20,
+      marginRight: 20,
       backgroundColor: "white",
       borderRadius: 20,
-      padding: 35,
+      paddingLeft: 25,
+      paddingRight: 25,
+      paddingBottom: 25,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {

@@ -59,7 +59,6 @@ function getdata() {
               name: item
             })            
         }
-        console.log(itemsList)
     });
   
   
@@ -90,7 +89,7 @@ export default class Compare extends Component {
     return (
       <View style={styles.rankingPage}>
       <ScrollView>
-      <View style={{alignItems: 'center', marginTop: '20%'}}>
+      <View style={{alignItems: 'center', marginTop: '15%'}}>
         <Text style={styles.title}>Compare</Text>
         <Text style={{alignItems: 'center', marginTop: '20%', marginBottom: '5%', fontSize: 20}}>Select Item 1</Text>
         <View style={styles.container}>

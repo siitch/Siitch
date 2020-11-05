@@ -83,13 +83,13 @@ function CalculateScreen() {
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
     <View style={styles.rankingPage}>
-      <View style={{alignItems: 'center', marginTop: '25%'}}>
+      <View style={{alignItems: 'center', marginTop: '15%'}}>
           <Text style={{fontWeight: 'bold', fontSize: 30}}>
               Calculator
           </Text>
       </View>
       <Image
-        style={{width: 100, height: 100 , marginLeft: DeviceWidth*0.38, marginTop: 30, marginBottom: 50}}
+        style={{width: 100, height: 100 , marginLeft: DeviceWidth*0.38, marginTop: 20, marginBottom: 30}}
         source={ computed && Profiles[item] ? Profiles[item] : Profiles.calculator }
         resizeMode= 'contain'
       />
@@ -100,7 +100,7 @@ function CalculateScreen() {
         <TextInput 
           style={{ 
             borderColor: '#80CAFF',
-            marginTop: 20,
+            marginTop: 10,
             height: 50,
             borderWidth: 2,
             borderRadius: 20, 
@@ -140,13 +140,13 @@ function CalculateScreen() {
           }}
           defaultNull
           containerStyle={{
-            height: 70,
+            height: 60,
             borderRadius: 20
           }}
           style={{
             backgroundColor: 'white', 
             width: DeviceWidth*0.9,
-            marginTop: 20,
+            marginTop: 10,
             borderWidth: 2,
             borderTopLeftRadius: 20, 
             borderTopRightRadius: 20,
@@ -157,7 +157,7 @@ function CalculateScreen() {
           dropDownStyle={{
             backgroundColor: 'white', 
             width: DeviceWidth*0.9,
-            marginTop: 20,
+            marginTop: 10,
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
             borderWidth: 2, 
@@ -194,13 +194,13 @@ function CalculateScreen() {
       {
         computed && 
           <View style={{alignItems: 'center', marginBottom: 20}}>
-            <Text style={{fontSize: 25, fontWeight: '500', color: '#29A3FE', marginTop: 30}}>
+            <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Individual Total
             </Text>
             <Text 
               style={{ 
                 borderColor: '#80CAFF',
-                marginTop: 20,
+                marginTop: 10,
                 height: 50,
                 borderWidth: 2,
                 borderRadius: 20, 
@@ -213,13 +213,13 @@ function CalculateScreen() {
             >
               {numberWithCommas(individual_total)} gal. p/lb
             </Text>
-            <Text style={{fontSize: 25, fontWeight: '500', color: '#29A3FE', marginTop: 30}}>
+            <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Yearly Total
             </Text>
             <Text 
               style={{ 
                 borderColor: '#80CAFF',
-                marginTop: 20,
+                marginTop: 10,
                 height: 50,
                 borderWidth: 2,
                 borderRadius: 20, 
@@ -238,13 +238,13 @@ function CalculateScreen() {
       {
         error.status && 
         <View style={{alignItems: 'center', marginBottom: 20}}>
-          <Text style={{fontSize: 25, fontWeight: '500', color: '#29A3FE', marginTop: 30}}>
+          <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
             {error.message}
           </Text>
         </View>
       }
 
-      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: selectOpened ? 160 : 20, marginBottom: 40}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: selectOpened ? 160 : 20, marginBottom: 20}}>
         <Button onPress={() => calculate(item, frequency)} title="Calculate" type="solid" buttonStyle={{ backgroundColor: '#70BF41' }} style={{ width: DeviceWidth*0.3 }}></Button>
         {
           computed && 

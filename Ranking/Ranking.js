@@ -10,7 +10,7 @@ function RankScreen({navigation}) {
     return (
       <View style={styles.rankingPage}>
         <ScrollView>
-            <View style={{alignItems: 'center', marginTop: '25%'}}>
+            <View style={{alignItems: 'center', marginTop: '15%'}}>
                 <Text style={{fontWeight: 'bold', fontSize: 30}}>
                     Select a Category
                 </Text>
@@ -113,17 +113,17 @@ const Oils = () => {
 }
 const DrinksAll = () => {
     return (
-        <RankingPage category='Drinks - All' id='Drinks - All' />
+        <RankingPage category='All Drinks' id='Drinks - All' />
     )
 }
 const DrinksAlcoholic = () => {
     return (
-        <RankingPage category='Drinks - Alcoholic' id='Drinks - Alc' />
+        <RankingPage category='Alcoholic' id='Drinks - Alc' />
     )
 }
 const DrinksNonAlcoholic = () => {
     return (
-        <RankingPage category='Drinks - Non-Alcoholic' id='Drinks - NA' />
+        <RankingPage category='Non-Alcoholic' id='Drinks - NA' />
     )
 }
 

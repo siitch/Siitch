@@ -1,4 +1,4 @@
-import Profiles from './ImageDB';
+import Profiles from '../Comparing/ImageDB';
 import React, { useState } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal, Dimensions } from 'react-native';
 import { styles } from './Styles';
@@ -21,7 +21,7 @@ export const RankingPage = ({category, id}) => {
 
     const waterParameter = () => {
         if(unit === 'L') {
-            if (id === "EDI") {
+            if (id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") {
                 return "Single item   L";
             }
             else {
@@ -29,7 +29,7 @@ export const RankingPage = ({category, id}) => {
             }
         }
         else if(unit === 'G') {
-            if (id === "EDI") {
+            if (id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") {
                 return "Single item   Gal";
             }
             else {
@@ -116,8 +116,8 @@ export const RankingPage = ({category, id}) => {
 
                 <View style={{ 
                     flexDirection: 'row', 
-                    marginTop: '10%', 
-                    marginLeft: 40, 
+                    marginTop: '3%', 
+                    marginLeft: 20, 
                     borderColor: '#80CAFF',
                     borderWidth: 2,
                     borderRadius: 20, 
@@ -144,10 +144,10 @@ export const RankingPage = ({category, id}) => {
 
                     <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', marginBottom: '5%'}}>
                     <Image
-                        style={{width: 40, height: 40}}
-                        source={Profiles.water_drops}
+                        style={{width: 20, height: 20}}
+                        source={Profiles.water}
                     />
-                    <Text style={{fontSize: 15, paddingTop: 15}}>{ unit === 'L' ? 'Liters per Kilogram' : 'Gallons per Pound' }</Text>
+                    <Text style={{fontSize: 15, marginLeft: 5}}>{ unit === 'L' ? 'Liters per Kilogram' : 'Gallons per Pound' }</Text>
                     </View>
 
                     {
@@ -169,13 +169,13 @@ export const RankingPage = ({category, id}) => {
                             transparent={true}
                             visible={modalVisible}
                         >
-                            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: 22 }}>
+                            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                             <View style={styles.modalView}>
                                 <Image style={{ width: 300 }} source={Profiles.learn_more} resizeMode='contain' />
-                                <Text style={{ marginBottom: 15, textAlign: "center" }}>
+                                <Text style={{ marginBottom: 15, textAlign: "left" }}>
                                     Farming methods, energy sources, transportaton costs and numerous elements all contribute to a product’s eco-cost.
                                 </Text>
-                                <Text style={{ marginBottom: 15, textAlign: "center" }}>
+                                <Text style={{ marginBottom: 15, textAlign: "left" }}>
                                     The water cost is just one benchmark, but we hope it provides some context to help you make more informed decisions.
                                 </Text>
                                 <TouchableHighlight
