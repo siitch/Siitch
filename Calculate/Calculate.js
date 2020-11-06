@@ -4,7 +4,7 @@ import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighligh
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from 'react-native-elements';
 import { styles } from '../Ranking/Styles';
-import Profiles from '../Ranking/ImageDB';
+import Profiles from '../Comparing/ImageDB';
 import firebase from 'firebase';
 
 const DeviceWidth = Dimensions.get('window').width;
