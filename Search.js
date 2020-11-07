@@ -159,8 +159,8 @@ const Search = ({searchData, navigation}) => {
           textAlign: 'center',
           fontSize: 20}}
         />
-        <Text style={{marginTop: 10, marginBottom: 10}}>
-          For prototype, only Beef, Jeans & Makeup search {'\n'} pages are
+        <Text style={{marginTop: 30, marginBottom: 10}}>
+          For the prototype, only the Beef, Jeans & Makeup {'\n'} search pages are
           active. We're curious what you think.
         </Text>
         {catImage.map((row, i) => (

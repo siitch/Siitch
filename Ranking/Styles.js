@@ -48,14 +48,14 @@ const styles = StyleSheet.create({
     },
     text: {
       textAlign: 'center',
-      fontSize: 17,
+      fontSize: 22,
       color: 'black',
     },
     bottomtext: {
       position: 'relative',
       textAlign: 'center',
       color: 'black',
-      fontSize: 18,
+      fontSize: 22,
     },
     colflex: {
       paddingTop: 70,
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     center: {
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 20
     },
     centerearth: {
       right: 190,
