@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighlight, Modal } from 'react-native';
+import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighlight, Modal, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from 'react-native-elements';
 import { styles } from '../Ranking/Styles';
@@ -245,10 +245,22 @@ function CalculateScreen() {
       }
 
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: selectOpened ? 160 : 20, marginBottom: 20}}>
-        <Button onPress={() => calculate(item, frequency)} title="Calculate" type="solid" buttonStyle={{ backgroundColor: '#70BF41' }} style={{ width: DeviceWidth*0.3 }}></Button>
+        <View>
+          <TouchableOpacity onPress={() => { calculate(item, frequency) }} style={{padding: 15, borderRadius: 30, backgroundColor: '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{alignItems: 'center'}}>
+              <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>Calculate</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
         {
           computed && 
-          <Button onPress={() => setModalVisible(true)} title="Challenge" type="solid" buttonStyle={{ backgroundColor: '#29A3FE' }} style={{ marginLeft: 20, width: DeviceWidth*0.3 }}></Button>
+          <View>
+            <TouchableOpacity onPress={() => { setModalVisible(true) }} style={{padding: 15, borderRadius: 30, marginLeft: 10, backgroundColor: '#29A3FE', alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>Challenge</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         }
       </View>
   </View>
