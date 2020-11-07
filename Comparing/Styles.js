@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   rankingPage: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
   },
   rankingPageImage: {
     width: 65,

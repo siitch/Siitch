@@ -306,19 +306,33 @@ export const comparePage = ({route}) => {
           }
         </View>
       </View>
+      
+        {(f1['Notes to appear'] != "" )&& 
+          <View style={{paddingLeft: 20, paddingRight: 20}}>
+            <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
+          </View>
+        }
 
-      <View >
-        <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f1['Notes to appear']}</Text>
-        <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f2['Notes to appear']}</Text>
+        {(f2['Notes to appear'] != "" )&& 
+          <View style={{paddingLeft: 20, paddingRight: 20}}>
+            <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
+          </View>
+        }
+
         {
-          isProduct3Pesent &&
-          <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f3['Notes to appear']}</Text>
+          (isProduct3Pesent && f3['Notes to appear'] != "") &&
+          <View style={{paddingLeft: 20, paddingRight: 20}}>
+            <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
+          </View>
         }
         {
-          isProduct4Pesent &&
-          <Text style={{textAlign: 'center',fontSize:20, alignItems:'center'}}>{f4['Notes to appear']}</Text>
+          (isProduct4Pesent && f4['Notes to appear'] != "") &&
+          <View style={{paddingLeft: 20, paddingRight: 20}}>
+            <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
+          </View>
         }
-      </View>
+      
+      
 
       <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
         <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}} isCollapsed='true'>
@@ -447,7 +461,7 @@ function getTextStyle(val1, val2) {
     borderRadius: 40,
     borderWidth: 5,
     width: DeviceWidth*0.3, 
-    height: DeviceWidth*0.75, 
+    height: DeviceWidth*0.8, 
     alignItems:'center', 
     transform: [{scale: 0.9}],
    }
@@ -455,7 +469,7 @@ function getTextStyle(val1, val2) {
     return {
       flex: 1,
       width: DeviceWidth*0.3, 
-      height: DeviceWidth*0.75, 
+      height: DeviceWidth*0.8, 
       alignItems:'center', 
       transform: [{scale: 0.9}],
     }
