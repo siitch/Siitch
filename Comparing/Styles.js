@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   center: {
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
   },
   centerearth: {
     right: 190,
@@ -208,6 +208,20 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     borderColor: '#404040',
     flexDirection: "row"
+  },
+  bottomBorderLine: {
+    borderBottomColor: 'lightgray', 
+    borderBottomWidth: 1,
+    marginBottom: 20
+  },
+  textFormatCompare: {
+    textAlign: 'center',
+    fontSize:20,
+  },
+  boldTextFormatCompare: {
+    textAlign: 'center',
+    fontSize:30,
+    fontWeight:'bold'
   }
 });
 export {styles};
