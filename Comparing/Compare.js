@@ -104,12 +104,22 @@ export default class Compare extends Component {
     }
   }
 
+  _deleteProduct3(){
+      this.setState({product3: ""})
+      this.setState({isProduct3: false})
+  }
+
+  _deleteProduct4(){
+    this.setState({product4: ""})
+    this.setState({isProduct4: false})
+}
+
   checkEmpty() {
     return (this.state.product1 == "" || this.state.product2 == "" || (this.state.isProduct3 && this.state.product3 == "") || (this.state.isProduct4 && this.state.product4 == ""));
   }
 
   checkDuplicates() {
-    return (this.state.product1 == this.state.product2) || (this.state.product1 == this.state.product3) || (this.state.product1 == this.state.product4) ||(this.state.product2 == this.state.product3) || (this.state.product2 == this.state.product4) || ((this.isProduct3 && this.isProduct4) && (this.state.product3 == this.state.product4))
+    return ((this.state.product1 == this.state.product2) || ( this.state.isProduct3 && (this.state.product1 == this.state.product3)) || (this.state.isProduct4 && (this.state.product1 == this.state.product4)) || (this.state.isProduct3 && (this.state.product2 == this.state.product3)) || (this.state.isProduct4 && (this.state.product2 == this.state.product4)) || (this.state.isProduct3 && this.state.isProduct4 && (this.state.product3 == this.state.product4)))
   }
 
   render() {
@@ -207,9 +217,10 @@ export default class Compare extends Component {
                     selectedValue={(index, item) => this._setProduct3(item)}
                   />
                   <MaterialCommunityIcons
-                        name="magnify"
+                        name="close"
                         color={'gray'}
                         size={40}
+                        onPress={() => {this._deleteProduct3()}}
                       />
                 </View>
               </View>
@@ -242,9 +253,10 @@ export default class Compare extends Component {
                     selectedValue={(index, item) => this._setProduct4(item)}
                   />
                   <MaterialCommunityIcons
-                        name="magnify"
+                        name="close"
                         color={'gray'}
                         size={40}
+                        onPress={() => {this._deleteProduct4()}}
                       />
                 </View>
               </View>
@@ -255,7 +267,7 @@ export default class Compare extends Component {
               <TouchableOpacity 
               style={{
                 width: width / 6,
-                height: 55,
+                height: 60,
                 borderRadius: 20,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -266,7 +278,7 @@ export default class Compare extends Component {
                 onPress={() => {this._addProduct(true)}
                 }>
                 <View style={styles.center}>
-                  <Text style={{fontSize: 40, color: 'gray', textAlignVertical: 'center', fontWeight: 'bold'}}>+</Text>
+                  <Text style={{fontSize: 30, color: 'gray', textAlignVertical: 'center', fontWeight: 'bold'}}>+</Text>
                 </View>
               </TouchableOpacity>
             </View>

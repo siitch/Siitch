@@ -232,6 +232,9 @@ export const comparePage = ({route}) => {
     if(prod3 && !prod4) {
       return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]));
     }
+    else if (!prod3 && prod4){
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f4[selectedcategory4]));
+    }
     else if(prod3 && prod4) {
       return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f4[selectedcategory4]));
     }
