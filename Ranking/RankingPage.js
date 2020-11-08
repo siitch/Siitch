@@ -1,4 +1,4 @@
-import Profiles from '../Comparing/ImageDB';
+import Profiles from '../ImageDB.js';
 import React, { useState } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal, Dimensions } from 'react-native';
 import { styles } from './Styles';
