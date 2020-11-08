@@ -17,7 +17,7 @@ export const RankingPage = ({category, id}) => {
     const [fetched, handleFetch] = useState(false);
     const [currentCategory, changeCategory] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [unit, setUnit] = useState('L');
+    const [unit, setUnit] = useState('G');
 
     const waterParameter = () => {
         if(unit === 'L') {
