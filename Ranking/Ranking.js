@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import { ScrollView, TouchableOpacity, View, Text } from 'react-native';
 import { CategoryIcon } from './CategoryIcon';
 import { styles } from './Styles';
-import Profiles from './ImageDB';
+import Profiles from '../ImageDB';
 import { RankingPage } from './RankingPage';
 
 function RankScreen({navigation}) {

@@ -4,7 +4,7 @@ import { styles } from './Styles';
 import firebase from 'firebase';
 import { images } from '../ImageURL';
 import {ImageIcon} from '../ImageIcon';
-import Profiles from './ImageDB.js';
+import Profiles from '../ImageDB.js';
 const DeviceWidth = Dimensions.get('window').width;
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
