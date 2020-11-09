@@ -20,8 +20,6 @@ const frequency_values = {
 
 function CalculateScreen() {
 
-  const waterParameter = "Global Gallon p lb";
-
   const config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
     authDomain: 'siitch-6b176.firebaseapp.com',
@@ -40,7 +38,29 @@ function CalculateScreen() {
   const [individual_total, setIndividualTotal] = useState();
   const [error, setError] = useState({ status: false, message: '' });
   const [modalVisible, setModalVisible] = useState(false);
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState("");
+  const [unit, setUnit] = useState('G');
+
+  const waterParameter = (id) => {
+    if(unit === 'L') {
+      if (id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") {
+          return "Single item   L";
+      }
+      else {
+          return "Global Liters p kg";
+      }
+    }
+    else if(unit === 'G') {
+      if (id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") {
+          return "Single item   Gal";
+      }
+      else {
+          return "Global Gallon p lb";
+      }
+    }
+  }
+
+  const parameter = waterParameter();
 
   const numberWithCommas = (x) => {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -57,8 +77,10 @@ function CalculateScreen() {
     .once('value', data => { 
         fetchedData = data.val();
 
-        if(item in fetchedData && fetchedData[item][waterParameter]) {
-          setIndividualTotal(fetchedData[item][waterParameter]); 
+        id = fetchedData[item]["Category"];
+
+        if(item in fetchedData && fetchedData[item][waterParameter(id)]) {
+          setIndividualTotal(fetchedData[item][waterParameter(id)]); 
           setError({ status: false, message: '' });
           setComputed(true);
         }
@@ -89,12 +111,35 @@ function CalculateScreen() {
 
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
-    <View style={styles.rankingPage}>
-      <View style={{alignItems: 'center', marginTop: '15%'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 30}}>
-              Calculator
-          </Text>
+      <View style={{flexDirection: 'row'}}>
+        <View style={{ 
+          flexDirection: 'row', 
+          marginTop: '10%', 
+          marginLeft: 20, 
+          borderColor: '#80CAFF',
+          borderWidth: 2,
+          borderRadius: 20, 
+          width: 65,
+          paddingTop: 10,
+          paddingLeft: 10,
+          paddingRight: 10,
+          paddingBottom: 20
+      }}>
+          <TouchableOpacity onPress={() => { clearElements(); setComputed(false); setUnit('G'); }} >
+              <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+          </TouchableOpacity>
+          <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
+          <TouchableOpacity onPress={() => { clearElements(); setComputed(false); setUnit('L'); }} >
+              <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+          </TouchableOpacity>
       </View>
+      <View style={{alignItems: 'center', marginTop: 10}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '10%', paddingTop: 30, paddingLeft: 50, paddingRight: 10, paddingBottom: 10}}>
+            Calculator
+        </Text>
+      </View>
+    </View>
+    <View style={styles.rankingPage}>
       <Image
         style={{width: 100, height: 100 , marginLeft: DeviceWidth*0.38, marginTop: 20, marginBottom: 30}}
         source={ computed && Profiles[item] ? Profiles[item] : Profiles.calculator }
@@ -171,7 +216,7 @@ function CalculateScreen() {
             borderWidth: 2, 
             borderColor: '#80CAFF'
           }}
-          onChangeItem={currentFrequency => {setComputed(false); setFrequency(currentFrequency.value); }}
+          onChangeItem={currentFrequency => { setComputed(false); setFrequency(currentFrequency.value); }}
           onOpen={() => { setComputed(false); setSelect(true); setError({ status: false, message: '' }); }}
           onClose={() => { setSelect(false); }}
         />
@@ -219,7 +264,7 @@ function CalculateScreen() {
                 fontWeight: 'bold'
               }} 
             >
-              {numberWithCommas(individual_total)} gal. p/lb
+              {numberWithCommas(individual_total)} {unit === "L" ? "L. p/kg" : "gal. p/lb"}
             </Text>
             <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Yearly Total
@@ -238,7 +283,7 @@ function CalculateScreen() {
                 fontWeight: 'bold'
               }} 
             >
-              {numberWithCommas(individual_total*frequency_values[frequency]*52)} gal.
+              {numberWithCommas(individual_total*frequency_values[frequency]*52)} {unit === "L" ? "L." : "gal."}
             </Text>
         </View> 
       }
