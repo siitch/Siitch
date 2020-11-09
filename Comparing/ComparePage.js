@@ -309,7 +309,7 @@ export const comparePage = ({route}) => {
         <View style={{flexDirection: 'row'}}>
         <View style={{ 
                       flexDirection: 'row', 
-                      marginTop: '3%', 
+                      marginTop: '5%', 
                       marginLeft: 20, 
                       borderColor: '#80CAFF',
                       borderWidth: 2,
@@ -329,7 +329,7 @@ export const comparePage = ({route}) => {
                           <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                       </TouchableOpacity>
           </View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'0%', marginBottom: '5%', paddingLeft: 40}}>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', paddingLeft: '15%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} </Text>
           {/* <Text style={{fontSize:20,fontWeight:'bold'}}>{prod1} vs. {prod2}</Text> */}
           <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod2}</Text>
