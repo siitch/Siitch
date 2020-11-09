@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighlight, Modal, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighlight, Modal, TouchableOpacity, Alert } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Button } from 'react-native-elements';
 import { styles } from '../Ranking/Styles';
 import Profiles from '../ImageDB.js';
 import firebase from 'firebase';
@@ -41,6 +40,7 @@ function CalculateScreen() {
   const [individual_total, setIndividualTotal] = useState();
   const [error, setError] = useState({ status: false, message: '' });
   const [modalVisible, setModalVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("")
 
   const numberWithCommas = (x) => {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -80,6 +80,13 @@ function CalculateScreen() {
     }
   }
 
+  const clearElements = () => {
+    setComputed(false);
+    setInputValue("");
+    setItem("");
+    DropDownPicker.value = null;
+  }
+
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
     <View style={styles.rankingPage}>
@@ -108,8 +115,9 @@ function CalculateScreen() {
             textAlign: 'center',
             fontSize: 20
           }} 
+          value={inputValue}
           placeholder="Search"
-          onChangeText={currentItem => { setComputed(false); setItem(currentItem); setError({ status: false, message: '' }); }}
+          onChangeText={currentItem => { setInputValue(currentItem); setComputed(false); setItem(currentItem); setError({ status: false, message: '' }); }}
         />
         <Text style={{fontSize: 25, marginTop: 30, fontWeight: '500'}}>
           Buy / Use / Eat
@@ -237,18 +245,14 @@ function CalculateScreen() {
 
       {
         error.status && 
-        <View style={{alignItems: 'center', marginBottom: 20}}>
-          <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
-            {error.message}
-          </Text>
-        </View>
+          Alert.alert(error.message)
       }
 
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: selectOpened ? 160 : 20, marginBottom: 20}}>
         <View>
-          <TouchableOpacity onPress={() => { calculate(item, frequency) }} style={{padding: 15, borderRadius: 30, backgroundColor: '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={() => {computed ? clearElements() : calculate(item, frequency)}} style={{padding: 15, borderRadius: 30, backgroundColor: '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
             <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>Calculate</Text>
+              <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>{computed ? "Clear" : "Calculate"}</Text>
             </View>
           </TouchableOpacity>
         </View>
