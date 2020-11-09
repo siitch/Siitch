@@ -3,7 +3,7 @@ import Grass from './MeatComponents/Grass';
 import Recycle from './MeatComponents/Recycle';
 import Heart from './MeatComponents/Heart';
 import Water from './MeatComponents/Water';
-import Search from './Search';
+import Search from './Search/Search';
 import Compare, {compareScreen} from './Comparing/Compare';
 import NormalSearch from './NormalSearchingComponents/NormalSearch';
 import What from './MeatComponents/What';
@@ -44,30 +44,32 @@ const DeviceWidth = Dimensions.get('window').width;
 function HomeScreen() {
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
-    <View style={styles.MainContainer}>
-      <Image style={styles.alpha} source={Profiles.alpha} resizeMode="contain" />
-      <View style={styles.center}>
-        <Image style={styles.logo} source={Profiles.logo} resizeMode="contain" />
-      </View>
+      <View style={styles.MainContainer}>
+        <Image
+          style={styles.alpha}
+          source={Profiles.alpha}
+          resizeMode="contain"
+        />
+        <View style={styles.center}>
+          <Image
+            style={styles.logo}
+            source={Profiles.logo}
+            resizeMode="contain"
+          />
+        </View>
 
-      <Text style={styles.text}>Make Good Choices For Our Planet</Text>
-      <View style={{ alignItems: 'center' }}>
-      <Image
-          style={{width: DeviceWidth*0.8, height: 300, marginBottom: 20}}
-          source={Profiles.landing_image}
-          resizeMode= 'contain'
-      />
+        <Text style={styles.text}>Make Good Choices For Our Planet</Text>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            style={{width: DeviceWidth * 0.8, height: 300, marginBottom: 20}}
+            source={Profiles.landing_image}
+            resizeMode="contain"
+          />
+        </View>
+        <Text style={styles.bottomtext}>See the environmental cost of</Text>
+        <Text style={styles.bottomtext}>what you buy, so you can make</Text>
+        <Text style={styles.bottomtext}>a difference every day</Text>
       </View>
-      <Text style={styles.bottomtext}>
-        See the environmental cost of
-      </Text>
-      <Text style={styles.bottomtext}>
-        what you buy, so you can make
-      </Text>
-      <Text style={styles.bottomtext}>
-        a difference every day
-      </Text>
-    </View>
     </ScrollView>
   );
 }
@@ -132,13 +134,17 @@ const App = () => {
             ),
           }}
         />
-        <Tab.Screen 
-          name="Calculate" 
+        <Tab.Screen
+          name="Calculate"
           component={CalculateStackScreen}
           options={{
             tabBarLabel: 'Calculate',
             tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="calculator" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="calculator"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
@@ -243,13 +249,13 @@ const App = () => {
                   <Image
                     source={images.water_drop_click}
                     style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.water_drop}
                     style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ),
             }}
@@ -263,13 +269,13 @@ const App = () => {
                   <Image
                     source={images.vs_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.vs}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ),
             }}
@@ -283,13 +289,13 @@ const App = () => {
                   <Image
                     source={images.grass_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.grass}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ),
             }}
@@ -303,13 +309,13 @@ const App = () => {
                   <Image
                     source={images.heart_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.heart}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ),
             }}
@@ -323,13 +329,13 @@ const App = () => {
                   <Image
                     source={images.recycle_select}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.recycle}
                     style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
-                    resizeMode='contain'
+                    resizeMode="contain"
                   />
                 ),
             }}
