@@ -241,6 +241,10 @@ export const comparePage = ({route}) => {
     return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]));
   }
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <ScrollView style={{backgroundColor:'white'}}>
       <View>
@@ -264,7 +268,7 @@ export const comparePage = ({route}) => {
               <Image source = {Profiles[prod1]}
                 style = {{width: 200, height: 200, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{f1[selectedcategory1]} {f1['Metric to display']}</Text>
+                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1['Metric to display']}</Text>
                 <Text style={styles.textFormatCompare}>{f1['Measurement1']}</Text>
                 <Text style={styles.textFormatCompare}>{f1['Size']}</Text>
             </View>
@@ -272,7 +276,7 @@ export const comparePage = ({route}) => {
               <Image source = {Profiles[prod2]} 
                 style = {{width: 200, height: 200, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{f2[selectedcategory2]} {f2['Metric to display']}</Text>
+                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2['Metric to display']}</Text>
                 <Text style={styles.textFormatCompare}>{f2['Measurement1']}</Text>
                 <Text style={styles.textFormatCompare}>{f2['Size']}</Text>
             </View>
@@ -286,7 +290,7 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod3]}
                     style = {{width: 200, height: 200, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{f3[selectedcategory3]} {f3['Metric to display']}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3['Metric to display']}</Text>
                     <Text style={styles.textFormatCompare}>{f3['Measurement1']}</Text>
                     <Text style={styles.textFormatCompare}>{f3['Size']}</Text>
                 </View>
@@ -297,7 +301,7 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod4]} 
                     style = {{width: 200, height: 200, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{f4[selectedcategory4]} {f4['Metric to display']}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4['Metric to display']}</Text>
                     <Text style={styles.textFormatCompare}>{f4['Measurement1']}</Text>
                     <Text style={styles.textFormatCompare}>{f4['Size']}</Text>
                 </View>
@@ -369,36 +373,36 @@ export const comparePage = ({route}) => {
               </View>
               <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                 <View style={{width:DeviceWidth/6}}><Text>{prod1}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f1['Global Imperial Green Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f1['Global Imperial Blue Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f1['Global Imperial Gray Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{f1['Global Gallon p lb']}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Green Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Blue Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Gray Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f1['Global Gallon p lb']))}</Text></View>
               </View>
               <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                 <View style={{width:DeviceWidth/6}}><Text>{prod2}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f2['Global Imperial Green Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f2['Global Imperial Blue Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{f2['Global Imperial Gray Gal p lb']}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{f2['Global Gallon p lb']}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Green Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Blue Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Gray Gal p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f2['Global Gallon p lb']))}</Text></View>
               </View>
               {
                 isProduct3Pesent &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod3}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f3['Global Imperial Green Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f3['Global Imperial Blue Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f3['Global Imperial Gray Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{f3['Global Gallon p lb']}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Green Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Blue Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Gray Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f3['Global Gallon p lb']))}</Text></View>
                 </View>
               }
               {
                 isProduct4Pesent &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod4}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f4['Global Imperial Green Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f4['Global Imperial Blue Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{f4['Global Imperial Gray Gal p lb']}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{f4['Global Gallon p lb']}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Green Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Blue Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Gray Gal p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4['Global Gallon p lb']))}</Text></View>
                 </View>
               }
             </View>
