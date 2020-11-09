@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, Image, Dimensions, TouchableHighlight } from 'react-native';
+import { ScrollView, View, Text, Image, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 import firebase from 'firebase';
 import { images } from '../ImageURL';
@@ -38,6 +38,8 @@ export const comparePage = ({route}) => {
   const [isProduct3Pesent, setIsProduct3Present] = useState(false);
   const [isProduct4Pesent, setIsProduct4Present] = useState(false);
 
+  const [unit, setUnit] = useState('G');
+
   const config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
     authDomain: 'siitch-6b176.firebaseapp.com',
@@ -49,40 +51,6 @@ export const comparePage = ({route}) => {
     measurementId: 'G-13MVLQ6ZPF',
   };
 
-  // const fetchData = () => {
-  //   if (!firebase.apps.length) {
-  //       firebase.initializeApp(config);
-  //   }
-
-  //   firebase
-  //   .database()
-  //   .ref('/')
-  //   .once('value', data => { 
-  //       fetchedData = data.val();
-  //       for (var item in fetchedData) {
-  //         if(item === prod1) {
-  //           handleFetch1(true);
-  //           p1[item] = fetchedData[item];
-  //           f1 = p1[prod1]
-  //         } 
-  //         else if(item === prod2){
-  //           handleFetch2(true);
-  //           p2[item] = fetchedData[item];
-  //           f2 = p2[prod2]
-  //         } 
-  //         else if(item === prod3){
-  //           handleFetch3(true);
-  //           p3[item] = fetchedData[item];
-  //           f3 = p3[prod3]
-  //         } 
-  //         else if(item === prod4){
-  //           handleFetch4(true);
-  //           p4[item] = fetchedData[item];
-  //           f4 = p4[prod4]
-  //         }
-  //       }
-  //   });
-  // }
 
   const fetchData1 = () => {
     if (!firebase.apps.length) {
@@ -211,22 +179,112 @@ export const comparePage = ({route}) => {
   }
 
   const setMetric = (obj) => {
-    if (obj) {
-      if (obj['Single item   Gal'] != ""){
-        return 'Single item   Gal'
+    if (obj){
+      if (unit == 'G'){
+        if (obj['Single item   Gal'] != ""){
+          return 'Single item   Gal'
+        }
+        else if (obj['Global Gallon p lb'] != ""){
+          return 'Global Gallon p lb'
+        }
+        else{
+          return "Time to decompose"
+        }
       }
-      else if (obj['Global Gallon p lb'] != ""){
-        return 'Global Gallon p lb'
+      else if (unit == 'L'){
+        if (obj['Single item   L'] != ""){
+          return 'Single item   L'
+        }
+        else if (obj['Global Liters p kg'] != ""){
+          return 'Global Liters p kg'
+        }
+        else{
+          return 'Time to decompose'
+        }
       }
-      else{
-        return "Time to decompose"
-      }
+
     }
   }
   const selectedcategory1 = setMetric(f1)
   const selectedcategory2 = setMetric(f2)
   const selectedcategory3 = setMetric(f3)
   const selectedcategory4 = setMetric(f4)
+
+
+  const setMetricblue = () => {
+      if (unit == 'G'){
+        return 'Global Imperial Blue Gal p lb'
+      }
+      else if (unit == 'L'){
+        return 'Global Blue L p kg'
+      }
+  }
+
+  const setMetricgreen = () => {
+    if (unit == 'G'){
+      return 'Global Imperial Green Gal p lb'
+    }
+    else if (unit == 'L'){
+      return 'Global Green L p kg'
+    }
+}
+
+  const setMetricgray = () => {
+    if (unit == 'G'){
+      return 'Global Imperial Gray Gal p lb'
+    }
+    else if (unit == 'L'){
+      return 'Global Gray L p kg'
+    }
+  }
+
+  const selectedcategoryblue = setMetricblue()
+  const selectedcategorygreen = setMetricgreen()
+  const selectedcategorygray = setMetricgray()
+
+  const setMetricdisplay = () => {
+    if (unit == 'G'){
+      return 'Metric to display'
+    }
+    else if (unit == 'L'){
+      return 'Metric to display L'
+    }
+  }
+
+  const setMetricmeasurement = () => {
+    if (unit == 'G'){
+      return 'Measurement1'
+    }
+    else if (unit == 'L'){
+      return 'Measurement L'
+    }
+  }
+
+  const setMetricsize = () => {
+    if (unit == 'G'){
+      return 'Size'
+    }
+    else if (unit == 'L'){
+      return 'Size L'
+    }
+  }
+
+  const selectedmetrictodisplay= setMetricdisplay()
+  const selectedmeasurement = setMetricmeasurement()
+  const selectedsize = setMetricsize()
+
+  const setMetrictext = () => {
+    if (unit == 'G'){
+      return 'The gallons of water it takes to make one pound of these items:'
+    }
+    else if (unit == 'L'){
+      return 'The gallons of water it takes to make one kg of these items:'
+    }
+  }
+
+  const selectedtext = setMetrictext()
+
+
 
   const getMinValue = () => {
     if(prod3 && !prod4) {
@@ -248,7 +306,30 @@ export const comparePage = ({route}) => {
   return (
     <ScrollView style={{backgroundColor:'white'}}>
       <View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%'}}>
+        <View style={{flexDirection: 'row'}}>
+        <View style={{ 
+                      flexDirection: 'row', 
+                      marginTop: '3%', 
+                      marginLeft: 20, 
+                      borderColor: '#80CAFF',
+                      borderWidth: 2,
+                      borderRadius: 20, 
+                      width: 65,
+                      paddingTop: 10,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                      paddingBottom: 20,
+                      height: 60
+                  }}>
+                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false); setUnit('G'); }} >
+                          <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                      </TouchableOpacity>
+                      <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
+                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false); setUnit('L'); }} >
+                          <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                      </TouchableOpacity>
+          </View>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'0%', marginBottom: '5%', paddingLeft: 40}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} </Text>
           {/* <Text style={{fontSize:20,fontWeight:'bold'}}>{prod1} vs. {prod2}</Text> */}
           <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod2}</Text>
@@ -262,23 +343,24 @@ export const comparePage = ({route}) => {
           }
           
         </View>
+        </View>
         <View style={{flex: 4,flexDirection:'column',alignItems:'center', marginBottom:0, padding: 0}}>
           <View style={{flex:2, flexDirection:'row',justifyContent:'space-between'}}>
             <View center style={getTextStyle(f1[selectedcategory1], getMinValue())}>
               <Image source = {Profiles[prod1]}
                 style = {{width: 200, height: 200, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1['Metric to display']}</Text>
-                <Text style={styles.textFormatCompare}>{f1['Measurement1']}</Text>
-                <Text style={styles.textFormatCompare}>{f1['Size']}</Text>
+                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1[selectedmetrictodisplay]}</Text>
+                <Text style={styles.textFormatCompare}>{f1[selectedmeasurement]}</Text>
+                <Text style={styles.textFormatCompare}>{f1[selectedsize]}</Text>
             </View>
             <View center style={getTextStyle(f2[selectedcategory2], getMinValue())}>
               <Image source = {Profiles[prod2]} 
                 style = {{width: 200, height: 200, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2['Metric to display']}</Text>
-                <Text style={styles.textFormatCompare}>{f2['Measurement1']}</Text>
-                <Text style={styles.textFormatCompare}>{f2['Size']}</Text>
+                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2[selectedmetrictodisplay]}</Text>
+                <Text style={styles.textFormatCompare}>{f2[selectedmeasurement]}</Text>
+                <Text style={styles.textFormatCompare}>{f2[selectedsize]}</Text>
             </View>
           </View>
           {
@@ -290,9 +372,9 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod3]}
                     style = {{width: 200, height: 200, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3['Metric to display']}</Text>
-                    <Text style={styles.textFormatCompare}>{f3['Measurement1']}</Text>
-                    <Text style={styles.textFormatCompare}>{f3['Size']}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.textFormatCompare}>{f3[selectedmeasurement]}</Text>
+                    <Text style={styles.textFormatCompare}>{f3[selectedsize]}</Text>
                 </View>
               }
               {
@@ -301,9 +383,9 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod4]} 
                     style = {{width: 200, height: 200, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4['Metric to display']}</Text>
-                    <Text style={styles.textFormatCompare}>{f4['Measurement1']}</Text>
-                    <Text style={styles.textFormatCompare}>{f4['Size']}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.textFormatCompare}>{f4[selectedmeasurement]}</Text>
+                    <Text style={styles.textFormatCompare}>{f4[selectedsize]}</Text>
                 </View>
               }
             </View>
@@ -347,7 +429,7 @@ export const comparePage = ({route}) => {
           </CollapseHeader>
           <CollapseBody style={{padding: 10, borderColor: '#FFD359',borderWidth: 2, borderBottomLeftRadius: 15, borderBottomRightRadius: 15}}>
             <View>
-              <Text>The gallons of water it takes to make one pound of these items:</Text>
+              <Text>{selectedtext}</Text>
               
               <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between", marginTop:'5%'}}>
                 <View style={{width:DeviceWidth/6}}><Text></Text></View>
@@ -373,36 +455,36 @@ export const comparePage = ({route}) => {
               </View>
               <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                 <View style={{width:DeviceWidth/6}}><Text>{prod1}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Green Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Blue Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1['Global Imperial Gray Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f1['Global Gallon p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1[selectedcategorygreen]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1[selectedcategoryblue]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f1[selectedcategorygray]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f1[selectedcategory1]))}</Text></View>
               </View>
               <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                 <View style={{width:DeviceWidth/6}}><Text>{prod2}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Green Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Blue Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2['Global Imperial Gray Gal p lb']))}</Text></View>
-                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f2['Global Gallon p lb']))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2[selectedcategorygreen]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2[selectedcategoryblue]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f2[selectedcategorygray]))}</Text></View>
+                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f2[selectedcategory2]))}</Text></View>
               </View>
               {
                 isProduct3Pesent &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod3}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Green Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Blue Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3['Global Imperial Gray Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f3['Global Gallon p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygreen]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategoryblue]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygray]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f3[selectedcategory3]))}</Text></View>
                 </View>
               }
               {
                 isProduct4Pesent &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod4}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Green Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Blue Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4['Global Imperial Gray Gal p lb']))}</Text></View>
-                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4['Global Gallon p lb']))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygreen]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategoryblue]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygray]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4[selectedcategory4]))}</Text></View>
                 </View>
               }
             </View>
