@@ -114,7 +114,7 @@ function CalculateScreen() {
       <View style={{flexDirection: 'row'}}>
         <View style={{ 
           flexDirection: 'row', 
-          marginTop: '10%', 
+          marginTop: '15%', 
           marginLeft: 20, 
           borderColor: '#80CAFF',
           borderWidth: 2,
@@ -134,7 +134,7 @@ function CalculateScreen() {
           </TouchableOpacity>
       </View>
       <View style={{alignItems: 'center', marginTop: 10}}>
-        <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '10%', paddingTop: 30, paddingLeft: 50, paddingRight: 10, paddingBottom: 10}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '15%', paddingTop: 30, paddingLeft: 50, paddingRight: 10, paddingBottom: 10}}>
             Calculator
         </Text>
       </View>
