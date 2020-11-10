@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, Image, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, Image, Dimensions, Linking, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 import firebase from 'firebase';
 import { images } from '../ImageURL';
@@ -14,29 +14,41 @@ let p1 = {};
 let p2 = {};
 let p3 = {};
 let p4 = {};
+let p5 = {};
+let p6 = {};
 let f1 = {};
 let f2 = {};
 let f3 = {};
 let f4 = {};
+let f5 = {};
+let f6 = {};
 
 export const comparePage = ({route}) => {
   const { prod1 } = route.params;
   const { prod2 } = route.params;
   const { prod3 } = route.params;
   const { prod4 } = route.params;
+  const { prod5 } = route.params;
+  const { prod6 } = route.params;
 
   const [fetched1, handleFetch1] = useState(false);
   const [fetched2, handleFetch2] = useState(false);
   const [fetched3, handleFetch3] = useState(false);
   const [fetched4, handleFetch4] = useState(false);
+  const [fetched5, handleFetch5] = useState(false);
+  const [fetched6, handleFetch6] = useState(false);
 
   const [currentprod1, changeprod1] = useState('');
   const [currentprod2, changeprod2] = useState('');
   const [currentprod3, changeprod3] = useState('');
   const [currentprod4, changeprod4] = useState('');
+  const [currentprod5, changeprod5] = useState('');
+  const [currentprod6, changeprod6] = useState('');
 
-  const [isProduct3Pesent, setIsProduct3Present] = useState(false);
-  const [isProduct4Pesent, setIsProduct4Present] = useState(false);
+  const [isProduct3Present, setIsProduct3Present] = useState(false);
+  const [isProduct4Present, setIsProduct4Present] = useState(false);
+  const [isProduct5Present, setIsProduct5Present] = useState(false);
+  const [isProduct6Present, setIsProduct6Present] = useState(false);
 
   const [unit, setUnit] = useState('G');
 
@@ -132,6 +144,46 @@ export const comparePage = ({route}) => {
     });
   }
 
+  const fetchData5 = () => {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+
+    firebase
+    .database()
+    .ref('/')
+    .once('value', data => { 
+        fetchedData = data.val();
+        for (var item in fetchedData) {
+            if(item === prod5) {
+                p5[item] = fetchedData[item];
+                f5 = p5[prod5]
+            }  
+        }
+        handleFetch5(true);
+    });
+  }
+
+  const fetchData6 = () => {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+
+    firebase
+    .database()
+    .ref('/')
+    .once('value', data => { 
+        fetchedData = data.val();
+        for (var item in fetchedData) {
+            if(item === prod6) {
+                p6[item] = fetchedData[item];
+                f6 = p6[prod6]
+            }  
+        }
+        handleFetch6(true);
+    });
+  }
+
   if(!fetched1) {
       fetchData1();
   }
@@ -178,6 +230,30 @@ export const comparePage = ({route}) => {
     f4 = {};
   }
 
+  if(prod5 && !fetched5) {
+    fetchData5();
+  }
+
+  if(prod5 && prod5 !== currentprod5) {
+    setIsProduct5Present(true)
+    changeprod5(prod5);
+    handleFetch5(false);
+    p5 = {};
+    f5 = {};
+  }
+
+  if(prod6 && !fetched6) {
+    fetchData6();
+  }
+
+  if(prod6 && prod6 !== currentprod6) {
+    setIsProduct6Present(true)
+    changeprod6(prod6);
+    handleFetch6(false);
+    p6 = {};
+    f6 = {};
+  }
+
   const setMetric = (obj) => {
     if (obj){
       if (unit == 'G'){
@@ -209,7 +285,8 @@ export const comparePage = ({route}) => {
   const selectedcategory2 = setMetric(f2)
   const selectedcategory3 = setMetric(f3)
   const selectedcategory4 = setMetric(f4)
-
+  const selectedcategory5 = setMetric(f5)
+  const selectedcategory6 = setMetric(f6)
 
   const setMetricblue = () => {
       if (unit == 'G'){
@@ -278,23 +355,57 @@ export const comparePage = ({route}) => {
       return 'The gallons of water it takes to make one pound of these items:'
     }
     else if (unit == 'L'){
-      return 'The gallons of water it takes to make one kg of these items:'
+      return 'The liters of water it takes to make one kg of these items:'
     }
   }
 
   const selectedtext = setMetrictext()
 
-
-
   const getMinValue = () => {
-    if(prod3 && !prod4) {
+    if(prod3 && !prod4 && !prod5 && !prod6) {
       return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]));
     }
-    else if (!prod3 && prod4){
+    else if (!prod3 && prod4 && !prod5 && !prod6) {
       return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f4[selectedcategory4]));
     }
-    else if(prod3 && prod4) {
+    else if (!prod3 && !prod4 && prod5 && !prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f5[selectedcategory5]));
+    }
+    else if (!prod3 && !prod4 && !prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f6[selectedcategory6]));
+    }
+    else if(prod3 && prod4 && !prod5 && !prod6) {
       return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f4[selectedcategory4]));
+    }
+    else if(prod3 && !prod4 && prod5 && !prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f5[selectedcategory5]));
+    }
+    else if(prod3 && !prod4 && !prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f6[selectedcategory6]));
+    }
+    else if(!prod3 && prod4 && prod5 && !prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f4[selectedcategory4]), parseInt(f5[selectedcategory5]));
+    }
+    else if(!prod3 && prod4 && !prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f4[selectedcategory4]), parseInt(f6[selectedcategory6]));
+    }
+    else if(!prod3 && !prod4 && prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f5[selectedcategory5]), parseInt(f6[selectedcategory6]));
+    }
+    else if(prod3 && prod4 && prod5 && !prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f4[selectedcategory4]), parseInt(f5[selectedcategory5]));
+    }
+    else if(prod3 && !prod4 && prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f5[selectedcategory5]), parseInt(f6[selectedcategory6]));
+    }
+    else if(prod3 && prod4 && !prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f4[selectedcategory4]), parseInt(f6[selectedcategory6]));
+    }
+    else if(!prod3 && prod4 && prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f4[selectedcategory4]), parseInt(f5[selectedcategory5]), parseInt(f6[selectedcategory6]));
+    }
+    else if(prod3 && prod4 && prod5 && prod6) {
+      return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]), parseInt(f3[selectedcategory3]), parseInt(f4[selectedcategory4]), parseInt(f5[selectedcategory5]), parseInt(f6[selectedcategory6]));
     }
     return Math.min(parseInt(f1[selectedcategory1]), parseInt(f2[selectedcategory2]));
   }
@@ -321,11 +432,11 @@ export const comparePage = ({route}) => {
                       paddingBottom: 20,
                       height: 60
                   }}>
-                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false); setUnit('G'); }} >
+                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G'); }} >
                           <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                       </TouchableOpacity>
                       <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false); setUnit('L'); }} >
+                      <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }} >
                           <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                       </TouchableOpacity>
           </View>
@@ -334,17 +445,24 @@ export const comparePage = ({route}) => {
           {/* <Text style={{fontSize:20,fontWeight:'bold'}}>{prod1} vs. {prod2}</Text> */}
           <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod2}</Text>
           {
-            isProduct3Pesent && 
+            isProduct3Present && 
             <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod3}</Text>
           }
           {
-            isProduct4Pesent && 
+            isProduct4Present && 
             <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod4}</Text>
           }
-          
+          {
+            isProduct5Present && 
+            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod5}</Text>
+          }
+          {
+            isProduct6Present && 
+            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod6}</Text>
+          }
         </View>
         </View>
-        <View style={{flex: 4,flexDirection:'column',alignItems:'center', marginBottom:0, padding: 0}}>
+        <View style={{flex: 6,flexDirection:'column',alignItems:'center', marginBottom:0, padding: 0}}>
           <View style={{flex:2, flexDirection:'row',justifyContent:'space-between'}}>
             <View center style={getTextStyle(f1[selectedcategory1], getMinValue())}>
               <Image source = {Profiles[prod1]}
@@ -364,10 +482,10 @@ export const comparePage = ({route}) => {
             </View>
           </View>
           {
-            (isProduct3Pesent || isProduct4Pesent) && 
+            (isProduct3Present || isProduct4Present) && 
             <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
               {
-                isProduct3Pesent &&
+                isProduct3Present &&
                 <View center style={getTextStyle(f3[selectedcategory3], getMinValue())}>
                   <Image source = {Profiles[prod3]}
                     style = {{width: 200, height: 200, alignItems:'center'}}
@@ -378,7 +496,7 @@ export const comparePage = ({route}) => {
                 </View>
               }
               {
-                isProduct4Pesent &&
+                isProduct4Present &&
                 <View center style={getTextStyle(f4[selectedcategory4], getMinValue())}>
                   <Image source = {Profiles[prod4]} 
                     style = {{width: 200, height: 200, alignItems:'center'}}
@@ -390,38 +508,77 @@ export const comparePage = ({route}) => {
               }
             </View>
           }
+          {
+            (isProduct5Present || isProduct6Present) && 
+            <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
+              {
+                isProduct5Present &&
+                <View center style={getTextStyle(f5[selectedcategory5], getMinValue())}>
+                  <Image source = {Profiles[prod5]}
+                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    resizeMode="contain"/>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f5[selectedcategory5]))} {f5[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.textFormatCompare}>{f5[selectedmeasurement]}</Text>
+                    <Text style={styles.textFormatCompare}>{f5[selectedsize]}</Text>
+                </View>
+              }
+              {
+                isProduct6Present &&
+                <View center style={getTextStyle(f6[selectedcategory6], getMinValue())}>
+                  <Image source = {Profiles[prod6]} 
+                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    resizeMode="contain"/>
+                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f6[selectedcategory6]))} {f6[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.textFormatCompare}>{f6[selectedmeasurement]}</Text>
+                    <Text style={styles.textFormatCompare}>{f6[selectedsize]}</Text>
+                </View>
+              }
+            </View>
+          }
         </View>
       </View>
       
-        {(f1['Notes to appear'] != "" )&& 
-          <View style={{paddingLeft: 20, paddingRight: 20}}>
-            <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
-          </View>
-        }
+      {
+        (f1['Notes to appear'] != "" )&& 
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
+        </View>
+      }
 
-        {(f2['Notes to appear'] != "" )&& 
-          <View style={{paddingLeft: 20, paddingRight: 20}}>
-            <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
-          </View>
-        }
+      {
+        (f2['Notes to appear'] != "" )&& 
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
+        </View>
+      }
 
-        {
-          (isProduct3Pesent && f3['Notes to appear'] != "") &&
-          <View style={{paddingLeft: 20, paddingRight: 20}}>
-            <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
-          </View>
-        }
-        {
-          (isProduct4Pesent && f4['Notes to appear'] != "") &&
-          <View style={{paddingLeft: 20, paddingRight: 20}}>
-            <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
-          </View>
-        }
-      
-      
+      {
+        (isProduct3Present && f3['Notes to appear'] != "") &&
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
+        </View>
+      }
+      {
+        (isProduct4Present && f4['Notes to appear'] != "") &&
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
+        </View>
+      }
+      {
+        (isProduct5Present && f5['Notes to appear'] != "") &&
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize:18, textAlign: 'left'}}>{f5['Notes to appear']}</Text>
+        </View>
+      }
+      {
+        (isProduct6Present && f6['Notes to appear'] != "") &&
+        <View style={{paddingLeft: 20, paddingRight: 20}}>
+          <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
+        </View>
+      }
 
       <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
-        <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}} isCollapsed='true'>
+        <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}}>
           <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#FFD359', width: DeviceWidth / 1.2,borderColor: '#FFD359', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
             <View style={{alignItems:'center'}}>
               <Text style={{fontWeight:'bold', fontSize: 20}}>Breakdown</Text>
@@ -468,7 +625,7 @@ export const comparePage = ({route}) => {
                 <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f2[selectedcategory2]))}</Text></View>
               </View>
               {
-                isProduct3Pesent &&
+                isProduct3Present &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod3}</Text></View>
                   <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygreen]))}</Text></View>
@@ -478,7 +635,7 @@ export const comparePage = ({route}) => {
                 </View>
               }
               {
-                isProduct4Pesent &&
+                isProduct4Present &&
                 <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
                   <View style={{width:DeviceWidth/6}}><Text>{prod4}</Text></View>
                   <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygreen]))}</Text></View>
@@ -487,11 +644,31 @@ export const comparePage = ({route}) => {
                   <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4[selectedcategory4]))}</Text></View>
                 </View>
               }
+              {
+                isProduct5Present &&
+                <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                  <View style={{width:DeviceWidth/6}}><Text>{prod5}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygreen]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategoryblue]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygray]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f5[selectedcategory5]))}</Text></View>
+                </View>
+              }
+              {
+                isProduct6Present &&
+                <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                  <View style={{width:DeviceWidth/6}}><Text>{prod6}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygreen]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategoryblue]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygray]))}</Text></View>
+                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f6[selectedcategory6]))}</Text></View>
+                </View>
+              }
             </View>
           </CollapseBody>
         </Collapse>
 
-        <Collapse style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}} isCollapsed='true'>
+        <Collapse style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}}>
           <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#70BF41', width: DeviceWidth / 1.2,borderColor: '#70BF41', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
             <View style={{alignItems:'center'}}>
               <Text style={{fontWeight:'bold', fontSize: 20}}>Rain</Text>
@@ -505,7 +682,7 @@ export const comparePage = ({route}) => {
           </CollapseBody>
         </Collapse>
 
-        <Collapse style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}} isCollapsed='true'>
+        <Collapse style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}}>
           <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#00ADEF', width: DeviceWidth / 1.2,borderColor: '#00ADEF', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
             <View style={{alignItems:'center'}}>
               <Text style={{fontWeight:'bold', fontSize: 20}}>Irrigation</Text>
@@ -519,7 +696,7 @@ export const comparePage = ({route}) => {
           </CollapseBody>
         </Collapse>
 
-        <Collapse style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}} isCollapsed='true'>
+        <Collapse style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}}>
           <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#C2C2C2', width: DeviceWidth / 1.2,borderColor: '#C2C2C2', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
             <View style={{alignItems:'center'}}>
               <Text style={{fontWeight:'bold', fontSize: 20}}>Cleaning</Text>
@@ -529,7 +706,7 @@ export const comparePage = ({route}) => {
             <View>
               <Text style={{fontWeight:'bold'}}>Cleaning water (Gray water): </Text>
               <Text>The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards </Text>
-              <Text style={{textAlign: 'left', marginTop: '3%'}}>Definitions: www.watercalculator.org</Text>
+              <Text style={{textAlign: 'left', marginTop: '3%'}}>Definitions: <Text onPress={() => Linking.openURL('https://www.watercalculator.org')} style={{color: '#00ADEF'}}>www.watercalculator.org</Text></Text>
             </View>
           </CollapseBody>
         </Collapse>

@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+const DeviceWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   databaseView: {
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     //marginLeft: 18,
     elevation:3,
     paddingRight: 25,
-    marginRight: 10,
+    marginRight: 50,
     marginBottom: 2,
     // shadowOpacity: 1.0,
     // shadowOffset: {
@@ -201,13 +202,14 @@ const styles = StyleSheet.create({
     //   height: 1
     // },
     height: 50,
-    borderWidth:1,
+    borderWidth:2,
     //shadowRadius: 10,
     backgroundColor: "rgba(255,255,255,1)",
     //shadowColor: "#d3d3d3",
-    borderRadius: 18,
-    borderColor: '#404040',
-    flexDirection: "row"
+    borderRadius: 20,
+    flexDirection: "row",
+    width: DeviceWidth * 0.7,
+    borderColor: '#80CAFF',
   },
   bottomBorderLine: {
     borderBottomColor: 'lightgray', 

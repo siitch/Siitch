@@ -1,4 +1,8 @@
+import { images } from './ImageURL';
+
 const Profiles = {
+    vs_compare: require('./images/Navigation_Icons/VS.png'),
+    vs_compare_select: require('./images/Navigation_Icons/VS_blue_1x.png'),
     meats: require('./images/Beef.png'),
     everyday_food: require('./images/hamburger.jpg'),
     seeds: require('./images/sunflower_seeds.png'),

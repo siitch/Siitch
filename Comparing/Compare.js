@@ -60,8 +60,6 @@ function getdata() {
             })            
         }
     });
-  
-  
  }
 
 export default class Compare extends Component {
@@ -74,8 +72,12 @@ export default class Compare extends Component {
       product2: "",
       product3: "",
       product4: "",
+      product5: "",
+      product6: "",
       isProduct3: false,
       isProduct4: false,
+      isProduct5: false,
+      isProduct6: false
     };
     getdata();
   }
@@ -89,18 +91,29 @@ export default class Compare extends Component {
 
   _setProduct3(item){
     this.setState({product3: item.name});
-    console.log(this.state.product3)
   }
 
   _setProduct4(item){
     this.setState({product4: item.name})
   }
 
+  _setProduct5(item){
+    this.setState({product5: item.name});
+  }
+
+  _setProduct6(item){
+    this.setState({product6: item.name});
+  }
+
   _addProduct(boolValue){
     if(!this.state.isProduct3){
       this.setState({isProduct3: boolValue})
-    } else {
+    } else if(!this.state.isProduct4){
       this.setState({isProduct4: boolValue})
+    } else if(!this.state.isProduct5) {
+      this.setState({isProduct5: boolValue})
+    } else {
+      this.setState({isProduct6: boolValue})
     }
   }
 
@@ -112,14 +125,40 @@ export default class Compare extends Component {
   _deleteProduct4(){
     this.setState({product4: ""})
     this.setState({isProduct4: false})
-}
+  }
+
+  _deleteProduct5(){
+    this.setState({product5: ""})
+    this.setState({isProduct5: false})
+  }
+
+  _deleteProduct6(){
+    this.setState({product6: ""})
+    this.setState({isProduct6: false})
+  }
 
   checkEmpty() {
-    return (this.state.product1 == "" || this.state.product2 == "" || (this.state.isProduct3 && this.state.product3 == "") || (this.state.isProduct4 && this.state.product4 == ""));
+    return (this.state.product1 == "" || this.state.product2 == "" || (this.state.isProduct3 && this.state.product3 == "") || (this.state.isProduct4 && this.state.product4 == "") || (this.state.isProduct5 && this.state.product5 == "") || (this.state.isProduct6 && this.state.product6 == ""));
   }
 
   checkDuplicates() {
-    return ((this.state.product1 == this.state.product2) || ( this.state.isProduct3 && (this.state.product1 == this.state.product3)) || (this.state.isProduct4 && (this.state.product1 == this.state.product4)) || (this.state.isProduct3 && (this.state.product2 == this.state.product3)) || (this.state.isProduct4 && (this.state.product2 == this.state.product4)) || (this.state.isProduct3 && this.state.isProduct4 && (this.state.product3 == this.state.product4)))
+    return (
+      (this.state.product1 == this.state.product2) || 
+      (this.state.isProduct3 && (this.state.product1 == this.state.product3)) || 
+      (this.state.isProduct4 && (this.state.product1 == this.state.product4)) || 
+      (this.state.isProduct5 && (this.state.product1 == this.state.product5)) || 
+      (this.state.isProduct6 && (this.state.product1 == this.state.product6)) || 
+      (this.state.isProduct3 && (this.state.product2 == this.state.product3)) || 
+      (this.state.isProduct4 && (this.state.product2 == this.state.product4)) || 
+      (this.state.isProduct5 && (this.state.product2 == this.state.product5)) || 
+      (this.state.isProduct6 && (this.state.product2 == this.state.product6)) ||
+      (this.state.isProduct3 && this.state.isProduct4 && (this.state.product3 == this.state.product4)) || 
+      (this.state.isProduct3 && this.state.isProduct5 && (this.state.product3 == this.state.product5)) || 
+      (this.state.isProduct3 && this.state.isProduct6 && (this.state.product3 == this.state.product6)) || 
+      (this.state.isProduct4 && this.state.isProduct5 && (this.state.product4 == this.state.product5)) || 
+      (this.state.isProduct4 && this.state.isProduct6 && (this.state.product4 == this.state.product6)) || 
+      (this.state.isProduct5 && this.state.isProduct6 && (this.state.product5 == this.state.product6))
+    )
   }
 
   render() {
@@ -131,7 +170,7 @@ export default class Compare extends Component {
             <Text style={styles.title}>Compare</Text>
             <Text style={{alignItems: 'center', marginTop: 20, marginBottom: '5%', fontSize: 20}}>Select Item 1</Text>
             <View style={styles.container}>
-              <View style={{width: 200, flexDirection:'row', alignItems:'center'}}>
+              <View style={{width: 200, flexDirection:'row', alignItems:'center', alignContent:'center'}}>
               <RNPicker 
                 dataSource={itemsList}
                 dummyDataSource={itemsList}
@@ -154,11 +193,6 @@ export default class Compare extends Component {
                 //dropDownImage={}
                 selectedValue={(index, item) => this._setProduct1(item)}
               />
-              <MaterialCommunityIcons
-                    name="magnify"
-                    color={'gray'}
-                    size={40}
-                  />
               </View>
             </View>
             <Text style={{alignItems: 'center', marginTop: 20, marginBottom: '5%', fontSize: 20}}>Select Item 2</Text>
@@ -184,11 +218,6 @@ export default class Compare extends Component {
                 dropDownImageStyle={styles.dropDownImageStyle}
                 selectedValue={(index, item) => this._setProduct2(item)}
               />
-              <MaterialCommunityIcons
-                    name="magnify"
-                    color={'gray'}
-                    size={40}
-                  />
             </View>
             {
               this.state.isProduct3 &&
@@ -220,6 +249,7 @@ export default class Compare extends Component {
                         name="close"
                         color={'gray'}
                         size={40}
+                        style = {{marginLeft: -18}}
                         onPress={() => {this._deleteProduct3()}}
                       />
                 </View>
@@ -256,7 +286,82 @@ export default class Compare extends Component {
                         name="close"
                         color={'gray'}
                         size={40}
+                        style = {{marginLeft: -18}}
                         onPress={() => {this._deleteProduct4()}}
+                      />
+                </View>
+              </View>
+            }
+
+            {
+              this.state.isProduct5 &&
+              <View style={{alignItems: 'center'}}>
+                <Text style={{alignItems: 'center', marginTop: 20, marginBottom: '5%', fontSize: 20}}>Select Item 5</Text>
+                <View style={{width: 200, flexDirection:'row', alignItems:'center'}}>
+                <RNPicker
+                    dataSource={itemsList}
+                    dummyDataSource={itemsList}
+                    defaultValue={false}
+                    pickerTitle={"Search Items"}
+                    showSearchBar={true}
+                    disablePicker={false}
+                    changeAnimation={"none"}
+                    searchBarPlaceHolder={"Search....."}
+                    showPickerTitle={true}
+                    searchBarContainerStyle={styles.searchBarContainerStyle}
+                    pickerStyle={styles.pickerStyle}
+                    itemSeparatorStyle={styles.itemSeparatorStyle}
+                    pickerItemTextStyle={styles.listTextViewStyle}
+                    selectedLabel={this.state.product5}
+                    placeHolderLabel={this.state.placeHolderText}
+                    selectLabelTextStyle={styles.selectLabelTextStyle}
+                    placeHolderTextStyle={styles.placeHolderTextStyle}
+                    dropDownImageStyle={styles.dropDownImageStyle}
+                    selectedValue={(index, item) => this._setProduct5(item)}
+                  />
+                  <MaterialCommunityIcons
+                        name="close"
+                        color={'gray'}
+                        size={40}
+                        style = {{marginLeft: -18}}
+                        onPress={() => {this._deleteProduct5()}}
+                      />
+                </View>
+              </View>
+            }
+
+{
+              this.state.isProduct6 &&
+              <View style={{alignItems: 'center'}}>
+                <Text style={{alignItems: 'center', marginTop: 20, marginBottom: '5%', fontSize: 20}}>Select Item 6</Text>
+                <View style={{width: 200, flexDirection:'row', alignItems:'center'}}>
+                <RNPicker
+                    dataSource={itemsList}
+                    dummyDataSource={itemsList}
+                    defaultValue={false}
+                    pickerTitle={"Search Items"}
+                    showSearchBar={true}
+                    disablePicker={false}
+                    changeAnimation={"none"}
+                    searchBarPlaceHolder={"Search....."}
+                    showPickerTitle={true}
+                    searchBarContainerStyle={styles.searchBarContainerStyle}
+                    pickerStyle={styles.pickerStyle}
+                    itemSeparatorStyle={styles.itemSeparatorStyle}
+                    pickerItemTextStyle={styles.listTextViewStyle}
+                    selectedLabel={this.state.product6}
+                    placeHolderLabel={this.state.placeHolderText}
+                    selectLabelTextStyle={styles.selectLabelTextStyle}
+                    placeHolderTextStyle={styles.placeHolderTextStyle}
+                    dropDownImageStyle={styles.dropDownImageStyle}
+                    selectedValue={(index, item) => this._setProduct6(item)}
+                  />
+                  <MaterialCommunityIcons
+                        name="close"
+                        color={'gray'}
+                        size={40}
+                        style = {{marginLeft: -18}}
+                        onPress={() => {this._deleteProduct6()}}
                       />
                 </View>
               </View>
@@ -283,8 +388,7 @@ export default class Compare extends Component {
               </TouchableOpacity>
             </View>
 
-            <View
-              >
+            <View>
               <TouchableOpacity 
               style={{
                 width: width / 2,
@@ -296,7 +400,7 @@ export default class Compare extends Component {
                 marginTop: 20,
               }}
                 onPress={() => { this.checkEmpty() ?
-                  Alert.alert('Please select an item') : ( this.checkDuplicates() ?Alert.alert('Please select different items'):this.props.navigation.navigate('Compare Details', {prod1: this.state.product1,prod2: this.state.product2, prod3: this.state.product3, prod4: this.state.product4}))
+                  Alert.alert('Please select an item') : ( this.checkDuplicates() ?Alert.alert('Please select different items'):this.props.navigation.navigate('Compare Details', {prod1: this.state.product1,prod2: this.state.product2, prod3: this.state.product3, prod4: this.state.product4, prod5: this.state.product5, prod6: this.state.product6}))
                 }
                 }>
                 <View style={{alignItems: 'center'}}>
@@ -304,8 +408,6 @@ export default class Compare extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-
-
           </View>
         </ScrollView>
       </View>
