@@ -73,6 +73,7 @@ export default class Compare extends Component {
       product4: '',
       product5: '',
       product6: '',
+      productarray: [],
       isProduct3: false,
       isProduct4: false,
       isProduct5: false,
@@ -145,6 +146,18 @@ export default class Compare extends Component {
       (this.state.isProduct5 && this.state.product5 == '') ||
       (this.state.isProduct6 && this.state.product6 == '')
     );
+  }
+
+  makearray(productarr){
+    console.log(productarr)
+    resarray = []
+    for (item in productarr){
+      if (productarr[item] != ""){
+        resarray.push(productarr[item])
+      }
+    }
+    console.log(resarray)
+    return resarray
   }
 
   checkDuplicates() {
@@ -514,12 +527,7 @@ export default class Compare extends Component {
                     : this.checkDuplicates()
                     ? Alert.alert('Please select different items')
                     : this.props.navigation.navigate('Compare Details', {
-                        prod1: this.state.product1,
-                        prod2: this.state.product2,
-                        prod3: this.state.product3,
-                        prod4: this.state.product4,
-                        prod5: this.state.product5,
-                        prod6: this.state.product6,
+                        prodarray : this.makearray([this.state.product1, this.state.product2, this.state.product3, this.state.product4, this.state.product5, this.state.product6])
                       });
                 }}>
                 <View style={{alignItems: 'center'}}>

@@ -24,12 +24,14 @@ let f5 = {};
 let f6 = {};
 
 export const comparePage = ({route}) => {
-  const { prod1 } = route.params;
-  const { prod2 } = route.params;
-  const { prod3 } = route.params;
-  const { prod4 } = route.params;
-  const { prod5 } = route.params;
-  const { prod6 } = route.params;
+  const { prodarray } = route.params;
+  const prod1 = prodarray[0];
+  const prod2 = prodarray[1];
+  const prod3 = prodarray[2];
+  const prod4 = prodarray[3];
+  const prod5 = prodarray[4];
+  const prod6 = prodarray[5];
+  
 
   const [fetched1, handleFetch1] = useState(false);
   const [fetched2, handleFetch2] = useState(false);
