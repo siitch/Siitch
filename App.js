@@ -361,9 +361,11 @@ const App = () => {
           options={({navigation}) => ({
             headerBackTitleVisible: false,
             headerRight: () => (
-              <Button
+              <MaterialCommunityIcons
+                name="home"
+                size={35}
+                color={'grey'}
                 onPress={() => navigation.navigate('Home')}
-                title="Home"
               />
             ),
           })}

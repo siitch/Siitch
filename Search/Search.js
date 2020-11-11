@@ -6,6 +6,7 @@ import {Searchbar, Avatar} from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profiles from './SearchDB';
+import RNPicker from 'rn-modal-picker';
 
 import {
   SafeAreaView,
@@ -24,7 +25,7 @@ import {
   Image,
 } from 'react-native';
 
-import {styles} from '../Ranking/Styles';
+import {styles} from './Style';
 const DeviceWidth = Dimensions.get('window').width;
 
 const Search = ({searchData, navigation}) => {
@@ -33,8 +34,10 @@ const Search = ({searchData, navigation}) => {
   const [keyword, setKeyword] = useState('');
   const [message, setMessage] = useState('');
   const [item, setItem] = useState([]);
+  const [name, setName] = useState('');
   const Tab = createBottomTabNavigator();
   var itemArr = [];
+  var itemsList = [];
 
   var config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
@@ -74,6 +77,12 @@ const Search = ({searchData, navigation}) => {
     let index = 0;
     let arr;
     for (const [key, value] of Object.entries(Profiles)) {
+      const keyUpp = key.toUpperCase();
+
+      if (!keyUpp.includes(keyword.toUpperCase())) {
+        continue;
+      }
+      itemsList.push(key);
       if (index % 3 === 0) {
         arr = [];
         itemArr.push(arr);
@@ -85,7 +94,7 @@ const Search = ({searchData, navigation}) => {
       index++;
     }
     setItem(itemArr);
-  }, []);
+  }, [keyword]);
   return (
     <View style={{backgroundColor: '#FFFFFF'}}>
       <View style={styles.searchFrame}>
@@ -107,6 +116,7 @@ const Search = ({searchData, navigation}) => {
               fontSize: 20,
             }}
           />
+
           <Text style={{marginTop: 30, marginBottom: 10, textAlign: 'center'}}>
             For the prototype, only the Beef, Jeans & Makeup {'\n'} search pages
             are active. We're curious what you think.
