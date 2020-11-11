@@ -36,8 +36,9 @@ import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
 import {CalculateStackScreen} from './Calculate/Calculate';
 
-import Profiles from './Ranking/ImageDB';
+// import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
+import Profiles from './ImageDB';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -167,12 +168,17 @@ const App = () => {
           component={compareScreen}
           options={{
             tabBarLabel: 'Compare',
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="scale-balance"
-                color={color}
-                size={size}
-              />
+            tabBarIcon: ({focused}) =>
+              focused ? (
+                <Image
+                  source={Profiles.vs_compare_select}
+                  resizeMode="contain"
+                />
+              ) : (
+                <Image
+                  source={Profiles.vs_compare}
+                  resizeMode="contain"
+                />
             ),
           }}
         />
