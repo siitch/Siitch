@@ -26,18 +26,20 @@ const What = () => {
         <Text style={{fontSize:24,alignContent:'center'}}>What Can I do?</Text>
       </View>
       <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Frequency</Text>
-      <Text style={{fontSize:14,marginLeft:'5%'}}>Try saving red meat for special occasions</Text>
-      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',marginRight:'5%'}}>Take it at your own pace. If you eat meat twice a day, try eating it once a day</Text>
-      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Portion Size</Text>
-      <Image source={images.portion} style={{marginLeft:'10%',marginTop:'5%'}} resizeMode='contain'/>
-      <Text style={{fontSize:14,marginLeft:'5%'}}>Reducing portion size will save you money and help you lose weight</Text>
+      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Try saving red meat for special occasions</Text>
+      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',marginRight:'5%',width: Width / 1.2}}>Take it at your own pace. If you eat meat twice a day, try eating it once a day</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold',}}>Reduce Portion Size</Text>
+      <View style={{widt:Width,alignItems:'center'}}>
+      <Image source={images.portion} style={{marginTop:'5%'}} resizeMode='contain'/>
+      </View>
+      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Reducing portion size will save you money and help you lose weight</Text>
       <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Replace</Text>
-      <Text style={{fontSize:14,marginLeft:'5%'}}>Try healthier meats, like fish or poultry</Text>
+      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Try healthier meats, like fish or poultry</Text>
       <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%'}}>Try meat-alternative products</Text>
       <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Explore</Text>
       <Text style={{fontSize:14,marginLeft:'5%'}}>Explore new plant-based recipes</Text>
-      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%'}}>Find the vegetables that work for your pallete. Examples: marinated portobello mushrooms, grilled peppers, eggplant, sweet potato tacos, black bean burgers, pinto beans, chickpeas, lentils, edamame...</Text>
-      <Text style={{fontSize:12,marginTop:'1%',marginLeft:'5%',fontWeight:'bold'}}>(Talk to your doctor before changing diets)</Text>
+      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',width: Width / 1.2}}>Find the vegetables that work for your pallete. Examples: marinated portobello mushrooms, grilled peppers, eggplant, sweet potato tacos, black bean burgers, pinto beans, chickpeas, lentils, edamame...</Text>
+      <Text style={{fontSize:12,marginTop:'1%',marginLeft:'5%',fontWeight:'bold',width: Width / 1.2}}>(Talk to your doctor before changing diets)</Text>
       <View style={{width:Width,alignItems:'center',marginTop:'10%'}}>
         <Text style={{ color:'#8DC73F', fontSize:20,marginLeft:'25%',fontWeight:'bold', transform: [{ rotate: '-6.51deg' }]
           }}>
@@ -62,29 +64,35 @@ const What = () => {
         </View>  
       </View>
       <View>
-        <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Don’t Waste Meat</Text>
-        <View style={{flexDirection:'row',alignItems:'center',marginTop:'5%'}}>
-        <Image source={images.milk} resizeMode='contain' />
-        <Image source={images.steak_large} style={{marginLeft:'10%'}} resizeMode='contain' />
+        <View style={{width:Width,alignItems:'center'}}>
+        <Text style={{fontSize:20,marginTop:'5%',fontWeight:'bold'}}>Don’t Waste Meat</Text>
+        </View>
+        <View style={{flexDirection:'row',alignItems:'center',width:Width,marginTop:'5%'}}>
+          <View style={{width:Width/2,alignItems:'center'}}><Image source={images.milk} resizeMode='contain' /></View>
+          <View style={{width:Width/2,alignItems:'center'}}><Image source={images.steak_large} style={{marginLeft:'10%'}} resizeMode='contain' /></View>
       </View>
       <View style={{flexDirection:'row',alignItems:'center'}}>
-        <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>One liter milk =</Text>
-        <Text style={{fontSize:14,marginTop:'5%',marginLeft:'25%',fontWeight:'bold'}}>One 8 oz. steak =</Text>
+        <View style={{width:Width/2,alignItems:'center'}}><Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>One liter milk =</Text></View>
+        <View style={{width:Width/2,alignItems:'center'}}><Text style={{fontSize:14,marginTop:'5%',fontWeight:'bold'}}>One 8 oz. steak =</Text></View>
       </View>
-      <View style={{flexDirection:'row',alignItems:'center'}}>
-          <View style={{flexDirection:'row', alignItems: 'center',marginLeft:'5%'}}>
+      <View style={{flexDirection:'row',alignItems:'center',width:Width}}>
+        <View style={{width:Width/2,alignItems:'center'}}>
+          <View style={{flexDirection:'row'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
               style={{width: 20, height: 20}}
             />
             <Text style={{fontSize:14,fontWeight:'bold',color:'#00ADEF'}}>232 gallons</Text>
           </View>
-          <View style={{flexDirection:'row', alignItems: 'center',marginLeft:'25%'}}>
+        </View>
+        <View style={{width:Width/2,alignItems:'center'}}>
+          <View style={{flexDirection:'row'}}>
             <Image
               source={require('./../images/WaterDrop_BLUE.png')}
               style={{width: 20, height: 20}}
             />
             <Text style={{fontSize:14,fontWeight:'bold',color:'#00ADEF'}}>850 gallons</Text>
+          </View>
           </View>
       </View>
       </View>
@@ -103,6 +111,7 @@ const What = () => {
           <Text style={{fontSize:16,color:'white',fontWeight:'bold'}}>Meat and dairy products have a high environmental footprint. Rotting meat also produces more greenhouse gases than rotting fruit.</Text>
         </View>
       </View>
+      <View style={{height:Height/10}}/>
     </ScrollView>
   );
 };

@@ -34,26 +34,25 @@ const Grass = ({inputData, navigation}) => {
           style={{
             flexDirection: 'row',
             width: width,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '3%',
-            marginLeft:20,
+            marginTop: Height / 20 + 20,
+            marginRight:'10%',
+            marginLeft:'10%'
           }}>
-          <View style={{width: width/3}}>
+          <View style={{width: width/4,alignItems:'center'}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/graphic_large.png')}
               style={{width: 150, height: 150,}}
               resizeMode="contain"
             />
           </View>
-          <View style={{width: width*2/3, marginLeft:15, flexDirection: 'column'}}>
+          <View style={{width: width*2.2/4,marginLeft:'10%',flexDirection: 'column'}}>
             <Image
               source={require('./../images/Beef/Beef_Earth/treestump_small.png')}
-              style={{width: 50, height: 50,marginTop:-20,marginLeft:150}}
+              style={{width: 50, height: 50,marginTop:-20,marginLeft:130}}
               resizeMode="contain"
             />
             <View style={{alignItems:'center',marginTop:10,marginRight:30}}>
-              <Text style={{fontSize: 14}}>
+              <Text style={{fontSize: 16}}>
                 Livestock production uses 75% of earth’s agricultural land and
                 is a leading driver for global deforestation.
               </Text>
@@ -74,10 +73,12 @@ const Grass = ({inputData, navigation}) => {
             width: width,
             justifyContent: 'flex-start',
             alignItems: 'flex-start',
-            marginLeft:20,
+            marginTop: Height / 50,
+            marginRight:'10%',
+            marginLeft:'5%'
           }}>
           <Image
-            style={{width: 150, height: 150}}
+            style={{width: 170, height: 170}}
             source={images.car}
             resizeMode="contain"
           />
@@ -90,7 +91,7 @@ const Grass = ({inputData, navigation}) => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'flex-start',
-                marginTop:'-15%'
+                marginTop:'-15%',
               }}>
               <View
                 style={{
@@ -110,6 +111,7 @@ const Grass = ({inputData, navigation}) => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'flex-start',
+                marginTop:10
               }}>
               <View
                 style={{
@@ -127,15 +129,15 @@ const Grass = ({inputData, navigation}) => {
             </View>
           </View>
         </View>
-        <View style={{alignItems: 'center',width:width,marginTop:-10}}>
+        <View style={{alignItems: 'center',width:width,marginTop:10}}>
           <View style={{flexDirection: 'row', width: width / 1.5}}>
-            <Text>
+            <Text style={{fontSize:16}}>
               The pollution generated in producing a typical 8 ounce steak is
               equivalent to driving a small car for 29 milies.
             </Text>
           </View>
         </View>
-        <View style={{alignItems: 'center',marginTop:-15}}>
+        <View style={{alignItems: 'center'}}>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
           activeOpacity={1}
@@ -156,17 +158,18 @@ const Grass = ({inputData, navigation}) => {
           <Text style={{fontSize: 20, fontWeight:'bold'}}>What Can I do?</Text>
         </TouchableHighlight>
         </View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'6%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+          <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+          <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
+            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>
@@ -194,6 +197,7 @@ const Grass = ({inputData, navigation}) => {
             </TouchableHighlight>
           </View>
         </View>
+        <View style={{height:Height/10}}/>
       </ScrollView>
     </View>
   );

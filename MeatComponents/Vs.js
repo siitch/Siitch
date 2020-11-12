@@ -20,33 +20,40 @@ import {
 } from 'react-native';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
+const arr = [
+  {water: 1847, picture: images.beef_steak},
+  {water: 718, picture: images.pig_vs},
+  {water: 518, picture: images.chicken},
+  {water: 302, picture: images.tofu},
+];
 const Vs = ({navigation}) => {
   return (
-    <View style={{backgroundColor:'white'}}>
-      <ScrollView>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: width,
-            height: Height / 10,
-            backgroundColor: '#00ADEF',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text style={{
-            color: 'white',
-            width: Width / 3,
-            textAlign: 'center',
-            fontSize: 20,
-            fontWeight: 'bold',
-            marginLeft: Width / 20,
-          }}>
-            One Pound {'\n'} of this
+    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
+      <View
+        style={{
+          backgroundColor: '#00adef',
+          height: Height / 10,
+          width:Width,
+          alignItems: 'center',
+          flexDirection: 'row',
+          textAlign: 'center',
+        }}>
+        <View style={{flexDirection: 'row'}}>
+          <Text
+            style={{
+              color: 'white',
+              width: Width / 6,
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginLeft: Width / 10,
+            }}>
+            One of these
           </Text>
           <Text
             style={{
               color: 'white',
-              marginLeft: Width / 30,
+              marginLeft: Width / 10,
               textAlign: 'center',
               fontSize: 20,
             }}>
@@ -55,148 +62,44 @@ const Vs = ({navigation}) => {
           <Text
             style={{
               color: 'white',
-              marginLeft: Width / 20,
+              marginLeft: Width / 10,
               width: Width / 2,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
             }}>
-            This many gallons{'\n'} of water
+            This many gallons of water
           </Text>
         </View>
+      </View>
+      {arr.map((row, i) => (
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'center',
+            marginLeft: Width / 10,
             alignItems: 'center',
-          }}>
-          <Image source={images.beef_steak} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
-          <View style={{width: width / 3, alignItems: 'center'}}>
-            <Image
-              source={require('./../images/WaterDrop_BLUE.png')}
-              style={{width: 30, height: 30}}
-            />
-          </View>
-
-          <View style={{
-              flexDirection: 'row',
-              width: width / 3,
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#3AADFA',
-                lineHeight: 30,
-              }}>
-              1,847
-            </Text>
-            <Text style={{fontSize: 15, marginLeft: '2%', lineHeight: 37}}>
-              gal
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Image source={images.pig_vs} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
-          <View style={{width: width / 3, alignItems: 'center'}}>
-            <Image
-              source={require('./../images/WaterDrop_BLUE.png')}
-              style={{width: 30, height: 30}}
-            />
-          </View>
-          <View
+            marginTop: Height / 250,
+          }}
+          key={i}>
+          <Image
+            source={row.picture}
             style={{
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              width: width / 3,
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#3AADFA',
-                lineHeight: 30,
-              }}>
-              718
-            </Text>
-            <Text style={{fontSize: 15, marginLeft: '2%', lineHeight: 37}}>
-              gal
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Image source={images.chicken} style={{width:60,height:60,marginLeft: '10%'}} resizeMode='contain'/>
-          <View style={{width: width / 3, alignItems: 'center'}}>
+              width: Width / 5,
+              height: Height / 9,
+              marginRight: Width / 20,
+            }}
+            resizeMode='contain'
+          />
+          <View style={{alignItems:'center',flexDirection:'row'}}>
             <Image
-              source={require('./../images/WaterDrop_BLUE.png')}
-              style={{width: 30, height: 30}}
+              source={images.water}
+              style={{width: Width / 15, height: Height / 23, marginLeft:'30%'}}
+              resizeMode='contain'
             />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: width / 3,
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#3AADFA',
-                lineHeight: 30,
-              }}>
-              518
-            </Text>
-            <Text style={{fontSize: 15, marginLeft: '2%', lineHeight: 37}}>
-              gal
-            </Text>
+            <Text style={{color: '#00adef',fontWeight:'bold',fontSize:20}}>{row.water} gallons</Text>
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Image  source={images.tofu} style={{width:60,height:60,marginTop: '2%',marginLeft: '10%'}} resizeMode='contain'/>
-          <View style={{width: width / 3, alignItems: 'center'}}>
-            <Image
-              source={require('./../images/WaterDrop_BLUE.png')}
-              style={{width: 30, height: 30}}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: width / 3,
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#3AADFA',
-                lineHeight: 30,
-              }}>
-              302
-            </Text>
-            <Text style={{fontSize: 15, marginLeft: '2%', lineHeight: 37}}>
-              gal
-            </Text>
-          </View>
-        </View>
+      ))}
         <View style={{alignItems: 'center'}}>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
@@ -211,7 +114,7 @@ const Vs = ({navigation}) => {
             width: Width*0.9,
             textAlign: 'center',
             fontSize: 20,
-            marginTop:'10%',
+            marginTop:'5%',
             alignItems:'center',
             justifyContent:'center'
           }}>
@@ -219,16 +122,17 @@ const Vs = ({navigation}) => {
         </TouchableHighlight>
         </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
-          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+          <Text style={{fontSize:20,fontWeight:'bold',marginTop:5}}>Doing good</Text>
+          <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+          <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
+            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>
@@ -256,8 +160,8 @@ const Vs = ({navigation}) => {
             </TouchableHighlight>
           </View>
         </View>
+        <View style={{height:Height/10}}/>
       </ScrollView>
-    </View>
   );
 };
 export default Vs;

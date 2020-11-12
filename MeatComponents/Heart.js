@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 import {images} from '../ImageURL';
 import What from './What';
-import {ArrowIconCol} from './ArrowIconCol';
 import {ImageIcon} from '../ImageIcon';
 import {
   SafeAreaView,
@@ -25,31 +24,23 @@ const Heart = ({navigation, inputData}) => {
   return (
     <ScrollView style={{backgroundColor:'white'}}>
     <View style={{paddingTop: Height / 20,width:Width}}>
-      <View style={{flexDirection: 'row',alignItems:'center',marginLeft:20}}>
-        <Text style={{width: Width / 1.3,width:Width*3/4}}>
+      <View style={{flexDirection: 'row',alignItems:'center',marginLeft:30}}>
+        <Text style={{width:Width*1.6/3,fontSize:16}}>
           Reducing red meat intake can have numerous health benefits, including a lower risk of developing type 2 diabetes, cardiovascular disease, and certain cancers.
         </Text>
-        <View style={{width:Width/4,alignItems:'center'}}>
-        <Image source={images.heart_small} style={{marginLeft:-30,marginTop:-15}} resizeMode='contain'/>
+        <View style={{width:Width*1.1/3,alignItems:'center',marginLeft:5}}>
+        <Image source={images.heart_small} style={{width:110,height:110}} resizeMode='contain'/>
         </View>
       </View>
-      <Text style={{marginLeft:'40%',marginTop:'2%',fontSize:12}}>- News Medical Life Sciences</Text>
-      <View
-        style={{
-          width: Width,
-          height: 2,
-          backgroundColor: '#EF7A6A',
-          marginTop: '5%',
-        }}
-      />
-      <View style={{flexDirection: 'row'}}>
+      <Text style={{marginLeft:'10%',marginTop:'2%',fontSize:12}}>- News Medical Life Sciences</Text>
+      <View style={{flexDirection: 'row',marginTop:Height/20}}>
         <View
           style={{
             flexDirection: 'column',
             width: Width / 3,
             alignItems: 'center',
           }}>
-          <ArrowIconCol h={90} />
+          <ImageIcon category='healt' image={images.arrow_graph} />
           <Text style={{alignItems: 'center',fontSize:16}}>Type 2{'\n'} Diabetes</Text>
         </View>
         <View
@@ -58,7 +49,7 @@ const Heart = ({navigation, inputData}) => {
             width: Width / 3,
             alignItems: 'center',
           }}>
-          <ArrowIconCol h={150} />
+          <ImageIcon category='healt' image={images.arrow_graph} />
           <Text style={{alignItems: 'center', fontSize:16, marginLeft: '10%'}}>
             Cardiovascular{'\n'}Disease
           </Text>
@@ -69,7 +60,7 @@ const Heart = ({navigation, inputData}) => {
             width: Width / 3,
             alignItems: 'center',
           }}>
-          <ArrowIconCol h={90} />
+          <ImageIcon category='healt' image={images.arrow_graph} />
           <Text style={{alignItems: 'center',fontSize:16}}>Certain{'\n'}Cancers</Text>
         </View>
       </View>
@@ -88,7 +79,7 @@ const Heart = ({navigation, inputData}) => {
             width: Width*0.9,
             textAlign: 'center',
             fontSize: 20,
-            marginTop:'10%',
+            marginTop:'15%',
             alignItems:'center',
             justifyContent:'center'
           }}>
@@ -97,15 +88,16 @@ const Heart = ({navigation, inputData}) => {
         </View>
       <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
         <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-        <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+        <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+        <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
       </View>
-      <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+      <View  style={{flexDirection:'column',alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
+            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>
@@ -134,6 +126,7 @@ const Heart = ({navigation, inputData}) => {
           </View>
         </View>
     </View>
+    <View style={{height:Height/10}}/>
   </ScrollView>
   );
 };
