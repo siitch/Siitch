@@ -159,8 +159,8 @@ export const RankingPage = ({category, id}) => {
                     }
 
                     <View>
-                        <View style={{ marginLeft: 10, marginRight: 10, marginTop: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
-                        <Text style={{fontSize: 16, marginTop: 10, marginLeft: 10, marginRight: 10}}>
+                        <View style={{ marginLeft: 20, marginRight: 20, marginTop: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
+                        <Text style={{fontSize: 16, paddingTop: 10, marginTop: 10, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
                             Water awareness is key, but many factors determine the eco-cost of a product.&nbsp;
                         </Text>
 
@@ -196,16 +196,15 @@ export const RankingPage = ({category, id}) => {
                                 }
                             }
                         >
-                            <Text style= {{ color:'blue', marginTop: 20, marginBottom: 20, marginLeft: 10, paddingLeft: DeviceWidth*0.37 }}>Learn More</Text>
+                            <Text style= {{ color:'blue', marginTop: 20, marginBottom: 20, marginLeft: 20, marginRight: 20, width: DeviceWidth, textAlign: 'center' }}>Learn More</Text>
                         </TouchableOpacity>
+                        <Text style={{fontSize: 16, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
+                            Don't see an item you're looking for? We only list quantifiable
+                            items from reputable studies. We'll add more as we find them.
+                        </Text>
+                        <View style={{ marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
                     </View>
-
-                    <Text style={{fontSize: 16, marginLeft: 10, marginRight: 10, marginBottom: 10}}>
-                        Don't see an item you're looking for? We only list quantifiable
-                        items from reputable studies. We'll add more as we find them.
-                    </Text>
                 </View>
-                <View style={{ marginLeft: 10, marginRight: 10, marginTop: 10, marginBottom: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
             </ScrollView>
         </View>
     );
