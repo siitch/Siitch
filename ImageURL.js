@@ -25,6 +25,7 @@ export const images = {
   recycle_select: require('./images/Navigation_Icons/Recycle_icon_brown.png'),
   vs: require('./images/Navigation_Icons/VS_BW_2x.png'),
   vs_select: require('./images/Navigation_Icons/VS_blue_3x.png'),
+  down_arrow: require('./images/Navigation_Icons/down_arrow.png'),
 
   //Beef VS page
   pig_vs: require('./images/Meats/pig_small.png'),
@@ -42,6 +43,7 @@ export const images = {
   clock: require('./images/clock.png'),
   // Beef Heart page
   heart_small: require('./images/heart_small.png'),
+  arrow_graph: require('./images/Beef/green_chart.png'),
   //Beef Brands
   impossible: require('./images/Beef/Company_logos/impossible_burger_1x.png'),
   beyond_meat: require('./images/Beef/Company_logos/beyond_meat_1x.png'),

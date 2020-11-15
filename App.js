@@ -39,6 +39,7 @@ import {CalculateStackScreen} from './Calculate/Calculate';
 // import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
 import Profiles from './ImageDB';
+import { color } from 'react-native-reanimated';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 

@@ -23,7 +23,7 @@ const Width = Dimensions.get('window').width;
 const Recycle = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor:'white'}}>
-    <View style={{flexDirection: 'column', flex: 1}}>
+    <View style={{flexDirection: 'column', flex: 1,marginTop: Height / 20,width:Width}}>
       <View
         style={{
           paddingTop: 10,
@@ -36,12 +36,12 @@ const Recycle = ({navigation}) => {
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 11,
+            width: Width / 3,
+            height: Height / 10,
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 16}}>
+        <Text style={{width: 100, textAlign: 'center', fontSize: 16}}>
           Time to {'\n'}grow
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -66,13 +66,13 @@ const Recycle = ({navigation}) => {
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 11,
+            width: Width / 3,
+            height: Height / 10,
             marginTop:'10%',
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 16,marginTop:'10%',}}>
+        <Text style={{width: 100, textAlign: 'center', fontSize: 16,marginTop:'10%',}}>
           Compostable?
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -99,13 +99,13 @@ const Recycle = ({navigation}) => {
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 11,
+            width: Width / 3,
+            height: Height / 10,
             marginTop:'10%',
           }}
           resizeMode='contain'
         />
-        <Text style={{width: 130, textAlign: 'center', fontSize: 16, marginTop:'10%',}}>
+        <Text style={{width: 100, textAlign: 'center', fontSize: 16, marginTop:'10%',}}>
           Time to{'\n'}decompose
         </Text>
         <View style={{height: '100%', width: 1, backgroundColor: 'black'}} />
@@ -144,15 +144,16 @@ const Recycle = ({navigation}) => {
         </View>
       <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+          <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+          <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:170,height:170}}></Image>
+            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>
@@ -181,6 +182,7 @@ const Recycle = ({navigation}) => {
           </View>
         </View>
     </View>
+    <View style={{height:Height/10}}/>
   </ScrollView>
   );
 };

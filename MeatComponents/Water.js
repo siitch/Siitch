@@ -3,6 +3,7 @@ import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
 import {ImageIcon} from '../ImageIcon';
+import { styles } from '../Ranking/Styles';
 
 import {
   SafeAreaView,
@@ -17,16 +18,20 @@ import {
   Pressable,
   TouchableHighlight,
   Alert,
+  Modal,
 } from 'react-native';
 import { images } from '../ImageURL';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 const Water = ({inputData, navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisiblec, setModalVisiblec] = useState(false);
+  const [modalVisiblei, setModalVisiblei] = useState(false);
   return (
     <View style={{backgroundColor:'white'}}>
       <ScrollView>
-        <View style={{alignItems: 'center', marginTop: '2%'}}>
+        <View style={{alignItems: 'center', marginTop: Height / 20}}>
           <Text style={{fontWeight: 'bold', fontSize: 20}}>One Pound Beef</Text>
         </View>
         <View
@@ -71,17 +76,17 @@ const Water = ({inputData, navigation}) => {
               height: 100,
               borderRadius: 20,
               backgroundColor: '#3AADFA',
-              justifyContent: 'center',
-              alignItems: 'center',
+              alignItems:'center',
+              justifyContent:'center',
               marginTop:'-5%'
             }}>
             <Image
-              source={require('./../images/Beef/BeefPage/2000gal_truck.png')}
-              style={{width: 120, height: 120, alignItems: 'center'}}
+              source={require('./../images/Beef/BeefPage/beef_truck_white_bg_1x.png')}
+              style={{width: 110, height: 110,marginTop:2}}
               resizeMode='contain'
             />
-            <Text style={{fontSize: 18, marginLeft: '5%', color: 'white'}}>
-              Context {'\n'} 2,000 gallon tank
+            <Text style={{fontSize: 20, marginLeft: '5%', color: 'white'}}>
+              Context {'\n'} <Text style={{fontWeight:'bold'}}>2,000</Text> gallon tank
             </Text>
           </View>
         </View>
@@ -96,7 +101,7 @@ const Water = ({inputData, navigation}) => {
             ?
           </Text>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{alignItems: 'center',marginTop:10}}>
           <View style={{width: 250}}>
             <Text style={{fontSize: 16}}>
               The food cattle eats accounts for 98% of beef's water footprint.
@@ -169,12 +174,31 @@ const Water = ({inputData, navigation}) => {
               backgroundColor: '#6dbd64',
               alignItems: 'center',
             }}>
+            <Modal animationType="slide"
+                   transparent={true}
+                   visible={modalVisible}
+              >
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                  <View style={styles.modalView}>
+                    <Text style={{ marginTop: 10,fontSize:22,fontWeight:'bold', textAlign: "center" }}>Rain</Text>
+                    <Text style={{ marginBottom: 15,marginTop: 15, textAlign: "left" }}>
+                        Rain water (Green water): The amount of rainwater required to make an item
+                    </Text>
+                        <TouchableHighlight
+                                style={{ ...styles.openButton, backgroundColor: "#70BF41" }}
+                                onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
+                        </TouchableHighlight>
+                   </View>
+                </View>
+              </Modal>
             <TouchableOpacity
-              onPress={() =>
-                Alert.alert(
-                  'Rain',
-                  'Rain water (Green water): The amount of rainwater required to make an item.',
-                )
+              onPress={() => {
+                setModalVisible(true);
+              }
               }>
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Rain</Text>
@@ -197,6 +221,7 @@ const Water = ({inputData, navigation}) => {
               </View>
             </TouchableOpacity>
           </View>
+          
           <View
             style={{
               width: width / 4,
@@ -205,12 +230,31 @@ const Water = ({inputData, navigation}) => {
               backgroundColor: '#3AADFA',
               alignItems: 'center',
             }}>
+              <Modal animationType="slide"
+                   transparent={true}
+                   visible={modalVisiblei}
+              >
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                  <View style={styles.modalView}>
+                    <Text style={{ marginTop: 10,fontSize:22,fontWeight:'bold', textAlign: "center" }}>Irrigation</Text>
+                    <Text style={{ marginBottom: 15,marginTop: 15, textAlign: "left" }}>
+                    Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item.
+                    </Text>
+                        <TouchableHighlight
+                                style={{ ...styles.openButton, backgroundColor: "#70BF41" }}
+                                onPress={() => {
+                                    setModalVisiblei(!modalVisiblei);
+                                }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
+                        </TouchableHighlight>
+                   </View>
+                </View>
+              </Modal>
             <TouchableOpacity
-              onPress={() =>
-                Alert.alert(
-                  'Irrigation',
-                  'Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item.',
-                )
+              onPress={() => {
+                setModalVisiblei(true);
+              }
               }>
               <Text style={{fontSize: 20, color: 'white'}}>
                 {'\n'}Irrigation
@@ -241,12 +285,31 @@ const Water = ({inputData, navigation}) => {
               backgroundColor: '#bfbfbf',
               alignItems: 'center',
             }}>
+            <Modal animationType="slide"
+                   transparent={true}
+                   visible={modalVisiblec}
+              >
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                  <View style={styles.modalView}>
+                    <Text style={{ marginTop: 10,fontSize:22,fontWeight:'bold', textAlign: "center" }}>Cleaning</Text>
+                    <Text style={{ marginBottom: 15,marginTop: 15, textAlign: "left" }}>
+                    Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards. Definitions: www.watercalculator.org
+                    </Text>
+                        <TouchableHighlight
+                                style={{ ...styles.openButton, backgroundColor: "#70BF41" }}
+                                onPress={() => {
+                                    setModalVisiblec(!modalVisiblec);
+                                }}
+                                >
+                                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
+                        </TouchableHighlight>
+                   </View>
+                </View>
+              </Modal>
             <TouchableOpacity
-              onPress={() =>
-                Alert.alert(
-                  'Cleaning',
-                  'Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards. Definitions: www.watercalculator.org',
-                )
+              onPress={() => {
+                setModalVisiblec(true);
+              }
               }>
               <Text style={{fontSize: 20, color: 'white'}}>{'\n'}Cleaning</Text>
               <View style={{alignItems: 'center'}}>
@@ -291,15 +354,16 @@ const Water = ({inputData, navigation}) => {
         </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-          <Text style={{fontSize:16}}>Ranked in no particular order.</Text>
+          <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+          <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
+        <View  style={{flexDirection:'column',alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
             <ImageIcon category='brand' image={images.impossible}></ImageIcon>
             </TouchableHighlight>
             <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:150,height:150}}></Image>
+            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
             </TouchableHighlight>
           </View>
           <View style={{flexDirection:'row',marginTop:'5%'}}>
@@ -327,6 +391,7 @@ const Water = ({inputData, navigation}) => {
             </TouchableHighlight>
           </View>
         </View>
+        <View style={{height:Height/10}}/>
       </ScrollView>
     </View>
   );
