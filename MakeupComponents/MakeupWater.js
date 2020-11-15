@@ -28,7 +28,7 @@ const MakeupWater = ({inputData, navigation}) => {
       <ScrollView
         style={{marginTop: Height / 20}}
         contentContainerStyle={{alignItems: 'center'}}>
-        <View>
+        <View style={{alignItems: 'center'}}>
           <Text
             style={{
               width: Width / 1.2,
@@ -40,7 +40,7 @@ const MakeupWater = ({inputData, navigation}) => {
           </Text>
           <Image
             source={images.makeup}
-            style={{width: Width / 1.2, height: Height / 3}}
+            style={{width: Width / 1.5, height: Height / 4}}
           />
           <View
             style={{
