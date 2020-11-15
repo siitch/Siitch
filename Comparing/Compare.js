@@ -204,12 +204,7 @@ export default class Compare extends Component {
             }}>
             <Text style={styles.title}>Compare</Text>
             <Text
-              style={{
-                alignItems: 'center',
-                marginTop: 20,
-                marginBottom: '5%',
-                fontSize: 20,
-              }}>
+              style={styles.selectItemText}>
               Select Item 1
             </Text>
             <View style={styles.container}>
@@ -245,12 +240,7 @@ export default class Compare extends Component {
               </View>
             </View>
             <Text
-              style={{
-                alignItems: 'center',
-                marginTop: 20,
-                marginBottom: '5%',
-                fontSize: 20,
-              }}>
+              style={styles.selectItemText}>
               Select Item 2
             </Text>
             <View
@@ -280,12 +270,7 @@ export default class Compare extends Component {
             {this.state.isProduct3 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 3
                 </Text>
                 <View
@@ -331,12 +316,7 @@ export default class Compare extends Component {
             {this.state.isProduct4 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 4
                 </Text>
                 <View
@@ -382,12 +362,7 @@ export default class Compare extends Component {
             {this.state.isProduct5 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 5
                 </Text>
                 <View
@@ -433,12 +408,7 @@ export default class Compare extends Component {
             {this.state.isProduct6 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 6
                 </Text>
                 <View
