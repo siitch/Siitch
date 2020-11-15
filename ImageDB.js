@@ -36,12 +36,11 @@ const Profiles = {
     Olives: require('./images/Image_new/Fruits/olives.png'),
     Dates: require('./images/Image_new/Fruits/dates.png'),
     Plums: require('./images/Image_new/Fruits/plums.png'),
-    Apricots: require('./images/Image_new/Fruits/apricot.png'),
     Guavas: require('./images/Image_new/Fruits/guava.png'),
     Mangoes: require('./images/Image_new/Fruits/mango.png'),
     Cherries: require('./images/Image_new/Fruits/cherries.png'),
     Papayas: require('./images/Image_new/Fruits/papaya.png'),
-    'Apricots fresh': require('./images/Image_new/Fruits/apricot.png'),
+    Apricots: require('./images/Image_new/Fruits/apricot.png'),
     Coconut: require('./images/Image_new/Fruits/coconut.png'),
     Avocado: require('./images/Image_new/Fruits/avocado.png'),
     Pears: require('./images/Image_new/Fruits/pear.png'),
@@ -183,7 +182,7 @@ const Profiles = {
     'Cocunut oil': require('./images/Image_new/Oils/coconut_oil.png'),
     'Canola oil': require('./images/Image_new/Oils/rapeseed_oil.png'),
     'Corn oil': require('./images/Image_new/Oils/corn_oil.png'),
-    Wine: require('./images/Image_new/Drinks_Alcoholic/Larger_units/wine_gallon.png'),
+    'Wine gallon': require('./images/Image_new/Drinks_Alcoholic/Larger_units/wine_gallon.png'),
     Whiskey: require('./images/Image_new/Drinks_Alcoholic/Larger_units/whiskey_bottle.png'),
     'Beer gallon': require('./images/Image_new/Drinks_Alcoholic/Larger_units/beer_gallon.png'),
     'Wine bottle': require('./images/Image_new/Drinks_Alcoholic/Larger_units/wine_bottle.png'),
@@ -215,7 +214,7 @@ const Profiles = {
     Tea: require('./images/Image_new/Drinks_Non_Alcoholic/tea.png'),
     'Tea 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/tea.png'),
     'Gin one & half oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/gin_glass.png'),
-    'Vodka one & half ounce': require('./images/Image_new/Drinks_Alcoholic/Single_units/vodka_glass.png'),
+    'Vodka one & half oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/vodka_glass.png'),
   };
   export default Profiles;
   
