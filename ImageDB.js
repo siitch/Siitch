@@ -202,7 +202,7 @@ const Profiles = {
     'Grape juice': require('./images/Image_new/Drinks_Non_Alcoholic/grape_juice.png'),
     'Grape juice 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/grape_juice.png'),
     'Wine 5 oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/wine_glass.png'),
-    'Coffee beans': require('./images/Image_new/Nuts_&_Beans/coffee_beans.png'),
+    'Coffee beans': require('./images/Image_new/Nuts_&_Beans/ALT/coffee_beans.png'),
     'Coffee 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/coffee.png'),
     'Grapefruit juice': require('./images/Image_new/Drinks_Non_Alcoholic/grapefruit_juice.png'),
     'Grapefruit juice 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/grape_juice.png'),
