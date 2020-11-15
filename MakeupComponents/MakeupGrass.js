@@ -22,7 +22,9 @@ const Height = Dimensions.get('window').height;
 
 const MakeupGrass = ({inputData, navigation}) => {
   return (
-    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
+    <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
+      contentContainerStyle={{alignItems: 'center'}}>
       <View
         style={{
           width: Width,
@@ -63,14 +65,16 @@ const MakeupGrass = ({inputData, navigation}) => {
         underlayColor="#8DC73F"
         style={{
           backgroundColor: '#8DC73F',
-          width: Width - Width / 5,
-          height: Height / 20,
-          alignItems: 'center',
-          borderRadius: 10,
-          marginLeft: Width / 10,
-          marginRight: Width / 10,
-          justifyContent: 'center',
+          height: 50,
+          borderWidth: 2,
+          borderColor: '#8DC73F',
+          borderRadius: 20,
+          width: Width * 0.9,
+          textAlign: 'center',
+          fontSize: 20,
           marginTop: '10%',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>What Can I do?</Text>
       </TouchableHighlight>

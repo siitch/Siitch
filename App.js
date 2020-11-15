@@ -175,11 +175,8 @@ const App = () => {
                   resizeMode="contain"
                 />
               ) : (
-                <Image
-                  source={Profiles.vs_compare}
-                  resizeMode="contain"
-                />
-            ),
+                <Image source={Profiles.vs_compare} resizeMode="contain" />
+              ),
           }}
         />
       </Tab.Navigator>
@@ -245,7 +242,10 @@ const App = () => {
     if (detail) {
       return (
         <Tab.Navigator
-          tabBarOptions={{style: {height: DeviceHeight / 8}, showLabel: false}}>
+          tabBarOptions={{
+            style: {height: DeviceHeight / 10},
+            showLabel: false,
+          }}>
           <Tab.Screen
             name="Water"
             component={WaterPage}
@@ -254,13 +254,13 @@ const App = () => {
                 focused ? (
                   <Image
                     source={images.water_drop_click}
-                    style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.water_drop}
-                    style={{width: DeviceWidth / 8, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ),
@@ -274,13 +274,13 @@ const App = () => {
                 focused ? (
                   <Image
                     source={images.vs_select}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.vs}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ),
@@ -294,13 +294,13 @@ const App = () => {
                 focused ? (
                   <Image
                     source={images.grass_select}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.grass}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ),
@@ -314,13 +314,13 @@ const App = () => {
                 focused ? (
                   <Image
                     source={images.heart_select}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.heart}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ),
@@ -334,13 +334,13 @@ const App = () => {
                 focused ? (
                   <Image
                     source={images.recycle_select}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ) : (
                   <Image
                     source={images.recycle}
-                    style={{width: DeviceWidth / 7, height: DeviceHeight / 15}}
+                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
                     resizeMode="contain"
                   />
                 ),
@@ -369,7 +369,7 @@ const App = () => {
             headerRight: () => (
               <MaterialCommunityIcons
                 name="home"
-                size={35}
+                size={25}
                 color={'grey'}
                 onPress={() => navigation.navigate('Home')}
               />
