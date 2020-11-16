@@ -25,7 +25,6 @@ const MakeupWater = ({inputData, navigation}) => {
   const [expand, setExpand] = useState(false);
   return (
     <ScrollView
-      style={{marginTop: Height / 20}}
       contentContainerStyle={{
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
@@ -37,12 +36,13 @@ const MakeupWater = ({inputData, navigation}) => {
             textAlign: 'center',
             fontSize: 25,
             fontWeight: 'bold',
+            marginTop: Height / 20,
           }}>
           How Green is Your Makeup: {'\n'}Ingredients & Packaging?
         </Text>
         <Image
           source={images.makeup}
-          style={{width: Width / 1.5, height: Height / 4}}
+          style={{width: Width / 1.5, height: Height / 5}}
         />
         <View
           style={{
