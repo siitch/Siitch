@@ -103,8 +103,8 @@ const JeansWater = ({inputData, navigation}) => {
             style={{
               flexDirection: 'row',
               marginTop: 20,
-              marginLeft: 10,
-              marginRight: 10,
+              marginLeft: 15,
+              marginRight: 15,
             }}>
             <View>
               <Text
@@ -112,12 +112,12 @@ const JeansWater = ({inputData, navigation}) => {
                   fontWeight: 'bold',
                   fontSize: 24,
                   color: 'white',
-                  marginLeft: 10,
+                  marginLeft: 15,
                 }}>
                 2,247 gal.
               </Text>
             </View>
-            <View style={{flexDirection: 'column', marginLeft: 10}}>
+            <View style={{flexDirection: 'column', marginLeft: 15}}>
               <Text style={{fontSize: 20, color: 'white'}}>
                 to grow the cotton
               </Text>
@@ -127,13 +127,13 @@ const JeansWater = ({inputData, navigation}) => {
             </View>
             <Image
               source={images.rain}
-              style={{resizeMode: 'cover', marginLeft: 10, marginTop: -10}}
+              style={{resizeMode: 'cover', marginLeft: 15, marginTop: -10}}
             />
           </View>
           <View style={{flexDirection: 'row'}}>
             <Image
               source={images.blue_plus}
-              style={{resizeMode: 'cover', marginLeft: 10, marginTop: -30}}
+              style={{resizeMode: 'cover', marginLeft: 15, marginTop: -30}}
             />
             <Image
               source={images.cotton}
@@ -149,7 +149,7 @@ const JeansWater = ({inputData, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               marginTop: 15,
             }}>
             <Text
@@ -175,7 +175,7 @@ const JeansWater = ({inputData, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               marginTop: 5,
             }}>
             <Text
@@ -201,7 +201,7 @@ const JeansWater = ({inputData, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               marginTop: 5,
               alignItems: 'center',
             }}>
@@ -228,7 +228,7 @@ const JeansWater = ({inputData, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               marginTop: 5,
               alignItems: 'center',
             }}>
@@ -255,7 +255,7 @@ const JeansWater = ({inputData, navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               marginTop: 5,
               alignItems: 'center',
             }}>
@@ -285,13 +285,13 @@ const JeansWater = ({inputData, navigation}) => {
               height: 1,
               backgroundColor: 'white',
               marginTop: 15,
-              marginLeft: 10,
+              marginLeft: 15,
             }}
           />
           <View
             style={{
               flexDirection: 'row',
-              marginLeft: 10,
+              marginLeft: 15,
               alignItems: 'center',
             }}>
             <Text

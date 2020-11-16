@@ -78,6 +78,7 @@ const JeansGrass = ({inputData, navigation}) => {
               color: 'white',
               width: Width / 1.4,
               fontSize: 20,
+              marginLeft: 5,
             }}>
             That outflow often pours into the rivers in countries like India &
             China, poisoning the soils & flowing into our oceans
