@@ -14,11 +14,13 @@ import {
   Pressable,
   TouchableHighlight,
   Image,
+  Dimensions,
 } from 'react-native';
+const Height = Dimensions.get('screen').height;
 
 const NormalSearch = ({name, inputData}) => {
   return (
-    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
+    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
       <View style={{alignItems: 'center'}}>
         <Image source={Profiles[name]} />
         <Text style={{fontSize: 25, fontWeight: 'bold'}}>{name}</Text>
@@ -32,6 +34,7 @@ const NormalSearch = ({name, inputData}) => {
           ) : null,
         )}
       </View>
+      <View style={{height: Height / 10}} />
     </ScrollView>
   );
 };
