@@ -21,22 +21,24 @@ const Width = Dimensions.get('window').width;
 
 const WhatJeans = () => {
   return (
-    <ScrollView style={{backgroundColor:'#FFFFFF'}}>
+    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
       <View style={{alignItems: 'center'}}>
-        <Text style={{marginTop: 20, fontSize: 24}}>What Can I do?</Text>
+        <Text style={{marginTop: Height / 20, fontSize: 24}}>
+          What Can I do?
+        </Text>
       </View>
-      <View style={{marginLeft: 15}}>
+      <View style={{marginLeft: 15, marginRight: 15}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Reduce</Text>
         <Text style={{textAlign: 'left'}}>
           The only way to truly make a meaningful impact is to consume less.
           Comptemplate if you really need that new pair of jeans.
         </Text>
       </View>
-      <View style={{marginLeft: 15, marginTop: 15}}>
+      <View style={{marginLeft: 15, marginTop: 15, marginRight: 15}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Repair</Text>
         <Text>Mend worn jeans before replacing them to extend their life.</Text>
       </View>
-      <View style={{marginLeft: 15, marginTop: 15}}>
+      <View style={{marginLeft: 15, marginTop: 15, marginRight: 15}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Repurpose</Text>
         <Text>
           Use jeans as rags instead of throwing them out, or better yet,
@@ -116,7 +118,7 @@ const WhatJeans = () => {
         </View>
       </View>
       {/* end of blue frame */}
-      <View style={{marginLeft: 15, marginTop: 40}}>
+      <View style={{marginLeft: 15, marginTop: 40, marginRight: 15}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Recycle</Text>
         <Text>Recycle them:</Text>
         <Text
@@ -182,18 +184,21 @@ const WhatJeans = () => {
         style={{
           marginTop: Height / 10,
           marginLeft: 15,
+          marginRight: 15,
         }}>
         <Text style={{fontSize: 25, fontWeight: 'bold'}}>Ask</Text>
         <Text>
           Ask your favorite brands to do better, Email them or use social media.
         </Text>
-        <Text style={{fontSize: 25, fontWeight: 'bold',marginTop:'5%'}}>Avoid</Text>
+        <Text style={{fontSize: 25, fontWeight: 'bold', marginTop: '5%'}}>
+          Avoid
+        </Text>
         <Text>
           Avoid jeans made with regular cotton, Organic cotton is grown without
           harmful pesticides leaving the soil healthier. Other Benefits of
           growing organic v.s regular cotton:{' '}
         </Text>
-        <View style={{flexDirection: 'row',marginTop:'5%'}}>
+        <View style={{flexDirection: 'row', marginTop: '5%'}}>
           <Text>--</Text>
           <Text>45% reduction in CO2</Text>
         </View>
@@ -214,11 +219,12 @@ const WhatJeans = () => {
         style={{
           flexDirection: 'row',
           marginLeft: (3 * Width) / 4,
-          marginTop:'3%'
+          marginTop: '3%',
         }}>
         <Text style={{fontSize: 10}}>-</Text>
         <Text style={{fontSize: 10}}>Soil Associtation org, Patagonia</Text>
       </View>
+      <View style={{height: Height / 10}} />
     </ScrollView>
   );
 };

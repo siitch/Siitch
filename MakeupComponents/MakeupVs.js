@@ -109,6 +109,7 @@ const MakeupVs = ({inputData, navigation}) => {
             Sustainable Jungle.{' '}
           </Text>
         </Text>
+        <Image source={images.down_arrow} style={{width: 60, height: 60}} />
       </View>
       <View style={{flexDirection: 'column', alignItems: 'center'}}>
         <View style={{flexDirection: 'row'}}>
@@ -317,6 +318,7 @@ const MakeupVs = ({inputData, navigation}) => {
           <Image source={images.neek_rate} />
         </View>
       </View>
+      <View style={{height: Height / 10}} />
     </ScrollView>
   );
 };
