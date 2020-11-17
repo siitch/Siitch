@@ -127,7 +127,11 @@ const JeansWater = ({inputData, navigation}) => {
             </View>
             <Image
               source={images.rain}
-              style={{resizeMode: 'cover', marginLeft: 15, marginTop: -10}}
+              style={{
+                resizeMode: 'cover',
+                marginLeft: 15,
+                marginTop: -10,
+              }}
             />
           </View>
           <View style={{flexDirection: 'row'}}>
