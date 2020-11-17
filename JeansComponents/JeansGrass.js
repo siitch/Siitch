@@ -21,9 +21,6 @@ import {images} from '../ImageURL';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const JeansGrass = ({inputData, navigation}) => {
-  useEffect(() => {
-    console.log(Height);
-  }, []);
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
