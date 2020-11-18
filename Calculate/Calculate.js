@@ -77,15 +77,17 @@ function CalculateScreen() {
     .once('value', data => { 
         fetchedData = data.val();
 
-        id = fetchedData[item]["Category"];
+        if(item in fetchedData) {
+          id = fetchedData[item]["Category"];
+        }
 
-        if(item in fetchedData && fetchedData[item][waterParameter(id)]) {
+        if(!(item in fetchedData) || !fetchedData[item][waterParameter(id)]) {
+          setError({ status: true, message: 'This item does not exist' });
+        }
+        else if(item in fetchedData && fetchedData[item][waterParameter(id)]) {
           setIndividualTotal(fetchedData[item][waterParameter(id)]); 
           setError({ status: false, message: '' });
           setComputed(true);
-        }
-        else {
-          setError({ status: true, message: 'This item does not exist' });
         }
     });
   }
@@ -295,7 +297,7 @@ function CalculateScreen() {
 
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: selectOpened ? 160 : 20, marginBottom: 20}}>
         <View>
-          <TouchableOpacity onPress={() => {computed ? clearElements() : calculate(item, frequency)}} style={{padding: 15, borderRadius: 30, backgroundColor: '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity onPress={() => {computed ? clearElements() : calculate(item, frequency)}} style={{padding: 15, borderRadius: 30, backgroundColor: computed ? "orange" : '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
             <View style={{alignItems: 'center'}}>
               <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>{computed ? "Clear" : "Calculate"}</Text>
             </View>
