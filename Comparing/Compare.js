@@ -83,27 +83,27 @@ export default class Compare extends Component {
     getdata();
   }
   _setProduct1(item) {
-    this.setState({product1: item.name});
+    this.setState({product1: item});
   }
 
   _setProduct2(item) {
-    this.setState({product2: item.name});
+    this.setState({product2: item});
   }
 
   _setProduct3(item) {
-    this.setState({product3: item.name});
+    this.setState({product3: item});
   }
 
   _setProduct4(item) {
-    this.setState({product4: item.name});
+    this.setState({product4: item});
   }
 
   _setProduct5(item) {
-    this.setState({product5: item.name});
+    this.setState({product5: item});
   }
 
   _setProduct6(item) {
-    this.setState({product6: item.name});
+    this.setState({product6: item});
   }
 
   _addProduct(boolValue) {
@@ -140,12 +140,12 @@ export default class Compare extends Component {
 
   checkEmpty() {
     return (
-      this.state.product1 == '' ||
-      this.state.product2 == '' ||
-      (this.state.isProduct3 && this.state.product3 == '') ||
-      (this.state.isProduct4 && this.state.product4 == '') ||
-      (this.state.isProduct5 && this.state.product5 == '') ||
-      (this.state.isProduct6 && this.state.product6 == '')
+      this.state.product1 == "" || 
+      this.state.product2 == "" || 
+      (this.state.isProduct3 && this.state.product3 == "" ) ||
+      (this.state.isProduct4 && this.state.product4 == "" ) ||
+      (this.state.isProduct5 && this.state.product5 == "" ) ||
+      (this.state.isProduct6 && this.state.product6 == "" )
     );
   }
 
@@ -235,7 +235,7 @@ export default class Compare extends Component {
                   selectLabelTextStyle={styles.selectLabelTextStyle}
                   placeHolderTextStyle={styles.placeHolderTextStyle}
                   dropDownImageStyle={styles.dropDownImageStyle}
-                  selectedValue={(index, item) => this._setProduct1(item)}
+                  selectedValue={(index, item) => this._setProduct1(item.name)}
                 />
               </View>
             </View>
@@ -264,7 +264,7 @@ export default class Compare extends Component {
                 selectLabelTextStyle={styles.selectLabelTextStyle}
                 placeHolderTextStyle={styles.placeHolderTextStyle}
                 dropDownImageStyle={styles.dropDownImageStyle}
-                selectedValue={(index, item) => this._setProduct2(item)}
+                selectedValue={(index, item) => this._setProduct2(item.name)}
               />
             </View>
             {this.state.isProduct3 && (
@@ -298,7 +298,7 @@ export default class Compare extends Component {
                     selectLabelTextStyle={styles.selectLabelTextStyle}
                     placeHolderTextStyle={styles.placeHolderTextStyle}
                     dropDownImageStyle={styles.dropDownImageStyle}
-                    selectedValue={(index, item) => this._setProduct3(item)}
+                    selectedValue={(index, item) => this._setProduct3(item.name)}
                   />
                   <MaterialCommunityIcons
                     name="close"
@@ -344,7 +344,7 @@ export default class Compare extends Component {
                     selectLabelTextStyle={styles.selectLabelTextStyle}
                     placeHolderTextStyle={styles.placeHolderTextStyle}
                     dropDownImageStyle={styles.dropDownImageStyle}
-                    selectedValue={(index, item) => this._setProduct4(item)}
+                    selectedValue={(index, item) => this._setProduct4(item.name)}
                   />
                   <MaterialCommunityIcons
                     name="close"
@@ -390,7 +390,7 @@ export default class Compare extends Component {
                     selectLabelTextStyle={styles.selectLabelTextStyle}
                     placeHolderTextStyle={styles.placeHolderTextStyle}
                     dropDownImageStyle={styles.dropDownImageStyle}
-                    selectedValue={(index, item) => this._setProduct5(item)}
+                    selectedValue={(index, item) => this._setProduct5(item.name)}
                   />
                   <MaterialCommunityIcons
                     name="close"
@@ -436,7 +436,7 @@ export default class Compare extends Component {
                     selectLabelTextStyle={styles.selectLabelTextStyle}
                     placeHolderTextStyle={styles.placeHolderTextStyle}
                     dropDownImageStyle={styles.dropDownImageStyle}
-                    selectedValue={(index, item) => this._setProduct6(item)}
+                    selectedValue={(index, item) => this._setProduct6(item.name)}
                   />
                   <MaterialCommunityIcons
                     name="close"
@@ -514,11 +514,6 @@ export default class Compare extends Component {
               </TouchableOpacity>
             </View>
 
-
-
-
-
-
             <View>
               <TouchableOpacity
                 style={{
@@ -546,10 +541,6 @@ export default class Compare extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-
-
-
-
           </View>
         </ScrollView>
       </View>
