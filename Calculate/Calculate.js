@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { styles } from '../Ranking/Styles';
 import Profiles from '../ImageDB.js';
 import firebase from 'firebase';
+import { CalculateTotal } from './CalculateTotal';
 
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -17,6 +18,8 @@ const frequency_values = {
   five_week: 5,
   once_month: 0.25
 }
+
+let fetchedData = {}
 
 function CalculateScreen() {
 
@@ -59,8 +62,6 @@ function CalculateScreen() {
       }
     }
   }
-
-  const parameter = waterParameter();
 
   const numberWithCommas = (x) => {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -127,11 +128,11 @@ function CalculateScreen() {
           paddingRight: 10,
           paddingBottom: 20
       }}>
-          <TouchableOpacity onPress={() => { clearElements(); setComputed(false); setUnit('G'); }} >
+          <TouchableOpacity onPress={() => { setUnit('G'); setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   Gal" : "Global Gallon p lb"]); }} >
               <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
           </TouchableOpacity>
           <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-          <TouchableOpacity onPress={() => { clearElements(); setComputed(false); setUnit('L'); }} >
+          <TouchableOpacity onPress={() => { setUnit('L'); setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   L" : "Global Liters p kg"]); }} >
               <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
           </TouchableOpacity>
       </View>
@@ -252,41 +253,11 @@ function CalculateScreen() {
             <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Individual Total
             </Text>
-            <Text 
-              style={{ 
-                borderColor: '#80CAFF',
-                marginTop: 10,
-                height: 50,
-                borderWidth: 2,
-                borderRadius: 20, 
-                width: DeviceWidth*0.9,
-                textAlign: 'center',
-                fontSize: 20,
-                paddingTop: 10,
-                fontWeight: 'bold'
-              }} 
-            >
-              {numberWithCommas(individual_total)} {unit === "L" ? "L. p/kg" : "gal. p/lb"}
-            </Text>
+            <CalculateTotal value={individual_total} unit={unit} />
             <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Yearly Total
             </Text>
-            <Text 
-              style={{ 
-                borderColor: '#80CAFF',
-                marginTop: 10,
-                height: 50,
-                borderWidth: 2,
-                borderRadius: 20, 
-                width: DeviceWidth*0.9,
-                textAlign: 'center',
-                fontSize: 20,
-                paddingTop: 10,
-                fontWeight: 'bold'
-              }} 
-            >
-              {numberWithCommas(individual_total*frequency_values[frequency]*52)} {unit === "L" ? "L." : "gal."}
-            </Text>
+            <CalculateTotal value={individual_total*frequency_values[frequency]*52} unit={unit} />
         </View> 
       }
 
