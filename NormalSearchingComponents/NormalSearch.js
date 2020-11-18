@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
-import Profiles from '../Comparing/ImageDB';
+import Profiles from '../ImageDB';
 import {
   SafeAreaView,
   StyleSheet,

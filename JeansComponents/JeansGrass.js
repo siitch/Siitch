@@ -32,7 +32,7 @@ const JeansGrass = ({inputData, navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 30,
+            marginTop: Height / 40,
             marginLeft: 15,
             marginRight: 15,
           }}>
@@ -42,7 +42,6 @@ const JeansGrass = ({inputData, navigation}) => {
               color: 'white',
               width: Width / 1.5,
               fontSize: 20,
-              marginTop: 10,
             }}>
             Cotton is an extremely thirsty crop to grow.
           </Text>
@@ -50,7 +49,7 @@ const JeansGrass = ({inputData, navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 20,
+            marginTop: Height / 45,
             marginLeft: 15,
             marginRight: 15,
           }}>
@@ -68,7 +67,7 @@ const JeansGrass = ({inputData, navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 20,
+            marginTop: Height / 45,
             marginLeft: 15,
             marginRight: 15,
           }}>
@@ -87,7 +86,7 @@ const JeansGrass = ({inputData, navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 30,
+            marginTop: Height / 30,
             marginLeft: 15,
             marginRight: 15,
           }}>

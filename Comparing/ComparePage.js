@@ -413,24 +413,28 @@ export const comparePage = ({route}) => {
   }
 
   const numberWithCommas = (x) => {
+    if(isNaN(x)){
+      return "NA"
+    }
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   return (
     <ScrollView style={{backgroundColor:'white'}}>
       <View>
-        <View style={{flexDirection: 'row'}}>
-        <View style={{ 
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{width: DeviceWidth*0.18, marginTop: '3%'}}>
+            <View style={{ 
                       flexDirection: 'row', 
                       marginTop: '5%', 
-                      marginLeft: 20, 
+                      marginLeft: 15, 
                       borderColor: '#80CAFF',
                       borderWidth: 2,
                       borderRadius: 20, 
                       width: 65,
                       paddingTop: 10,
                       paddingLeft: 10,
-                      paddingRight: 10,
+                      //paddingRight: 10,
                       paddingBottom: 20,
                       height: 60
                   }}>
@@ -441,34 +445,57 @@ export const comparePage = ({route}) => {
                       <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }} >
                           <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                       </TouchableOpacity>
+            </View>
           </View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', paddingLeft: '15%'}}>
+        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} </Text>
-          {/* <Text style={{fontSize:20,fontWeight:'bold'}}>{prod1} vs. {prod2}</Text> */}
-          <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod2}</Text>
+          <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod2}</Text>
           {
             isProduct3Present && 
-            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod3}</Text>
+            <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod3}</Text>
+            </View>
           }
           {
             isProduct4Present && 
-            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod4}</Text>
+            <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod4}</Text>
+            </View>
           }
           {
             isProduct5Present && 
-            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod5}</Text>
+            <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod5}</Text>
+            </View>
           }
           {
             isProduct6Present && 
-            <Text style={{fontSize:20,fontWeight:'bold'}}> vs. {prod6}</Text>
+            <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod6}</Text>
+            </View>
           }
         </View>
+        <View style={{ 
+                      flexDirection: 'row', 
+                      marginTop: '5%', 
+                      marginRight: 20, 
+                      //borderColor: '#80CAFF',
+                      //borderWidth: 1,
+                      //borderRadius: 20, 
+                      width: DeviceWidth*0.20,
+                      paddingTop: 10,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                      paddingBottom: 20,
+                      height: 60
+                  }}>
+          </View>
         </View>
-        <View style={{flex: 6,flexDirection:'column',alignItems:'center', marginBottom:0, padding: 0}}>
+        <View style={{flex: 6,flexDirection:'column',alignItems:'center', marginBottom:0, paddingLeft: 10, paddingRight: 10}}>
           <View style={{flex:2, flexDirection:'row',justifyContent:'space-between'}}>
             <View center style={getTextStyle(f1[selectedcategory1], getMinValue())}>
               <Image source = {Profiles[prod1]}
-                style = {{width: 200, height: 200, alignItems:'center'}}
+                style = {{width: 180, height: 180, alignItems:'center'}}
                 resizeMode="contain"/>
                 <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1[selectedmetrictodisplay]}</Text>
                 <Text style={styles.textFormatCompare}>{f1[selectedmeasurement]}</Text>
@@ -476,7 +503,7 @@ export const comparePage = ({route}) => {
             </View>
             <View center style={getTextStyle(f2[selectedcategory2], getMinValue())}>
               <Image source = {Profiles[prod2]} 
-                style = {{width: 200, height: 200, alignItems:'center'}}
+                style = {{width: 180, height: 180, alignItems:'center'}}
                 resizeMode="contain"/>
                 <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2[selectedmetrictodisplay]}</Text>
                 <Text style={styles.textFormatCompare}>{f2[selectedmeasurement]}</Text>
@@ -490,7 +517,7 @@ export const comparePage = ({route}) => {
                 isProduct3Present &&
                 <View center style={getTextStyle(f3[selectedcategory3], getMinValue())}>
                   <Image source = {Profiles[prod3]}
-                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
                     <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3[selectedmetrictodisplay]}</Text>
                     <Text style={styles.textFormatCompare}>{f3[selectedmeasurement]}</Text>
@@ -501,7 +528,7 @@ export const comparePage = ({route}) => {
                 isProduct4Present &&
                 <View center style={getTextStyle(f4[selectedcategory4], getMinValue())}>
                   <Image source = {Profiles[prod4]} 
-                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
                     <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4[selectedmetrictodisplay]}</Text>
                     <Text style={styles.textFormatCompare}>{f4[selectedmeasurement]}</Text>
@@ -517,7 +544,7 @@ export const comparePage = ({route}) => {
                 isProduct5Present &&
                 <View center style={getTextStyle(f5[selectedcategory5], getMinValue())}>
                   <Image source = {Profiles[prod5]}
-                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
                     <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f5[selectedcategory5]))} {f5[selectedmetrictodisplay]}</Text>
                     <Text style={styles.textFormatCompare}>{f5[selectedmeasurement]}</Text>
@@ -528,7 +555,7 @@ export const comparePage = ({route}) => {
                 isProduct6Present &&
                 <View center style={getTextStyle(f6[selectedcategory6], getMinValue())}>
                   <Image source = {Profiles[prod6]} 
-                    style = {{width: 200, height: 200, alignItems:'center'}}
+                    style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
                     <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f6[selectedcategory6]))} {f6[selectedmetrictodisplay]}</Text>
                     <Text style={styles.textFormatCompare}>{f6[selectedmeasurement]}</Text>
@@ -540,46 +567,47 @@ export const comparePage = ({route}) => {
         </View>
       </View>
       
+      
+
+      <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
       {
         (f1['Notes to appear'] != "" )&& 
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
         </View>
       }
 
       {
         (f2['Notes to appear'] != "" )&& 
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
         </View>
       }
 
       {
         (isProduct3Present && f3['Notes to appear'] != "") &&
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
         </View>
       }
       {
         (isProduct4Present && f4['Notes to appear'] != "") &&
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
         </View>
       }
       {
         (isProduct5Present && f5['Notes to appear'] != "") &&
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize:18, textAlign: 'left'}}>{f5['Notes to appear']}</Text>
         </View>
       }
       {
         (isProduct6Present && f6['Notes to appear'] != "") &&
-        <View style={{paddingLeft: 20, paddingRight: 20}}>
+        <View style={{width: DeviceWidth/1.2}}>
           <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
         </View>
       }
-
-      <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
         <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}}>
           <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#FFD359', width: DeviceWidth / 1.2,borderColor: '#FFD359', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
             <View style={{alignItems:'center'}}>
@@ -728,7 +756,8 @@ function getTextStyle(val1, val2) {
     width: DeviceWidth*0.3, 
     height: DeviceWidth*0.8, 
     alignItems:'center', 
-    transform: [{scale: 0.9}],
+    transform: [{scale: 0.8}],
+    justifyContent: 'center'
    }
   } else {
     return {
@@ -736,7 +765,8 @@ function getTextStyle(val1, val2) {
       width: DeviceWidth*0.3, 
       height: DeviceWidth*0.8, 
       alignItems:'center', 
-      transform: [{scale: 0.9}],
+      transform: [{scale: 0.8}],
+      justifyContent: 'center'
     }
   }
 }

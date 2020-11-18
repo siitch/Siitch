@@ -32,6 +32,7 @@ import {
 
 import RNPicker from 'rn-modal-picker';
 import {color} from 'react-native-reanimated';
+import Profiles from '../ImageDB';
 
 function getdata() {
   itemsList = [];
@@ -204,12 +205,7 @@ export default class Compare extends Component {
             }}>
             <Text style={styles.title}>Compare</Text>
             <Text
-              style={{
-                alignItems: 'center',
-                marginTop: 20,
-                marginBottom: '5%',
-                fontSize: 20,
-              }}>
+              style={styles.selectItemText}>
               Select Item 1
             </Text>
             <View style={styles.container}>
@@ -227,7 +223,7 @@ export default class Compare extends Component {
                   pickerTitle={'Search Items'}
                   showSearchBar={true}
                   disablePicker={false}
-                  changeAnimation={'none'}
+                  changeAnimation={'fade'}
                   searchBarPlaceHolder={'Search.....'}
                   showPickerTitle={true}
                   searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -239,18 +235,12 @@ export default class Compare extends Component {
                   selectLabelTextStyle={styles.selectLabelTextStyle}
                   placeHolderTextStyle={styles.placeHolderTextStyle}
                   dropDownImageStyle={styles.dropDownImageStyle}
-                  //dropDownImage={}
                   selectedValue={(index, item) => this._setProduct1(item)}
                 />
               </View>
             </View>
             <Text
-              style={{
-                alignItems: 'center',
-                marginTop: 20,
-                marginBottom: '5%',
-                fontSize: 20,
-              }}>
+              style={styles.selectItemText}>
               Select Item 2
             </Text>
             <View
@@ -262,7 +252,7 @@ export default class Compare extends Component {
                 pickerTitle={'Search Items'}
                 showSearchBar={true}
                 disablePicker={false}
-                changeAnimation={'none'}
+                changeAnimation={'fade'}
                 searchBarPlaceHolder={'Search.....'}
                 showPickerTitle={true}
                 searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -280,12 +270,7 @@ export default class Compare extends Component {
             {this.state.isProduct3 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 3
                 </Text>
                 <View
@@ -301,7 +286,7 @@ export default class Compare extends Component {
                     pickerTitle={'Search Items'}
                     showSearchBar={true}
                     disablePicker={false}
-                    changeAnimation={'none'}
+                    changeAnimation={'fade'}
                     searchBarPlaceHolder={'Search.....'}
                     showPickerTitle={true}
                     searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -331,12 +316,7 @@ export default class Compare extends Component {
             {this.state.isProduct4 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 4
                 </Text>
                 <View
@@ -352,7 +332,7 @@ export default class Compare extends Component {
                     pickerTitle={'Search Items'}
                     showSearchBar={true}
                     disablePicker={false}
-                    changeAnimation={'none'}
+                    changeAnimation={'fade'}
                     searchBarPlaceHolder={'Search.....'}
                     showPickerTitle={true}
                     searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -382,12 +362,7 @@ export default class Compare extends Component {
             {this.state.isProduct5 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 5
                 </Text>
                 <View
@@ -403,7 +378,7 @@ export default class Compare extends Component {
                     pickerTitle={'Search Items'}
                     showSearchBar={true}
                     disablePicker={false}
-                    changeAnimation={'none'}
+                    changeAnimation={'fade'}
                     searchBarPlaceHolder={'Search.....'}
                     showPickerTitle={true}
                     searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -433,12 +408,7 @@ export default class Compare extends Component {
             {this.state.isProduct6 && (
               <View style={{alignItems: 'center'}}>
                 <Text
-                  style={{
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginBottom: '5%',
-                    fontSize: 20,
-                  }}>
+                  style={styles.selectItemText}>
                   Select Item 6
                 </Text>
                 <View
@@ -454,7 +424,7 @@ export default class Compare extends Component {
                     pickerTitle={'Search Items'}
                     showSearchBar={true}
                     disablePicker={false}
-                    changeAnimation={'none'}
+                    changeAnimation={'fade'}
                     searchBarPlaceHolder={'Search.....'}
                     showPickerTitle={true}
                     searchBarContainerStyle={styles.searchBarContainerStyle}
@@ -515,7 +485,7 @@ export default class Compare extends Component {
                 style={{
                   width: width / 2,
                   height: 50,
-                  borderRadius: 20,
+                  borderRadius: 30,
                   backgroundColor: '#70BF41',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -543,6 +513,43 @@ export default class Compare extends Component {
                 </View>
               </TouchableOpacity>
             </View>
+
+
+
+
+
+
+            <View>
+              <TouchableOpacity
+                style={{
+                  width: width / 2,
+                  height: 50,
+                  borderRadius: 30,
+                  backgroundColor: '#EAAD28',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: 20,
+                }}
+                onPress={() => {this._setProduct1("");this._setProduct2("");this._setProduct3("");this._setProduct4("");this._setProduct5("");this._setProduct6(""); this.state.isProduct3=false;
+                this.state.isProduct4=false;this.state.isProduct5=false;this.state.isProduct6=false;
+                }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                      fontWeight: 'bold',
+                    }}>
+                    Clear
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+
+
+
           </View>
         </ScrollView>
       </View>

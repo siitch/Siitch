@@ -56,7 +56,10 @@ const Search = ({searchData, navigation}) => {
     if (keyword === '') {
       return;
     } else {
-      readData(keyword);
+      let input =
+        keyword.charAt(0).toUpperCase() +
+        keyword.slice(1, keyword.length).toLowerCase();
+      readData(input);
     }
   };
   const readData = image => {
