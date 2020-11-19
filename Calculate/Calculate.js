@@ -128,11 +128,11 @@ function CalculateScreen() {
           paddingRight: 10,
           paddingBottom: 20
       }}>
-          <TouchableOpacity onPress={() => { setUnit('G'); setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   Gal" : "Global Gallon p lb"]); }} >
+          <TouchableOpacity onPress={() => { setUnit('G'); if(individual_total) { setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   Gal" : "Global Gallon p lb"]); } else {calculate(item, frequency)} }} >
               <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
           </TouchableOpacity>
           <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-          <TouchableOpacity onPress={() => { setUnit('L'); setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   L" : "Global Liters p kg"]); }} >
+          <TouchableOpacity onPress={() => { setUnit('L'); if(individual_total) { setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   L" : "Global Liters p kg"]); } else {calculate(item, frequency)} }} >
               <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
           </TouchableOpacity>
       </View>
