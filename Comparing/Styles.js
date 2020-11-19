@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   pickerStyle: {
     //marginLeft: 18,
     elevation:3,
+    marginTop: 10,
     paddingRight: 25,
     marginRight: 50,
     marginBottom: 2,
@@ -224,6 +225,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize:30,
     fontWeight:'bold'
+  },
+  selectItemText: {
+    alignItems: 'center',
+    marginTop: 30,
+    fontSize: 25,
+    fontWeight: '500'
   }
 });
 export {styles};
