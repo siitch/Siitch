@@ -39,7 +39,7 @@ const MakeupGrass = ({inputData, navigation}) => {
           alignItems: 'center',
           marginTop: 20,
         }}>
-        <Text style={{fontSize: 20}}>
+        <Text style={{fontSize: 16}}>
           Palm oil derivatives appear in 70% of cosmetics, contributing to
           repaid deforestation, wildlife extinction and climate change.
         </Text>
@@ -48,7 +48,7 @@ const MakeupGrass = ({inputData, navigation}) => {
           <Text>Kostigen, The Green Blue Book</Text>
         </View>
         <Image source={images.frog} style={{width: Width / 1.5, height: 100}} />
-        <Text style={{fontSize: 20}}>
+        <Text style={{fontSize: 16}}>
           Personal care products flushed or rinsed down the drain have been
           linked to decreased fertility and skewed sexual development in
           everything from frogs to fish.

@@ -27,14 +27,13 @@ const MakeupHeart = ({inputData, navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#FFFFFF'}}>
       <View style={{marginTop: Height / 20, alignItems: 'center'}}>
-        <Text style={{fontSize: 25}}>1400 V.S 30</Text>
-        <Text style={{fontSize: 20}}>
+        <Text style={{fontSize: 28,fontWeight:'bold'}}>1400 vs. 30</Text>
+        <Text style={{fontSize: 20,marginTop:15}}>
           The European Union has banned {'\n'}or restriced 1400 ingredients.{' '}
           {'\n'}The U.S? Only 30.
         </Text>
         <View style={{flexDirection: 'row', marginTop: 20}}>
-          <Text style={{fontSize: 25}}>89%</Text>
-          <Image source={images.exclamation} style={{width: 25, height: 25}} />
+          <Text style={{fontSize: 28,fontWeight:'bold'}}>89%</Text>
         </View>
         <View
           style={{
@@ -42,7 +41,7 @@ const MakeupHeart = ({inputData, navigation}) => {
             borderColor: '#EF7A6A',
             borderRadius: 10,
             width: Width / 1.2,
-            marginTop: 10,
+            marginTop: 5,
           }}>
           <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
             89% of U.S. cosmetics ingredients have not been tested publically
@@ -104,7 +103,7 @@ const MakeupHeart = ({inputData, navigation}) => {
           onPress={() => Linking.openURL('https://www.google.com/')}>
           SafeCosmetic.org
         </Text>
-        <Text style={{fontSize: 25, marginTop: 20, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 28, marginTop: 20, fontWeight: 'bold'}}>
           1938
         </Text>
         <View
@@ -181,7 +180,7 @@ const MakeupHeart = ({inputData, navigation}) => {
           }}>
           <Text
             style={{textAlign: 'center', fontWeight: 'bold', marginTop: 10}}>
-            1938 Food, Drug, Cosmetic Art
+            1938 Food, Drug, Cosmetic Act
           </Text>
           {expand3 ? (
             <View style={{marginTop: 10}}>

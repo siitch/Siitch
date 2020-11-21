@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Appbar} from 'react-native-paper';
 const {width, height} = Dimensions.get('screen');
 import {images} from '../ImageURL';
+import Profiles from '../ImageDB';
 import {ImageIcon} from '../ImageIcon';
 import {
   SafeAreaView,
@@ -22,9 +23,9 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const arr = [
   {water: 1847, picture: images.beef_steak},
-  {water: 718, picture: images.pig_vs},
+  {water: 718, picture: Profiles.Pork},
   {water: 518, picture: images.chicken},
-  {water: 302, picture: images.tofu},
+  {water: 302, picture: Profiles.Tofu},
 ];
 const Vs = ({navigation}) => {
   return (

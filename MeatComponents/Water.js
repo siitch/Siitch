@@ -51,7 +51,7 @@ const Water = ({inputData, navigation}) => {
               style={{
                 fontSize: 24,
                 fontWeight: 'bold',
-                color: '#3AADFA',
+                color: '#0091FE',
                 lineHeight: 30,
               }}>
               {inputData['Global Gallon p lb']}
@@ -75,7 +75,7 @@ const Water = ({inputData, navigation}) => {
               width: 300,
               height: 100,
               borderRadius: 20,
-              backgroundColor: '#3AADFA',
+              backgroundColor: '#00ADEF',
               alignItems: 'center',
               justifyContent: 'center',
               marginTop: '-5%',

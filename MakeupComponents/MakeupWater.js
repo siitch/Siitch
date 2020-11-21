@@ -110,10 +110,10 @@ const MakeupWater = ({inputData, navigation}) => {
           70 - 80%{' '}
           <Image
             source={images.water}
-            style={{width: Width / 20, height: Height / 30}}
+            style={{width: Width / 20, height: Height / 30,marginLeft:10}}
           />
         </Text>
-        <Text>
+        <Text style={{fontSize:16}}>
           On average, a standard cosmetic product (cream, lotion, etc.)
           comprises between{' '}
           <Text style={{fontWeight: 'bold'}}>70 and 80% </Text>of water.

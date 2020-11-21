@@ -28,19 +28,19 @@ const JeansHeart = ({inputData, navigation}) => {
       <View style={{flexDirection: 'row', marginTop: Height / 20}}>
         <Image
           source={images.jeans_health}
-          style={{height: 250, marginLeft: -60}}
+          style={{height: 250, marginLeft: -70}}
           resizeMode="contain"
         />
         <View
           style={{flexDirection: 'column', width: Width / 2, marginLeft: -60}}>
-          <Text style={{marginTop: '10%'}}>
+          <Text style={{fontSize:16}}>
             The chemical washes and sandblasting process that gets the
             ‘distressed’ look can have major health consequences on factory
-            workers where health and safety protocols aren’t followed.
+            workers where health and safety protocols are not followed.
           </Text>
           <Image
             source={images.jeans_health_folded}
-            style={{height: 150, width: 150, marginTop: '5%', marginLeft: 20}}
+            style={{height: 110, width: 110, marginTop: '20%', marginLeft: 20}}
             resizeMode="contain"
           />
         </View>
@@ -48,7 +48,7 @@ const JeansHeart = ({inputData, navigation}) => {
       <View
         style={{
           alignItems: 'center',
-          marginTop: '5%',
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 18, width: Width / 1.3}}>
           Check out Good on You’s
@@ -87,7 +87,7 @@ const JeansHeart = ({inputData, navigation}) => {
         style={{
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: '5%',
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
         <Text style={{fontSize: 16, width: Width / 1.3}}>

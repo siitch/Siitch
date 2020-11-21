@@ -38,7 +38,7 @@ const MakeupVs = ({inputData, navigation}) => {
           marginTop: Height / 20,
           backgroundColor: '#FFFFFF',
         }}>
-        <Text style={{fontSize: 25}}>Who is regulating?</Text>
+        <Text style={{fontSize: 25,fontWeight:'bold'}}>Who is regulating?</Text>
         <View style={{marginLeft: 20, marginRight: 20}}>
           {itemArr.map((item, index) => (
             <View style={{flexDirection: 'row', marginTop: 20}} key={index}>
@@ -48,14 +48,14 @@ const MakeupVs = ({inputData, navigation}) => {
                   width: Width / 2,
                   justifyContent: 'center',
                 }}>
-                <Text style={{marginLeft: 20}}>{item.name}</Text>
+                <Text style={{marginLeft: 20,fontSize:16}}>{item.name}</Text>
               </View>
               <Image
                 source={item.img2}
                 style={{
-                  width: 50,
-                  height: 50,
-                  marginLeft: 20,
+                  width: 70,
+                  height: 70,
+                  marginLeft: 30,
                   resizeMode: 'contain',
                 }}
               />
