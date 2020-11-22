@@ -153,7 +153,7 @@ const JeansVs = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.thereformation.com/');
+              Linking.openURL('https://www.asket.com/');
             }}>
             <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
