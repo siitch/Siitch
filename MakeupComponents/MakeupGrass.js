@@ -24,7 +24,11 @@ const MakeupGrass = ({inputData, navigation}) => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
-      contentContainerStyle={{alignItems: 'center'}}>
+      contentContainerStyle={{
+        alignItems: 'center',
+        marginLeft: 50,
+        marginRight: 50,
+      }}>
       <View
         style={{
           width: Width,
@@ -34,9 +38,6 @@ const MakeupGrass = ({inputData, navigation}) => {
       </View>
       <View
         style={{
-          marginLeft: 20,
-          marginRight: 20,
-          alignItems: 'center',
           marginTop: 20,
         }}>
         <Text style={{fontSize: 16}}>
@@ -85,7 +86,12 @@ const MakeupGrass = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.1}}>
+        <Text
+          style={{
+            fontSize: 16,
+            marginTop: 10,
+            textAlign: 'center',
+          }}>
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text

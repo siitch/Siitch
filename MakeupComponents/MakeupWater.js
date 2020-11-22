@@ -25,9 +25,11 @@ const MakeupWater = ({inputData, navigation}) => {
   const [expand, setExpand] = useState(false);
   return (
     <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
       contentContainerStyle={{
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        marginRight: 50,
+        marginLeft: 50,
       }}>
       <View style={{alignItems: 'center'}}>
         <Text
@@ -42,7 +44,7 @@ const MakeupWater = ({inputData, navigation}) => {
         </Text>
         <Image
           source={images.makeup}
-          style={{width: Width / 1.5, height: Height / 5}}
+          style={{width: Width / 1.8, height: Height / 7}}
         />
         <View
           style={{
@@ -51,7 +53,7 @@ const MakeupWater = ({inputData, navigation}) => {
             borderColor: '#EF7A6A',
             borderWidth: 1,
             borderRadius: 15,
-            width: Width / 1.2,
+            width: Width * 0.9,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -110,10 +112,10 @@ const MakeupWater = ({inputData, navigation}) => {
           70 - 80%{' '}
           <Image
             source={images.water}
-            style={{width: Width / 20, height: Height / 30,marginLeft:10}}
+            style={{width: 10, height: 25, marginLeft: 10}}
           />
         </Text>
-        <Text style={{fontSize:16}}>
+        <Text style={{fontSize: 16}}>
           On average, a standard cosmetic product (cream, lotion, etc.)
           comprises between{' '}
           <Text style={{fontWeight: 'bold'}}>70 and 80% </Text>of water.
@@ -146,7 +148,12 @@ const MakeupWater = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.1}}>
+        <Text
+          style={{
+            fontSize: 16,
+            marginTop: 10,
+            textAlign: 'center',
+          }}>
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text

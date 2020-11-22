@@ -22,7 +22,9 @@ const Height = Dimensions.get('window').height;
 
 const MakeupRecycle = ({inputData, navigation}) => {
   return (
-    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
+    <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
+      contentContainerStyle={{marginLeft: 50, marginRight: 50}}>
       <View
         style={{
           alignItems: 'center',
@@ -31,15 +33,24 @@ const MakeupRecycle = ({inputData, navigation}) => {
           marginRight: 20,
         }}>
         <Text style={{fontSize: 28, fontWeight: 'bold'}}>120 Billion +</Text>
-        <Text style={{fontSize: 20,marginTop:15}}>
+        <Text style={{fontSize: 20, marginTop: 15}}>
           Units of packaging produced every year by the global cosmetics
           industry. Most of it is not recyclable.
         </Text>
-        <Text style={{fontSize: 28, fontWeight: 'bold', marginTop: 40,color:'#A77C57'}}>
+        <Text
+          style={{
+            fontSize: 28,
+            fontWeight: 'bold',
+            marginTop: 40,
+            color: '#A77C57',
+          }}>
           1,000 Years
         </Text>
-        <Image source={images.moisture} style={{width: 150, height: 150,marginTop:10}} />
-        <Text style={{fontSize: 20, textAlign: 'center',marginTop:'5%'}}>
+        <Image
+          source={images.moisture}
+          style={{width: 150, height: 150, marginTop: 10}}
+        />
+        <Text style={{fontSize: 20, textAlign: 'center', marginTop: '5%'}}>
           The average moisturizer pot takes 1,000 years to decompose
         </Text>
         <TouchableHighlight
@@ -69,7 +80,12 @@ const MakeupRecycle = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.1}}>
+        <Text
+          style={{
+            fontSize: 16,
+            marginTop: 10,
+            textAlign: 'center',
+          }}>
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text

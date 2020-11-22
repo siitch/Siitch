@@ -25,22 +25,24 @@ const MakeupHeart = ({inputData, navigation}) => {
   const [expand2, setExpand2] = useState(false);
   const [expand3, setExpand3] = useState(false);
   return (
-    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
+    <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
+      contentContainerStyle={{marginLeft: 50, marginRight: 50}}>
       <View style={{marginTop: Height / 20, alignItems: 'center'}}>
-        <Text style={{fontSize: 28,fontWeight:'bold'}}>1400 vs. 30</Text>
-        <Text style={{fontSize: 20,marginTop:15}}>
+        <Text style={{fontSize: 28, fontWeight: 'bold'}}>1400 vs. 30</Text>
+        <Text style={{fontSize: 20, marginTop: 15}}>
           The European Union has banned {'\n'}or restriced 1400 ingredients.{' '}
           {'\n'}The U.S? Only 30.
         </Text>
         <View style={{flexDirection: 'row', marginTop: 20}}>
-          <Text style={{fontSize: 28,fontWeight:'bold'}}>89%</Text>
+          <Text style={{fontSize: 28, fontWeight: 'bold'}}>89%</Text>
         </View>
         <View
           style={{
             backgroundColor: '#EF7A6A',
             borderColor: '#EF7A6A',
             borderRadius: 10,
-            width: Width / 1.2,
+            width: Width * 0.9,
             marginTop: 5,
           }}>
           <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
@@ -85,22 +87,22 @@ const MakeupHeart = ({inputData, navigation}) => {
         </View>
         <Image
           source={images.perfume}
-          style={{width: 80, height: 80, marginTop: 20}}
+          style={{width: 80, height: 80, marginTop: 20, marginBottom: 20}}
         />
         <Text>Great Resouces: </Text>
         <Text
           style={{textDecorationLine: 'underline'}}
-          onPress={() => Linking.openURL('https://www.google.com/')}>
+          onPress={() => Linking.openURL('https://www.ewg.org')}>
           EWG
         </Text>
         <Text
           style={{textDecorationLine: 'underline'}}
-          onPress={() => Linking.openURL('https://www.google.com/')}>
+          onPress={() => Linking.openURL('https://www.thinkdirtyapp.com')}>
           Think Dirty
         </Text>
         <Text
           style={{textDecorationLine: 'underline'}}
-          onPress={() => Linking.openURL('https://www.google.com/')}>
+          onPress={() => Linking.openURL('http://www.safecosmetics.org')}>
           SafeCosmetic.org
         </Text>
         <Text style={{fontSize: 28, marginTop: 20, fontWeight: 'bold'}}>
@@ -111,7 +113,7 @@ const MakeupHeart = ({inputData, navigation}) => {
             backgroundColor: '#EF7A6A',
             borderColor: '#EF7A6A',
             borderRadius: 10,
-            width: Width / 1.2,
+            width: Width * 0.9,
             marginTop: 10,
           }}>
           <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
@@ -176,7 +178,7 @@ const MakeupHeart = ({inputData, navigation}) => {
             borderColor: '#EF7A6A',
             borderRadius: 10,
             marginTop: 10,
-            width: Width / 1.2,
+            width: Width * 0.9,
           }}>
           <Text
             style={{textAlign: 'center', fontWeight: 'bold', marginTop: 10}}>
@@ -247,7 +249,12 @@ const MakeupHeart = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.1}}>
+        <Text
+          style={{
+            fontSize: 16,
+            marginTop: 10,
+            textAlign: 'center',
+          }}>
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text

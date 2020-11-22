@@ -101,7 +101,9 @@ const Search = ({searchData, navigation}) => {
   return (
     <View style={{backgroundColor: '#FFFFFF'}}>
       <View style={styles.searchFrame}>
-        <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        <ScrollView
+          style={{backgroundColor: '#FFFFFF'}}
+          contentContainerStyle={{alignItems: 'center'}}>
           <Text style={styles.title}>Search</Text>
           <Searchbar
             placeholder="Search"

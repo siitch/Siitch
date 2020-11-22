@@ -31,24 +31,28 @@ const itemArr = [
 
 const MakeupVs = ({inputData, navigation}) => {
   return (
-    <ScrollView style={{backgroundColor: '#FFFFFF'}}>
+    <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
+      contentContainerStyle={{marginLeft: 50, marginRight: 50}}>
       <View
         style={{
           alignItems: 'center',
           marginTop: Height / 20,
           backgroundColor: '#FFFFFF',
         }}>
-        <Text style={{fontSize: 25,fontWeight:'bold'}}>Who is regulating?</Text>
-        <View style={{marginLeft: 20, marginRight: 20}}>
+        <Text style={{fontSize: 25, fontWeight: 'bold'}}>
+          Who is regulating?
+        </Text>
+        <View>
           {itemArr.map((item, index) => (
             <View style={{flexDirection: 'row', marginTop: 20}} key={index}>
-              <Image source={item.img} style={{width: 50, height: 50}} />
+              <Image source={item.img} style={{width: 70, height: 70}} />
               <View
                 style={{
                   width: Width / 2,
                   justifyContent: 'center',
                 }}>
-                <Text style={{marginLeft: 20,fontSize:16}}>{item.name}</Text>
+                <Text style={{marginLeft: 20, fontSize: 16}}>{item.name}</Text>
               </View>
               <Image
                 source={item.img2}
@@ -61,7 +65,7 @@ const MakeupVs = ({inputData, navigation}) => {
               />
             </View>
           ))}
-          <Text style={{marginTop: 20}}>
+          <Text style={{marginTop: 20, marginLeft: 50, marginRight: 50}}>
             With the exception of color additivies, the Food and Drug
             Administration lacks the power and resources to review the safety of
             chemicals in cosmetics before they are used.
@@ -95,7 +99,12 @@ const MakeupVs = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.1}}>
+        <Text
+          style={{
+            fontSize: 16,
+            marginTop: 10,
+            textAlign: 'center',
+          }}>
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text
