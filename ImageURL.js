@@ -42,7 +42,7 @@ export const images = {
   compost: require('./images/Compost.png'),
   clock: require('./images/clock.png'),
   // Beef Heart page
-  heart_small: require('./images/heart_small.png'),
+  heart_large: require('./images/heart_large.png'),
   arrow_graph: require('./images/Beef/green_chart.png'),
   //Beef Brands
   impossible: require('./images/Beef/Company_logos/impossible_burger_1x.png'),
@@ -61,7 +61,7 @@ export const images = {
 
   // Jeans water page
   jeans: require('./images/Jeans/Main_Page/jeans_small.png'),
-  truck: require('./images/Jeans/Main_Page/3000_gallon_tank.png'),
+  truck: require('./images/Jeans/Main_Page/jeans_truck__white_bg_1x.png'),
   waterBackground: require('./images/Jeans/Main_Page/Mainpage_background_3x.png'),
   rain: require('./images/Jeans/Water_Page/rain_small.png'),
   blue_plus: require('./images/Jeans/Water_Page/blue_plus_1x.png'),
@@ -97,6 +97,7 @@ export const images = {
   triarchy: require('./images/Jeans/Company_logos/triarchy_1x.png'),
   dl: require('./images/Jeans/Company_logos/DL_1x.png'),
   g_star: require('./images/Jeans/Company_logos/GStar_1x.png'),
+  asket :require('./images/Jeans/Company_logos/asket.png'),
 
   // makeup water
   makeup: require('./images/Makeup_Image_Folder/makeup_2.jpg'),
@@ -119,20 +120,21 @@ export const images = {
   questionMark: require('./images/Makeup_Image_Folder/VS_Page/revised_question_mark_2x.png'),
 
   //makeup brands
-  axiology_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Axiology_logo_1x.png'),
-  dab_logo: require('./images/Makeup_Image_Folder/Brand_Logos/DAB_logo_1x.png'),
-  fat_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Fat_logo_1x.png'),
-  plant_logo: require('./images/Makeup_Image_Folder/Brand_Logos/PlantMakeup_logo_1x.png'),
-  nudi_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Nudi_logo_1x.png'),
-  elate_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Elate_logo_1x.png'),
-  cleanfaced_logo: require('./images/Makeup_Image_Folder/Brand_Logos/CleanFaced_logo_1x.png'),
-  sea_witch_logo: require('./images/Makeup_Image_Folder/Brand_Logos/SeaWitch_logo_1x.png'),
-  percent100_logo: require('./images/Makeup_Image_Folder/Brand_Logos/100percent_logo_1x.png'),
-  phb_logo: require('./images/Makeup_Image_Folder/Brand_Logos/PHB_logo_1x.png'),
-  odylique_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Odylique_logo_1x.png'),
-  vyana_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Vyana_logo_1x.png'),
-  dirty_logo: require('./images/Makeup_Image_Folder/Brand_Logos/DirtyHippie_logo_1x.png'),
-  neek_logo: require('./images/Makeup_Image_Folder/Brand_Logos/Neek_logo_1x.png'),
+  axiology_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Axiology_logo_1x.png'),
+  dab_logo : require('./images/Makeup_Image_Folder/Brand_Logos/DAB_logo_1x.png'),
+  fat_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Fat_logo_1x.png'),
+  plant_logo : require('./images/Makeup_Image_Folder/Brand_Logos/PlantMakeup_logo_1x.png'),
+  nudi_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Nudi_logo_1x.png'),
+  elate_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Elate_logo_1x.png'),
+  cleanfaced_logo : require('./images/Makeup_Image_Folder/Brand_Logos/CleanFaced_logo_1x.png'),
+  sea_witch_logo : require('./images/Makeup_Image_Folder/Brand_Logos/SeaWitch_logo_1x.png'),
+  percent100_logo : require('./images/Makeup_Image_Folder/Brand_Logos/100percent_logo_1x.png'),
+  phb_logo : require('./images/Makeup_Image_Folder/Brand_Logos/PHB_logo_1x.png'),
+  odylique_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Odylique_logo_1x.png'),
+  vyana_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Vyana_logo_1x.png'),
+  dirty_logo : require('./images/Makeup_Image_Folder/Brand_Logos/DirtyHippie_logo_1x.png'),
+  neek_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Neek_logo_1x.png'),
+  
 
   //makeup brands rating
   axiology_rate: require('./images/Makeup_Image_Folder/Brand_Logos/Axiology_ratings_1x.png'),

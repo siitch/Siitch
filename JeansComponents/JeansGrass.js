@@ -42,6 +42,9 @@ const JeansGrass = ({inputData, navigation}) => {
               color: 'white',
               width: Width / 1.5,
               fontSize: 20,
+              marginLeft:-15,
+              marginTop:'3%',
+              textAlign:'right',
             }}>
             Cotton is an extremely thirsty crop to grow.
           </Text>
@@ -77,7 +80,7 @@ const JeansGrass = ({inputData, navigation}) => {
               color: 'white',
               width: Width / 1.4,
               fontSize: 20,
-              marginLeft: 5,
+              marginLeft: 15,
             }}>
             That outflow often pours into the rivers in countries like India &
             China, poisoning the soils & flowing into our oceans
@@ -95,7 +98,7 @@ const JeansGrass = ({inputData, navigation}) => {
               color: 'white',
               width: Width / 1.4,
               fontSize: 20,
-              marginTop: 10,
+              marginTop: 15,
             }}>
             You can a make a difference! Support brands doing good.
           </Text>
@@ -112,7 +115,7 @@ const JeansGrass = ({inputData, navigation}) => {
           height: 50,
           borderWidth: 2,
           borderColor: '#8DC73F',
-          borderRadius: 20,
+          borderRadius: 30,
           width: Width * 0.9,
           textAlign: 'center',
           fontSize: 20,
@@ -129,7 +132,7 @@ const JeansGrass = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.3}}>
+        <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
             onPress={() => Linking.openURL('https://goodonyou.eco/')}
@@ -150,7 +153,7 @@ const JeansGrass = ({inputData, navigation}) => {
             onPress={() => {
               Linking.openURL('https://www.thereformation.com/');
             }}>
-            <ImageIcon category="brand" image={images.ref} />
+            <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={1}

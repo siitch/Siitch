@@ -28,7 +28,7 @@ const JeansHeart = ({inputData, navigation}) => {
       <View style={{flexDirection: 'row', marginTop: Height / 20}}>
         <Image
           source={images.jeans_health}
-          style={{height: 250, marginLeft: -70}}
+          style={{height: 250, marginLeft: -80}}
           resizeMode="contain"
         />
         <View
@@ -73,7 +73,7 @@ const JeansHeart = ({inputData, navigation}) => {
           height: 50,
           borderWidth: 2,
           borderColor: '#8DC73F',
-          borderRadius: 20,
+          borderRadius: 30,
           width: Width * 0.9,
           textAlign: 'center',
           fontSize: 20,
@@ -90,7 +90,7 @@ const JeansHeart = ({inputData, navigation}) => {
           marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.3}}>
+        <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
             onPress={() => Linking.openURL('https://goodonyou.eco/')}
@@ -111,7 +111,7 @@ const JeansHeart = ({inputData, navigation}) => {
             onPress={() => {
               Linking.openURL('https://www.thereformation.com/');
             }}>
-            <ImageIcon category="brand" image={images.ref} />
+            <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={1}

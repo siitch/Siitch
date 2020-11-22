@@ -29,7 +29,7 @@ const Heart = ({navigation, inputData}) => {
           Reducing red meat intake can have numerous health benefits, including a lower risk of developing type 2 diabetes, cardiovascular disease, and certain cancers.
         </Text>
         <View style={{width:Width*1.1/3,alignItems:'center',marginLeft:5}}>
-        <Image source={images.heart_small} style={{width:110,height:110}} resizeMode='contain'/>
+        <Image source={images.heart_large} style={{width:110,height:110}} resizeMode='contain'/>
         </View>
       </View>
       <Text style={{marginLeft:'10%',marginTop:'2%',fontSize:12}}>- News Medical Life Sciences</Text>
@@ -75,7 +75,7 @@ const Heart = ({navigation, inputData}) => {
             height: 50,
             borderWidth: 2,
             borderColor: '#8DC73F',
-            borderRadius: 20, 
+            borderRadius: 30, 
             width: Width*0.9,
             textAlign: 'center',
             fontSize: 20,

@@ -30,14 +30,15 @@ const JeansRecycle = ({inputData, navigation}) => {
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
+          marginTop:'2%'
         }}>
         <Image
           source={images.jeans}
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 8,
+            width: Width / 5,
+            height: Height / 9,
           }}
           resizeMode="contain"
         />
@@ -66,8 +67,8 @@ const JeansRecycle = ({inputData, navigation}) => {
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 8,
+            width: Width / 5,
+            height: Height / 9,
             marginTop: '8%',
           }}
           resizeMode="contain"
@@ -105,8 +106,8 @@ const JeansRecycle = ({inputData, navigation}) => {
           style={{
             marginLeft: Width / 30,
             marginRight: Width / 30,
-            width: Width / 4,
-            height: Height / 8,
+            width: Width / 5,
+            height: Height / 9,
             marginTop: '8%',
           }}
           resizeMode="contain"
@@ -142,11 +143,11 @@ const JeansRecycle = ({inputData, navigation}) => {
           height: 50,
           borderWidth: 2,
           borderColor: '#8DC73F',
-          borderRadius: 20,
+          borderRadius: 30,
           width: Width * 0.9,
           textAlign: 'center',
           fontSize: 20,
-          marginTop: '10%',
+          marginTop: '5%',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -156,10 +157,10 @@ const JeansRecycle = ({inputData, navigation}) => {
         style={{
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: '5%',
+          marginTop: '10%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.3}}>
+        <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
             onPress={() => Linking.openURL('https://goodonyou.eco/')}
@@ -180,7 +181,7 @@ const JeansRecycle = ({inputData, navigation}) => {
             onPress={() => {
               Linking.openURL('https://www.thereformation.com/');
             }}>
-            <ImageIcon category="brand" image={images.ref} />
+            <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={1}

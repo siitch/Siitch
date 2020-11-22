@@ -37,9 +37,11 @@ const JeansVs = ({inputData, navigation}) => {
         style={{
           backgroundColor: '#00adef',
           height: Height / 10,
+          width:Width,
           alignItems: 'center',
           flexDirection: 'row',
           textAlign: 'center',
+          marginBottom:'5%'
         }}>
         <View style={{flexDirection: 'row'}}>
           <Text
@@ -66,7 +68,7 @@ const JeansVs = ({inputData, navigation}) => {
             style={{
               color: 'white',
               marginLeft: Width / 10,
-              width: Width / 2,
+              width: Width / 2.2,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
@@ -81,34 +83,28 @@ const JeansVs = ({inputData, navigation}) => {
             flexDirection: 'row',
             marginLeft: Width / 10,
             alignItems: 'center',
-            marginTop: Height / 40,
+            marginTop: Height / 250,
           }}
           key={i}>
           <Image
             source={row.picture}
             style={{
               width: Width / 5,
-              height: Height / 12,
+              height: Height / 9,
               marginRight: Width / 20,
             }}
-            resizeMode="contain"
+            resizeMode='contain'
           />
-          <View style={{marginLeft: '20%'}}>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                source={images.water}
-                style={{
-                  width: Width / 20,
-                  height: Height / 30,
-                }}
-                resizeMode="contain"
-              />
-              <Text
-                style={{color: '#00adef', fontWeight: 'bold', fontSize: 20}}>
-                {row.water} gallons
-              </Text>
-            </View>
-            <Text style={{marginLeft: Width / 20}}>{row.name}</Text>
+          <View style={{alignItems:'flex-start',flexDirection:'column'}}>
+          <View style={{alignItems:'center',flexDirection:'row'}}>
+            <Image
+              source={images.water}
+              style={{width: Width / 15, height: Height / 23, marginLeft:'30%'}}
+              resizeMode='contain'
+            />
+            <Text style={{color: '#00adef',fontWeight:'bold',fontSize:20,width:Width/3}}>{row.water} gallons</Text>
+          </View>
+          <Text style={{fontSize:16,marginLeft:'40%',textAlign:'left',marginTop:-5}}>{row.name}</Text>
           </View>
         </View>
       ))}
@@ -121,7 +117,7 @@ const JeansVs = ({inputData, navigation}) => {
           height: 50,
           borderWidth: 2,
           borderColor: '#8DC73F',
-          borderRadius: 20,
+          borderRadius: 30,
           width: Width * 0.9,
           textAlign: 'center',
           fontSize: 20,
@@ -137,8 +133,8 @@ const JeansVs = ({inputData, navigation}) => {
           alignItems: 'center',
           marginTop: '5%',
         }}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.3}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold',marginTop:'2%'}}>Doing good</Text>
+        <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
             onPress={() => Linking.openURL('https://goodonyou.eco/')}
@@ -159,7 +155,7 @@ const JeansVs = ({inputData, navigation}) => {
             onPress={() => {
               Linking.openURL('https://www.thereformation.com/');
             }}>
-            <ImageIcon category="brand" image={images.ref} />
+            <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={1}

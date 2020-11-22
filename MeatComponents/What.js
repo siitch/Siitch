@@ -22,24 +22,24 @@ const Width = Dimensions.get('window').width;
 const What = () => {
   return (
     <ScrollView style={{backgroundColor:'white'}}>
-      <View style={{width:Width,alignItems:'center',marginTop:'5%'}}>
-        <Text style={{fontSize:24,alignContent:'center'}}>What Can I do?</Text>
+      <View style={{width:Width,alignItems:'center',marginTop:'10%'}}>
+        <Text style={{fontSize:24,alignContent:'center',fontWeight:'bold'}}>What Can I do?</Text>
       </View>
-      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Reduce Frequency</Text>
-      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Try saving red meat for special occasions</Text>
-      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',marginRight:'5%',width: Width / 1.2}}>Take it at your own pace. If you eat meat twice a day, try eating it once a day</Text>
-      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold',}}>Reduce Portion Size</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'10%',fontWeight:'bold'}}>Reduce Frequency</Text>
+      <Text style={{fontSize:14,marginLeft:'10%',width: Width / 1.2}}>Try saving red meat for special occasions</Text>
+      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'10%',marginRight:'5%',width: Width / 1.2}}>Take it at your own pace. If you eat meat twice a day, try eating it once a day</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'10%',fontWeight:'bold',}}>Reduce Portion Size</Text>
       <View style={{widt:Width,alignItems:'center'}}>
       <Image source={images.portion} style={{marginTop:'5%'}} resizeMode='contain'/>
       </View>
-      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Reducing portion size will save you money and help you lose weight</Text>
-      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Replace</Text>
-      <Text style={{fontSize:14,marginLeft:'5%',width: Width / 1.2}}>Try healthier meats, like fish or poultry</Text>
-      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%'}}>Try meat-alternative products</Text>
-      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>Explore</Text>
-      <Text style={{fontSize:14,marginLeft:'5%'}}>Explore new plant-based recipes</Text>
-      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'5%',width: Width / 1.2}}>Find the vegetables that work for your pallete. Examples: marinated portobello mushrooms, grilled peppers, eggplant, sweet potato tacos, black bean burgers, pinto beans, chickpeas, lentils, edamame...</Text>
-      <Text style={{fontSize:12,marginTop:'1%',marginLeft:'5%',fontWeight:'bold',width: Width / 1.2}}>(Talk to your doctor before changing diets)</Text>
+      <Text style={{fontSize:14,marginLeft:'10%',width: Width / 1.2}}>Reducing portion size will save you money and help you lose weight</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'10%',fontWeight:'bold'}}>Replace</Text>
+      <Text style={{fontSize:14,marginLeft:'10%',width: Width / 1.2}}>Try healthier meats, like fish or poultry</Text>
+      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'10%'}}>Try meat-alternative products</Text>
+      <Text style={{fontSize:20,marginTop:'5%',marginLeft:'10%',fontWeight:'bold'}}>Explore</Text>
+      <Text style={{fontSize:14,marginLeft:'10%'}}>Explore new plant-based recipes</Text>
+      <Text style={{fontSize:14,marginTop:'3%',marginLeft:'10%',width: Width / 1.2}}>Find the vegetables that work for your pallete. Examples: marinated portobello mushrooms, grilled peppers, eggplant, sweet potato tacos, black bean burgers, pinto beans, chickpeas, lentils, edamame...</Text>
+      <Text style={{fontSize:12,marginTop:'1%',marginLeft:'10%',fontWeight:'bold',width: Width / 1.2}}>(Talk to your doctor before changing diets)</Text>
       <View style={{width:Width,alignItems:'center',marginTop:'10%'}}>
         <Text style={{ color:'#8DC73F', fontSize:20,marginLeft:'25%',fontWeight:'bold', transform: [{ rotate: '-6.51deg' }]
           }}>
@@ -72,7 +72,7 @@ const What = () => {
           <View style={{width:Width/2,alignItems:'center'}}><Image source={images.steak_large} style={{marginLeft:'10%'}} resizeMode='contain' /></View>
       </View>
       <View style={{flexDirection:'row',alignItems:'center'}}>
-        <View style={{width:Width/2,alignItems:'center'}}><Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%',fontWeight:'bold'}}>One liter milk =</Text></View>
+        <View style={{width:Width/2,alignItems:'center'}}><Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%',fontWeight:'bold'}}>One liter milk =</Text></View>
         <View style={{width:Width/2,alignItems:'center'}}><Text style={{fontSize:14,marginTop:'5%',fontWeight:'bold'}}>One 8 oz. steak =</Text></View>
       </View>
       <View style={{flexDirection:'row',alignItems:'center',width:Width}}>
@@ -97,7 +97,7 @@ const What = () => {
       </View>
       </View>
       
-      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'5%'}}>
+      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%'}}>
       <Text onPress={() => Linking.openURL('https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')} style={{color:'#00ADEF'}}>Plan your meals, </Text>
          and plan for leftovers so you don’t waste meat, or any dairy product</Text>
       <View style={{

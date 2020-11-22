@@ -45,7 +45,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{
               fontSize: 24,
               fontWeight: 'bold',
-              color: '#3AADFA',
+              color: '#0091FE',
               lineHeight: 30,
             }}>
             2866
@@ -55,31 +55,31 @@ const JeansWater = ({inputData, navigation}) => {
           </Text>
         </View>
       </View>
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{alignItems: 'center', justifyContent: 'center',marginTop:'2%'}}>
         <Image
           source={images.jeans}
-          style={{width: 200, height: 200}}
+          style={{width: 150, height: 150}}
           resizeMode="contain"
         />
       </View>
-      <View style={{alignItems: 'center', marginTop: '2%'}}>
+      <View style={{alignItems: 'center', marginTop: '8%'}}>
         <View
           style={{
             flexDirection: 'row',
             width: 300,
             height: 100,
             borderRadius: 20,
-            backgroundColor: '#3AADFA',
+            backgroundColor: '#00ADEF',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
           <Image
             source={images.truck}
-            style={{width: 120, height: 120, alignItems: 'center'}}
+            style={{width: 110, height: 110, marginTop: 2,marginLeft:-20}}
             resizeMode="contain"
           />
           <Text style={{fontSize: 18, marginLeft: '5%', color: 'white'}}>
-            Context {'\n'} 3,000 gallon tank
+            Context {'\n'}<Text style={{fontWeight:'bold'}}>3,000</Text> gallon tank
           </Text>
         </View>
       </View>
@@ -118,7 +118,7 @@ const JeansWater = ({inputData, navigation}) => {
               </Text>
             </View>
             <View style={{flexDirection: 'column', marginLeft: 15}}>
-              <Text style={{fontSize: 20, color: 'white'}}>
+              <Text style={{fontSize: 20, color: 'white',fontWeight:'bold'}}>
                 to grow the cotton
               </Text>
               <Text style={{fontSize: 14, color: 'white'}}>
@@ -129,7 +129,7 @@ const JeansWater = ({inputData, navigation}) => {
               source={images.rain}
               style={{
                 resizeMode: 'cover',
-                marginLeft: 15,
+                marginLeft: 5,
                 marginTop: -10,
               }}
             />
@@ -180,7 +180,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{
               flexDirection: 'row',
               marginLeft: 15,
-              marginTop: 5,
+              marginTop: 10,
             }}>
             <Text
               style={{
@@ -206,7 +206,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{
               flexDirection: 'row',
               marginLeft: 15,
-              marginTop: 5,
+              marginTop: 10,
               alignItems: 'center',
             }}>
             <Text
@@ -260,7 +260,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{
               flexDirection: 'row',
               marginLeft: 15,
-              marginTop: 5,
+              marginTop: 10,
               alignItems: 'center',
             }}>
             <Text
@@ -310,7 +310,7 @@ const JeansWater = ({inputData, navigation}) => {
             </Text>
             <Text
               style={{
-                fontSize: 12,
+                fontSize: 14,
                 color: 'white',
                 width: Width / 1.5,
                 marginLeft: '45%',
@@ -330,7 +330,7 @@ const JeansWater = ({inputData, navigation}) => {
           height: 50,
           borderWidth: 2,
           borderColor: '#8DC73F',
-          borderRadius: 20,
+          borderRadius: 30,
           width: Width * 0.9,
           textAlign: 'center',
           fontSize: 20,
@@ -347,7 +347,7 @@ const JeansWater = ({inputData, navigation}) => {
           marginTop: '5%',
         }}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Doing good</Text>
-        <Text style={{fontSize: 16, width: Width / 1.3}}>
+        <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
             onPress={() => Linking.openURL('https://goodonyou.eco/')}
@@ -368,7 +368,7 @@ const JeansWater = ({inputData, navigation}) => {
             onPress={() => {
               Linking.openURL('https://www.thereformation.com/');
             }}>
-            <ImageIcon category="brand" image={images.ref} />
+            <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={1}

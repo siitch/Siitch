@@ -64,7 +64,7 @@ const Vs = ({navigation}) => {
             style={{
               color: 'white',
               marginLeft: Width / 10,
-              width: Width / 2,
+              width: Width / 2.2,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
@@ -111,7 +111,7 @@ const Vs = ({navigation}) => {
             height: 50,
             borderWidth: 2,
             borderColor: '#8DC73F',
-            borderRadius: 20, 
+            borderRadius: 30, 
             width: Width*0.9,
             textAlign: 'center',
             fontSize: 20,
