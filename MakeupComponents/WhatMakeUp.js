@@ -34,98 +34,98 @@ const WhatMakeUp = () => {
       <View style={{alignItems: 'center', marginTop: '5%'}}>
         <Image
           source={images.nail_polish}
-          style={{width: Width / 1.5, height: Height / 4}}
+          style={{width: Width / 1.8, height: Height / 7}}
           resizeMode="contain"
         />
       </View>
-      <Text
-        style={{
-          fontSize: 20,
-          alignContent: 'center',
-          fontWeight: 'bold',
-          marginLeft: '10%',
-          marginTop: '5%',
-        }}>
-        Do an Eco-Audit
-      </Text>
-      <View
-        style={{
-          backgroundColor: '#EF7A6A',
-          borderColor: '#EF7A6A',
-          borderRadius: 10,
-          width: Width / 1.2,
-          marginLeft: '10%',
-        }}>
-        <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
-          Why do an eco-audit? When you know your impact, you can make simple
-          changes that have major benefits.
+      <View style={{alignSelf: 'center'}}>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginTop: '5%',
+          }}>
+          Do an Eco-Audit
         </Text>
-        {expand1 ? (
-          <View style={{marginTop: 20}}>
-            <Text style={{marginLeft: 20, marginRight: 20}}>
-              It’s easy. Awareness starts with with counting. Count how many
-              products:
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: '5%',
-                marginLeft: 20,
-                marginRight: 20,
-              }}>
-              <Text>- </Text>
-              <Text>are on your bathroom vanity</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>- </Text>
-              <Text>are in your shower</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>- </Text>
-              <Text>how many are plastic?</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>- </Text>
-              <Text>how many are glass?</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>- </Text>
-              <Text>
-                how often do you buy them: every week, and every year?
+        <View
+          style={{
+            backgroundColor: '#EF7A6A',
+            borderColor: '#EF7A6A',
+            borderRadius: 10,
+            width: Width * 0.9,
+          }}>
+          <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
+            Why do an eco-audit? When you know your impact, you can make simple
+            changes that have major benefits.
+          </Text>
+          {expand1 ? (
+            <View style={{marginTop: 20}}>
+              <Text style={{marginLeft: 20, marginRight: 20}}>
+                It’s easy. Awareness starts with counting. Count how many
+                products:
               </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: '5%',
+                  marginLeft: 20,
+                  marginRight: 20,
+                }}>
+                <Text>- </Text>
+                <Text>are on your bathroom vanity</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>- </Text>
+                <Text>are in your shower</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>- </Text>
+                <Text>how many are plastic?</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>- </Text>
+                <Text>how many are glass?</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>- </Text>
+                <Text>
+                  how often do you buy them: every week, and every year?
+                </Text>
+              </View>
+              <Text style={{marginLeft: 20, marginRight: 20, marginTop: '5%'}}>
+                Add the numbers up and take a minute to think - where can you
+                cut back?
+              </Text>
+              <TouchableHighlight
+                style={{marginLeft: Width / 1.32, marginTop: -30}}
+                onPress={() => setExpand1(false)}
+                underlayColor="transparent">
+                <MaterialCommunityIcons
+                  name="menu-up"
+                  color="black"
+                  style={{fontSize: 40}}
+                />
+              </TouchableHighlight>
             </View>
-            <Text style={{marginLeft: 20, marginRight: 20, marginTop: '5%'}}>
-              Add up the numbers up and take a minute to think - where can you
-              cut back?
-            </Text>
+          ) : (
             <TouchableHighlight
               style={{marginLeft: Width / 1.32, marginTop: -30}}
-              onPress={() => setExpand1(false)}
+              onPress={() => setExpand1(true)}
               underlayColor="transparent">
               <MaterialCommunityIcons
-                name="menu-up"
+                name="menu-down"
                 color="black"
                 style={{fontSize: 40}}
               />
             </TouchableHighlight>
-          </View>
-        ) : (
-          <TouchableHighlight
-            style={{marginLeft: Width / 1.32, marginTop: -30}}
-            onPress={() => setExpand1(true)}
-            underlayColor="transparent">
-            <MaterialCommunityIcons
-              name="menu-down"
-              color="black"
-              style={{fontSize: 40}}
-            />
-          </TouchableHighlight>
-        )}
+          )}
+        </View>
       </View>
+
       <View style={{alignItems: 'center', marginTop: '10%'}}>
         <Image source={images.waterless} resizeMode="contain" />
       </View>
@@ -161,95 +161,98 @@ const WhatMakeUp = () => {
           more info
         </Text>
       </Text>
-      <Text
-        style={{
-          fontSize: 20,
-          alignContent: 'center',
-          fontWeight: 'bold',
-          marginLeft: '10%',
-          marginTop: '5%',
-        }}>
-        Go Eco-Friendly
-      </Text>
-      <View
-        style={{
-          backgroundColor: '#EF7A6A',
-          borderColor: '#EF7A6A',
-          borderRadius: 10,
-          width: Width / 1.2,
-          marginLeft: '10%',
-        }}>
-        <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
-          Want to make a difference? Eliminate single use plastics and jars.
-          Think refill, not landfill.
+      <View style={{alignSelf: 'center'}}>
+        <Text
+          style={{
+            fontSize: 20,
+            alignContent: 'center',
+            fontWeight: 'bold',
+            marginTop: '5%',
+          }}>
+          Go Eco-Friendly
         </Text>
-        {expand2 ? (
-          <View style={{marginTop: 20}}>
-            <Text style={{marginLeft: 20, marginRight: 20}}>
-              Your bottles, pumps, tubes and jars have a major impact. Support
-              brands that:
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: '5%',
-                marginLeft: 20,
-                marginRight: 20,
-              }}>
-              <Text>1)</Text>
-              <Text> Use refillable aluminum or glass bottles</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>2)</Text>
-              <Text> Help you commit to refillable makeup routiner</Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
-              <Text>3)</Text>
-              <Text>
-                {' '}
-                Use earth-friendly, reusable, biodegradable packaging made from
-                100% recyclable material
+        <View
+          style={{
+            backgroundColor: '#EF7A6A',
+            borderColor: '#EF7A6A',
+            borderRadius: 10,
+            width: Width * 0.9,
+          }}>
+          <Text style={{marginLeft: 20, marginRight: 20, marginTop: 10}}>
+            Want to make a difference? Eliminate single use plastics and jars.
+            Think refill, not landfill.
+          </Text>
+          {expand2 ? (
+            <View style={{marginTop: 20}}>
+              <Text style={{marginLeft: 20, marginRight: 20}}>
+                Your bottles, pumps, tubes and jars have a major impact. Support
+                brands that:
               </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: '5%',
+                  marginLeft: 20,
+                  marginRight: 20,
+                }}>
+                <Text>1)</Text>
+                <Text> Use refillable aluminum or glass bottles</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>2)</Text>
+                <Text> Help you commit to refillable makeup routines</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', marginLeft: 20, marginRight: 20}}>
+                <Text>3)</Text>
+                <Text>
+                  {' '}
+                  Use earth-friendly, reusable, biodegradable packaging made
+                  from 100% recyclable material
+                </Text>
+              </View>
+              <Text style={{marginLeft: 20, marginRight: 20, marginTop: '5%'}}>
+                For more zero-waste tips and solutions:
+              </Text>
+              <Text
+                onPress={() =>
+                  Linking.openURL('https://www.goingzerowaste.com/')
+                }
+                style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
+                Going Zero Waste
+              </Text>
+              <Text
+                onPress={() => Linking.openURL('https://packagefreeshop.com/')}
+                style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
+                Package Free Shop
+              </Text>
+              <TouchableHighlight
+                style={{marginLeft: Width / 1.32, marginTop: -30}}
+                onPress={() => setExpand2(false)}
+                underlayColor="transparent">
+                <MaterialCommunityIcons
+                  name="menu-up"
+                  color="black"
+                  style={{fontSize: 40}}
+                />
+              </TouchableHighlight>
             </View>
-            <Text style={{marginLeft: 20, marginRight: 20, marginTop: '5%'}}>
-              For more zero-waste tips and solutions:
-            </Text>
-            <Text
-              onPress={() => Linking.openURL('https://www.goingzerowaste.com/')}
-              style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
-              Going Zero Waste
-            </Text>
-            <Text
-              onPress={() => Linking.openURL('https://packagefreeshop.com/')}
-              style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
-              Package Free Shop
-            </Text>
+          ) : (
             <TouchableHighlight
               style={{marginLeft: Width / 1.32, marginTop: -30}}
-              onPress={() => setExpand2(false)}
+              onPress={() => setExpand2(true)}
               underlayColor="transparent">
               <MaterialCommunityIcons
-                name="menu-up"
+                name="menu-down"
                 color="black"
                 style={{fontSize: 40}}
               />
             </TouchableHighlight>
-          </View>
-        ) : (
-          <TouchableHighlight
-            style={{marginLeft: Width / 1.32, marginTop: -30}}
-            onPress={() => setExpand2(true)}
-            underlayColor="transparent">
-            <MaterialCommunityIcons
-              name="menu-down"
-              color="black"
-              style={{fontSize: 40}}
-            />
-          </TouchableHighlight>
-        )}
+          )}
+        </View>
       </View>
+
       <View style={{alignItems: 'center', marginTop: '10%'}}>
         <Image source={images.donotpour} resizeMode="contain" />
       </View>
@@ -287,10 +290,10 @@ const WhatMakeUp = () => {
       <Text style={{marginLeft: '10%', marginRight: '10%'}}>
         <Text
           onPress={() =>
-            Linking.openURL('https://homehacks.co/upcycle-old-perfume-bottles/')
+            Linking.openURL('https://www.ewg.org/californiacosmetics/toxic12')
           }
           style={{color: '#00ADEF'}}>
-          The Toxic 12 Chemicals and Contaminants in Your Cosmetic
+          The Toxic 12 Chemicals and Contaminants in Your Cosmetics
         </Text>
         <Text> - EWG</Text>
       </Text>

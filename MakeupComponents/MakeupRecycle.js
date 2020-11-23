@@ -62,7 +62,7 @@ const MakeupRecycle = ({inputData, navigation}) => {
             height: 50,
             borderWidth: 2,
             borderColor: '#8DC73F',
-            borderRadius: 20,
+            borderRadius: 30,
             width: Width * 0.9,
             textAlign: 'center',
             fontSize: 20,

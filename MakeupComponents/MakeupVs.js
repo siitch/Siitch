@@ -46,31 +46,30 @@ const MakeupVs = ({inputData, navigation}) => {
         <View>
           {itemArr.map((item, index) => (
             <View style={{flexDirection: 'row', marginTop: 20}} key={index}>
-              <Image source={item.img} style={{width: 70, height: 70}} />
+              <Image source={item.img} style={{width: 50, height: 50}} />
               <View
                 style={{
                   width: Width / 2,
                   justifyContent: 'center',
                 }}>
-                <Text style={{marginLeft: 20, fontSize: 16}}>{item.name}</Text>
+                <Text style={{marginLeft: 10, fontSize: 16}}>{item.name}</Text>
               </View>
               <Image
                 source={item.img2}
                 style={{
-                  width: 70,
-                  height: 70,
-                  marginLeft: 30,
+                  width: 50,
+                  height: 50,
                   resizeMode: 'contain',
                 }}
               />
             </View>
           ))}
-          <Text style={{marginTop: 20, marginLeft: 50, marginRight: 50}}>
+          <Text style={{marginTop: 20}}>
             With the exception of color additivies, the Food and Drug
             Administration lacks the power and resources to review the safety of
             chemicals in cosmetics before they are used.
           </Text>
-          <Text style={{marginLeft: Width / 1.5}}>- EWG</Text>
+          <Text style={{marginLeft: Width * 0.6}}>- EWG</Text>
         </View>
         <TouchableHighlight
           onPress={() => navigation.navigate('What')}
@@ -81,7 +80,7 @@ const MakeupVs = ({inputData, navigation}) => {
             height: 50,
             borderWidth: 2,
             borderColor: '#8DC73F',
-            borderRadius: 20,
+            borderRadius: 30,
             width: Width * 0.9,
             textAlign: 'center',
             fontSize: 20,
