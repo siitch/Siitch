@@ -150,14 +150,12 @@ export default class Compare extends Component {
   }
 
   makearray(productarr){
-    console.log(productarr)
     resarray = []
     for (item in productarr){
       if (productarr[item] != ""){
         resarray.push(productarr[item])
       }
     }
-    console.log(resarray)
     return resarray
   }
 
