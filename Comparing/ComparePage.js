@@ -439,11 +439,11 @@ export const comparePage = ({route}) => {
                       height: 60
                   }}>
                       <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G'); }} >
-                          <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                          <Text style={{ color: unit === 'G' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                       </TouchableOpacity>
                       <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
                       <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }} >
-                          <Text style={{ paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                          <Text style={{ color: unit === 'L' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                       </TouchableOpacity>
             </View>
           </View>
