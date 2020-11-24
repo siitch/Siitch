@@ -420,9 +420,7 @@ const Water = ({inputData, navigation}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              What Can I do?
-            </Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold',color:'white'}}>What Can I Do?</Text>
           </TouchableHighlight>
         </View>
         <View
