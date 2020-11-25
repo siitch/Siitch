@@ -263,8 +263,14 @@ const styles = StyleSheet.create({
   },
   boldTextFormatCompare: {
     textAlign: 'center',
-    fontSize:30,
+    fontSize:25,
     fontWeight:'bold'
+  },
+  boldTextFormatBlueCompare: {
+    textAlign: 'center',
+    fontSize:25,
+    fontWeight:'bold',
+    color: '#00ADEF'
   },
   selectItemText: {
     alignItems: 'center',

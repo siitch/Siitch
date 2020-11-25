@@ -354,10 +354,10 @@ export const comparePage = ({route}) => {
 
   const setMetrictext = () => {
     if (unit == 'G'){
-      return 'The gallons of water it takes to make one pound of these items:'
+      return 'The gallons of water used to make the items above, or (if applicable) the years it takes to decompose.'
     }
     else if (unit == 'L'){
-      return 'The liters of water it takes to make one kg of these items:'
+      return 'The liters of water used to make the items above, or (if applicable) the years it takes to decompose.'
     }
   }
 
@@ -445,7 +445,7 @@ export const comparePage = ({route}) => {
                       </TouchableOpacity>
             </View>
           </View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
+        {/* <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} </Text>
           <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod2}</Text>
           {
@@ -472,10 +472,10 @@ export const comparePage = ({route}) => {
             <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod6}</Text>
             </View>
           }
-        </View>
+        </View> */}
         <View style={{ 
                       flexDirection: 'row', 
-                      marginTop: '5%', 
+                      marginTop: '0%', 
                       marginRight: 20, 
                       //borderColor: '#80CAFF',
                       //borderWidth: 1,
@@ -495,7 +495,14 @@ export const comparePage = ({route}) => {
               <Image source = {Profiles[prod1]}
                 style = {{width: 180, height: 180, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1[selectedmetrictodisplay]}</Text>
+                <Text style={styles.boldTextFormatCompare}>{prod1}</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f1[selectedcategory1]))} {f1[selectedmetrictodisplay]}</Text>
+                    </View>
                 <Text style={styles.textFormatCompare}>{f1[selectedmeasurement]}</Text>
                 <Text style={styles.textFormatCompare}>{f1[selectedsize]}</Text>
             </View>
@@ -503,7 +510,14 @@ export const comparePage = ({route}) => {
               <Image source = {Profiles[prod2]} 
                 style = {{width: 180, height: 180, alignItems:'center'}}
                 resizeMode="contain"/>
-                <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2[selectedmetrictodisplay]}</Text>
+                <Text style={styles.boldTextFormatCompare}>{prod2}</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f2[selectedcategory2]))} {f2[selectedmetrictodisplay]}</Text>
+                    </View>
                 <Text style={styles.textFormatCompare}>{f2[selectedmeasurement]}</Text>
                 <Text style={styles.textFormatCompare}>{f2[selectedsize]}</Text>
             </View>
@@ -517,7 +531,14 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod3]}
                     style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{prod3}</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f3[selectedcategory3]))} {f3[selectedmetrictodisplay]}</Text>
+                    </View>
                     <Text style={styles.textFormatCompare}>{f3[selectedmeasurement]}</Text>
                     <Text style={styles.textFormatCompare}>{f3[selectedsize]}</Text>
                 </View>
@@ -528,7 +549,14 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod4]} 
                     style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{prod4}</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f4[selectedcategory4]))} {f4[selectedmetrictodisplay]}</Text>
+                    </View>
                     <Text style={styles.textFormatCompare}>{f4[selectedmeasurement]}</Text>
                     <Text style={styles.textFormatCompare}>{f4[selectedsize]}</Text>
                 </View>
@@ -544,7 +572,14 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod5]}
                     style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f5[selectedcategory5]))} {f5[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{prod5}</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f5[selectedcategory4]))} {f6[selectedmetrictodisplay]}</Text>
+                    </View>
                     <Text style={styles.textFormatCompare}>{f5[selectedmeasurement]}</Text>
                     <Text style={styles.textFormatCompare}>{f5[selectedsize]}</Text>
                 </View>
@@ -555,7 +590,14 @@ export const comparePage = ({route}) => {
                   <Image source = {Profiles[prod6]} 
                     style = {{width: 180, height: 180, alignItems:'center'}}
                     resizeMode="contain"/>
-                    <Text style={styles.boldTextFormatCompare}>{numberWithCommas(parseInt(f6[selectedcategory6]))} {f6[selectedmetrictodisplay]}</Text>
+                    <Text style={styles.boldTextFormatCompare}>{prod6}</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                      <Image
+                        style={{width: 20, height: 20, marginTop: '3%'}}
+                        source={Profiles.water}
+                      />
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f6[selectedcategory6]))} {f6[selectedmetrictodisplay]}</Text>
+                    </View>
                     <Text style={styles.textFormatCompare}>{f6[selectedmeasurement]}</Text>
                     <Text style={styles.textFormatCompare}>{f6[selectedsize]}</Text>
                 </View>
