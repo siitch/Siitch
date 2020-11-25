@@ -110,44 +110,59 @@ export const RankingPage = ({category, id}) => {
         max = 0;
     }
 
-    return (
-        <View style={styles.meats}>
-            <ScrollView>
-
-                <View style={{ 
-                    flexDirection: 'row', 
-                    marginTop: '10%', 
-                    marginLeft: 20, 
-                    borderColor: '#00ADEF',
-                    borderWidth: 2,
-                    borderRadius: 10, 
-                    width: 65,
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                    paddingBottom: 5
-                }}>
-                    <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G'); }} >
-                        <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
-                    </TouchableOpacity>
-                    <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-                    <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L'); }} >
-                        <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{alignItems: 'center'}}>
-
-                    <Text style={{ fontWeight: 'bold', fontSize: 30, marginTop: 10 }}>
-                        {category}
-                    </Text>
-
-                    <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', marginBottom: '5%'}}>
+    const unitTitle = (category, unit) => {
+        if(category === "Everyday Items" || category === "Everyday Foods" || category === "All Drinks" || category === "Alcoholic") {
+            return <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%'}}></View>;
+        }
+        else {
+            return (
+                <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', marginBottom: '5%'}}>
                     <Image
                         style={{width: 20, height: 20}}
                         source={Profiles.water}
                     />
                     <Text style={{fontSize: 15, marginLeft: 5}}>{ unit === 'L' ? 'Liters per Kilogram' : 'Gallons per Pound' }</Text>
+                </View>
+            );
+        }
+    }
+
+    return (
+        <View style={styles.meats}>
+            <ScrollView>
+
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{ 
+                        flexDirection: 'row', 
+                        marginTop: '5%', 
+                        marginLeft: 20, 
+                        borderColor: '#00ADEF',
+                        borderWidth: 2,
+                        borderRadius: 10, 
+                        width: 65,
+                        paddingLeft: 10,
+                        paddingRight: 10
+                    }}>
+                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G'); }} >
+                            <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                        </TouchableOpacity>
+                        <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
+                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L'); }} >
+                            <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                        </TouchableOpacity>
                     </View>
+                    <View style={{alignItems: 'center', marginTop: 10, width: DeviceWidth*0.6}}>
+                        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, paddingTop: 15, paddingLeft: 10, paddingRight: 10, paddingBottom: 10}}>
+                            {category}
+                        </Text>
+                    </View>
+                </View>
+
+                <View style={{alignItems: 'center'}}>
+
+                    {
+                        unitTitle(category, unit)
+                    }
 
                     {
                         sortable.map((item, index) => {

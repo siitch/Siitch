@@ -32,7 +32,7 @@ function RankScreen({navigation}) {
                 </View>
                 <View className="column2">
                     <TouchableOpacity onPress={() => navigation.navigate('Fruits')} >
-                        <CategoryIcon category='Fruits' image={Profiles.fruits} />
+                        <CategoryIcon category='Fruits' image={Profiles.Apple} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Everyday Items')} >
                         <CategoryIcon category='Everyday items' image={Profiles.everyday_items} />
@@ -49,10 +49,10 @@ function RankScreen({navigation}) {
                         <CategoryIcon category='Vegetables' image={Profiles.vegetables} />
                     </TouchableOpacity> 
                     <TouchableOpacity onPress={() => navigation.navigate('Nuts, Beans')} >
-                        <CategoryIcon category='Nuts, Beans' image={Profiles.nuts_beans} />
+                        <CategoryIcon category='Nuts, Beans' image={Profiles.Peanuts} />
                     </TouchableOpacity>          
                     <TouchableOpacity onPress={() => navigation.navigate('Oils')} >
-                        <CategoryIcon category='Oils' image={Profiles.oils} />
+                        <CategoryIcon category='Oils' image={Profiles['Olive oil']} />
                     </TouchableOpacity>           
                     <TouchableOpacity onPress={() => navigation.navigate('Drinks-NonAlcoholic')} >
                         <CategoryIcon category='Drinks-NonAlcoholic' image={Profiles.non_alcoholic_drinks} />

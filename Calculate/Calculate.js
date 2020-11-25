@@ -272,8 +272,11 @@ function CalculateScreen() {
       >
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: 22 }}>
           <View style={styles.modalView}>
-              <Text style={{ marginBottom: 15, textAlign: "center", marginTop: 30 }}>
-                  Challenges specific to the item to appear in the future.
+              <Text style={{ textAlign: "center", marginTop: 30 }}>
+                  Challenges specific to the item
+              </Text>
+              <Text style={{ marginBottom: 15, textAlign: "center" }}>
+                  to appear in the future.
               </Text>
               <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#70BF41" }}

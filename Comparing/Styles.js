@@ -200,6 +200,30 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     textAlign: "left"
   },
+  modalView: {
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 25,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 20,
+  },
   calculatePickerStyle: {
     alignContent: "center",
     elevation: 3,
