@@ -68,7 +68,7 @@ export const RankingPage = ({category, id}) => {
         firebase
         .database()
         .ref('/')
-        .once('value', data => { 
+        .once('value', data => {
             fetchedData = data.val();
             for (var item in fetchedData) {
                 if((fetchedData[item]["Category"] === id || fetchedData[item]["Category 2"] === id || fetchedData[item]["Category 3"] === id) && fetchedData[item][parameter]) {
@@ -167,7 +167,7 @@ export const RankingPage = ({category, id}) => {
                     {
                         sortable.map((item, index) => {
                             return(
-                                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} /> 
+                                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} /> 
                             )
                         })
                     }
