@@ -2,26 +2,29 @@ import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Text, View, ScrollView, Image, Dimensions, TextInput, TouchableHighlight, Modal, TouchableOpacity, Alert } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { styles } from '../Ranking/Styles';
+import { styles } from '../Comparing/Styles';
 import Profiles from '../ImageDB.js';
 import firebase from 'firebase';
 import { CalculateTotal } from './CalculateTotal';
+import RNPicker from 'rn-modal-picker';
 
 const DeviceWidth = Dimensions.get('window').width;
 
 const frequency_values = {
-  once_day: 7,
-  once_week: 1,
-  two_week: 2,
-  three_week: 3,
-  four_week: 4,
-  five_week: 5,
-  once_month: 0.25
+  once_day: 365,
+  once_week: 52,
+  two_week: 2*52,
+  three_week: 3*52,
+  four_week: 4*52,
+  five_week: 5*52,
+  once_month: 1*12
 }
 
 let fetchedData = {}
 
 function CalculateScreen() {
+
+  let itemsList = [];
 
   const config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
@@ -63,9 +66,26 @@ function CalculateScreen() {
     }
   }
 
-  const numberWithCommas = (x) => {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const fetchList = () => {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+
+    firebase
+    .database()
+    .ref('/')
+    .once('value', data => { 
+        fetchedData = data.val();
+
+        for (let item in fetchedData) {
+          itemsList.push({
+            name: item,
+          });
+        }
+    });
   }
+
+  fetchList();
 
   const fetchData = (item) => {
     if (!firebase.apps.length) {
@@ -77,6 +97,12 @@ function CalculateScreen() {
     .ref('/')
     .once('value', data => { 
         fetchedData = data.val();
+
+        for (let item in fetchedData) {
+          itemsList.push({
+            name: item,
+          });
+        }
 
         if(item in fetchedData) {
           id = fetchedData[item]["Category"];
@@ -117,27 +143,25 @@ function CalculateScreen() {
       <View style={{flexDirection: 'row'}}>
         <View style={{ 
           flexDirection: 'row', 
-          marginTop: '15%', 
+          marginTop: '21%', 
           marginLeft: 20, 
-          borderColor: '#80CAFF',
+          borderColor: '#00ADEF',
           borderWidth: 2,
-          borderRadius: 20, 
+          borderRadius: 10, 
           width: 65,
-          paddingTop: 10,
           paddingLeft: 10,
-          paddingRight: 10,
-          paddingBottom: 20
+          paddingRight: 10
       }}>
           <TouchableOpacity onPress={() => { setUnit('G'); if(individual_total) { setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   Gal" : "Global Gallon p lb"]); } else {calculate(item, frequency)} }} >
-              <Text style={{ color: unit === 'G' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+              <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
           </TouchableOpacity>
           <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
           <TouchableOpacity onPress={() => { setUnit('L'); if(individual_total) { setIndividualTotal(fetchedData[item][(id === "EDI" || id === "Drinks - All" || id === "Drinks - Alc") ? "Single item   L" : "Global Liters p kg"]); } else {calculate(item, frequency)} }} >
-              <Text style={{ color: unit === 'L' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+              <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
           </TouchableOpacity>
       </View>
       <View style={{alignItems: 'center', marginTop: 10}}>
-        <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '15%', paddingTop: 30, paddingLeft: 50, paddingRight: 10, paddingBottom: 10}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30, marginTop: '21%', paddingTop: 30, paddingLeft: 50, paddingRight: 10, paddingBottom: 10}}>
             Calculator
         </Text>
       </View>
@@ -152,21 +176,37 @@ function CalculateScreen() {
         <Text style={{fontSize: 25, fontWeight: '500'}}>
           Select Item
         </Text>
-        <TextInput 
-          style={{ 
-            borderColor: '#80CAFF',
-            marginTop: 10,
-            height: 50,
-            borderWidth: 2,
-            borderRadius: 20, 
-            width: DeviceWidth*0.9,
-            textAlign: 'center',
-            fontSize: 20
-          }} 
-          value={inputValue}
-          placeholder="Search"
-          onChangeText={currentItem => { setInputValue(currentItem); setComputed(false); setItem(currentItem); setError({ status: false, message: '' }); }}
-        />
+        <View style={styles.container}>
+          <View
+            style={{
+              width: DeviceWidth*0.9,
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignContent: 'center'
+            }}>
+            <RNPicker
+              dataSource={itemsList}
+              dummyDataSource={itemsList}
+              defaultValue={false}
+              pickerTitle={'Search Items'}
+              showSearchBar={true}
+              disablePicker={false}
+              changeAnimation={'fade'}
+              searchBarPlaceHolder={'Search.....'}
+              showPickerTitle={true}
+              selectedLabel={item}
+              searchBarContainerStyle={styles.searchBarContainerStyle}
+              pickerStyle={styles.calculatePickerStyle}
+              itemSeparatorStyle={styles.itemSeparatorStyle}
+              pickerItemTextStyle={styles.listTextViewStyle}
+              selectLabelTextStyle={styles.calculateLabelTextStyle}
+              placeHolderLabel={"Select"}
+              placeHolderTextStyle={styles.placeHolderTextStyle}
+              dropDownImageStyle={styles.dropDownImageStyle}
+              selectedValue={(index, currentItem) => { setInputValue(currentItem.name); setComputed(false); setItem(currentItem.name); setError({ status: false, message: '' }); }}
+            />
+          </View>
+        </View>
         <Text style={{fontSize: 25, marginTop: 30, fontWeight: '500'}}>
           Buy / Use / Eat
         </Text> 
@@ -253,11 +293,11 @@ function CalculateScreen() {
             <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Individual Total
             </Text>
-            <CalculateTotal value={individual_total} unit={unit} />
+            <CalculateTotal value={individual_total} unit={unit} id={id} type="individual" />
             <Text style={{fontSize: 25, fontWeight: '500', color: 'black', marginTop: 30}}>
               Yearly Total
             </Text>
-            <CalculateTotal value={individual_total*frequency_values[frequency]*52} unit={unit} />
+            <CalculateTotal value={individual_total*frequency_values[frequency]} unit={unit} id={id} type="yearly" />
         </View> 
       }
 
@@ -270,7 +310,7 @@ function CalculateScreen() {
         <View>
           <TouchableOpacity onPress={() => {computed ? clearElements() : calculate(item, frequency)}} style={{padding: 15, borderRadius: 30, backgroundColor: computed ? "orange" : '#70BF41', alignItems: 'center', justifyContent: 'center'}}>
             <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>{computed ? "Clear" : "Calculate"}</Text>
+              <Text style={{textAlign: 'center', width: computed ? 90 : DeviceWidth*0.4, fontWeight: 'bold', fontSize: 20, color: 'white', alignItems: 'center'}}>{computed ? "Clear" : "Calculate"}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -279,7 +319,7 @@ function CalculateScreen() {
           <View>
             <TouchableOpacity onPress={() => { setModalVisible(true) }} style={{padding: 15, borderRadius: 30, marginLeft: 10, backgroundColor: '#29A3FE', alignItems: 'center', justifyContent: 'center'}}>
               <View style={{alignItems: 'center'}}>
-                <Text style={{fontSize: 20, color: 'white', alignItems: 'center'}}>Challenge</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 20, color: 'white', alignItems: 'center'}}>Challenge</Text>
               </View>
             </TouchableOpacity>
           </View>

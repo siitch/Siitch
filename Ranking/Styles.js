@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   centerearth: {
     right: 190,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   logo: {
     marginTop: '5%',
     width: 250,
-    height: 100,
+    height: 150,
   },
   rankingPage: {
     flex: 1,

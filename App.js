@@ -70,7 +70,7 @@ function HomeScreen() {
         </View>
         <Text style={styles.bottomtext}>See the environmental cost of</Text>
         <Text style={styles.bottomtext}>what you buy, so you can make</Text>
-        <Text style={styles.bottomtext}>a difference every day</Text>
+        <Text style={styles.bottomtext}>a difference every day!</Text>
       </View>
     </ScrollView>
   );

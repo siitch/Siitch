@@ -426,24 +426,22 @@ export const comparePage = ({route}) => {
           <View style={{width: DeviceWidth*0.18, marginTop: '3%'}}>
             <View style={{ 
                       flexDirection: 'row', 
-                      marginTop: '5%', 
-                      marginLeft: 15, 
-                      borderColor: '#80CAFF',
+                      marginTop: '21%', 
+                      marginLeft: 20, 
+                      borderColor: '#00ADEF',
                       borderWidth: 2,
-                      borderRadius: 20, 
+                      borderRadius: 10, 
                       width: 65,
-                      paddingTop: 10,
                       paddingLeft: 10,
-                      //paddingRight: 10,
-                      paddingBottom: 20,
-                      height: 60
+                      paddingRight: 10,
+                      height: 40
                   }}>
                       <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G'); }} >
-                          <Text style={{ color: unit === 'G' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                          <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                       </TouchableOpacity>
                       <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
                       <TouchableOpacity onPress={() => { handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }} >
-                          <Text style={{ color: unit === 'L' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                          <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                       </TouchableOpacity>
             </View>
           </View>

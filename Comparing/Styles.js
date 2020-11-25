@@ -157,7 +157,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-
+  calculateLabelTextStyle: {
+    color: "#000",
+    textAlign: "center",
+    width: "99%",
+    padding: 10,
+    fontSize: 20,
+    flexDirection: "row",
+    justifyContent:'center',
+    alignItems:'center'
+  },
   selectLabelTextStyle: {
     color: "#000",
     textAlign: "left",
@@ -169,8 +178,9 @@ const styles = StyleSheet.create({
   },
   placeHolderTextStyle: {
     color: "#D3D3D3",
-    padding: 10,
-    textAlign: "left",
+    paddingTop: 10,
+    fontSize: 20,
+    textAlign: "center",
     width: "99%",
     flexDirection: "row",
     justifyContent:'center',
@@ -190,23 +200,29 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     textAlign: "left"
   },
+  calculatePickerStyle: {
+    alignContent: "center",
+    elevation: 3,
+    marginTop: 10,
+    paddingRight: 25,
+    marginBottom: 2,
+    height: 50,
+    borderWidth: 2,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 20,
+    flexDirection: "row",
+    width: DeviceWidth * 0.9,
+    borderColor: '#80CAFF'
+  },
   pickerStyle: {
-    //marginLeft: 18,
     elevation:3,
     marginTop: 10,
     paddingRight: 25,
     marginRight: 50,
     marginBottom: 2,
-    // shadowOpacity: 1.0,
-    // shadowOffset: {
-    //   width: 1,
-    //   height: 1
-    // },
     height: 50,
     borderWidth:2,
-    //shadowRadius: 10,
     backgroundColor: "rgba(255,255,255,1)",
-    //shadowColor: "#d3d3d3",
     borderRadius: 20,
     flexDirection: "row",
     width: DeviceWidth * 0.7,

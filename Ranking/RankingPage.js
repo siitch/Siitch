@@ -116,23 +116,22 @@ export const RankingPage = ({category, id}) => {
 
                 <View style={{ 
                     flexDirection: 'row', 
-                    marginTop: '3%', 
+                    marginTop: '10%', 
                     marginLeft: 20, 
-                    borderColor: '#80CAFF',
+                    borderColor: '#00ADEF',
                     borderWidth: 2,
-                    borderRadius: 20, 
+                    borderRadius: 10, 
                     width: 65,
-                    paddingTop: 10,
                     paddingLeft: 10,
                     paddingRight: 10,
-                    paddingBottom: 20
+                    paddingBottom: 5
                 }}>
                     <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G'); }} >
-                        <Text style={{ color: unit === 'G' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                        <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                     </TouchableOpacity>
                     <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
                     <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L'); }} >
-                        <Text style={{ color: unit === 'L' ? '#80CAFF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                        <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                     </TouchableOpacity>
                 </View>
 
