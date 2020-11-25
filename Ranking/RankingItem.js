@@ -36,8 +36,6 @@ export const RankingItem = ({ max, cost, item, image, unit, category }) => {
         }
     }
 
-    sliceItem(item);
-
     return (
         <View>
             <View style={{flexDirection: 'row'}}>
