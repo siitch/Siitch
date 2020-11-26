@@ -32,7 +32,7 @@ function RankScreen({navigation}) {
                 </View>
                 <View className="column2">
                     <TouchableOpacity onPress={() => navigation.navigate('Fruits')} >
-                        <CategoryIcon category='Fruits' image={Profiles.Apple} />
+                        <CategoryIcon category='Fruits' image={Profiles.Apples} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Everyday Items')} >
                         <CategoryIcon category='Everyday items' image={Profiles.everyday_items} />
