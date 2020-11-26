@@ -578,7 +578,7 @@ export const comparePage = ({route}) => {
                         style={{width: 20, height: 20, marginTop: '3%'}}
                         source={Profiles.water}
                       />
-                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f5[selectedcategory4]))} {f6[selectedmetrictodisplay]}</Text>
+                      <Text style={styles.boldTextFormatBlueCompare}>{numberWithCommas(parseInt(f5[selectedcategory5]))} {f6[selectedmetrictodisplay]}</Text>
                     </View>
                     <Text style={styles.textFormatCompare}>{f5[selectedmeasurement]}</Text>
                     <Text style={styles.textFormatCompare}>{f5[selectedsize]}</Text>
@@ -794,7 +794,7 @@ function getTextStyle(val1, val2) {
     borderRadius: 40,
     borderWidth: 5,
     width: DeviceWidth*0.3, 
-    height: DeviceWidth*0.8, 
+    height: DeviceWidth*0.85, 
     alignItems:'center', 
     transform: [{scale: 0.8}],
     justifyContent: 'center'
@@ -803,7 +803,7 @@ function getTextStyle(val1, val2) {
     return {
       flex: 1,
       width: DeviceWidth*0.3, 
-      height: DeviceWidth*0.8, 
+      height: DeviceWidth*0.85, 
       alignItems:'center', 
       transform: [{scale: 0.8}],
       justifyContent: 'center'
