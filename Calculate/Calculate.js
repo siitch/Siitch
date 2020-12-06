@@ -135,6 +135,7 @@ function CalculateScreen() {
     setComputed(false);
     setInputValue("");
     setItem("");
+    setIndividualTotal(null)
     DropDownPicker.value = null;
   }
 
