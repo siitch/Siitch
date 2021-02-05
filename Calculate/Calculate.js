@@ -115,8 +115,13 @@ function CalculateScreen() {
           id = fetchedData[item]['Category'];
         }
 
-        if (!(item in fetchedData) || !fetchedData[item][waterParameter(id)]) {
+        if (!(item in fetchedData)) {
           setError({status: true, message: 'This item does not exist'});
+        } else if (!fetchedData[item][waterParameter(id)]) {
+          setError({
+            status: true,
+            message: 'Water unit does not exist. Try the compare tool.',
+          });
         } else if (
           item in fetchedData &&
           fetchedData[item][waterParameter(id)]
