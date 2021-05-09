@@ -13,7 +13,7 @@ const Profiles = {
   Plums: require('../images/Image_new/Fruits/plums.png'),
   Apricots: require('../images/Image_new/Fruits/apricot.png'),
   Guavas: require('../images/Image_new/Fruits/guava.png'),
-  Mangoes: require('../images/Image_new/Fruits/mango.png'),
+  Mangoes: ('../images/Image_new/Fruits/mango.png'),
   Cherries: require('../images/Image_new/Fruits/cherries.png'),
   Papayas: require('../images/Image_new/Fruits/papaya.png'),
   'Cherries sour': require('../images/Image_new/Fruits/cherries.png'),

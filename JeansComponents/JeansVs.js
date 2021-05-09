@@ -24,7 +24,7 @@ const Width = Dimensions.get('window').width;
 const arr = [
   {name: 'Pair of jeans', water: 2866, picture: images.jeansVs},
   {name: 'Leather shoes', water: 2113, picture: Profiles['Leather shoes']},
-  {name: 'Cotton t-shirt', water: 660, picture: Profiles.Shirt},
+  {name: 'Cotton T shirt', water: 660, picture: Profiles['Cotton T shirt']},
   {name: 'socks', water: 244, picture: Profiles.Socks},
 ];
 

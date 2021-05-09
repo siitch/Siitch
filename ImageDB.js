@@ -195,6 +195,8 @@ const Profiles = {
     Vodka: require('./images/Image_new/Drinks_Alcoholic/Single_units/vodka_glass.png'),
     'Pineapple juice': require('./images/Image_new/Drinks_Non_Alcoholic/pineapple_juice.png'),
     'Pineapple juice 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/pineapple_juice.png'),
+    'Milk': require('./images/Image_new/Drinks_Non_Alcoholic/milk.png'),
+    'Milk 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/milk.png'),
     'Milk cow': require('./images/Image_new/Drinks_Non_Alcoholic/milk.png'),
     'Milk cow 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/milk.png'),
     'Apple juice': require('./images/Image_new/Drinks_Non_Alcoholic/apple_juice.png'),
