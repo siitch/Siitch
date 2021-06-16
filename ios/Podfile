@@ -88,7 +88,7 @@ post_install do |installer|
       find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
       "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
       find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
-      "RCTBridgeModuleNameForClass(module))", "RCTBridgeModuleNameForClass(Class(module)))")
+      "RCTBridgeModuleNameForClass(strongModule))", "RCTBridgeModuleNameForClass(Class(strongModule)))")
   end
 
 def find_and_replace(dir, findstr, replacestr)
@@ -103,3 +103,5 @@ def find_and_replace(dir, findstr, replacestr)
   end
   Dir[dir + '*/'].each(&method(:find_and_replace))
 end
+
+
