@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: DeviceHeight * 0.1,
+    paddingTop: DeviceHeight * 0.025,
   },
   text: {
     textAlign: 'center',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: DeviceWidth * 0.25,
   },
   logo: {
-    marginTop: '5%',
+    marginTop: '1%',
     width: 250,
     height: 150,
   },

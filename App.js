@@ -25,7 +25,7 @@ import WhatMakeUp from './MakeupComponents/WhatMakeUp';
 import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
-import {View, Text, Image, Dimensions, Button, ScrollView} from 'react-native';
+import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -36,6 +36,14 @@ import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
 import {CalculateStackScreen} from './Calculate/Calculate';
 
+//Stuff for extra menu
+import { MenuMain } from './Menu/Screens';
+import { Sources } from './Menu/Screens';
+import { Mission } from './Menu/Screens';
+import { About } from './Menu/Screens';
+import { Virtual } from './Menu/Screens';
+import { FAQ } from './Menu/Screens';
+
 // import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
 import Profiles from './ImageDB';
@@ -43,6 +51,8 @@ import { color } from 'react-native-reanimated';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
+// Main function with siitch logo with text
+// and home logo with botto text
 function HomeScreen() {
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
@@ -80,15 +90,69 @@ const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const Stack = createStackNavigator();
 
+
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Home"
       component={HomeScreen}
-      options={{headerShown: false}}
+      options={{headerShown: true}}
+      options={({navigation}) => ({
+        headerBackTitleVisible: false,
+        headerShown : true,
+        headerTitle: null,
+        headerRight: () => (
+          <MaterialCommunityIcons
+            name="menu"
+            size={25}
+            color={'black'}
+            style={{
+              paddingRight: 20
+          }}
+            onPress={() => navigation.navigate('Menu')}
+          />
+        ),
+      })}
+    />
+    
+    <HomeStack.Screen 
+      name = "Menu"
+      component = {MenuMain}
+      />
+    
+    <HomeStack.Screen
+    name = "Sources"
+    component = {Sources}
+    options = {({route}) => ({
+      headerTitle: "Sources & Resources"
+    })}
+    />
+    <HomeStack.Screen
+    name = "Mission"
+    component = {Mission}
+    />
+    <HomeStack.Screen
+    name = "About"
+    component = {About}
+    />
+    <HomeStack.Screen
+    name = "Virtual"
+    component = {Virtual}
+    options = {({route}) => ({
+      headerTitle: "Virtual Water"
+    })}
+    />
+    <HomeStack.Screen
+    name = "FAQ"
+    component = {FAQ}
+    options = {({route}) => ({
+      headerTitle: "Frequently Asked Questions"
+    })}
     />
   </HomeStack.Navigator>
 );
+
+
 
 const App = () => {
   const [status, setStatus] = useState(true);
@@ -358,7 +422,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="HomeStack"
+          name="Home"
           component={HomeTabs}
           options={{headerShown: false}}
         />
@@ -372,6 +436,9 @@ const App = () => {
                 name="home"
                 size={25}
                 color={'grey'}
+                style={{
+                  paddingRight: 15
+              }}
                 onPress={() => navigation.navigate('Home')}
               />
             ),
@@ -382,4 +449,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
+
 export default App;

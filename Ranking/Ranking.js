@@ -10,7 +10,7 @@ function RankScreen({navigation}) {
     return (
       <View style={styles.rankingPage}>
         <ScrollView>
-            <View style={{alignItems: 'center', marginTop: '15%'}}>
+            <View style={{alignItems: 'center', marginTop: '25%'}}>
                 <Text style={{fontWeight: 'bold', fontSize: 30}}>
                     Select a Category
                 </Text>
