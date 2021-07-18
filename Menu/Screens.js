@@ -20,7 +20,7 @@ export const MenuMain = ({ navigation }) => {
             flexDirection: 'row',
             width: width,
             height: 75,
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         }}
@@ -36,6 +36,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '25%', marginTop: '1%'}}/>
         </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -43,7 +44,7 @@ export const MenuMain = ({ navigation }) => {
             flexDirection: 'row',
             width: width,
             height: 75,
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         }}
@@ -59,6 +60,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '50%', marginTop: '1%'}}/>
         </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -66,7 +68,7 @@ export const MenuMain = ({ navigation }) => {
             flexDirection: 'row',
             width: width,
             height: 75,
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         }}
@@ -82,6 +84,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '55%', marginTop: '1%'}}/>
         </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -89,7 +92,7 @@ export const MenuMain = ({ navigation }) => {
             flexDirection: 'row',
             width: width,
             height: 75,
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         }}
@@ -105,6 +108,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '45%', marginTop: '1%'}}/>
         </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -112,7 +116,7 @@ export const MenuMain = ({ navigation }) => {
             flexDirection: 'row',
             width: width,
             height: 75,
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         }}
@@ -128,6 +132,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '60%', marginTop: '1%'}}/>
         </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <View
             style={{
               flexDirection: 'row',
@@ -161,6 +166,17 @@ export const MenuMain = ({ navigation }) => {
             Have friends who love the planet? {'\n'}
             Feel free to share this prototype!
       </Text>
+      <Text
+        style={{
+          fontSize: 17,
+          color: 'black',
+          alignContent: 'auto',
+          margin: '5%',
+          textAlign: 'center'
+        }}>
+            This app only works on iPhones at this time. {'\n'}
+            It does not work on iPads or any Android devices.
+      </Text>
       </ScrollView>
     );
   }
@@ -183,7 +199,7 @@ export const Sources = ({ navigation }) => {
       <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://waterfootprint.org/media/downloads/Report47-WaterFootprintCrops-Vol1.pdf',
               )
             }
             style={{
@@ -199,7 +215,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://waterfootprint.org/media/downloads/Report-48-WaterFootprint-AnimalProducts-Vol1_1.pdf',
               )
             }
             style={{
@@ -215,7 +231,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://waterfootprint.org/media/downloads/TheWaterFootprintAssessmentManual_2.pdf',
               )
             }
             style={{
@@ -231,7 +247,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://waterfootprint.org/en/resources/waterstat/',
               )
             }
             style={{
@@ -247,7 +263,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.watercalculator.org/',
               )
             }
             style={{
@@ -263,7 +279,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.amazon.com/Your-Water-Footprint-Shocking-Everyday/dp/1770852956',
               )
             }
             style={{
@@ -279,7 +295,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://fdc.nal.usda.gov/',
               )
             }
             style={{
@@ -295,7 +311,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.fda.gov/home',
               )
             }
             style={{
@@ -311,7 +327,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'http://www.fao.org/home/en/',
               )
             }
             style={{
@@ -327,7 +343,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.nrdc.org/',
               )
             }
             style={{
@@ -343,7 +359,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.amazon.com/Green-Book-Everyday-Saving-Planet/dp/0307381358',
               )
             }
             style={{
@@ -354,12 +370,12 @@ export const Sources = ({ navigation }) => {
             }
             }>
             {' '}
-            The Green Blue Book - Kostigen{' '}
+            The Green Blue Book - Rogers & Kostigen{' '}
           </Text>
           <Text
             onPress={() =>
               Linking.openURL(
-                'google.com',
+                'https://www.nationalgeographic.com/',
               )
             }
             style={{

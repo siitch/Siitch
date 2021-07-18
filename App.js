@@ -201,20 +201,6 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="Calculate"
-          component={CalculateStackScreen}
-          options={{
-            tabBarLabel: 'Calculate',
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="calculator"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="Search2"
           component={GoToSearch}
           options={{
@@ -222,6 +208,20 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons
                 name="magnify"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Calculate"
+          component={CalculateStackScreen}
+          options={{
+            tabBarLabel: 'Calculate',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="calculator"
                 color={color}
                 size={size}
               />

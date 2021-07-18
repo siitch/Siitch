@@ -50,6 +50,7 @@ function CalculateScreen() {
   const [frequency, setFrequency] = useState('');
   const [item, setItem] = useState('');
   const [computed, setComputed] = useState(false);
+  const [context, setContext] = useState(false);
   const [selectOpened, setSelect] = useState(false);
   const [individual_total, setIndividualTotal] = useState();
   const [error, setError] = useState({status: false, message: ''});
@@ -356,6 +357,7 @@ function CalculateScreen() {
               alignItems: 'center',
               marginTop: 22,
             }}>
+              {!context && (
             <View style={styles.modalView}>
               <Text style={{textAlign: 'center', marginTop: 30}}>
                 Challenges specific to the item
@@ -371,6 +373,25 @@ function CalculateScreen() {
                 <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
               </TouchableHighlight>
             </View>
+            )}
+            {context && (
+              <View style={styles.modalView}>
+              <Text style={{textAlign: 'center', marginTop: 30}}>
+                Each person on average in the US, {'\n'}
+                uses about 1,800 gallons (6820 Liters) per day.
+              </Text>
+              <Text style={{marginBottom: 15, textAlign: 'center'}}>
+                Or over 655,000 gallons (2.48M Liters) per year.
+              </Text>
+              <TouchableHighlight
+                style={{...styles.openButton, backgroundColor: '#70BF41'}}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
+              </TouchableHighlight>
+            </View>
+            )}
           </View>
         </Modal>
 
@@ -449,7 +470,7 @@ function CalculateScreen() {
           {computed && (
             <View>
               <TouchableOpacity
-                onPress={() => {
+                onPress={() => {setContext(false), 
                   setModalVisible(true);
                 }}
                 style={{
@@ -475,6 +496,36 @@ function CalculateScreen() {
             </View>
           )}
         </View>
+        {computed && (
+            <View>
+              <TouchableOpacity
+                onPress={() => {setContext(true), 
+                  setModalVisible(true);
+                }}
+                style={{
+                  padding: 15,
+                  borderRadius: 30,
+                  marginLeft: '19%',
+                  marginRight: '19%',
+                  marginBottom: '10%',
+                  backgroundColor: '#70BF41',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                    }}>
+                    Context
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+        )}
       </View>
     </ScrollView>
   );

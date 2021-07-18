@@ -174,6 +174,9 @@ export const RankingPage = ({category, id}) => {
 
                     <View>
                         <View style={{ marginLeft: 20, marginRight: 20, marginTop: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
+                        <Text style={{fontWeight: 'bold', color: '#002363' ,fontSize: 16, paddingTop: 10, marginTop: 10, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
+                            The average person in the US uses {('\n')}about 1,800 gallons (6,820 Liters) per day
+                        </Text>
                         <Text style={{fontSize: 16, paddingTop: 10, marginTop: 10, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
                             Water awareness is key, but many factors determine the eco-cost of a product.&nbsp;
                         </Text>
