@@ -2,13 +2,15 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {useState} from 'react';
 const {width, height} = Dimensions.get('screen');
-import {View, Text, Image, Dimensions, Linking, Pressable, Button, TouchableOpacity, ScrollView, StyleSheet} from 'react-native';
+import { WebView } from 'react-native-webview';
+import {View, Text, Image, Dimensions, Linking, Pressable, Button, TouchableOpacity, TouchableHighlight, ScrollView, StyleSheet} from 'react-native';
 import { styles } from '../Ranking/Styles';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ScreenContainer } from 'react-native-screens';
+const Width = width;
 
 export const MenuMain = ({ navigation }) => {
     return (
@@ -107,6 +109,30 @@ export const MenuMain = ({ navigation }) => {
               Virtual Water {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '45%', marginTop: '1%'}}/>
+        </TouchableOpacity>
+        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <TouchableOpacity
+        style={{
+            alignItems: "center",
+            backgroundColor: "#DDDDDD",
+            flexDirection: 'row',
+            width: width,
+            height: 75,
+            backgroundColor: 'white',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}
+        onPress={() => navigation.navigate('Feedback')}
+        >
+        <Image
+              source={require('./../images2/Feedback_2x.png')}
+              style={{width: 36, height: 40, marginTop: 3, marginRight: '7%', marginLeft: '0%'}}
+              resizeMode="contain"
+            />
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
+              Feedback {'\n'}
+            </Text>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '49%', marginTop: '1%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -976,8 +1002,714 @@ export const Virtual = ({ navigation }) => {
     )
 }
 
+export const Feedback = ({ navigation }) => {
+  return (
+    <WebView
+      source={{ uri: 'https://docs.google.com/forms/d/e/1FAIpQLSfXTM0QORW9VGi7KE6bgNpNM8SGZgzsYu3YS1wZdi0oL6S-4A/viewform?vc=0&c=0&w=1&flr=0' }}
+  />
+  );
+}
+
 export const FAQ = ({ navigation }) => {
+  const [expand, setExpand] = useState(false);
     return (
-        <Text>Need FAQ Section still :)</Text>
+      <ScrollView
+      style={{backgroundColor: '#FFFFFF'}}
+      contentContainerStyle={{
+        alignItems: 'center',
+        marginRight: 50,
+        marginLeft: 50,
+      }}>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            What can this app do for me?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                This app will give you context for what you consume. 
+                Are you concerned about the planet? 
+                Your micro-actions over your lifetime have a major impact. 
+                This app will help you better understand the impact of your decisions. 
+                Right now, the metric is water. 
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            What am I supposed to do with this information?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                Use it to remind yourself how much water is required to produce 
+                the simplest of items, from a glass of milk to paper coffee cups. 
+                Use it to motivate behavior change. 
+                Use the statistics to have conversations with your kids, 
+                to help teach them that everything has a cost. 
+                Use it to help them understand that when they buy or throw something away, 
+                whether a pair of jeans or an egg, that water and the earth's resources make it possible. 
+                Use the compare tool so they can visualize the differences.
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            Why did you build this app?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                We love this planet. We thought everyone should have a better 
+                understanding of what they consume. We hope by having better awareness, 
+                you can make better decisions that are right for you and the planet, 
+                one Siitch-uation at a time.
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            Why should I care about water?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                Let's break it down: 97% of the world's water is too salty to drink. 
+                2% is locked in icecaps and glaciers. Less than 1% of earth's water is drinkable. 
+                Agriculture uses about 70% of freshwater globally. Due to climate change, 
+                farmers and cities can no longer rely on snowmelt and glacier runoff during the summer. 
+                Aquifers are drying up: 21 of the world’s largest 37 aquifers have exceeded sustainability tipping points. 
+                Less water means less food. There's roughly 7.8 billion people on earth today. 
+                We're heading towards 9 billion by 2050. We're going to need every drop.
+                {'\n'}{'\n'}
+                Apart from keeping us alive, water enables societies to thrive. 
+                Clean, sustainable water provides the foundation for everything we rely on: 
+                agriculture, trade, sanitation, political stability, our health and so much more.
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            What is virtual water, and why should I care?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                Virtual water is the volume of water used to produce consumer products such as food, 
+                clothes, your phone, plastic cups etc. Scientists estimate 90-97% of the water we use every day is virtual water, 
+                which is why it's important to understand how our everyday decisions impact the planet. 
+                Virtual water includes rain, irrigated, and the water used to clean an item 
+                (also known as green, blue and gray water) before it is ready for consumption. 
+                See our Virtual Water page for more details. 
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            How much water does the average person use every day?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                According to https://www.watercalculator.org the US average / water 
+                consumption per person is 1,802 gallons per day (6,821 L). 
+                This accounts for direct and indirect water use. Examples of direct water use are bathing, 
+                cooking, doing laundry: essentially, any time you turn on a tap. 
+                Indirect water, also known as virtual water (the statistics that this app mainly shows) 
+                is the total volume of water used to produce consumer products.
+
+
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            Is there a scale that shows me where I am compared to everyone else?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                The 1,802 gallons per day statistic is broad. 
+                We are not affiliated with the GRACE Communications Foundation, 
+                but their terrific Water Calculator can help you see how you compare.  
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            If the average American uses 1,802 gallons of water per day, what should we be aiming for?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                Less than that. What's important is making every day and every decision count. 
+                Knowing the impact of your actions and purchasing decisions is key.
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            These statistics are shocking. What are your sources?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                We were shocked by the numbers as well. See our Sources page in the menu. 
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            So, should I stop eating avocados?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                No! Avocados are good for you! Just because certain foods/items take a lot of resources, 
+                does not mean you should stop eating them. What's important is being aware 
+                of what it takes to make them, so you don't waste them. 
+                If you buy a pound of avocados and let them go bad, you've just wasted 237 gallons of water. 
+                Worse still, if you're not composting, they will then sit in a landfill with other trash and emit carbon and methane, 
+                further contributing to climate change. Your daily micro-actions have a major impact.
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            Are you going to show other statistics in the future?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                That's the goal.
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+        <View
+          style={{
+            marginTop: 20,
+            backgroundColor: '#FFFFFF',
+            width: Width,
+          }}>
+          <Text
+            style={{
+              fontSize: 15,
+              paddingTop: 20,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              fontWeight: 'bold',
+            }}>
+            <Text>
+            What can I do to reduce my impact?
+            </Text>
+            </Text>
+            {expand ? (
+            <Text 
+              styles= {{
+                fontWeight: 'normal',
+                fontSize: 15,
+                
+            }}>
+                There are hundreds of small things you can do every day to make a difference. 
+                The first step? Know what you’re consuming. And stick to the 8 R's of sustainability: 
+                refuse, reduce, reuse, refill, repair, regift, recycle, repeat. 
+                In the Search pages, you'll see a list of ideas within the 'What Can I Do' 
+                links. A few other terrific sites, this for water: https://wateruseitwisely.com/100-ways-to-conserve-water/ 
+                And this for reducing your waste: https://zerowastehome.com/tips/
+            </Text>
+            ) : null}
+          {expand ? (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -20}}
+              onPress={() => setExpand(false)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-up"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              style={{marginLeft: Width / 1.125, marginTop: -37}}
+              onPress={() => setExpand(true)}
+              underlayColor="transparent">
+              <MaterialCommunityIcons
+                name="menu-down"
+                color="black"
+                style={{fontSize: 40}}
+              />
+            </TouchableHighlight>
+          )}
+        </View>
+      </ScrollView>
     );
 }

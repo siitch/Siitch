@@ -43,6 +43,7 @@ import { Mission } from './Menu/Screens';
 import { About } from './Menu/Screens';
 import { Virtual } from './Menu/Screens';
 import { FAQ } from './Menu/Screens';
+import { Feedback } from './Menu/Screens';
 
 // import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
@@ -148,6 +149,10 @@ const HomeStackScreen = () => (
     options = {({route}) => ({
       headerTitle: "Frequently Asked Questions"
     })}
+    />
+    <HomeStack.Screen
+    name = "Feedback"
+    component = {Feedback}
     />
   </HomeStack.Navigator>
 );
