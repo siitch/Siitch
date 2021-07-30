@@ -29,8 +29,8 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('Sources')}
         >
             <Image
-              source={require('./../images2/sources.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '5%', marginLeft: '-5%'}}
+              source={require('./../images2/Source_PNG.png')}
+              style={{width: 50, height: 50, marginTop: 3, marginRight: '5%', marginLeft: '-2%'}}
               resizeMode="contain"
             />
             <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
@@ -53,8 +53,8 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('Mission')}
         >
         <Image
-              source={require('./../images2/Mission_icon_large.png')}
-              style={{width: 40, height: 40, marginTop: 3, marginRight: '9%', marginLeft: '-1%'}}
+              source={require('./../images2/Mission_PNG.png')}
+              style={{width: 50, height: 50, marginTop: 3, marginRight: '9%', marginLeft: '-1%'}}
               resizeMode="contain"
             />
             <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
@@ -77,7 +77,7 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('About')}
         >
         <Image
-              source={require('./../images2/info_button.png')}
+              source={require('./../images2/About_PNG.png')}
               style={{width: 50, height: 50, marginTop: 3, marginRight: '7%', marginLeft: '-1%'}}
               resizeMode="contain"
             />
@@ -101,8 +101,8 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('Virtual')}
         >
         <Image
-              source={require('./../images/blue_water_3.png')}
-              style={{width: 40, height: 40, marginTop: 3, marginRight: '4%', marginLeft: '-1%'}}
+              source={require('./../images2/Blue_Water_Drop_PNG.png')}
+              style={{width: 50, height: 50, marginTop: 3, marginRight: '3%', marginLeft: '-1%'}}
               resizeMode="contain"
             />
             <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
@@ -125,8 +125,8 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('Feedback')}
         >
         <Image
-              source={require('./../images2/Feedback_2x.png')}
-              style={{width: 36, height: 40, marginTop: 3, marginRight: '7%', marginLeft: '0%'}}
+              source={require('./../images2/Feedback_PNG.png')}
+              style={{width: 50, height: 50, marginTop: 3, marginRight: '6%', marginLeft: '1%'}}
               resizeMode="contain"
             />
             <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
@@ -149,8 +149,8 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.navigate('FAQ')}
         >
         <Image
-              source={require('./../images2/question.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '7%', marginLeft: '-1%'}}
+              source={require('./../images2/FAQ_PNG.png')}
+              style={{width: 50, height: 50, marginTop: 3, marginRight: '7%', marginLeft: '0%'}}
               resizeMode="contain"
             />
             <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
@@ -177,7 +177,7 @@ export const MenuMain = ({ navigation }) => {
             {'\n'}{'\n'}
             This is just a prototype. 
             Click the Feedback link after you’ve played around. 
-            We’d love your feedback on how to improve it. 
+            We’d love your thoughts on how to improve it. 
             {'\n'}{'\n'}{'\n'}
             Thank you.
             </Text>
@@ -203,6 +203,74 @@ export const MenuMain = ({ navigation }) => {
             This app only works on iPhones at this time. {'\n'}
             It does not work on iPads or any Android devices.
       </Text>
+      <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://bit.ly/3i4kebj',
+              )
+            }
+            style={{
+            color: '#00ADEF',
+            fontSize: 20,
+            marginTop: 30,
+            alignSelf: 'center',
+            }
+            }>
+            {' '}
+            Privacy Policy{' '}
+          </Text>
+          <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://bit.ly/2UBNugJ',
+              )
+            }
+            style={{
+            color: '#00ADEF',
+            fontSize: 20,
+            marginTop: 10,
+            paddingBottom: 10,
+            alignSelf: 'center',
+            }
+            }>
+            {' '}
+            Terms of Use{' '}
+          </Text>
+          <View style={{alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity onPress={() =>
+              Linking.openURL(
+                'https://www.facebook.com/SiitchHQ',
+              )
+            }>
+              <Image style={{
+                marginTop: 40, 
+                marginRight: 10,
+                marginBottom: 25,
+                height: 55,
+                width: 55,
+            }} source={require('./../images2/Facebook.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() =>
+              Linking.openURL(
+                'https://twitter.com/SiitchHQ',
+              )
+            }>
+              <Image style={{
+                marginTop: 40,
+                marginLeft: 10, 
+                marginBottom: 25,
+                height: 55,
+                width: 55,
+            }} source={require('./../images2/Twitter.png')} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </ScrollView>
     );
   }
@@ -219,7 +287,7 @@ export const Sources = ({ navigation }) => {
           marginRight: '7%',
         }}>
         All attempts have been made to represent the most accurate information
-        possible. Facts and statistics have been sourced from numerous scientific 
+        possible. Facts and statistics have been sourced from numerous publicly available scientific 
         studies, white papers, and news articles. The main sources are listed below.
       </Text>
       <Text
@@ -433,12 +501,24 @@ export const Sources = ({ navigation }) => {
           marginLeft: '7%',
           marginTop: 30,
           marginRight: '7%',
-          paddingBottom: 30
         }}>
-        Landing page image c/o Freepik.com
-
-
+        Landing page people vector created by
       </Text>
+      <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://www.freepik.com/vectors/people',
+              )
+            }
+            style={{
+            fontSize: 18,
+            marginLeft: '6%',
+            textDecorationLine: 'underline',
+            }
+            }>
+            {' '}
+            rawpixel.com{' '}
+          </Text>
         </ScrollView>
       );
 }
@@ -650,7 +730,7 @@ export const Mission = ({ navigation }) => {
       <View
             style={{
               flexDirection: 'row',
-              width: 385,
+              width: 410,
               height: 125,
               borderRadius: 20,
               backgroundColor: '#2f97ef',
@@ -658,9 +738,10 @@ export const Mission = ({ navigation }) => {
               justifyContent: 'center',
               marginTop: 20,
               marginRight: 20,
+              marginLeft: -20,
             }}> 
-            <Text style={{fontSize: 19, color: 'white'}}>
-            If you give nature a chance, it recovers.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold'}}>- Sir David Attenborough</Text>{' '}
+            <Text style={{fontSize: 19, color: 'white', marginLeft: 20, }}>
+            If you give nature a chance, it recovers.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold', Left: 30,}}>- Sir David Attenborough</Text>{' '}
             {'\n'}   (Host, Planet Earth)</Text>
         </View>
       </ScrollView>
@@ -1078,6 +1159,7 @@ export const FAQ = ({ navigation }) => {
             </TouchableHighlight>
           )}
         </View>
+        <View style={{ borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <View
           style={{
             marginTop: 20,
