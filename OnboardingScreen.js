@@ -21,7 +21,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-1.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/1.png')}/>
         ),
       },
       {
@@ -30,7 +30,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-2.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/2.png')}/>
         ),
       },
       {
@@ -39,7 +39,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-3.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/3.png')}/>
         ),
       },
       {
@@ -48,7 +48,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-4.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/4.png')}/>
         ),
       },
       {
@@ -57,7 +57,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-5.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/5.png')}/>
         ),
       },
       {
@@ -66,7 +66,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-6.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/6.png')}/>
         ),
       },
       {
@@ -75,7 +75,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#ffffff',
         image: (
           <Image style={{height:height
-            , width:width}} source={require('./images/Image_new/Onboarding/onb-7.png')}/>
+            , width:width}} source={require('./images/Image_new/Onboarding/7.png')}/>
         ),
       },
       
@@ -89,7 +89,7 @@ const OnboardingScreen = ({navigation}) => {
               navigation.replace("Landing Page")
             }}
             >
-        <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LETS GET STARTED</Text>
+        <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
           </TouchableOpacity>
           // <Button
           // style={{backgroundColor: '#70BF41'}}
