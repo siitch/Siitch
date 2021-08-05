@@ -39,17 +39,18 @@ import {CalculateStackScreen} from './Calculate/Calculate';
 
 //Stuff for extra menu
 import { MenuMain } from './Menu/Screens';
-import { Sources } from './Menu/Screens';
-import { Mission } from './Menu/Screens';
-import { About } from './Menu/Screens';
-import { Virtual } from './Menu/Screens';
-import { FAQ } from './Menu/Screens';
-import { Feedback } from './Menu/Screens';
+import { Sources } from './Menu/Sources';
+import { Mission } from './Menu/Mission';
+import { About } from './Menu/About';
+import { Virtual } from './Menu/Virtual';
+import { FAQ } from './Menu/FAQ';
+import { Feedback } from './Menu/Feedback';
 
 // import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
+import { OnboardingScreen } from './OnboardingScreen';
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -154,6 +155,16 @@ function HomeScreen() {
       <HomeStack.Screen
       name = "Feedback"
       component = {Feedback}
+      />
+      <HomeStack.Screen
+      name = "Tutorial"
+      component = {OnboardingScreen}
+      />
+      <HomeStack.Screen
+      //This is so the button at the end
+      //of the tutorial goes to the right place
+      name = "Landing Page"
+      component = {MenuMain}
       />
     </HomeStack.Navigator>
   );
