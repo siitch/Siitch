@@ -378,11 +378,108 @@ function CalculateScreen() {
               <View style={styles.modalView}>
               <Text style={{textAlign: 'center', marginTop: 30}}>
                 Each person on average in the US, {'\n'}
-                uses about 1,800 gallons (6820 Liters) per day.
+                uses about 1,800 gallons (6,820 Liters) per day.
               </Text>
               <Text style={{marginBottom: 15, textAlign: 'center'}}>
-                Or over 655,000 gallons (2.48M Liters) per year.
+                Or over 657,000 gallons (2.48M Liters) per year.
               </Text>
+          <View style={{alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 300,
+              height: 100,
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2%',
+            }}>
+              <Text style={{fontSize: 20, marginRight: '12%', color: 'black',}}>
+              {' '}80 gal.{'\n'}(302 L.)
+            </Text>
+            <Image
+              source={require('./../images2/80Gal.jpeg')}
+              style={{width: 150, height: 150, marginTop: 2}}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 300,
+              height: 100,
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2%',
+            }}>
+              <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
+              2,000 gal.{'\n'}(7,570 L.)
+            </Text>
+            <Image
+              source={require('./../images2/2000Gal.jpeg')}
+              style={{width: 160, height: 160, marginTop: 2}}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 300,
+              height: 100,
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2%',
+            }}>
+              <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
+              12,000 gal.{'\n'}(45,425 L.)
+            </Text>
+            <Image
+              source={require('./../images2/12000Gal.jpeg')}
+              style={{width: 180, height: 180, marginTop: 2}}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 300,
+              height: 100,
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2%',
+            }}>
+             <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
+              100,000 gal.{'\n'}(378,541 L.)
+            </Text>
+            <Image
+              source={require('./../images2/100000Gal.jpeg')}
+              style={{width: 175, height: 175, marginTop: 2}}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 300,
+              height: 100,
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2%',
+            }}>
+              <Text style={{fontSize: 20, marginRight: '10%', marginLeft: '-2%', color: 'black',}}>
+              660,000 gal.{'\n'}{'  '}(2.5 mil L.){'\n'}Olympic Pool
+            </Text>
+            <Image
+              source={require('./../images2/660000Gal.jpeg')}
+              style={{width: 160, height: 160, marginTop: 2}}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
               <TouchableHighlight
                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
                 onPress={() => {

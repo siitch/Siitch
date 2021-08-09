@@ -30,14 +30,14 @@ export const MenuMain = ({ navigation }) => {
         onPress={() => navigation.replace("Tutorial")}
         >
             <Image
-              source={require('./../images2/Tutorial.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '5%', marginLeft: '5%'}}
+              source={require('./../images2/Tutorial2.png')}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               Tutorial {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: 230, marginTop: '1%', marginRight: '7%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '57%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -55,13 +55,13 @@ export const MenuMain = ({ navigation }) => {
         >
             <Image
               source={require('./../images2/Source_PNG.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '5%', marginLeft: '5%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               Sources & Resources {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: 106, marginTop: '1%', marginRight: '7%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '27%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -79,13 +79,13 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/Mission_PNG.png')}
-              style={{width: 46, height: 46, marginTop: 3, marginRight: '5%', marginLeft: '6%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 1,}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               Mission {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: 229, marginTop: '1%', marginRight: '7%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '56%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -103,13 +103,13 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/About_PNG.png')}
-              style={{width: 48, height: 48, marginTop: 3, marginRight: '5%', marginLeft: '5%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 10}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               About {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: 225, marginTop: '1%', marginRight: '7%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '59%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -127,13 +127,13 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/Blue_Water_Drop_PNG.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '3%', marginLeft: '-1%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               Virtual Water {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '45%', marginTop: '1%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '44%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -151,13 +151,13 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/Feedback_PNG.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '6%', marginLeft: '1%'}}
+              style={{width: 44, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               Feedback {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '49%', marginTop: '1%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '51%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
@@ -175,13 +175,13 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/FAQ_PNG.png')}
-              style={{width: 50, height: 50, marginTop: 3, marginRight: '7%', marginLeft: '0%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
               FAQ {'\n'}
             </Text>
-            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '60%', marginTop: '1%'}}/>
+            <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '63%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
         <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <View
@@ -228,39 +228,6 @@ export const MenuMain = ({ navigation }) => {
             This app only works on iPhones at this time. {'\n'}
             It does not work on iPads or any Android devices.
       </Text>
-      <Text
-            onPress={() =>
-              Linking.openURL(
-                'https://bit.ly/3i4kebj',
-              )
-            }
-            style={{
-            color: '#00ADEF',
-            fontSize: 20,
-            marginTop: 30,
-            alignSelf: 'center',
-            }
-            }>
-            {' '}
-            Privacy Policy{' '}
-          </Text>
-          <Text
-            onPress={() =>
-              Linking.openURL(
-                'https://bit.ly/2UBNugJ',
-              )
-            }
-            style={{
-            color: '#00ADEF',
-            fontSize: 20,
-            marginTop: 10,
-            paddingBottom: 10,
-            alignSelf: 'center',
-            }
-            }>
-            {' '}
-            Terms of Use{' '}
-          </Text>
           <View style={{alignItems: 'center'}}>
           <View
             style={{

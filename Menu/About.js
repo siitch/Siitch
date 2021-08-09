@@ -145,13 +145,59 @@ export const About = ({ navigation }) => {
         Is it useful? If so, what other features could be helpful?
         Thank you so much!
       </Text>
-      <Text style={{
-          fontSize: 22,
-          textAlign: 'center',
-          color: '#ab4302',
-          marginBottom: '10%',
-          fontWeight: 'bold'
-      }}> NEED FEEDBACK BUTTON</Text>
+      <TouchableOpacity
+        style={{
+            alignItems: "center",
+            backgroundColor: "white",
+            flexDirection: 'row',
+            borderRadius: 30,
+            borderWidth: 3,
+            borderColor: 'lightgreen',
+            alignItems: 'center',
+            marginLeft: '15%',
+            marginRight: '15%',
+            marginBottom: '5%',
+            justifyContent: 'center',
+        }}
+        onPress={() => navigation.navigate('Feedback')}
+        >
+            <Text style={{fontSize: 17, fontFamily: 'Futura-MediumItalic', color: 'black', textAlign: 'center', marginTop: '7%'}}>
+              FEEDBACK {'\n'}
+            </Text>
+        </TouchableOpacity>
+        <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://bit.ly/3i4kebj',
+              )
+            }
+            style={{
+            color: '#00ADEF',
+            fontSize: 20,
+            marginTop: 20,
+            alignSelf: 'center',
+            }
+            }>
+            {' '}
+            Privacy Policy{' '}
+          </Text>
+          <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://bit.ly/2UBNugJ',
+              )
+            }
+            style={{
+            color: '#00ADEF',
+            fontSize: 20,
+            marginTop: 10,
+            paddingBottom: '5%',
+            alignSelf: 'center',
+            }
+            }>
+            {' '}
+            Terms of Use{' '}
+          </Text>
         </ScrollView>
       );
 }
