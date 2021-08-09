@@ -39,7 +39,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '57%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -63,7 +63,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '27%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -87,7 +87,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '56%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -111,7 +111,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '59%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -135,7 +135,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '44%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -159,7 +159,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '51%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
@@ -183,12 +183,12 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '63%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: 55, borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <View
             style={{
               flexDirection: 'row',
               width: width * 0.9,
-              height: 220,
+              height: 200,
               borderRadius: 20,
               backgroundColor: '#f2d3ac',
               alignItems: 'center',
@@ -200,23 +200,12 @@ export const MenuMain = ({ navigation }) => {
             <Text style={{fontSize: 18, color: 'black', margin: '5%',}}>
             Dear Environmentalists,
             {'\n'}{'\n'}
-            This is just a prototype. 
-            Click the Feedback link after you’ve played around. 
-            We’d love your thoughts on how to improve it. 
-            {'\n'}{'\n'}{'\n'}
-            Thank you.
+            This is just an early release, so we'd love your thoughts
+            on how to improve it. Share your ideas by clicking our Feedback link.
+            {'\n'}{'\n'}
+            Thank you!
             </Text>
         </View>
-        <Text
-        style={{
-          fontSize: 18,
-          alignContent: 'auto',
-          margin: '12%',
-          textAlign: 'center'
-        }}>
-            Have friends who love the planet? {'\n'}
-            Feel free to share this prototype!
-      </Text>
       <Text
         style={{
           fontSize: 17,
@@ -226,7 +215,7 @@ export const MenuMain = ({ navigation }) => {
           textAlign: 'center'
         }}>
             This app only works on iPhones at this time. {'\n'}
-            It does not work on iPads or any Android devices.
+            It does not work on iPads , iWatches, or any Android devices.
       </Text>
           <View style={{alignItems: 'center'}}>
           <View
@@ -235,32 +224,6 @@ export const MenuMain = ({ navigation }) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <TouchableOpacity onPress={() =>
-              Linking.openURL(
-                'https://www.facebook.com/SiitchHQ',
-              )
-            }>
-              <Image style={{
-                marginTop: 40, 
-                marginRight: 10,
-                marginBottom: 25,
-                height: 55,
-                width: 55,
-            }} source={require('./../images2/Facebook.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() =>
-              Linking.openURL(
-                'https://twitter.com/SiitchHQ',
-              )
-            }>
-              <Image style={{
-                marginTop: 40,
-                marginLeft: 10, 
-                marginBottom: 25,
-                height: 55,
-                width: 55,
-            }} source={require('./../images2/Twitter.png')} />
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
