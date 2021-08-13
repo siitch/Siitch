@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { View, Text, Button, Image,StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image,StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
 import Profiles from './ImageDB';
@@ -20,8 +20,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/1.png')}/>
+            </ScrollView>
         ),
       },
       {
@@ -29,8 +31,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/2.png')}/>
+          </ScrollView>        
         ),
       },
       {
@@ -38,8 +42,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/3.png')}/>
+          </ScrollView>
         ),
       },
       {
@@ -47,8 +53,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/4.png')}/>
+          </ScrollView>
         ),
       },
       {
@@ -56,8 +64,11 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/5.png')}/>
+          </ScrollView>
+
         ),
       },
       {
@@ -65,8 +76,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/6.png')}/>
+            </ScrollView>
         ),
       },
       {
@@ -74,8 +87,10 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images/Image_new/Onboarding/7.png')}/>
+          </ScrollView>
         ),
       },
       

@@ -47,12 +47,15 @@ const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
     backgroundColor: 'white',
-    paddingTop: DeviceHeight * 0.025,
+    paddingTop: DeviceHeight * 0.015,
+    paddingBottom: DeviceHeight * 0.02
   },
   text: {
     textAlign: 'center',
     fontSize: 22,
     color: 'black',
+    marginTop: DeviceHeight * 0.01,
+    marginBottom: DeviceHeight * -0.01
   },
   bottomtext: {
     position: 'relative',
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: DeviceHeight * 0.04,
   },
   centerearth: {
     right: 190,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     width: DeviceWidth * 0.25,
   },
   logo: {
-    marginTop: DeviceHeight - 900,
+    marginTop: DeviceHeight - (DeviceHeight * 1.07),
     width: 250,
     height: 150,
   },
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
   meatsText: {
     flexDirection: 'row',
   },
+  
   modalView: {
     marginLeft: 20,
     marginRight: 20,

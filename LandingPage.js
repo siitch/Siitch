@@ -77,7 +77,7 @@ function HomeScreen() {
           <Text style={styles.text}>Make Good Choices For Our Planet</Text>
           <View style={{alignItems: 'center'}}>
             <Image
-              style={{width: DeviceWidth * 0.8, height: 300, marginBottom: 20}}
+              style={{width: DeviceWidth * 0.8, height: 300, marginBottom: DeviceHeight * 0.01}}
               source={Profiles.landing_image}
               resizeMode="contain"
             />

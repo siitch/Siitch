@@ -375,7 +375,23 @@ function CalculateScreen() {
             </View>
             )}
             {context && (
-              <View style={styles.modalView}>
+              <ScrollView style={{backgroundColor: 'white'}}>
+              <View style={{
+                margin: '3%',
+                paddingHorizontal: '3%',
+                marginTop: '8%',
+                paddingBottom: '5%',
+                backgroundColor: 'white',
+                borderRadius: 20,
+                alignItems: 'center',
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+              }}>
               <Text style={{textAlign: 'center', marginTop: 30}}>
                 Each person on average in the US{'\n'}
                 uses about 1,800 gallons (6,820 Liters) of virtual water per day.
@@ -488,6 +504,7 @@ function CalculateScreen() {
                 <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
               </TouchableHighlight>
             </View>
+            </ScrollView>
             )}
           </View>
         </Modal>

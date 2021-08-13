@@ -12,6 +12,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { ScreenContainer } from 'react-native-screens';
 import { OnboardingScreen } from '../OnboardingScreen';
 const Width = width;
+const DeviceWidth = Dimensions.get('window').width;
+const DeviceHeight = Dimensions.get('window').height;
 
 export const MenuMain = ({ navigation }) => {
     return (
@@ -21,7 +23,7 @@ export const MenuMain = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.04,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -39,13 +41,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '57%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.13,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -63,13 +65,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '27%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.04,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -87,13 +89,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '56%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.04,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -111,13 +113,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '59%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.06,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -135,13 +137,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '44%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.05,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -159,13 +161,13 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '51%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <TouchableOpacity
         style={{
             alignItems: "center",
             backgroundColor: "#DDDDDD",
             flexDirection: 'row',
-            width: width,
+            marginHorizontal: DeviceWidth * 0.03,
             height: 75,
             backgroundColor: 'white',
             alignItems: 'center',
@@ -183,7 +185,7 @@ export const MenuMain = ({ navigation }) => {
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '63%', marginTop: '1%', marginRight: '5%'}}/>
         </TouchableOpacity>
-        <View style={{ marginLeft: '15%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
+        <View style={{ marginLeft: '17%', borderBottomColor: 'gray', borderBottomWidth: 1 }}></View>
         <View
             style={{
               flexDirection: 'row',

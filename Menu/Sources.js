@@ -19,9 +19,9 @@ export const Sources = ({ navigation }) => {
         style={{
           fontSize: 18,
           alignContent: 'auto',
-          marginLeft: '7%',
+          marginLeft: '6%',
           marginTop: '10%',
-          marginRight: '7%',
+          marginRight: '6%',
         }}>
         All attempts have been made to represent the most accurate information
         possible. Facts and statistics have been sourced from numerous publicly available scientific 
@@ -37,10 +37,10 @@ export const Sources = ({ navigation }) => {
             color: '#00ADEF',
             fontSize: 20,
             marginLeft: '6%',
-            marginTop: 40
+            marginRight: '2%',
+            marginTop: '12%'
             }
             }>
-            {' '}
             Mekonnen and Hoekstra 2010 - Crops{' '}
           </Text>
           <Text
@@ -53,11 +53,11 @@ export const Sources = ({ navigation }) => {
             color: '#00ADEF',
             fontSize: 20,
             marginLeft: '6%',
+            marginRight: '2%',
             marginTop: 5
             }
             }>
-            {' '}
-            Mekonnen and Hoekstra 2010 - Animals{' '}
+            Mekonnen and Hoekstra 2010 - Animals
           </Text>
           <Text
             onPress={() =>
@@ -69,11 +69,11 @@ export const Sources = ({ navigation }) => {
             color: '#00ADEF',
             fontSize: 20,
             marginLeft: '6%',
+            marginRight: '2%',
             marginTop: 5
             }
             }>
-            {' '}
-            Water Footprint Assessment Manual, 2011{' '}
+            Water Footprint Assessment Manual, 2011
           </Text>
           <Text
             onPress={() =>
@@ -88,7 +88,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             Water Footprint Network{' '}
           </Text>
           <Text
@@ -104,7 +103,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             Water Calculator{' '}
           </Text>
           <Text
@@ -120,7 +118,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             Your Water Footprint - Leahy{' '}
           </Text>
           <Text
@@ -136,7 +133,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             USDA Food Data Central{' '}
           </Text>
           <Text
@@ -152,7 +148,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             USFDA{' '}
           </Text>
           <Text
@@ -168,7 +163,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             United Nations F.A.O.{' '}
           </Text>
           <Text
@@ -184,7 +178,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             National Resource Defence Council{' '}
           </Text>
           <Text
@@ -197,11 +190,11 @@ export const Sources = ({ navigation }) => {
             color: '#00ADEF',
             fontSize: 20,
             marginLeft: '6%',
+            marginRight: '2%',
             marginTop: 5
             }
             }>
-            {' '}
-            The Green Blue Book - Rogers & Kostigen{' '}
+            The Green Blue Book - Rogers & Kostigen
           </Text>
           <Text
             onPress={() =>
@@ -216,7 +209,6 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            {' '}
             National Geographic{' '}
           </Text>
           <Text
@@ -250,6 +242,7 @@ export const Sources = ({ navigation }) => {
             style={{
             fontSize: 18,
             marginLeft: '6%',
+            marginBottom: '4%',
             textDecorationLine: 'underline',
             }
             }>

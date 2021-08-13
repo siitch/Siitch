@@ -392,7 +392,8 @@ export const FAQ = ({ navigation }) => {
                       'https://www.watercalculator.org',
                     )}
                     style={{
-                    color: 'black',
+                    color: 'blue',
+                    textDecorationLine: 'underline',
                     fontSize: 17,
                     marginTop: 10,
                     paddingBottom: '7%',
@@ -780,7 +781,8 @@ export const FAQ = ({ navigation }) => {
                       'https://wateruseitwisely.com/100-ways-to-conserve-water',
                     )}
                     style={{
-                    color: 'black',
+                    color: 'blue',
+                    textDecorationLine: 'underline',
                     fontSize: 17,
                     marginTop: 10,
                     paddingBottom: '7%',
@@ -793,9 +795,10 @@ export const FAQ = ({ navigation }) => {
                       'https://zerowastehome.com/tips/',
                     )}
                     style={{
-                    color: 'black',
+                    color: 'blue',
                     fontSize: 17,
                     marginTop: 10,
+                    textDecorationLine: 'underline',
                     paddingBottom: '7%',
                     alignSelf: 'center',
                     }
