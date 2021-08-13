@@ -82,9 +82,14 @@ function HomeScreen() {
               resizeMode="contain"
             />
           </View>
-          <Text style={styles.bottomtext}>See the environmental cost of</Text>
-          <Text style={styles.bottomtext}>what you buy, so you can make</Text>
-          <Text style={styles.bottomtext}>a difference every day!</Text>
+          <Text style={styles.bottomtext}>Helping you make an</Text>
+          <Text style={styles.bottomtext}>environmental <Text style={{
+            position: 'relative',
+            textAlign: 'center',
+            color: '#70BF41',
+            fontSize: 22,
+            }}>IMPACT</Text>,</Text>
+          <Text style={styles.bottomtext}>one Siitch-uation at a time</Text>
         </View>
       </ScrollView>
     );
@@ -159,6 +164,8 @@ function HomeScreen() {
       <HomeStack.Screen
       name = "Tutorial"
       component = {OnboardingScreen}
+      options = {{
+      }}
       />
       <HomeStack.Screen
       //This is so the button at the end

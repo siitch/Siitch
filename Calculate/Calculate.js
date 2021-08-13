@@ -377,8 +377,8 @@ function CalculateScreen() {
             {context && (
               <View style={styles.modalView}>
               <Text style={{textAlign: 'center', marginTop: 30}}>
-                Each person on average in the US, {'\n'}
-                uses about 1,800 gallons (6,820 Liters) per day.
+                Each person on average in the US{'\n'}
+                uses about 1,800 gallons (6,820 Liters) of virtual water per day.
               </Text>
               <Text style={{marginBottom: 15, textAlign: 'center'}}>
                 Or over 657,000 gallons (2.48M Liters) per year.

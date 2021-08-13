@@ -122,9 +122,9 @@ const Search = ({searchData, navigation}) => {
             }}
           />
 
-          <Text style={{marginTop: 30, marginBottom: 10, textAlign: 'center'}}>
-            For the prototype, only the Beef, Jeans & Makeup {'\n'} search pages
-            are active. We're curious what you think.
+          <Text style={{fontSize: 15, marginTop: 30, marginBottom: 10, textAlign: 'center'}}>
+            For the prototype, <Text style={{fontSize: 16, marginTop: 30, marginBottom: 10, textAlign: 'center', fontWeight: 'bold'}}>only the Beef, Jeans & Makeup{'\n'}
+            search page are active.</Text> We're curious what you think.
           </Text>
 
           {item.map((row, i) => (

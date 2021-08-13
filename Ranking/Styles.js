@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: DeviceWidth * 0.25,
   },
   logo: {
-    marginTop: '1%',
+    marginTop: DeviceHeight - 900,
     width: 250,
     height: 150,
   },

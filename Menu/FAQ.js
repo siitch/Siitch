@@ -37,7 +37,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: 20,
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -51,7 +51,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   marginLeft: '3%',
@@ -98,7 +98,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15, 
+                fontSize: 17, 
                 paddingTop: '1%', 
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -114,7 +114,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -163,7 +163,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -179,7 +179,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -224,7 +224,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -240,7 +240,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -292,7 +292,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -308,7 +308,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -318,8 +318,19 @@ export const FAQ = ({ navigation }) => {
                   which is why it's important to understand how our everyday decisions impact the planet. 
                   Virtual water includes rain, irrigated, and the water used to clean an item 
                   (also known as green, blue and gray water) before it is ready for consumption. 
-                  See our Virtual Water page for more details. 
-  
+                  See our <Text
+                    onPress={() => navigation.navigate('Virtual')}
+                    style={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    marginTop: 10,
+                    paddingBottom: '7%',
+                    alignSelf: 'center',
+                    }
+                    }>
+                    Virtual Water
+                  </Text> page for more details. 
               </Text>
               ) : null}
             {expand4 ? (
@@ -355,7 +366,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -371,12 +382,25 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
               }}>
-                  According to https://www.watercalculator.org the US average / water 
+                  According to <Text
+                    onPress={() => Linking.openURL(
+                      'https://www.watercalculator.org',
+                    )}
+                    style={{
+                    color: 'black',
+                    fontSize: 17,
+                    marginTop: 10,
+                    paddingBottom: '7%',
+                    alignSelf: 'center',
+                    }
+                    }>
+                    www.watercalculator.org
+                  </Text> the US average / water 
                   consumption per person is 1,802 gallons per day (6,821 L). 
                   This accounts for direct and indirect water use. Examples of direct water use are bathing, 
                   cooking, doing laundry: essentially, any time you turn on a tap. 
@@ -419,7 +443,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -435,7 +459,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -478,7 +502,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -494,7 +518,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -536,7 +560,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -552,12 +576,24 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
               }}>
-                  We were shocked by the numbers as well. See our Sources page in the menu. 
+                  We were shocked by the numbers as well. See our <Text
+                    onPress={() => navigation.navigate('Sources')}
+                    style={{
+                    color: 'black',
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    marginTop: 10,
+                    paddingBottom: '7%',
+                    alignSelf: 'center',
+                    }
+                    }>
+                    Sources
+                  </Text> page in the menu. 
               </Text>
               ) : null}
             {expand8 ? (
@@ -593,7 +629,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -609,7 +645,7 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
@@ -655,7 +691,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',               
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -671,12 +707,12 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
               }}>
-                  That's the goal.
+                  That's the goal!
               </Text>
               ) : null}
             {expand10 ? (
@@ -713,7 +749,7 @@ export const FAQ = ({ navigation }) => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 paddingTop: '1%',                
                 marginLeft: '3%',
                 paddingRight: 15,
@@ -729,17 +765,43 @@ export const FAQ = ({ navigation }) => {
               <Text 
                 style= {{
                   fontWeight: 'normal',
-                  fontSize: 15,
+                  fontSize: 17,
                   marginLeft: '3%',
                   marginRight: "3%" ,   
                   
               }}>
                   There are hundreds of small things you can do every day to make a difference. 
                   The first step? Know what you’re consuming. And stick to the 8 R's of sustainability: 
-                  refuse, reduce, reuse, refill, repair, regift, recycle, repeat. 
+                  refuse, reduce, reuse, refill, repair, regift, recycle, repeat. {'\n'} {'\n'}
                   In the Search pages, you'll see a list of ideas within the 'What Can I Do' 
-                  links. A few other terrific sites, this for water: https://wateruseitwisely.com/100-ways-to-conserve-water/ 
-                  And this for reducing your waste: https://zerowastehome.com/tips/
+                  links. {'\n'} {'\n'}
+                  A few other terrific sites, this for water: <Text
+                    onPress={() => Linking.openURL(
+                      'https://wateruseitwisely.com/100-ways-to-conserve-water',
+                    )}
+                    style={{
+                    color: 'black',
+                    fontSize: 17,
+                    marginTop: 10,
+                    paddingBottom: '7%',
+                    alignSelf: 'center',
+                    }
+                    }>
+                    www.wateruseitwisely.com
+                  </Text> {'\n'}And this for reducing your waste: <Text
+                    onPress={() => Linking.openURL(
+                      'https://zerowastehome.com/tips/',
+                    )}
+                    style={{
+                    color: 'black',
+                    fontSize: 17,
+                    marginTop: 10,
+                    paddingBottom: '7%',
+                    alignSelf: 'center',
+                    }
+                    }>
+                    www.zerowastehome.com
+                  </Text>
               </Text>
               ) : null}
             {expand11 ? (

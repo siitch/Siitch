@@ -75,7 +75,7 @@ export const About = ({ navigation }) => {
           alignContent: 'center',
           textAlign: 'center',
           marginTop: 5,
-          color: 'green'
+          color: '#70BF41'
         }}>
         Change Starts with Awareness
       </Text>
@@ -148,11 +148,11 @@ export const About = ({ navigation }) => {
       <TouchableOpacity
         style={{
             alignItems: "center",
-            backgroundColor: "white",
+            backgroundColor: "#70BF41",
             flexDirection: 'row',
             borderRadius: 30,
             borderWidth: 3,
-            borderColor: 'lightgreen',
+            borderColor: '#70BF41',
             alignItems: 'center',
             marginLeft: '15%',
             marginRight: '15%',
@@ -161,7 +161,7 @@ export const About = ({ navigation }) => {
         }}
         onPress={() => navigation.navigate('Feedback')}
         >
-            <Text style={{fontSize: 17, fontFamily: 'Futura-MediumItalic', color: 'black', textAlign: 'center', marginTop: '7%'}}>
+            <Text style={{fontSize: 20,fontWeight: 'bold', color: 'white', textAlign: 'center', marginTop: '7%'}}>
               FEEDBACK {'\n'}
             </Text>
         </TouchableOpacity>
@@ -191,7 +191,7 @@ export const About = ({ navigation }) => {
             color: '#00ADEF',
             fontSize: 20,
             marginTop: 10,
-            paddingBottom: '5%',
+            paddingBottom: '7%',
             alignSelf: 'center',
             }
             }>

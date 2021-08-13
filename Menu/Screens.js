@@ -201,7 +201,19 @@ export const MenuMain = ({ navigation }) => {
             Dear Environmentalists,
             {'\n'}{'\n'}
             This is just an early release, so we'd love your thoughts
-            on how to improve it. Share your ideas by clicking our Feedback link.
+            on how to improve it. Share your ideas by clicking our <Text
+            onPress={() => navigation.navigate('Feedback')}
+            style={{
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: 18,
+            marginTop: 10,
+            paddingBottom: '7%',
+            alignSelf: 'center',
+            }
+            }>
+            Feedback
+          </Text> link.
             {'\n'}{'\n'}
             Thank you!
             </Text>
@@ -212,6 +224,7 @@ export const MenuMain = ({ navigation }) => {
           color: 'black',
           alignContent: 'auto',
           margin: '5%',
+          marginBottom: '7%',
           textAlign: 'center'
         }}>
             This app only works on iPhones at this time. {'\n'}

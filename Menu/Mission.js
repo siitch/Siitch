@@ -23,7 +23,7 @@ export const Mission = ({ navigation }) => {
           marginTop: '10%',
           marginRight: '7%',
         }}>
-        The mission of Siitch is to help you make a <Text style={{color: '#19bf42'}} > MASSIVE IMPACT </Text> 
+        The mission of Siitch is to help you make a <Text style={{color: '#70BF41'}} > MASSIVE IMPACT </Text> 
         on the environment over your lifetime by focusing on day to day decisions. 
       </Text>
       <Text
@@ -45,7 +45,7 @@ export const Mission = ({ navigation }) => {
           marginTop: 7,
           marginRight: '7%',
         }}>
-     Change starts with <Text style={{color: '#19bf42'}} >AWARENESS</Text>. 
+     Change starts with <Text style={{color: '#70BF41'}} >AWARENESS</Text>. 
     With Siitch, you’ll learn about the 
     environmental cost of what you buy, and 
     tips on how you can do better, so you can 
