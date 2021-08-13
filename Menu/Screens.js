@@ -200,7 +200,7 @@ export const MenuMain = ({ navigation }) => {
             <Text style={{fontSize: 18, color: 'black', margin: '5%',}}>
             Dear Environmentalists,
             {'\n'}{'\n'}
-            This is just an early release, so we'd love your thoughts
+            This is an early release, so we'd love your thoughts
             on how to improve it. Share your ideas by clicking our <Text
             onPress={() => navigation.navigate('Feedback')}
             style={{
@@ -228,7 +228,7 @@ export const MenuMain = ({ navigation }) => {
           textAlign: 'center'
         }}>
             This app only works on iPhones at this time. {'\n'}
-            It does not work on iPads , iWatches, or any Android devices.
+            It does not work on iPads, iWatches, or any Android devices.
       </Text>
           <View style={{alignItems: 'center'}}>
           <View

@@ -190,7 +190,7 @@ export const Sources = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'https://www.amazon.com/Green-Book-Everyday-Saving-Planet/dp/0307381358',
+                'https://www.amazon.com/Green-Blue-Book-Water-Savings-Everything/dp/1605294713/ref=sr_1_2?dchild=1&keywords=Green+blue+book+kostigen&qid=1628817411&sr=8-2',
               )
             }
             style={{
