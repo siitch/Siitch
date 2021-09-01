@@ -36,7 +36,7 @@ export const MenuMain = ({ navigation }) => {
               style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%', marginBottom: '4%'}}>
               Tutorial {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '57%', marginTop: '1%', marginRight: '5%'}}/>
@@ -57,10 +57,10 @@ export const MenuMain = ({ navigation }) => {
         >
             <Image
               source={require('./../images2/Source_PNG.png')}
-              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '6%', marginLeft: '3%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '8%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               Sources & Resources {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '27%', marginTop: '1%', marginRight: '5%'}}/>
@@ -84,7 +84,7 @@ export const MenuMain = ({ navigation }) => {
               style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               Mission {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '56%', marginTop: '1%', marginRight: '5%'}}/>
@@ -108,7 +108,7 @@ export const MenuMain = ({ navigation }) => {
               style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               About {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '59%', marginTop: '1%', marginRight: '5%'}}/>
@@ -129,10 +129,10 @@ export const MenuMain = ({ navigation }) => {
         >
         <Image
               source={require('./../images2/Blue_Water_Drop_PNG.png')}
-              style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
+              style={{width: 45, height: 45, marginTop: 3, marginRight: '6%', marginLeft: '3%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '7%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               Virtual Water {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '44%', marginTop: '1%', marginRight: '5%'}}/>
@@ -156,7 +156,7 @@ export const MenuMain = ({ navigation }) => {
               style={{width: 44, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '7%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               Feedback {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '51%', marginTop: '1%', marginRight: '5%'}}/>
@@ -180,7 +180,7 @@ export const MenuMain = ({ navigation }) => {
               style={{width: 45, height: 45, marginTop: 3, marginRight: '5%', marginLeft: '4%'}}
               resizeMode="contain"
             />
-            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%'}}>
+            <Text style={{fontSize: 20, color: 'black', marginTop: '6%', marginRight: 4, marginLeft: '-2%', marginBottom: '5%'}}>
               FAQ {'\n'}
             </Text>
             <MaterialCommunityIcons name = 'arrow-right' size = {30} style= {{marginLeft: '63%', marginTop: '1%', marginRight: '5%'}}/>

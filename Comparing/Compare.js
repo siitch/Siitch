@@ -198,7 +198,7 @@ export default class Compare extends Component {
           <View
             style={{
               alignItems: 'center',
-              marginTop: '15%',
+              marginTop: '25%',
               marginBottom: '15%',
             }}>
             <Text style={styles.title}>Compare</Text>

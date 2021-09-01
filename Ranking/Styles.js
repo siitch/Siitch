@@ -87,9 +87,10 @@ const styles = StyleSheet.create({
   alpha: {
     marginLeft: DeviceWidth * 0.05,
     width: DeviceWidth * 0.25,
+    marginBottom: DeviceHeight - DeviceHeight * 1.03
   },
   logo: {
-    marginTop: DeviceHeight - (DeviceHeight * 1.07),
+    marginTop: DeviceHeight - (DeviceHeight * 1.04),
     width: 250,
     height: 150,
   },

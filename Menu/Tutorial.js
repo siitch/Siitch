@@ -3,12 +3,11 @@ import React, { useEffect } from 'react';
 import { View, Text, Button, Image,StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
-import Profiles from './ImageDB';
 
 import Onboarding from 'react-native-onboarding-swiper';
 
 
-const OnboardingScreen = ({navigation}) => {
+const Tutorial = ({navigation}) => {
 
     return(
         <Onboarding
@@ -20,9 +19,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP1.png')}/>
+            , width:width}} source={require('../images2/OnboardP1.png')}/>
             </ScrollView>
         ),
       },
@@ -31,9 +30,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP2.png')}/>
+            , width:width}} source={require('../images2/OnboardP2.png')}/>
           </ScrollView>        
         ),
       },
@@ -42,9 +41,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP3.png')}/>
+            , width:width}} source={require('../images2/OnboardP3.png')}/>
             </ScrollView>
         ),
       },
@@ -53,9 +52,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP4.png')}/>
+            , width:width}} source={require('../images2/OnboardP4.png')}/>
             </ScrollView>
         ),
       },
@@ -64,9 +63,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP5.png')}/>
+            , width:width}} source={require('../images2/OnboardP5.png')}/>
             </ScrollView>
 
         ),
@@ -76,9 +75,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP6.png')}/>
+            , width:width}} source={require('../images2/OnboardP6.png')}/>
             </ScrollView>
         ),
       },
@@ -87,9 +86,9 @@ const OnboardingScreen = ({navigation}) => {
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP7.png')}/>
+            , width:width}} source={require('../images2/OnboardP7.png')}/>
             </ScrollView>
         ),
       },
@@ -121,7 +120,7 @@ const OnboardingScreen = ({navigation}) => {
         backgroundColor: '#FFFFFF',
         image: (
           <Image style={{height:height/3
-            , width:width, resizeMode:'contain'}} source={require('./images/Image_new/Onboarding/graphic.png')}/>
+            , width:width, resizeMode:'contain'}} source={require('../images/Image_new/Onboarding/graphic.png')}/>
         ),
       },
     ]}
@@ -130,7 +129,7 @@ const OnboardingScreen = ({navigation}) => {
     );
 };
 
-export {OnboardingScreen}
+export {Tutorial}
 
 const styles = StyleSheet.create({
     container: {
@@ -145,6 +144,8 @@ const styles = StyleSheet.create({
       alignItems: "center",
       backgroundColor: "#70BF41",
       padding: 10,
+      marginBottom: '50%',
+      marginTop: '-10%',
       borderRadius: 25,
       justifyContent: 'center'
       

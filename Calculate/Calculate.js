@@ -164,6 +164,7 @@ function CalculateScreen() {
             borderWidth: 2,
             borderRadius: 10,
             width: 65,
+            height: 44,
             paddingLeft: 10,
             paddingRight: 10,
           }}>

@@ -45,6 +45,7 @@ import { About } from './Menu/About';
 import { Virtual } from './Menu/Virtual';
 import { FAQ } from './Menu/FAQ';
 import { Feedback } from './Menu/Feedback';
+import { Tutorial } from './Menu/Tutorial';
 
 // import Profiles from './Ranking/ImageDB';
 import {images} from './ImageURL';
@@ -163,7 +164,7 @@ function HomeScreen() {
       />
       <HomeStack.Screen
       name = "Tutorial"
-      component = {OnboardingScreen}
+      component = {Tutorial}
       options = {{
       }}
       />
