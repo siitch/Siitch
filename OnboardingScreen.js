@@ -93,6 +93,17 @@ const OnboardingScreen = ({navigation}) => {
             </ScrollView>
         ),
       },
+      {
+        title: '',
+        subtitle: '',
+        backgroundColor: '#ffffff',
+        image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
+          <Image style={{height:height
+            , width:width}} source={require('./images2/OnboardP8.png')}/>
+            </ScrollView>
+        ),
+      },
       
       
       {
