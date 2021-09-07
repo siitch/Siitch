@@ -92,6 +92,17 @@ const Tutorial = ({navigation}) => {
             </ScrollView>
         ),
       },
+      {
+        title: '',
+        subtitle: '',
+        backgroundColor: '#ffffff',
+        image: (
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
+          <Image style={{height:height
+            , width:width}} source={require('../images2/OnboardP8.png')}/>
+            </ScrollView>
+        ),
+      },
       
       
       {
