@@ -42,7 +42,7 @@ const MakeupGrass = ({inputData, navigation}) => {
         }}>
         <Text style={{fontSize: 16}}>
           Palm oil derivatives appear in 70% of cosmetics, contributing to
-          repaid deforestation, wildlife extinction and climate change.
+          rapid deforestation, wildlife extinction and climate change.
         </Text>
         <View style={{flexDirection: 'row', marginLeft: 60}}>
           <Text>-</Text>

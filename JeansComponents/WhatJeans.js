@@ -228,7 +228,7 @@ const WhatJeans = () => {
           marginRight:'5%'
         }}>
         <Text style={{fontSize: 14}}>-</Text>
-        <Text style={{fontSize: 14}}>Soil Associtation org, Patagonia</Text>
+        <Text style={{fontSize: 14}}>Soil Association org, Patagonia</Text>
       </View>
       <View style={{height: Height / 10}} />
     </ScrollView>

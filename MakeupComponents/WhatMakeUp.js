@@ -219,12 +219,12 @@ const WhatMakeUp = () => {
                 onPress={() =>
                   Linking.openURL('https://www.goingzerowaste.com/')
                 }
-                style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
+                style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Going Zero Waste
               </Text>
               <Text
                 onPress={() => Linking.openURL('https://packagefreeshop.com/')}
-                style={{marginLeft: 20, marginRight: 20, color: '#00ADEF'}}>
+                style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Package Free Shop
               </Text>
               <TouchableHighlight

@@ -43,13 +43,13 @@ const Vs = ({navigation}) => {
           <Text
             style={{
               color: 'white',
-              width: Width / 6,
+              width: Width / 5.2,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
               marginLeft: Width / 10,
             }}>
-            One of these
+            One lb of these
           </Text>
           <Text
             style={{
@@ -63,7 +63,7 @@ const Vs = ({navigation}) => {
           <Text
             style={{
               color: 'white',
-              marginLeft: Width / 10,
+              marginLeft: Width / 13,
               width: Width / 2.2,
               textAlign: 'center',
               fontSize: 20,

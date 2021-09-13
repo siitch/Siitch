@@ -1,5 +1,5 @@
 export const images = {
-  meats: require('./images/Beef.png'),
+  meats: require('./images/beef_recycle.png'),
   everyday_food: require('./images/hamburger.jpg'),
   seeds: require('./images/sunflower_seeds.png'),
   drinks_all: require('./images/coffee_small.png'),

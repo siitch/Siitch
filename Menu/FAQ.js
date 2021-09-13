@@ -104,6 +104,7 @@ export const FAQ = ({ navigation }) => {
                 paddingRight: 15,
                 paddingBottom: 10,
                 fontWeight: 'bold',
+                color: '#2f97ef'
               }}
               onPress={() => setExpand1(expand1 ? false : true)}>
               <Text>
@@ -713,7 +714,7 @@ export const FAQ = ({ navigation }) => {
                   marginRight: "3%" ,   
                   
               }}>
-                  That's the goal!
+                  That's the goal.
               </Text>
               ) : null}
             {expand10 ? (
@@ -745,7 +746,7 @@ export const FAQ = ({ navigation }) => {
             style={{
               marginTop: 20,
               backgroundColor: '#FFFFFF',
-              marginBottom: '2%',
+              marginBottom: '5%',
               width: Width,
             }}>
             <Text

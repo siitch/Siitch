@@ -166,15 +166,36 @@ export const About = ({ navigation }) => {
             </Text>
         </TouchableOpacity>
         <Text
+        style={{
+          fontSize: 22,
+          alignContent: 'center',
+          textAlign: 'center',
+          marginTop: 25,
+        }}>
+        Contact Us 
+      </Text>
+      <Text
+        style={{
+          fontSize: 18,
+          alignContent: 'center',
+          textAlign: 'center',
+          marginLeft: '7%',
+          marginTop: 5,
+          marginBottom: 20,
+          marginRight: '7%',
+        }}>
+         contact@siitch.com
+      </Text>
+        <Text
             onPress={() =>
               Linking.openURL(
-                'https://bit.ly/3i4kebj',
+                'https://www.siitch.com/privacy-policy',
               )
             }
             style={{
             color: '#00ADEF',
             fontSize: 20,
-            marginTop: 20,
+            marginTop: 15,
             alignSelf: 'center',
             }
             }>
@@ -184,14 +205,14 @@ export const About = ({ navigation }) => {
           <Text
             onPress={() =>
               Linking.openURL(
-                'https://bit.ly/2UBNugJ',
+                'https://www.siitch.com/termsofuse',
               )
             }
             style={{
             color: '#00ADEF',
             fontSize: 20,
             marginTop: 10,
-            paddingBottom: '7%',
+            paddingBottom: 40,
             alignSelf: 'center',
             }
             }>

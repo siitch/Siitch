@@ -56,7 +56,7 @@ const MakeupHeart = ({inputData, navigation}) => {
                 watch our for yourself. How? Start with this article from{' '}
                 <Text
                   style={{textDecorationLine: 'underline'}}
-                  onPress={() => Linking.openURL('https://www.google.com/')}>
+                  onPress={() => Linking.openURL('https://thegoodfaceproject.com/articles/check-ingredients-in-cosmetics')}>
                   The Good Face Project On How to Check Cosmetic Ingredients for
                   Safety.
                 </Text>
@@ -135,13 +135,13 @@ const MakeupHeart = ({inputData, navigation}) => {
                 </Text>
                 <Text
                   style={{textDecorationLine: 'underline', marginTop: 10}}
-                  onPress={() => Linking.openURL('https://www.google.com/')}>
+                  onPress={() => Linking.openURL('https://www.ewg.org/news-insights/news/80-years-later-cosmetics-chemicals-still-unregulated')}>
                   80 Years Later, Cosmetic Chemical Still Unregulated.
                   <Text>- EWG</Text>
                 </Text>
                 <Text
                   style={{textDecorationLine: 'underline', marginTop: 10}}
-                  onPress={() => Linking.openURL('https://www.google.com/')}>
+                  onPress={() => Linking.openURL('https://www.byrdie.com/banned-ingredients-europe')}>
                   9 Beauty Ingredients That Are Banned Overseas (But Legal in
                   the U.S.) - Byrdie
                   <Text>- EWG</Text>

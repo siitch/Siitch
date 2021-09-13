@@ -97,7 +97,7 @@ const What = () => {
       </View>
       </View>
       
-      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%'}}>
+      <Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%', marginRight:'10%'}}>
       <Text onPress={() => Linking.openURL('https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')} style={{color:'#00ADEF'}}>Plan your meals, </Text>
          and plan for leftovers so you don’t waste meat, or any dairy product</Text>
       <View style={{
