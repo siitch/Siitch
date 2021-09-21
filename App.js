@@ -25,7 +25,7 @@ const App = () => {
                 AsyncStorage.setItem('alreadyLaunched', 'true');
                 setIsFirstLaunch(true);
             } else {
-                setIsFirstLaunch(true);
+                setIsFirstLaunch(false);
             }
         });
     }, []);

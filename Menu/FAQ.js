@@ -25,6 +25,7 @@ export const FAQ = ({ navigation }) => {
     const [expand9, setExpand9] = useState(false);
     const [expand10, setExpand10] = useState(false);
     const [expand11, setExpand11] = useState(false);
+    const [expand12, setExpand12] = useState(false);
   
       return (
         <ScrollView
@@ -120,14 +121,15 @@ export const FAQ = ({ navigation }) => {
                   marginRight: "3%" ,   
                   
               }}>
-                  Use it to remind yourself how much water is required to produce 
-                  the simplest of items, from a glass of milk to paper coffee cups. 
-                  Use it to motivate behavior change. 
+                  Use Siitch to remind yourself how much water is required to produce even
+                  the simplest of items, from a glass of milk to paper coffee cups. {'\n'}
+                  Use Siitch to motivate behavior change. {'\n'}
                   Use the statistics to have conversations with your kids, 
-                  to help teach them that everything has a cost. 
-                  Use it to help them understand that when they buy or throw something away, 
-                  whether a pair of jeans or an egg, that water and the earth's resources make it possible. 
-                  Use the compare tool so they can visualize the differences.
+                  to help teach them that everything has a cost. {'\n'}
+                  Use Siitch to understand that when you buy or throw something away, 
+                  whether it be a pair of jeans or an egg, 
+                  that water and the earth's reasourses make it possible. {'\n'}
+                  Use the compare tool to visualize the differences.
   
               </Text>
               ) : null}
@@ -746,7 +748,6 @@ export const FAQ = ({ navigation }) => {
             style={{
               marginTop: 20,
               backgroundColor: '#FFFFFF',
-              marginBottom: '5%',
               width: Width,
             }}>
             <Text
@@ -823,6 +824,67 @@ export const FAQ = ({ navigation }) => {
               <TouchableHighlight
                 style={{marginLeft: Width / 1.125, marginTop: -37}}
                 onPress={() => setExpand11(true)}
+                underlayColor="transparent">
+                <MaterialCommunityIcons
+                  name="menu-down"
+                  color="black"
+                  style={{fontSize: 40}}
+                />
+              </TouchableHighlight>
+            )}
+          </View>
+          <View style={{ borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingTop: '3%'}}></View>
+          <View
+            style={{
+              marginTop: 20,
+              backgroundColor: '#FFFFFF',
+              marginBottom: '5%',
+              width: Width,
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                paddingTop: '1%',               
+                marginLeft: '3%',
+                paddingRight: 15,
+                paddingBottom: 10,
+                fontWeight: 'bold',
+              }}
+              onPress={() => setExpand12(expand12 ? false : true)}>
+              <Text>
+              Why does my screen look misaligned/weird?
+              </Text>
+              </Text>
+              {expand12 ? (
+              <Text 
+                style= {{
+                  fontWeight: 'normal',
+                  fontSize: 17,
+                  marginLeft: '3%',
+                  marginRight: "3%" ,   
+                  
+              }}>
+                  This app is just in beginning stages. Right now Siitch looks
+                  best on newer iPhones with regular non-zoomed in text. {'\n'}
+                  Androids, iPads, Apple Watches, older phones, and iPhones with zoomed in display are
+                  all currently not supported. We plan on supporting all platforms in the future.
+              </Text>
+              ) : null}
+            {expand10 ? (
+              <TouchableHighlight
+                style={{marginLeft: Width / 1.125, marginTop: -20}}
+                onPress={() => setExpand12(false)}
+                underlayColor="transparent">
+                <MaterialCommunityIcons
+                  name="menu-up"
+                  color="black"
+                  style={{fontSize: 40}}
+                />
+              </TouchableHighlight>
+            ) : (
+              <TouchableHighlight
+                style={{marginLeft: Width / 1.125, marginTop: -37}}
+                onPress={() => setExpand12(true)}
                 underlayColor="transparent">
                 <MaterialCommunityIcons
                   name="menu-down"
