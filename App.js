@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useEffect} from 'react';
+import React, {useEffect, Component} from 'react';
 import {useState} from 'react';
 import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'react-native';
 
@@ -11,10 +11,12 @@ import { AsyncStorage } from 'react-native';
 import {landingdetails} from './LandingPage';
 import {OnboardingScreen} from './OnboardingScreen';
 
+
 const AppStack = createStackNavigator();
 
 const App = () => {
 
+  
   const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
 
     useEffect(()=>{
@@ -48,18 +50,8 @@ const App = () => {
         </NavigationContainer>
       );
     }
-
-    // return(
-    //   <NavigationContainer independent={true}>
-    //       <AppStack.Navigator headerMode="none">
-    //         <AppStack.Screen name = "Onboarding" component={OnboardingScreen} />
-    //         <AppStack.Screen name = "Landing Page" component={landingdetails} />
-    //       </AppStack.Navigator>
-    //     </NavigationContainer>
-
-    // );
-  
   
 };
+
 
 export default App;
