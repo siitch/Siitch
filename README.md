@@ -74,13 +74,13 @@ Home, Rank, Search, Calculate, and Compare all work perfectly.
 
 ![Home Screen](Screenshots/Home.png)  
 
-![Compare Screen after selection](Screenshots/Compare Select.png)  
+![Compare Screen after selection](Screenshots/Compare%20Select.png)  
 
 ![Calculator result](Screenshots/Calculate.png)  
 
 If tap **MLTool**, app will crash.  
 
-![App will freeze and error message will pop out in Xcode](Screenshots/MLTool crash.png)  
+![App will freeze and error message will pop out in Xcode](Screenshots/MLTool%20crash.png)  
 
 ###Another branch I am working on (running on real device with Expo):  
 All tools except MLTool have errors. Data can't render in the picker.  
