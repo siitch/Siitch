@@ -84,7 +84,8 @@ If tap **MLTool**, app will crash.
 
 ![App will freeze and error message will pop out in Xcode](Screenshots/MLTool%20crash.png)  
 
-###Another branch I am working on (running on real device with Expo):  
+### Another branch I am working on (running on real device with Expo):  
+
 All tools except MLTool have errors. Data can't render in the picker.  
 
 ![Error with style and data fetched from database can't be rendered.](Screenshots/CalculatorError.PNG)  
