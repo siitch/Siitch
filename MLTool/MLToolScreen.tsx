@@ -82,10 +82,13 @@ export default function MLToolScreen() {
 
     //Load tensorflow
     initializeTfAsync();
-    //Load mobilenet
-    initializeModelAsync();
+
+    //Load mobilenet, currently commented out to prevent crash
+    //initializeModelAsync();
+
     //Get camera roll permission
     getCameraRollPermissionAsync();
+
     //Get camera permission
     getCameraPermissionAsync()
   }, []);
@@ -134,9 +137,9 @@ export default function MLToolScreen() {
 
       // resize image to avoid out of memory crashes
       const manipResponse = await ImageManipulator.manipulateAsync(
-        response.uri,
-        [{ resize: { width: 900 } }],
-        { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+          response.uri,
+          [{ resize: { width: 900 } }],
+          { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
       );
 
       const source = { uri: manipResponse.uri };
@@ -161,9 +164,9 @@ export default function MLToolScreen() {
       if (!response.cancelled) {
         // resize image to avoid out of memory crashes
         const manipResponse = await ImageManipulator.manipulateAsync(
-          response.uri,
-          [{ resize: { width: 900 } }],
-          { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
+            response.uri,
+            [{ resize: { width: 900 } }],
+            { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
         );
 
         const source = { uri: manipResponse.uri };
@@ -177,174 +180,182 @@ export default function MLToolScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.headerText}>MobileNet Image Classification</Text>
+      <View style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            contentContainerStyle={styles.contentContainer}
+        >
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.headerText}>MobileNet Image Classification</Text>
 
-          <View style={styles.loadingContainer}>
-            <View style={styles.loadingTfContainer}>
-              <Text style={styles.text}>TensorFlow.js ready?</Text>
-              {isTfReady ? (
-                  <Text style={styles.text}>✅</Text>
-              ) : (
-                  <ActivityIndicator size="small" />
-              )}
-            </View>
-
-            <View style={styles.loadingModelContainer}>
-              <Text style={styles.text}>MobileNet model ready? </Text>
-              {isModelReady ? (
-                  <Text style={styles.text}>✅</Text>
-              ) : (
-                  <ActivityIndicator size="small" />
-              )}
-            </View>
-          </View>
-        </View>
-
-
-
-        <View style={{
-          flex: 1
-        }}>
-          <Camera
-              ref={(ref) => setCamera(ref)}
-              type={Camera.Constants.Type.back}
-              style={{
-                flex: 1,
-                aspectRatio: 1, //Change this value to change the ratio of camera preview area
-              }}
-          />
-          <View style={
-            {
-              marginTop: '3%',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'space-evenly'
-            }
-          }>
-            <MaterialButton
-                icon="camera"
-                mode="contained"
-                disabled={!isModelReady}
-                loading={predicting}
-                onPress={takePictureAsync}>
-              Take Picture
-            </MaterialButton>
-          {isModelReady &&
-          predictions && (
-              <TouchableOpacity
-                  style={{
-                    backgroundColor: '#FF0266',
-                    //width: 75,
-                    height: 75,
-                    borderRadius:50,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginTop: '3%',
-                    marginBottom: '3%',
-                    marginRight: '3%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                  onPress={()=>setModalVisible(true)} >
-                <Text style={{color: 'white', margin: '3%'}}>Results</Text>
-              </TouchableOpacity>
-          )}
-
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-            >
-              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <View style={styles.modalView}>
-                  {imageToAnalyze && (
-                      <Image source={imageToAnalyze} style={styles.imageContainer} />
-                  )}
-                  {isModelReady &&
-                  predictions &&
-                  predictions.map((p, index) => {
-                    console.log(`${index} ${p.className}: ${p.probability}`);
-
-                    return (
-                        <MaterialButton
-                            key={index}
-                            mode="contained"
-                            style={{
-                              marginTop: '3%',
-                              marginBottom: '3%',
-                            }}
-                            onPress={()=>{}}>
-                          {p.className}
-                        </MaterialButton>
-                    );
-                  })}
-                  <TouchableHighlight
-                      style={{ ...styles.openButton, backgroundColor: "#70BF41" }}
-                      onPress={() => {
-                        setModalVisible(!modalVisible);
-                      }}
-                  >
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
-                  </TouchableHighlight>
-                </View>
+            <View style={styles.loadingContainer}>
+              <View style={styles.loadingTfContainer}>
+                <Text style={styles.text}>TensorFlow.js ready?</Text>
+                {isTfReady ? (
+                    <Text style={styles.text}>✅</Text>
+                ) : (
+                    <ActivityIndicator size="small" />
+                )}
               </View>
-            </Modal>
 
+              <View style={styles.loadingModelContainer}>
+                <Text style={styles.text}>MobileNet model ready? </Text>
+                {isModelReady ? (
+                    <Text style={styles.text}>✅</Text>
+                ) : (
+                    <ActivityIndicator size="small" />
+                )}
+              </View>
+            </View>
           </View>
-        </View>
 
 
-        <View style={styles.welcomeContainer}>
+
+          <View>
+            <Camera
+                ref={(ref) => setCamera(ref)}
+                type={Camera.Constants.Type.back}
+                style={{
+                  aspectRatio: 0.75,//Change this value to change the ratio of camera preview area
+                }}
+            >
+              {/* Put something here to show on camera preview area, such as a round button*/}
+            </Camera>
+            <View style={
+              {
+                marginTop: '3%',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'space-evenly'
+              }
+            }>
+              <MaterialButton
+                  icon="camera"
+                  mode="contained"
+                  disabled={!isModelReady} //if mobilenet is not ready, disable and turn grey
+                  loading={predicting} //when predicting, show loading animation
+                  onPress={takePictureAsync}//take picture
+              >
+                Take Picture
+              </MaterialButton>
+
+              {/* if prediction results are ready, show a result button that can
+            set the modal pop-out window visible */}
+              {predictions && (
+                  <TouchableOpacity
+                      style={{
+                        backgroundColor: '#FF0266',
+                        //width: 75,
+                        height: 75,
+                        borderRadius:50,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginTop: '3%',
+                        marginBottom: '3%',
+                        marginRight: '3%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                      onPress={()=>setModalVisible(true)} >
+                    <Text style={{color: 'white', margin: '3%'}}>Results</Text>
+                  </TouchableOpacity>
+              )}
+
+              {/* pop-out modal window */}
+              <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}
+              >
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                  <View style={styles.modalView}>
+
+                    {/* show the photo just took or selected */}
+                    {imageToAnalyze && (
+                        <Image source={imageToAnalyze} style={styles.imageContainer} />
+                    )}
+                    {/* show three result buttons */}
+                    {predictions &&
+                    predictions.map((p, index) => {
+                      console.log(`${index} ${p.className}: ${p.probability}`);
+
+                      return (
+                          <MaterialButton
+                              key={index}
+                              mode="contained"
+                              style={{
+                                marginTop: '3%',
+                                marginBottom: '3%',
+                              }}
+                              onPress={()=>{}}>
+                            {p.className}
+                          </MaterialButton>
+                      );
+                    })}
+
+                    {/* Close button that can set this modal invisible */}
+                    <TouchableHighlight
+                        style={{ ...styles.openButton, backgroundColor: "#70BF41" }}
+                        onPress={() => {
+                          setModalVisible(!modalVisible);
+                        }}
+                    >
+                      <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
+                    </TouchableHighlight>
+                  </View>
+                </View>
+              </Modal>
+
+            </View>
+          </View>
 
 
-          <TouchableOpacity
-            style={styles.imageWrapper}
-            onPress={isModelReady ? selectImageAsync : undefined}
-          >
-            {imageToAnalyze && (
-              <Image source={imageToAnalyze} style={styles.imageContainer} />
-            )}
+          {/* This area shows a image picker and a list of prediction results */}
+          <View style={styles.welcomeContainer}>
 
-            {isModelReady && !imageToAnalyze && (
-              <Text style={styles.transparentText}>Tap to choose image</Text>
-            )}
-          </TouchableOpacity>
-          <View style={styles.predictionWrapper}>
-            {isModelReady && imageToAnalyze && (
-              <Text style={styles.text}>
-                Predictions: {predictions ? "" : "Predicting..."}
-              </Text>
-            )}
-            {isModelReady &&
+
+            <TouchableOpacity
+                style={styles.imageWrapper}
+                onPress={isModelReady ? selectImageAsync : undefined}
+            >
+              {imageToAnalyze && (
+                  <Image source={imageToAnalyze} style={styles.imageContainer} />
+              )}
+
+              {isModelReady && !imageToAnalyze && (
+                  <Text style={styles.transparentText}>Tap to choose image</Text>
+              )}
+            </TouchableOpacity>
+            <View style={styles.predictionWrapper}>
+              {isModelReady && imageToAnalyze && (
+                  <Text style={styles.text}>
+                    Predictions: {predictions ? "" : "Predicting..."}
+                  </Text>
+              )}
+              {isModelReady &&
               predictions &&
               predictions.length &&
               console.log("=== Classify image predictions: ===")}
-            {isModelReady &&
+              {isModelReady &&
               predictions &&
               predictions.map((p, index) => {
                 console.log(`${index} ${p.className}: ${p.probability}`);
 
                 return (
-                  <Text key={index} style={styles.text}>
-                    {p.className}: {p.probability}
-                  </Text>
+                    <Text key={index} style={styles.text}>
+                      {p.className}: {p.probability}
+                    </Text>
                 );
               })}
+
+            </View>
+
 
           </View>
 
 
-        </View>
-
-
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
   );
 }
 
@@ -435,7 +446,7 @@ const MLToolStack = createStackNavigator();
 //Tab navigator from LandingPage.js leads us here.
 //We need to decide what will be on this page.
 export const mltoolScreen = () => (
-  //Create a stack to store user's browse history
+    //Create a stack to store user's browse history
     <MLToolStack.Navigator>
       <MLToolStack.Screen
           name="Camera"
