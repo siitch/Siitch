@@ -68,8 +68,10 @@ Simply go back to your IDE and edit anything you want, and you should see change
 remember to do `pod install` under ios folder.
 ***
 
-#Screenshots
-###This branch (running on iOS 14.5 simulator without Expo):
+#Screenshots  
+
+###This branch (running on iOS 14.5 simulator without Expo):  
+
 Home, Rank, Search, Calculate, and Compare all work perfectly.  
 
 ![Home Screen](Screenshots/Home.png)  
