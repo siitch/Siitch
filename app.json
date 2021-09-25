@@ -1,6 +1,13 @@
 {
+  "expo": {
+    "name": "AwesomeProject",
+    "slug": "awesome_project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
   "name": "AwesomeProject",
-  "displayName": "AwesomeProject",
   "ios": {
     "bundleIdentifier": "your bundle identifier",
     "supportsTablet": true

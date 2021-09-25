@@ -19,23 +19,35 @@
     "firebase": "^7.22.1",
     "patch-package": "^6.4.7",
     "react": "16.11.0",
-    "react-native": "0.62.0",
+    "react-native": "0.63.2",
     "react-native-dropdown-picker": "^3.7.1",
     "react-native-elements": "^1.2.7",
     "react-native-fix-image": "^2.1.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-onboarding-swiper": "^1.1.4",
-    "react-native-paper": "^4.2.0",
+    "react-native-paper": "^4.9.2",
     "react-native-progress": "^4.1.2",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^1.0.2",
     "react-native-screens": "^2.7.0",
     "react-native-search-bar": "^3.5.1",
     "react-native-splash-screen": "^3.2.0",
-    "react-native-vector-icons": "^7.1.0",
+    "react-native-vector-icons": "^8.1.0",
     "react-native-webview": "^11.6.5",
     "react-navigation": "^4.3.9",
-    "rn-modal-picker": "^0.3.0"
+    "rn-modal-picker": "^0.3.0",
+
+    "@react-native-async-storage/async-storage": "^1.15.8",
+    "@tensorflow-models/mobilenet": "^2.1.0",
+    "@tensorflow/tfjs": "^3.9.0",
+    "@tensorflow/tfjs-react-native": "^0.7.0",
+    "jpeg-js": "^0.4.3",
+    "react-native-fs": "^2.18.0",
+    "react-native-unimodules": "^0.14.9",
+    "expo-camera": "^11.2.2",
+    "expo-gl": "^10.4.2",
+    "expo-image-manipulator": "^9.2.2",
+    "expo-image-picker": "^10.2.3"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
@@ -45,7 +57,9 @@
     "eslint": "6.8.0",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.58.0",
-    "react-test-renderer": "16.11.0"
+    "react-test-renderer": "16.11.0",
+
+    "typescript": "^4.4.3"
   },
   "jest": {
     "preset": "react-native"
