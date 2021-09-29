@@ -46,7 +46,7 @@ export const FAQ = ({ navigation }) => {
                 fontWeight: 'bold',
               }}
               onPress={() => setExpand(expand ? false : true)}>
-              What can this app do for me?
+              What can Siitch do for me?
               </Text>
               {expand ? (
               <Text 
@@ -121,16 +121,14 @@ export const FAQ = ({ navigation }) => {
                   marginRight: "3%" ,   
                   
               }}>
-                  Use Siitch to remind yourself how much water is required to produce even
-                  the simplest of items, from a glass of milk to paper coffee cups. {'\n'}
                   Use Siitch to motivate behavior change. {'\n'}
-                  Use the statistics to have conversations with your kids, 
-                  to help teach them that everything has a cost. {'\n'}
-                  Use Siitch to understand that when you buy or throw something away, 
-                  whether it be a pair of jeans or an egg, 
-                  that water and the earth's reasourses make it possible. {'\n'}
+                  Use Siitch to remind yourself how much water is required to produce the simplest of items, from a glass of milk to paper coffee cups. {'\n'}
+                  Use the statistics to have conversations with your kids, to help teach them that everything has a cost. {'\n'}
+                  Use the statistics to teach your friends about the deeper cost of food waste.{'\n'}
+                  Use the statistics to teach them that casually throwing out single-use items has a much bigger impact than they imagine. {'\n'}
+                  Use Siitch to understand that when you buy or throw something away, whether a pair of jeans or an egg, that water and the earth's resources make it possible. {'\n'}
                   Use the compare tool to visualize the differences.
-  
+                    
               </Text>
               ) : null}
             {expand1 ? (
@@ -864,10 +862,10 @@ export const FAQ = ({ navigation }) => {
                   marginRight: "3%" ,   
                   
               }}>
-                  This app is just in beginning stages. Right now Siitch looks
+                  This app is just in its beginning stages. Right now Siitch looks
                   best on newer iPhones with regular non-zoomed in text. {'\n'}
-                  Androids, iPads, Apple Watches, older phones, and iPhones with zoomed in display are
-                  all currently not supported. We plan on supporting all platforms in the future.
+                  Android devices, iPads, Apple Watches, older phones, and iPhones with zoomed in displays are
+                   currently not supported. We plan on supporting all platforms in the future.
               </Text>
               ) : null}
             {expand10 ? (

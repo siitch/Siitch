@@ -113,7 +113,7 @@ export const Mission = ({ navigation }) => {
               marginTop: 20,
               marginLeft: '7%',
             }}> 
-            <Text style={{fontSize: 18, color: 'white'}}>
+            <Text style={{fontSize: 18, color: 'white', marginRight: '13%', marginLeft: '3%'}}>
             Never doubt that a small group of thoughtful, 
             committed citizens can change the world. {'\n'}
             It's the only thing that ever has.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold'}}>- Margaret Meade</Text>{' '}
