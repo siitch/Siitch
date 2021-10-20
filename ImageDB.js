@@ -21,6 +21,7 @@ const Profiles = {
     calculator: require('./images/Calculator.png'),
     water_drops: require('./images/water_drops.png'),
     water: require('./images/WaterDrop_BLUE.png'),
+    clock: require('./images/redClock_3pm.png'),
     learn_more: require('./images/learn-more.png'),
     calculator: require('./images/Calculator.png'),
     'gray water': require('./images/gray_water_3.png'),
