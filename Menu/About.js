@@ -51,11 +51,11 @@ export const About = ({ navigation }) => {
               marginTop: 35,
               marginLeft: '7%',
             }}> 
-            <Text style={{fontSize: 17.5, color: 'white', fontWeight: 'bold'}}>
+            <Text style={{fontSize: 17.5, color: 'white', fontWeight: 'bold', marginLeft: '3%', marginRight: '15%'}}>
             {'\n'}
-            We cannot solve the climate crisis by being {'\n'}‘good’ consumers. 
-            But we absolutely can {'\n'}make things much better by being good {'\n'}citizens. 
-            {'\n'}
+            We cannot solve the climate crisis by being ‘good’ consumers. {'\n'}
+            But we absolutely can make things much better by being good citizens. {'\n'}
+            
             {'\n'} <Text style={{fontWeight: 'bold',}}>- Emma Marris {'\n'}
             (Contributer, National Geographic)</Text>{' '}
             {'\n'}</Text>
@@ -137,7 +137,7 @@ export const About = ({ navigation }) => {
           fontSize: 18,
           alignContent: 'auto',
           marginLeft: '7%',
-          marginTop: 20,
+          marginTop: 10,
           marginBottom: 40,
           marginRight: '7%',
         }}>
@@ -181,7 +181,7 @@ export const About = ({ navigation }) => {
           textAlign: 'center',
           marginLeft: '7%',
           marginTop: 5,
-          marginBottom: 20,
+          marginBottom: 10,
           marginRight: '7%',
         }}>
          contact@siitch.com
