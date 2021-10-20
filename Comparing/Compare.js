@@ -11,6 +11,8 @@ import {Dimensions} from 'react-native';
 import {Component} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Counter from "react-native-counters";
+
 
 const {width, height} = Dimensions.get('screen');
 
