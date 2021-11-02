@@ -10,6 +10,7 @@ const DeviceWidth = Dimensions.get('window').width;
 export const CalculateTotal = ({value, unit, id, type}) => {
   const stringUnit = (unit, id, type) => {
     if (unit === 'L') {
+      return type === 'individual' ? 'L. p/item' : 'L.';
       if (
         id === 'EDI' ||
         id === 'EDF' ||
@@ -21,6 +22,7 @@ export const CalculateTotal = ({value, unit, id, type}) => {
         return 'L. p/kg';
       }
     } else if (unit === 'G') {
+      return type === 'individual' ? 'gal. p/item' : 'gal.';
       if (
         id === 'EDI' ||
         id === 'EDF' ||
