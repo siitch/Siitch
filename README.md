@@ -5,14 +5,14 @@ this app through `npm start` and then run it from Xcode on a simulator.
 
 ***  
 # Dependencies removed
-###2021/11/05
+### 2021/11/05
 1. "@tensorflow-models/mobilenet": "^2.1.0"
 2. "expo-image-picker": "^10.2.3"
 
 # Dependencies added
-###2021/11/05
+### 2021/11/05
 1. "react-native-ui-lib": "^6.2.1" UI library
-###2021/09/25
+### 2021/09/25
 1. "@react-native-async-storage/async-storage": "^1.15.8"
 2. "@tensorflow-models/mobilenet": "^2.1.0"
 3. "@tensorflow/tfjs": "^3.9.0"
@@ -28,7 +28,7 @@ this app through `npm start` and then run it from Xcode on a simulator.
 ***  
 
 # Changes on files and folders
-###2021/11/05
+### 2021/11/05
 1. Removed original MLTool prototype and added new files
 2. Removed 'Screenshots' folder
 3. Modified 'metro.config.js' to support .bin model files
@@ -36,7 +36,8 @@ this app through `npm start` and then run it from Xcode on a simulator.
 5. Modified 'LandingPage.js' to hide and show tab in the MLTool according to the current screen
 6. Modified 'info.plist' to remove redundant permission descriptions
 7. Added 'Camera.png' camera button, 'arrow.png' submit button, 'redClock_3pm.png' clock icon under ./images
-###2021/09/25
+  
+### 2021/09/25
 1. Added 'MLTool' folder and files for MLTool under it
 2. Added 'Screenshots' folder for README
 3. Modified 'app.json' to test Expo (Doesn't affect anything)
