@@ -18,11 +18,13 @@ const Profiles = {
     landing_image: require('./images/LandingPage_Image_2x.png'),
     logo: require('./images/SiitchLogo_large.png'),
     alpha: require('./images/alpha.png'),
+    arrow: require('./images/arrow.png'),
     calculator: require('./images/Calculator.png'),
     water_drops: require('./images/water_drops.png'),
     water: require('./images/WaterDrop_BLUE.png'),
+    clock: require('./images/redClock_3pm.png'),
+    camera: require('./images/Camera.png'),
     learn_more: require('./images/learn-more.png'),
-    calculator: require('./images/Calculator.png'),
     'gray water': require('./images/gray_water_3.png'),
     'blue water': require('./images/blue_water_3.png'),
     'green water': require('./images/green_water_3.png'),
@@ -62,7 +64,6 @@ const Profiles = {
     'Kiwi fruit': require('./images/Image_new/Fruits/kiwi_fruit.png'),
     Grapefruit: require('./images/Image_new/Fruits/grapefruit.png'),
     Currants: require('./images/Image_new/Fruits/currants.png'),
-    Papayas: require('./images/Image_new/Fruits/papaya.png'),
     Blackberries: require('./images/Image_new/Fruits/blackberries.png'),
     Rasberries: require('./images/Image_new/Fruits/rasberries.png'),
     Mulberries: require('./images/Image_new/Fruits/mulberries.png'),
@@ -117,7 +118,7 @@ const Profiles = {
     Salad: require('./images/Image_new/Everyday_Foods/salad.png'),
     'Toast 1 slice': require('./images/Image_new/Everyday_Foods/toast.png'),
     Chocolate: require('./images/Image_new/Everyday_Foods/chocolate.png'),
-    'Sugar cane': require('./images/Image_new/Everyday_Foods/sugar.png'), 
+    'Sugar cane': require('./images/Image_new/Everyday_Foods/sugar.png'),
     'Soy sauce': require('./images/Image_new/Everyday_Foods/soy_sauce.png'),
     Car: require('./images/Image_new/Everyday_Items/Water_Items/car_pix.png'),
     'Leather shoes': require('./images/Image_new/Everyday_Items/Water_Items/leather_shoes.png'),
@@ -222,4 +223,3 @@ const Profiles = {
     'Vodka one & half oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/vodka_glass.png'),
   };
   export default Profiles;
-  

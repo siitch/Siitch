@@ -31,6 +31,7 @@ import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'reac
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {styles} from './Ranking/Styles';
@@ -52,6 +53,7 @@ import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
+import {camerascreenScreen} from "./MLTool/CameraScreen";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -74,7 +76,7 @@ function HomeScreen() {
               resizeMode="contain"
             />
           </View>
-  
+
           <Text style={styles.text}>Make Good Choices For Our Planet</Text>
           <View style={{alignItems: 'center'}}>
             <Image
@@ -95,17 +97,16 @@ function HomeScreen() {
       </ScrollView>
     );
   }
-  
+
   const Tab = createBottomTabNavigator();
   const HomeStack = createStackNavigator();
   const Stack = createStackNavigator();
-  
+
   const HomeStackScreen = () => (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home"
         component={HomeScreen}
-        options={{headerShown: true}}
         options={({navigation}) => ({
           headerBackTitleVisible: false,
           headerShown : true,
@@ -123,12 +124,12 @@ function HomeScreen() {
           ),
         })}
       />
-      
-      <HomeStack.Screen 
+
+      <HomeStack.Screen
         name = "Menu"
         component = {MenuMain}
         />
-      
+
       <HomeStack.Screen
       name = "Sources"
       component = {Sources}
@@ -176,7 +177,7 @@ function HomeScreen() {
       />
     </HomeStack.Navigator>
   );
-  
+
   const landingdetails = () => {
     const [status, setStatus] = useState(true);
     const [getData, setGetData] = useState({});
@@ -267,6 +268,22 @@ function HomeScreen() {
                 ),
             }}
           />
+
+          {/* Add the mltool tab. */}
+            <Tab.Screen
+                name="MLTool"
+                component={camerascreenScreen}
+                options={({route})=>({
+                    tabBarLabel: 'MLTool',
+                    tabBarVisible: ((route) => {
+                        const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+                        return routeName === "Confirm" || routeName === "Detail";
+                    })(route),
+                    tabBarIcon: ({color, size}) => (
+                        <MaterialCommunityIcons name="camera" color={color} size={size} />
+                    ),
+                })}
+            />
         </Tab.Navigator>
       );
     };
@@ -315,7 +332,7 @@ function HomeScreen() {
         return <MakeupGrass navigation={navigation} />;
       }
     };
-  
+
     const searchDetail = ({navigation, route}) => {
       setGetData(route.params.value);
       let detail = true;
