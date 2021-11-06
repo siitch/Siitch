@@ -3,7 +3,7 @@
 This branch is the first integration of all new features with **Expo** support that allows you to test Siitch real time on 
 a real device using Expo Go app. Of course, you can still test it using Xcode on a simulator like before, but the command
 changes from `npm start` to `react-native start`. I don't recommend you pull from this branch, because there are some 
-dependency changes that may damage the original project when merging. However, I do recommend you clone this branch to 
+dependency changes that may damage the original project when merging. However, I do recommend you checkout this branch to 
 your local repository and develop on it because testing through Expo Go is way easier than using a simulator.
 
 If you run it on a simulator with m1 chip mac, the app will still crash during image prediction (After you hit camera button).
