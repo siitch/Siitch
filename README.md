@@ -36,6 +36,7 @@ this app through `npm start` and then run it from Xcode on a simulator.
 5. Modified 'LandingPage.js' to hide and show tab in the MLTool according to the current screen
 6. Modified 'info.plist' to remove redundant permission descriptions
 7. Added 'Camera.png' camera button, 'arrow.png' submit button, 'redClock_3pm.png' clock icon under ./images
+  
 ###2021/09/25
 1. Added 'MLTool' folder and files for MLTool under it
 2. Added 'Screenshots' folder for README
