@@ -31,6 +31,7 @@ import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'reac
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {styles} from './Ranking/Styles';
@@ -52,7 +53,7 @@ import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
-import { mltoolScreen } from "./MLTool/MLToolScreen";
+import {camerascreenScreen} from "./MLTool/CameraScreen";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -269,19 +270,20 @@ function HomeScreen() {
           />
 
           {/* Add the mltool tab. */}
-          <Tab.Screen
-            name="MLTool"
-            //Where this tab takes us to
-            component={mltoolScreen}
-            options={{
-              //Tab name
-              tabBarLabel: 'MLTool',
-              //Tab icon
-              tabBarIcon: ({color, size}) => (
-                <MaterialCommunityIcons name="camera" color={color} size={size} />
-              ),
-            }}
-          />
+            <Tab.Screen
+                name="MLTool"
+                component={camerascreenScreen}
+                options={({route})=>({
+                    tabBarLabel: 'MLTool',
+                    tabBarVisible: ((route) => {
+                        const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+                        return routeName === "Confirm" || routeName === "Detail";
+                    })(route),
+                    tabBarIcon: ({color, size}) => (
+                        <MaterialCommunityIcons name="camera" color={color} size={size} />
+                    ),
+                })}
+            />
         </Tab.Navigator>
       );
     };
