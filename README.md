@@ -1,32 +1,17 @@
 # About this branch
 
 This branch doesn't have **Expo**, which means you can't tune the app on your phone via `expo start`. You can only run
-this app through `npm start` and then run it from Xcode on a simulator. If you are running an iOS 14.5 simulator on a m1
-chip Mac, the app will crash when you enter the MLTool tab (in this branch I commented out `initializeModelAsync();` in
-file MLToolScreen.tsx to prevent mobilenet model from loading, then no crash). However, it will run well on a real device.
-If we have a developer account, we can verify this.
+this app through `npm start` and then run it from Xcode on a simulator.
 
-What's more, most of the camera components will not run on a simulator because it's impossible to access the camera of our
-machine to be used as a simulator camera. So, the preview of the camera will be a pure black rectangle. If you want to
-tune the app on a simulator, solution can be `'yarn remove expo-camera'` and using a different component that can simulate
-a device camera by using camera roll as 'camera' ([react-native-camera-kit](https://github.com/teslamotors/react-native-camera-kit)
-for example). However, this will not affect UI design process.
-
-
-The project I showed before is initiated through `expo init` and then I copied our code into the blank Expo project so
-that I can get it running on my phone. However, because Expo uses different (newer) dependencies, all tools are in error
-state except MLTool (see screenshots at the end). It will take some time to upgrade our code (what I am trying to do now)
-to meet requirements of newer versions of all those dependencies.
-
-
-In conclusion, it is better if we can migrate our project to Expo in the long run, so that we can tune it with our phone.
-For now, our target is polishing the UI for prototype presentation, I think we can either comment out the components that
-crash the app, or we don't work on this branch and just start from scratch to build a brand-new beautiful
-page (no matter which way, then I just copy our new code to my Expo project and add the camera and mobilenet model back
-to record a video on real device).
 ***  
+# Dependencies removed
+1. "@tensorflow-models/mobilenet": "^2.1.0"
+2. "expo-image-picker": "^10.2.3"
 
-# New dependencies added
+# Dependencies added
+###2021/11/06
+1. "react-native-ui-lib": "^6.2.1" UI library
+###2021/09/25
 1. "@react-native-async-storage/async-storage": "^1.15.8"
 2. "@tensorflow-models/mobilenet": "^2.1.0"
 3. "@tensorflow/tfjs": "^3.9.0"
@@ -42,6 +27,15 @@ to record a video on real device).
 ***  
 
 # Changes on files and folders
+###2021/11/06
+1. Removed original MLTool prototype and added new files
+2. Removed 'Screenshots' folder
+3. Modified 'metro.config.js' to support .bin model files
+4. Modified 'package.json' to change dependencies
+5. Modified 'LandingPage.js' to hide and show tab in the MLTool according to the current screen
+6. Modified 'info.plist' to remove redundant permission descriptions
+7. Added 'Camera.png' camera button, 'arrow.png' submit button, 'redClock_3pm.png' clock icon under ./images
+###2021/09/25
 1. Added 'MLTool' folder and files for MLTool under it
 2. Added 'Screenshots' folder for README
 3. Modified 'app.json' to test Expo (Doesn't affect anything)
@@ -63,41 +57,3 @@ to record a video on real device).
 ### Second: In Xcode
 1. Open Xcode and open our project `AwesomeProject.xcworkspace` under ios folder.
 2. Run on simulator.
-***
-
-# How to tune the app
-Simply go back to your IDE and edit anything you want, and you should see changes. If you need to add new dependencies,
-remember to do `pod install` under ios folder.
-***  
-
-# Screenshots
-
-### This branch (running on iOS 14.5 simulator without Expo):
-
-Home, Rank, Search, Calculate, and Compare all work perfectly.
-
-![Home Screen](Screenshots/Home.png "Home Screen")
-
-![Compare Screen after selection](Screenshots/Compare%20Select.png)
-
-![Calculator result](Screenshots/Calculate.png)
-
-If tap **MLTool**, camera area will be black, and if `initializeModelAsync();` is not commented out, my app will crash.
-
-![App will freeze and error message will pop out in Xcode](Screenshots/MLTool%20crash.png)
-
-### Another branch I am working on (running on real device with Expo):
-
-All tools except MLTool have errors. Data can't render in the picker.
-
-
-![Error with style and data fetched from database can't be rendered.](Screenshots/CalculatorError.PNG)
-
-MLTool works fine.
-
-![Initial state](Screenshots/MLTool%20open.PNG)
-
-![Take a photo](Screenshots/MLTool%20take%20photo.PNG)
-
-![Hit the result button](Screenshots/MLTool%20result.PNG)  
-
