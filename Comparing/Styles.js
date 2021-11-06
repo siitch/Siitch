@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     borderColor: '#80CAFF',
   },
   bottomBorderLine: {
-    borderBottomColor: 'lightgray', 
+    borderBottomColor: 'lightgray',
     borderBottomWidth: 1,
     marginBottom: 20
   },
@@ -272,11 +272,22 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color: '#00ADEF'
   },
+  boldTextFormatRedCompare: {
+    textAlign: 'center',
+    fontSize:25,
+    fontWeight:'bold',
+    color: '#ef0100'
+  },
   selectItemText: {
     alignItems: 'center',
     marginTop: 30,
     fontSize: 25,
     fontWeight: '500'
-  }
+  },
+  counterView: {
+    borderWidth:1,
+    borderColor: '#0e0f0f',
+    borderRadius:50
+  },
 });
 export {styles};

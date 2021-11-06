@@ -10,6 +10,7 @@ const DeviceWidth = Dimensions.get('window').width;
 export const CalculateTotal = ({value, unit, id, type}) => {
   const stringUnit = (unit, id, type) => {
     if (unit === 'L') {
+      //return type === 'individual' ? 'L. p/item' : 'L.';
       if (
         id === 'EDI' ||
         id === 'EDF' ||
@@ -18,9 +19,11 @@ export const CalculateTotal = ({value, unit, id, type}) => {
       ) {
         return type === 'individual' ? 'L. p/item' : 'L.';
       } else {
-        return 'L. p/kg';
+        //return 'L. p/kg';
+          return type === 'individual' ? 'L. p/item' : 'L.';
       }
     } else if (unit === 'G') {
+      //return type === 'individual' ? 'gal. p/item' : 'gal.';
       if (
         id === 'EDI' ||
         id === 'EDF' ||
@@ -29,7 +32,8 @@ export const CalculateTotal = ({value, unit, id, type}) => {
       ) {
         return type === 'individual' ? 'gal. p/item' : 'gal.';
       } else {
-        return 'gal. p/lb';
+        //return 'gal. p/lb';
+          return type === 'individual' ? 'gal. p/item' : 'gal.';
       }
     }
   };

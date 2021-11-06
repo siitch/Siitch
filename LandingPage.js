@@ -24,6 +24,7 @@ import MakeupGrass from './MakeupComponents/MakeupGrass';
 import WhatMakeUp from './MakeupComponents/WhatMakeUp';
 //
 import 'react-native-gesture-handler';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import React from 'react';
 import {useState} from 'react';
 import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'react-native';
@@ -52,6 +53,7 @@ import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
+import CameraScreen, {camerascreenScreen} from "./MLTool/CameraScreen";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -74,7 +76,7 @@ function HomeScreen() {
               resizeMode="contain"
             />
           </View>
-  
+
           <Text style={styles.text}>Make Good Choices For Our Planet</Text>
           <View style={{alignItems: 'center'}}>
             <Image
@@ -95,17 +97,16 @@ function HomeScreen() {
       </ScrollView>
     );
   }
-  
+
   const Tab = createBottomTabNavigator();
   const HomeStack = createStackNavigator();
   const Stack = createStackNavigator();
-  
+
   const HomeStackScreen = () => (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home"
         component={HomeScreen}
-        options={{headerShown: true}}
         options={({navigation}) => ({
           headerBackTitleVisible: false,
           headerShown : true,
@@ -123,12 +124,12 @@ function HomeScreen() {
           ),
         })}
       />
-      
-      <HomeStack.Screen 
+
+      <HomeStack.Screen
         name = "Menu"
         component = {MenuMain}
         />
-      
+
       <HomeStack.Screen
       name = "Sources"
       component = {Sources}
@@ -176,7 +177,7 @@ function HomeScreen() {
       />
     </HomeStack.Navigator>
   );
-  
+
   const landingdetails = () => {
     const [status, setStatus] = useState(true);
     const [getData, setGetData] = useState({});
@@ -251,7 +252,7 @@ function HomeScreen() {
               ),
             }}
           />
-          <Tab.Screen
+            <Tab.Screen
             name="Compare"
             component={compareScreen}
             options={{
@@ -266,6 +267,30 @@ function HomeScreen() {
                   <Image source={Profiles.vs_compare} resizeMode="contain" />
                 ),
             }}
+          />
+            {/*<Tab.Screen
+                name="MLTool1"
+                component={mltoolScreen1}
+                options={{
+                    tabBarLabel: 'MLTool1',
+                    tabBarIcon: ({color, size}) => (
+                        <MaterialCommunityIcons name="camera" color={color} size={size}/>
+                    ),
+                }}
+            />*/}
+          <Tab.Screen
+            name="MLTool"
+            component={camerascreenScreen}
+            options={({route})=>({
+              tabBarLabel: 'MLTool',
+                tabBarVisible: ((route) => {
+                    const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+                    return routeName === "Confirm" || routeName === "Detail";
+                })(route),
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="camera" color={color} size={size} />
+              ),
+            })}
           />
         </Tab.Navigator>
       );
@@ -315,7 +340,7 @@ function HomeScreen() {
         return <MakeupGrass navigation={navigation} />;
       }
     };
-  
+
     const searchDetail = ({navigation, route}) => {
       setGetData(route.params.value);
       let detail = true;
@@ -450,6 +475,13 @@ function HomeScreen() {
               component={HomeTabs}
               options={{headerShown: false}}
             />
+              <Stack.Screen
+                  name="CameraView"
+                  component={CameraScreen}
+                  options={{
+                      headerShown: false,
+                  }}
+                  />
             <Stack.Screen
               name="Search"
               component={searchDetail}

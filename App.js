@@ -11,12 +11,13 @@ import { AsyncStorage } from 'react-native';
 import {landingdetails} from './LandingPage';
 import {OnboardingScreen} from './OnboardingScreen';
 
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const AppStack = createStackNavigator();
 
 const App = () => {
 
-  
+
   const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
 
     useEffect(()=>{
@@ -34,23 +35,27 @@ const App = () => {
         return null;
     }else if (isFirstLaunch === true) {
       return (
+        <PaperProvider>
         <NavigationContainer independent={true}>
           <AppStack.Navigator headerMode="none">
             <AppStack.Screen name = "Onboarding" component={OnboardingScreen} />
             <AppStack.Screen name = "Landing Page" component={landingdetails} />
           </AppStack.Navigator>
         </NavigationContainer>
+        </PaperProvider>
       );
     } else {
       return (
+        <PaperProvider>
         <NavigationContainer independent={true}>
           <AppStack.Navigator headerMode="none">
             <AppStack.Screen name = "Landing Page" component={landingdetails} />
           </AppStack.Navigator>
         </NavigationContainer>
+        </PaperProvider>
       );
     }
-  
+
 };
 
 
