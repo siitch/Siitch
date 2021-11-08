@@ -202,67 +202,67 @@ export default function ItemDetail({ route }) {
     }
 
     // Used to change the dimension of the calculator area, as well as show the results and buttons
-     const compute = ()=>{
-         if(quantity && frequency){
-             setComputed(true)
-         }
-     }
+    const compute = ()=>{
+        if(quantity && frequency){
+            setComputed(true)
+        }
+    }
 
     const readData = itemName => {
         firebase
             .database()
             .ref(itemName)
             .on('value', function(get)  {
-                if(get.val() === null && itemName !== 'Makeup'){
-                    alert('No info for ' + itemName + ' now')
-                    console.log('No info for this item');
-                } else {
-                    const itemObj = get.val()
-                    // Global
-                    setItem(itemObj)
-                    setCategory(itemObj['Category'])
-                    setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
-                    setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
+                    if(get.val() === null && itemName !== 'Makeup'){
+                        alert('No info for ' + itemName + ' now')
+                        console.log('No info for this item');
+                    } else {
+                        const itemObj = get.val()
+                        // Global
+                        setItem(itemObj)
+                        setCategory(itemObj['Category'])
+                        setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
+                        setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
 
-                    // First section
-                    setMetricToDisplayG(itemObj['Metric to display'])
-                    setMetricToDisplayL(itemObj['Metric to display L'])
-                    setMeasurementG(itemObj['Measurement1'])
-                    setMeasurementL(itemObj['Measurement L'])
+                        // First section
+                        setMetricToDisplayG(itemObj['Metric to display'])
+                        setMetricToDisplayL(itemObj['Metric to display L'])
+                        setMeasurementG(itemObj['Measurement1'])
+                        setMeasurementL(itemObj['Measurement L'])
 
-                    // Second section
-                    setRain(itemObj['Global Imperial Green Gal p lb'])
-                    setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
-                    setCleaning(itemObj['Global Imperial Gray Gal p lb'])
+                        // Second section
+                        setRain(itemObj['Global Imperial Green Gal p lb'])
+                        setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
+                        setCleaning(itemObj['Global Imperial Gray Gal p lb'])
 
-                    setRainKg(itemObj['USA Green L p kg'])
-                    setIrrigationKg(itemObj['USA Blue L p kg'])
-                    setCleaningKg(itemObj['USA Gray L p kg'])
+                        setRainKg(itemObj['USA Green L p kg'])
+                        setIrrigationKg(itemObj['USA Blue L p kg'])
+                        setCleaningKg(itemObj['USA Gray L p kg'])
 
-                    // Third section
-                    setIndividualUnitG(itemObj['Individiual Unit Gal'])
-                    setIndividualUnitL(itemObj['Individiual Unit L'])
+                        // Third section
+                        setIndividualUnitG(itemObj['Individiual Unit Gal'])
+                        setIndividualUnitL(itemObj['Individiual Unit L'])
 
-                    // Fourth section
-                    setTimetodecompose(itemObj['Time to decompose'])
+                        // Fourth section
+                        setTimetodecompose(itemObj['Time to decompose'])
 
-                    // Fifth section
-                    setCompostable(itemObj['Compostable'])
+                        // Fifth section
+                        setCompostable(itemObj['Compostable'])
 
-                    // Sixth section
-                    setRecyclable('?')
+                        // Sixth section
+                        setRecyclable('?')
 
-                    // Seventh section
-                    setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
+                        // Seventh section
+                        setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
 
+                    }
                 }
-            }
             );
     };
 
     return(
         <SafeAreaView style={{
-             backgroundColor: 'white'
+            backgroundColor: 'white'
         }}>
             <ScrollView>
                 <View>
@@ -549,7 +549,7 @@ export default function ItemDetail({ route }) {
                                 <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
                             )}
                         </View>
-                        {!(compostable === 'Yes' || compostable === 'No') && (
+                        {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
                             <Text style={{marginLeft: 15, marginBottom: 5}}>
                                 {compostable}
                             </Text>
@@ -879,7 +879,7 @@ export default function ItemDetail({ route }) {
                                         <TouchableOpacity
                                             onPress={() => {
                                                 setShowContext(false);
-                                                    setModalVisible(true);
+                                                setModalVisible(true);
                                             }}
                                             style={{
                                                 padding: 15,
@@ -1234,13 +1234,13 @@ export default function ItemDetail({ route }) {
                                         zIndex: 10,
                                         alignSelf: 'flex-end',
                                         position: 'absolute'
-                                }}>
+                                    }}>
                                     <Image
                                         source={itemDetailImages.closeInfoModal}
                                         style={{
                                             width: 50,
                                             height: 50
-                                    }}/>
+                                        }}/>
                                 </TouchableOpacity>
                                 <View style={{
                                     margin: 15,
