@@ -35,6 +35,8 @@ import {useIsFocused} from "@react-navigation/native";
 import Profiles from "../ImageDB";
 
 export default function CameraScreen({navigation}) {
+    // init status
+    const [init, setInit] = useState(true);
     // Get the status if the camera screen is the first time visited
     const [visited, setVisited] = useState(null);
     // Status of camera permission
@@ -71,6 +73,7 @@ export default function CameraScreen({navigation}) {
             );
             // Set model reference
             setMyModel(loadedModel);
+            global.siitchmodel = loadedModel
             // Set model loading status
             setIsModelReady(true);
             setLoadingColor('red'); // Useless for now, but it might come in handy in the future
@@ -118,28 +121,33 @@ export default function CameraScreen({navigation}) {
                 }
             }
         }
-        getCameraPermissionAsync();
-        checkPermissionAsync();
-        initializeTfAsync();
-        initializeModelAsync();
+        if(init){
+            getCameraPermissionAsync();
+            checkPermissionAsync();
+            initializeTfAsync();
+            initializeModelAsync();
+            setInit(false)
+        } else {
+            checkPermissionAsync();
+        }
     }, [isFocused, granted, visited]); // Update when isFocused, granted, visited change
 
     // User taps the camera button, do this
     const takePictureAsync = async () => {
         try {
+            camera.pausePreview()
             // Get the photo user took
-            let response = await camera.takePictureAsync(null);
-
-            // Resize image to avoid out of memory crashes, also set it to the size of the screen so that we can display
-            // it as background in the Result Screen
-            const manipulateResponse = await ImageManipulator.manipulateAsync(
-                response.uri,
-                [{ resize: { width: Width, height: Height } }],
-                { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
-            );
-
-            // Pass the image and the model reference to 'ResultsScreen.js' to do prediction
-            navigation.push('Confirm', {image: manipulateResponse, myModel: myModel})
+            let response = await camera.takePictureAsync({onPictureSaved: async (picture) => {
+                    // Resize image to avoid out of memory crashes, also set it to the size of the screen so that we
+                    // can display it as background in the Result Screen
+                    const manipulateResponse = await ImageManipulator.manipulateAsync(
+                        picture.uri,
+                        [{resize: {width: Width, height: Height}}],
+                        {compress: 1, format: ImageManipulator.SaveFormat.JPEG}
+                    );
+                    // Pass the image and the model reference to 'ResultsScreen.js' to do prediction
+                    navigation.push('Confirm', {image: manipulateResponse})
+                }});
 
         } catch (error) {
             console.log(error);
