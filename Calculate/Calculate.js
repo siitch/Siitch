@@ -25,13 +25,17 @@ var itemNameList=[];
 var itemQuantityList=[];
 var itemFrequencyList=[];
 var itemCostList=[];
+var itemCostLList=[];
 var itemYearlyCostList=[];
+var itemYearlyLCostList=[];
 
 var itemName;
 var itemQuantity;
 var itemFrequency;
 var itemCost;
+var itemCostL;
 var itemYearlyCost;
+var itemYearlyLCost;
 
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -63,7 +67,6 @@ let fetchedData = {};
 
 function CalculateScreen() {
     let itemsList = [];
-    let id;
     var selectedItem = [];
 
     const config = {
@@ -94,57 +97,74 @@ function CalculateScreen() {
     const [modalVisible, setModalVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [unit, setUnit] = useState('G');
+    const [unitG,setUnitG] = useState(true);
     const [reallyOutputs,setReallyOutput] = useState(0);
+    const [reallyLOutputs,setReallyLOutput] = useState(0);
+
     var [yearlyCostTotal, setYearlyCostTotal] = useState(0);
     var [mixCostTotal, setMixCostTotal] = useState(0);
+    var [mixCostLTotal, setMixCostLTotal] = useState(0);
+    var [yearlyCostLTotal, setYearlyCostLTotal] = useState(0);
+
     var [itemOpenList,setItemOpenList] = useState([]);
+
 
 
     const updateReallyOutput = (currentUnit) =>{
         if(currentUnit=="yearly")
         {
             setReallyOutput(yearlyCostTotal);
+            setReallyLOutput(yearlyCostLTotal);
         }
         else if(currentUnit=="monthly")
         {
             setReallyOutput(~~(yearlyCostTotal/12));
+            setReallyLOutput(~~(yearlyCostLTotal/12));
         }
         else if(currentUnit=="weekly")
         {
             setReallyOutput(~~(yearlyCostTotal/56));
+            setReallyLOutput(~~(yearlyCostLTotal/56));
         }
         else
         {
             setReallyOutput(~~(yearlyCostTotal/365));
+            setReallyLOutput(~~(yearlyCostLTotal/365));
         }
     }
 
     const updateYearlyCostTotal = () =>{
         var sum=0;
+        var sumL=0;
         for(var i=0;i<itemYearlyCostList.length;i++)
         {
             sum+=itemYearlyCostList[i];
+            sumL+=itemYearlyLCostList[i];
         }
-        setYearlyCostTotal(sum)
+        setYearlyCostTotal(sum);
+        setYearlyCostLTotal(sumL);
     }
 
     const updateMixCostTotal =()=>{
         var sum=0;
+        var sumL=0;
         for(var i=0;i<itemCostList.length;i++)
         {
             sum+=itemCostList[i]*itemQuantityList[i];
+            sumL+=itemCostLList[i]*itemQuantityList[i];
         }
-        setMixCostTotal(sum)
+        setMixCostTotal(sum);
+        setMixCostLTotal(sumL);
     }
 
-    const waterParameter = (id) => {
-        if (unit === 'L') {
+    const waterParameter = (id,unitG) => {
+        if (unitG === 'L') {
             if (id === 'EDI') {
                 return 'Single item   L';
             } else {
                 return 'Global Liters p kg';
             }
-        } else if (unit === 'G') {
+        } else if (unitG === 'G') {
             if (id === 'EDI') {
                 return 'Single item   Gal';
             } else {
@@ -156,14 +176,20 @@ function CalculateScreen() {
     const deleteItemFromList = (index) => {
         console.log(index)
         setMixCostTotal(mixCostTotal-itemCostList[index]*itemQuantityList[index])
+        setMixCostLTotal(mixCostLTotal-itemCostLList[index]*itemQuantityList[index])
         setYearlyCostTotal(yearlyCostTotal-itemYearlyCostList[index])
+        setYearlyCostLTotal(yearlyCostLTotal-itemYearlyLCostList[index])
 
         itemNameList.splice(index,1);
         itemCostList.splice(index,1);
+        itemCostLList.splice(index,1);
         itemFrequencyList.splice(index,1);
         itemQuantityList.splice(index,1);
         itemYearlyCostList.splice(index,1);
+        itemYearlyLCostList.splice(index,1);
 
+        updateYearlyCostTotal();
+        updateMixCostTotal();
 
 
         console.log("mixCostTotal",mixCostTotal);
@@ -171,6 +197,7 @@ function CalculateScreen() {
         console.log("itemQuantityList",itemQuantityList)
         console.log("itemFrequencyList",itemFrequencyList)
         console.log("itemCostList",itemCostList)
+        console.log("itemCostLList",itemCostLList)
         upgradePages();
     }
 
@@ -219,30 +246,39 @@ function CalculateScreen() {
 
                 if (!(item in fetchedData)) {
                     setError({status: true, message: 'This item does not exist'});
-                } else if (!fetchedData[item][waterParameter(id)]) {
+                } else if (!fetchedData[item][waterParameter(id,'G')]) {
                     setError({
                         status: true,
                         message: 'Water unit does not exist. Try the compare tool.',
                     });
                 } else if (
                     item in fetchedData &&
-                    fetchedData[item][waterParameter(id)]
+                    fetchedData[item][waterParameter(id,'G')]
                 ) {
-                    setIndividualTotal(fetchedData[item][waterParameter(id)]);
-                    itemCost=fetchedData[item][waterParameter(id)];
-                    addtoList(fetchedData[item][waterParameter(id)]);
+                    setIndividualTotal(fetchedData[item][waterParameter(id,'G')]);
+                    itemCost=fetchedData[item][waterParameter(id,'G')];
+                    itemCostL=fetchedData[item][waterParameter(id,'L')];
+                    console.log("waterParameter(id,'G')",waterParameter(id,'G'))
+                    console.log("itemCost",itemCost)
+                    console.log("itemCostL",itemCostL)
+                    console.log("id",id)
+                    console.log("item",item)
+                    addtoList(fetchedData[item][waterParameter(id,'G')]);
                     setError({status: false, message: ''});
                     setComputed(true);
                 }
             });
     };
 
-    const calculate = (item, frequency) => {
+    const calculate = (item, frequency,quantity) => {
         if (!item) {
             setError({status: true, message: 'Please select an item'});
         } else if (!frequency) {
             setError({status: true, message: 'Please select a frequency'});
-        } else {
+        } else if(!quantity) {
+            setError({status: true, message: 'Please select a quantity'});
+        }
+        else {
             fetchData(item, frequency);
         }
     };
@@ -269,11 +305,6 @@ function CalculateScreen() {
         individual_sum = individual_sum + cost;
     }
 
-    const minusfromList = (cost) => {
-        individual_sum = individual_sum - cost;
-    }
-
-
     const clearElements = () => {
         setComputed(false);
         setInputValue('');
@@ -286,7 +317,9 @@ function CalculateScreen() {
         itemQuantityList=[];
         itemFrequencyList=[];
         itemCostList=[];
+        itemCostLList=[];
         itemYearlyCostList=[];
+        itemYearlyLCostList=[];
         upgradePages();
         console.log("------------")
 
@@ -311,6 +344,7 @@ function CalculateScreen() {
                     }}>
                     <TouchableOpacity
                         onPress={() => {
+                            setUnitG(true);
                             setUnit('G');
                             if (individual_total) {
                                 setIndividualTotal(
@@ -319,7 +353,7 @@ function CalculateScreen() {
                                         ],
                                 );
                             } else {
-                                calculate(item, frequency);
+                                calculate(item, frequency,quantity);
                             }
                         }}>
                         <Text
@@ -336,6 +370,7 @@ function CalculateScreen() {
                     <TouchableOpacity
                         onPress={() => {
                             setUnit('L');
+                            setUnitG(false);
                             if (individual_total) {
                                 setIndividualTotal(
                                     fetchedData[item][
@@ -343,7 +378,7 @@ function CalculateScreen() {
                                         ],
                                 );
                             } else {
-                                calculate(item, frequency);
+                                calculate(item, frequency,quantity);
                             }
                         }}>
                         <Text
@@ -781,16 +816,16 @@ function CalculateScreen() {
                     { !computed && (
                         <View>
                             <TouchableOpacity
-                                onPress={() => {calculate(item, frequency);
+                                onPress={() => {calculate(item, frequency,quantity);
 
                                 }}
                                 style={{
                                     padding: 15,
                                     borderRadius: 30,
                                     backgroundColor: 'orange',
+                                    margintop:10,
                                     marginLeft: '19%',
                                     marginRight: '19%',
-                                    marginBottom: '10%',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     backgroundColor:'#70BF41',
@@ -814,7 +849,7 @@ function CalculateScreen() {
                         <View>
                             <TouchableOpacity
                                 onPress={() => {
-                                    computed ? clearElements() : calculate(item, frequency);
+                                    computed ? clearElements() : calculate(item, frequency,quantity);
                                     // calculate(item,frequency);
                                 }}
                                 style={{
@@ -924,13 +959,20 @@ function CalculateScreen() {
                                     itemFrequencyList.push(frequency);
                                     itemQuantityList.push(quantity);
                                     itemCostList.push(itemCost);
+                                    itemCostLList.push(itemCostL);
 
                                     itemYearlyCost = individual_total * frequency_values[frequency]*Quantity_values[quantity];
+                                    itemYearlyLCost = itemCostL * frequency_values[frequency]*Quantity_values[quantity];
                                     itemYearlyCostList.push(itemYearlyCost);
+                                    itemYearlyLCostList.push(itemYearlyLCost);
                                     itemOpenList.push(false);
                                     setYearlyCostTotal(yearlyCostTotal+itemYearlyCost);
+                                    setYearlyCostLTotal(yearlyCostLTotal+itemYearlyLCost);
                                     setMixCostTotal(mixCostTotal+itemCost*Quantity_values[quantity]);
+                                    setMixCostLTotal(mixCostLTotal+itemCostL*Quantity_values[quantity]);
 
+                                    console.log("---------")
+                                    console.log("itemCost",itemCost)
                                     console.log("itemQuantity",quantity)
                                     console.log("itemFrequency",frequency)
                                     console.log("itemNameList",itemNameList)
@@ -972,13 +1014,11 @@ function CalculateScreen() {
                     <View style={{flexDirection: 'row',
                         justifyContent: 'space-between',
                         backgroundColor: 'rgba(198, 198, 198, 0.2)',
-                        height:40,
-                        marginTop: 20,
-                        marginBottom: 20
+                        height:40
                     }}>
                         <Text style={{fontSize: 23, fontWeight: '500',marginLeft:20,marginTop:7}}>Running Total</Text>
                         <Image
-                            style={{width: 30, height: 30,marginRight:75,marginTop:5}}
+                            style={{width: 30, height: 30,marginRight:65,marginTop:5}}
                             source={require('./../images/water_drop_150px_wide2.png')}
                         />
                     </View>
@@ -1003,6 +1043,8 @@ function CalculateScreen() {
                                     }
                                 />
                                 <Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]}</Text>
+                                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>g/p</Text>)}
+                                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>lbs/p</Text>)}
                             </View>
 
                             <View style={{flexDirection: 'row',
@@ -1072,7 +1114,7 @@ function CalculateScreen() {
                                                 onChangeItem={(currentQuantity) => {
                                                     itemQuantityList[index] = currentQuantity.label;
                                                     itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
-
+                                                    itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
                                                     updateYearlyCostTotal();
                                                     updateMixCostTotal();
                                                 }}
@@ -1140,6 +1182,7 @@ function CalculateScreen() {
                                                 onChangeItem={(currentFrequency) => {
                                                     itemFrequencyList[index]=currentFrequency.value;
                                                     itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
+                                                    itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
                                                     updateYearlyCostTotal();
                                                 }}
                                                 onOpen={() => {
@@ -1153,7 +1196,9 @@ function CalculateScreen() {
                                                     itemOpenList[index]=false;
                                                 }}
                                 />
-                                <Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{itemCostList[i]*itemQuantityList[i]}</Text>
+
+                                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{itemCostList[i]*itemQuantityList[i]}</Text>)}
+                                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{itemCostLList[i]*itemQuantityList[i]}</Text>)}
 
                                 <TouchableHighlight  onPress={(i) => deleteItemFromList(index)}>
                                     <Image
@@ -1178,19 +1223,81 @@ function CalculateScreen() {
                 </View>
 
                 {showlist && (
-                    <View style={{flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 20,
-                        marginBottom: 20,
-                        marginLeft:20,
-                        marginRight:20}}>
-                        <Text style={{fontSize: 20, fontWeight: '500'}}>Total</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{fontSize: 20, fontWeight: '500',marginLeft:20, marginTop: 20, marginBottom: 20}}>Total</Text>
+
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                borderColor: '#00ADEF',
+                                marginLeft:'3%',
+                                borderWidth: 2,
+                                marginTop: 10,
+                                marginBottom: 20,
+                                borderRadius: 10,
+                                width: 65,
+                                height: 44,
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                            }}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setUnit('G');
+                                    setUnitG(true);
+                                    if (individual_total) {
+                                        setIndividualTotal(
+                                            fetchedData[item][
+                                                id === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'
+                                                ],
+                                        );
+                                    } else {
+                                        calculate(item, frequency,quantity);
+                                    }
+                                }}>
+                                <Text
+                                    style={{
+                                        color: unit === 'G' ? '#00ADEF' : 'black',
+                                        paddingTop: 5,
+                                        fontSize: 20,
+                                        fontWeight: unit === 'G' ? 'bold' : 'normal',
+                                    }}>
+                                    G
+                                </Text>
+                            </TouchableOpacity>
+                            <Text style={{paddingTop: 5, fontSize: 20}}> / </Text>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setUnit('L');
+                                    setUnitG(false);
+                                    if (individual_total) {
+                                        setIndividualTotal(
+                                            fetchedData[item][
+                                                id === 'EDI' ? 'Single item   L' : 'Global Liters p kg'
+                                                ],
+                                        );
+                                    } else {
+                                        calculate(item, frequency,quantity);
+                                    }
+                                }}>
+                                <Text
+                                    style={{
+                                        color: unit === 'L' ? '#00ADEF' : 'black',
+                                        paddingTop: 5,
+                                        fontSize: 20,
+                                        fontWeight: unit === 'L' ? 'bold' : 'normal',
+                                    }}>
+                                    L
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+
                         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                             <Image
-                                style={{width: 20, height: 20}}
+                                style={{width: 30, height: 30, marginLeft:'40%',marginTop:15,marginBottom:20}}
                                 source={require('./../images/water_drop_150px_wide2.png')}
                             />
-                            <Text style={{fontSize: 20, fontWeight: '500'}}>{numberWithCommas(mixCostTotal)} Gal</Text>
+                            {unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostTotal)} Gal</Text>)}
+                            {!unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostLTotal)} Lbs</Text>)}
                         </View>
                     </View>
                 )}
@@ -1203,10 +1310,6 @@ function CalculateScreen() {
                         alignItems: 'center',
                         justifyContent: 'center',}}>
                         <View style={{flexDirection: 'row'}}>
-                            <Image
-                                style={{width: 30, height: 30,marginLeft:10,marginRight:10,marginTop:5}}
-                                source={require('./../images/water_drop_150px_wide2.png')}
-                            />
                             <Text style={{fontSize: 30, fontWeight: '600'}}>Impact</Text>
                         </View>
 
@@ -1269,7 +1372,15 @@ function CalculateScreen() {
                                         }}
                         />
 
-                        <Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                            <Image
+                                style={{width: 30, height: 30, marginTop:25}}
+                                source={require('./../images/water_drop_150px_wide2.png')}
+                            />
+                            {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                            {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} Lbs</Text>)}
+                        </View>
+
                     </View>
                 )}
 
