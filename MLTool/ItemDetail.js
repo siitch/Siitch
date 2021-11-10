@@ -8,11 +8,13 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
+import {Divider, Button} from "react-native-paper";
 import {Card,} from 'react-native-ui-lib';
 import firebase from "firebase";
 import React, {useEffect, useState} from "react";
 import ResultImage from "./ResultImage";
 import Profiles from '../ImageDB.js';
+import itemDetailImages from "./ItemDetailImages/itemDetailImages";
 import DropDownPicker from "react-native-dropdown-picker";
 import {CalculateTotal} from "../Calculate/CalculateTotal";
 import {styles} from "../Comparing/Styles";
@@ -29,9 +31,9 @@ export default function ItemDetail({ route }) {
     // Global unit, G or L
     const [globalUnit, setGlobalUnit] = useState('G');
     // Gallons
-    const [gallons, setGallons] = useState(null);
+    const [gallons, setGallons] = useState('');
     // Liters
-    const [liters, setLiters] = useState(null);
+    const [liters, setLiters] = useState('');
     // The water number displayed, Gallons or Liters
     const [displayWater, setDisplayWater] = useState(gallons);
     // Challenge Modal visibility
@@ -40,16 +42,22 @@ export default function ItemDetail({ route }) {
     const [rainModalVisible, setRainModalVisible] = useState(false);
     const [irrigationModalVisible, setIrrigationModalVisible] = useState(false);
     const [cleaningModalVisible, setCleaningModalVisible] = useState(false);
+    // Info button Modal visibility
+    const [infoVisible, setInfoVisible] = useState(false);
+    const [infoShown, setInfoShown] = useState('');
     // Number formatting util function
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
 
     // First section - G/L button, item image, item name, a number, a unit
-    const [metricToDisplay, setMetricToDisplay] = useState(null)
+    const [metricToDisplay, setMetricToDisplay] = useState(metricToDisplay)
+    const [metricToDisplayG, setMetricToDisplayG] = useState(null)
+    const [metricToDisplayL, setMetricToDisplayL] = useState(null)
     const [measurementG, setMeasurementG] = useState(null)
     const [measurementL, setMeasurementL] = useState(null)
     const [measurement, setMeasurement] = useState(measurementG);
+    const [color, setColor] = useState()
 
     // Second section - Rain / Irrigation / Cleaning
     // Gallons
@@ -67,10 +75,12 @@ export default function ItemDetail({ route }) {
     const [individualUnit, setIndividualUnit] = useState(individualUnitG)
 
     // Fourth section - Time to decompose:
-    const [timetodecompose, setTimetodecompose] = useState(null)
+    const [timetodecompose, setTimetodecompose] = useState('')
 
     // Fifth section - Compostable?
-    const [compostable, setCompostable] = useState(null)
+    const [compostable, setCompostable] = useState('')
+    const [check, setCheck] = useState(false);
+    const [cross, setCross] = useState(false);
 
     // Sixth section - Recyclable?
     const [recyclable, setRecyclable] = useState(null);
@@ -84,9 +94,9 @@ export default function ItemDetail({ route }) {
     const [selectOpened, setSelect] = useState(false);
     const [computed, setComputed] = useState(false);
     const [error, setError] = useState({status: false, message: ''});
-    const [individual_total, setIndividualTotal] = useState();
+    const [individual_total, setIndividualTotal] = useState(null);
     const [showContext, setShowContext] = useState(false);
-    const [calculatorHeight, setCalculatorHeight] = useState(280);
+    const [calculatorHeight, setCalculatorHeight] = useState(510);
     const waterParameter = (category) => {
         if (globalUnit === 'L') {
             if (category === 'EDI') {
@@ -146,90 +156,121 @@ export default function ItemDetail({ route }) {
         readData(itemName)
         compute()
         changeMetric()
-    }, [globalUnit, gallons, individualUnitG, quantity, frequency]);
+        checkCompostable()
+        changeColor()
+    }, [globalUnit, gallons, individualUnitG, metricToDisplay, timetodecompose, quantity, frequency]);
 
     // When the global metric changes, do corresponding changes
     const changeMetric = ()=>{
         if (globalUnit === 'G'){
             setDisplayWater(gallons)
-            setMetricToDisplay('gallons')
+            if(metricToDisplay !== 'years'){
+                setMetricToDisplay('gallons')
+            }
             setMeasurement(measurementG)
             setIndividualUnit(individualUnitG)
+            setMetricToDisplay(metricToDisplayG)
         } else {
             setDisplayWater(liters)
-            setMetricToDisplay('liters')
+            if(metricToDisplay !== 'years'){
+                setMetricToDisplay('liters')
+            }
             setMeasurement(measurementL)
             setIndividualUnit(individualUnitL)
+            setMetricToDisplay(metricToDisplayL)
         }
     }
+
+    // Used to change the color of the text to RED when the metric is years
+    const changeColor = ()=>{
+        if(metricToDisplay === 'years'){
+            setColor('#f32133')
+        } else {
+            setColor('#00ADEF')
+        }
+    }
+
+    // Check compostable
+    const checkCompostable = ()=>{
+        if(compostable !== ''){
+            if(compostable[0] === 'N'){
+                setCross(true)
+            } else if (compostable[0] === 'Y') {
+                setCheck(true)
+            }
+        }
+    }
+
     // Used to change the dimension of the calculator area, as well as show the results and buttons
-     const compute = ()=>{
-         if(quantity && frequency){
-             setCalculatorHeight(520)
-             setComputed(true)
-         }
-     }
+    const compute = ()=>{
+        if(quantity && frequency){
+            setComputed(true)
+        }
+    }
 
     const readData = itemName => {
         firebase
             .database()
             .ref(itemName)
             .on('value', function(get)  {
-                if(get.val() === null && itemName !== 'Makeup'){
-                    alert('No info for ' + itemName + ' now')
-                    console.log('No info for this item');
-                } else {
-                    const itemObj = get.val()
-                    // Global
-                    setItem(itemObj)
-                    setCategory(itemObj['Category'])
-                    setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
-                    setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
+                    if(get.val() === null && itemName !== 'Makeup'){
+                        alert('No info for ' + itemName + ' now')
+                        console.log('No info for this item');
+                    } else {
+                        const itemObj = get.val()
+                        // Global
+                        setItem(itemObj)
+                        setCategory(itemObj['Category'])
+                        setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
+                        setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
 
-                    // First section
-                    setMetricToDisplay(itemObj['Metric to display'])
-                    setMeasurementG(itemObj['Measurement1'])
-                    setMeasurementL(itemObj['Measurement L'])
+                        // First section
+                        setMetricToDisplayG(itemObj['Metric to display'])
+                        setMetricToDisplayL(itemObj['Metric to display L'])
+                        setMeasurementG(itemObj['Measurement1'])
+                        setMeasurementL(itemObj['Measurement L'])
 
-                    // Second section
-                    setRain(itemObj['Global Imperial Green Gal p lb'])
-                    setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
-                    setCleaning(itemObj['Global Imperial Gray Gal p lb'])
+                        // Second section
+                        setRain(itemObj['Global Imperial Green Gal p lb'])
+                        setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
+                        setCleaning(itemObj['Global Imperial Gray Gal p lb'])
 
-                    setRainKg(itemObj['USA Green L p kg'])
-                    setIrrigationKg(itemObj['USA Blue L p kg'])
-                    setCleaningKg(itemObj['USA Gray L p kg'])
+                        setRainKg(itemObj['USA Green L p kg'])
+                        setIrrigationKg(itemObj['USA Blue L p kg'])
+                        setCleaningKg(itemObj['USA Gray L p kg'])
 
-                    // Third section
-                    setIndividualUnitG(itemObj['Individiual Unit Gal'])
-                    setIndividualUnitL(itemObj['Individiual Unit L'])
+                        // Third section
+                        setIndividualUnitG(itemObj['Individiual Unit Gal'])
+                        setIndividualUnitL(itemObj['Individiual Unit L'])
 
-                    // Fourth section
-                    setTimetodecompose(itemObj['Time to decompose'])
+                        // Fourth section
+                        setTimetodecompose(itemObj['Time to decompose'])
 
-                    // Fifth section
-                    setCompostable(itemObj['Compostable'])
+                        // Fifth section
+                        setCompostable(itemObj['Compostable'])
 
-                    // Sixth section
-                    setRecyclable('?')
+                        // Sixth section
+                        setRecyclable('?')
 
-                    // Seventh section
-                    setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
+                        // Seventh section
+                        setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
 
+                    }
                 }
-            }
             );
     };
 
     return(
         <SafeAreaView style={{
-             backgroundColor: 'white'
+            backgroundColor: 'white'
         }}>
             <ScrollView>
                 <View>
                     {/* First section */}
                     <View
                         style={{
+                            position: 'absolute',
+                            zIndex: 10,
                             flexDirection: 'row',
                             marginTop: '5%',
                             marginLeft: 20,
@@ -237,7 +278,7 @@ export default function ItemDetail({ route }) {
                             borderWidth: 2,
                             borderRadius: 10,
                             width: 65,
-                            height: 44,
+                            height: 26,
                             paddingLeft: 10,
                             paddingRight: 10,
                         }}>
@@ -272,19 +313,24 @@ export default function ItemDetail({ route }) {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{alignItems: 'center'}}>
-                        <Image source={ResultImage[itemName]} />
+                    <View style={{alignItems: 'center',marginTop: 25 , marginBottom: 12}}>
+                        <Image source={ResultImage[itemName]} style={{width: 220, height: 220}} />
                         <Text style={{fontSize: 25, fontWeight: 'bold'}}>{itemName}</Text>
                         <View style={{
                             flexDirection: 'row',
                         }}>
-                            <Image source={Profiles.water} style={{width: 28, height: 28}}/>
+                            {metricToDisplay !== 'years' && (
+                                <Image source={Profiles.water} style={{width: 28, height: 28}}/>
+                            )}
+                            {metricToDisplay === 'years' && (
+                                <Image source={Profiles.clock} style={{width: 28, height: 28}}/>
+                            )}
                             <Text style={{
                                 textAlign: 'center',
                                 fontSize:25,
                                 fontWeight:'bold',
-                                color: '#00ADEF'
-                            }}>{displayWater!== null?numberWithCommas(displayWater):null} {metricToDisplay}</Text>
+                                color: color
+                            }}>{displayWater !== ''?numberWithCommas(displayWater):timetodecompose} {metricToDisplay}</Text>
                         </View>
                         <Text>{measurement}</Text>
                     </View>
@@ -300,11 +346,19 @@ export default function ItemDetail({ route }) {
                     {/* Second section */}
                     {(rain !== '' || irrigation !== '' || cleaning !== '') && (
                         <View>
+                            <Text style={{
+                                alignSelf: 'center',
+                                marginTop: 5,
+                                fontSize: 17,
+                                fontWeight: '500'
+                            }}>Water Breakdown</Text>
                             <View style={{
                                 flexDirection: 'row',
                                 justifyContent: 'space-around',
                                 flex: 4,
-                                margin: 7,
+                                marginLeft: 7,
+                                marginRight: 7,
+                                marginBottom: 7,
                                 padding: 5,
                                 height: 90
                             }}>
@@ -381,54 +435,90 @@ export default function ItemDetail({ route }) {
 
                     {/* To make 1 */}
                     {individualUnit !== '' && (
+                        <View>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                margin: 10
+                            }}>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
+                                }}>
+                                    <Image source={itemDetailImages.earth} style={{width: 28, height: 28}}/>
+                                    <Text style={{
+                                        fontSize: 17,
+                                        fontWeight: '500',
+                                        marginLeft: 5}}>
+                                        To make 1 {individualUnit !== '' ? individualUnit.split('/')[1] : itemName}{/* {itemName}*/}
+                                    </Text>
+                                    <Text>
+
+                                    </Text>
+                                </View>
+
+                                <View style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
+                                }}>
+                                    <Image source={Profiles.water} style={{width: 20, height: 20}}/>
+                                    <Text style={{
+                                        textAlign: 'center',
+                                        fontSize:20,
+                                        fontWeight:'bold',
+                                        color: '#00ADEF'
+                                    }}>{displayWater !== null ?
+                                        numberWithCommas(displayWater) : null} {globalUnit === 'G' ?
+                                        individualUnitG.split(' ')[0] : individualUnitL.split(' ')[0]}
+                                    </Text>
+                                </View>
+                            </View>
+                            {/* Divider */}
+                            <View
+                                style={{
+                                    borderBottomColor: 'rgba(0,0,0,0.25)',
+                                    borderBottomWidth: 1,
+                                }}
+                            />
+                        </View>
+                    )}
+
+                    {/* Time to decompose*/}
+                    <View>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between',
                             margin: 10
                         }}>
-                            <Text style={{fontWeight: 'bold'}}>
-                                To make 1 {individualUnit !== '' ? individualUnit.split('/')[1] : itemName}{/* {itemName}*/}:
-                            </Text>
                             <View style={{
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                alignItems: 'center'
                             }}>
-                                <Image source={Profiles.water} style={{width: 28, height: 28}}/>
+                                <Image source={itemDetailImages.decompose} style={{width: 28, height: 28}}/>
                                 <Text style={{
-                                    textAlign: 'center',
-                                    fontSize:25,
-                                    fontWeight:'bold',
-                                    color: '#00ADEF'
-                                }}>{displayWater !== null ?
-                                    numberWithCommas(displayWater) : null} {globalUnit === 'G' ?
-                                    individualUnitG.split(' ')[0] : individualUnitL.split(' ')[0]}
+                                    fontSize: 17,
+                                    fontWeight: '500',
+                                    marginLeft: 5}}>
+                                    Time to Decompose
                                 </Text>
+                                <TouchableOpacity
+                                    onPress={()=>{
+                                        setInfoVisible(true)
+                                        setInfoShown('Decompose')
+                                    }}>
+                                    <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    )}
-
-                    {/* Divider */}
-                    <View
-                        style={{
-                            borderBottomColor: 'rgba(0,0,0,0.25)',
-                            borderBottomWidth: 1,
-                        }}
-                    />
-
-                    {/* Time to decompose*/}
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        margin: 10
-                    }}>
-                        <Text style={{fontWeight: 'bold'}}>
-                            Time to decompose:
-                        </Text>
-                        <Text style={{color: 'red'}}>
-                            {timetodecompose}
-                        </Text>
+                        {timetodecompose !== '' && (
+                            <Text style={{marginLeft: 15, marginBottom: 15}}>
+                                {timetodecompose}
+                            </Text>
+                        )}
                     </View>
+
 
                     {/* Divider */}
                     <View
@@ -439,18 +529,44 @@ export default function ItemDetail({ route }) {
                     />
 
                     {/* Compostable? */}
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        margin: 10
-                    }}>
-                        <Text style={{fontWeight: 'bold'}}>
-                            Compostable?
-                        </Text>
-                        <Text style={{color: 'red'}}>
-                            {compostable}
-                        </Text>
+                    <View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            margin: 10
+                        }}>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center'
+                            }}>
+                                <Image source={itemDetailImages.compostable} style={{width: 28, height: 28}}/>
+                                <Text style={{
+                                    fontSize: 17,
+                                    fontWeight: '500',
+                                    marginLeft: 5}}>
+                                    Compostable?
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={()=>{
+                                        setInfoVisible(true)
+                                        setInfoShown('Compostable')
+                                    }}>
+                                    <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
+                                </TouchableOpacity>
+                            </View>
+                            {check && (
+                                <Image source={itemDetailImages.greenCheck} style={{width: 30, height: 30}}/>
+                            )}
+                            {cross && (
+                                <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
+                            )}
+                        </View>
+                        {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
+                            <Text style={{marginLeft: 15, marginBottom: 15}}>
+                                {compostable}
+                            </Text>
+                        )}
                     </View>
 
                     {/* Divider */}
@@ -468,9 +584,25 @@ export default function ItemDetail({ route }) {
                         justifyContent: 'space-between',
                         margin: 10
                     }}>
-                        <Text style={{fontWeight: 'bold'}}>
-                            Recyclable?
-                        </Text>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center'
+                        }}>
+                            <Image source={itemDetailImages.recyclable} style={{width: 28, height: 28}}/>
+                            <Text style={{
+                                fontSize: 17,
+                                fontWeight: '500',
+                                marginLeft: 5}}>
+                                Recyclable?
+                            </Text>
+                            <TouchableOpacity
+                                onPress={()=>{
+                                    setInfoVisible(true)
+                                    setInfoShown('Recyclable')
+                                }}>
+                                <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
+                            </TouchableOpacity>
+                        </View>
                         <Text style={{color: 'red'}}>
                             ?
                         </Text>
@@ -487,179 +619,179 @@ export default function ItemDetail({ route }) {
                 />
 
                 {/* Simple calculator */}
-                <View style={{
-                    height: calculatorHeight
-                }}>
+                {metricToDisplay !== null && metricToDisplay !== 'years' && (
                     <View style={{
-                        alignItems: 'center',
-                        zIndex: 10
+                        height: calculatorHeight
                     }}>
                         <View style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            width: DeviceWidth * 0.9,
+                            alignItems: 'center',
+                            zIndex: 10
                         }}>
                             <View style={{
-                                alignItems: 'center'
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                width: DeviceWidth * 0.9,
                             }}>
-                                <Text style={{
-                                    fontSize: 25,
-                                    marginTop: 30,
-                                    fontWeight: '500',
+                                <View style={{
+                                    alignItems: 'center'
                                 }}>
-                                    Quantity
-                                </Text>
-                                <DropDownPicker
-                                    items={[
-                                        {label: '1', value: '1'},
-                                        {label: '2', value: '2'},
-                                        {label: '3', value: '3'},
-                                        {label: '4', value: '4'},
-                                        {label: '5', value: '5'},
-                                        {label: '6', value: '6'},
-                                        {label: '7', value: '7'},
-                                        {label: '8', value: '8'},
-                                        {label: '9', value: '9'},
-                                        {label: '10', value: '10'},
-                                        {label: '20', value: '20'},
-                                        {label: '30', value: '30'},
-                                        {label: '40', value: '40'},
-                                        {label: '50', value: '50'},
-                                    ]}
-                                    placeholder="Select"
-                                    placeholderStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                        color: 'lightgray',
-                                    }}
-                                    itemStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                    }}
-                                    labelStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                    }}
-                                    defaultValue={quantity}
-                                    containerStyle={{
-                                        height: 60,
-                                        borderRadius: 20,
-                                    }}
-                                    style={{
-                                        backgroundColor: 'white',
-                                        width: DeviceWidth * 0.35,
-                                        marginTop: 10,
-                                        borderWidth: 2,
-                                        borderTopLeftRadius: 20,
-                                        borderTopRightRadius: 20,
-                                        borderBottomLeftRadius: 20,
-                                        borderBottomRightRadius: 20,
-                                        borderColor: '#80CAFF',
-                                    }}
-                                    dropDownStyle={{
-                                        backgroundColor: 'white',
-                                        width: DeviceWidth * 0.35,
-                                        marginTop: 10,
-                                        borderBottomLeftRadius: 20,
-                                        borderBottomRightRadius: 20,
-                                        borderWidth: 2,
-                                        borderColor: '#80CAFF',
-                                    }}
-                                    onChangeItem={(currentQuantity) => {
-                                        //setComputed(false);
-                                        itemQuantity=currentQuantity.label;
-                                        setQuantity(currentQuantity.value);
-                                    }}
-                                    onOpen={() => {
-                                        //setComputed(false);
-                                        setSelect(true);
-                                        setError({status: false, message: ''});
-                                    }}
-                                    onClose={() => {
-                                        setSelect(false);
-                                    }}
-                                />
-                            </View>
-                            <View style={{
-                                alignItems: 'center'
-                            }}>
-                                <Text style={{
-                                    fontSize: 25,
-                                    marginTop: 30,
-                                    fontWeight: '500',
+                                    <Text style={{
+                                        fontSize: 25,
+                                        marginTop: 30,
+                                        fontWeight: '500',
+                                    }}>
+                                        Quantity
+                                    </Text>
+                                    <DropDownPicker
+                                        items={[
+                                            {label: '1', value: '1'},
+                                            {label: '2', value: '2'},
+                                            {label: '3', value: '3'},
+                                            {label: '4', value: '4'},
+                                            {label: '5', value: '5'},
+                                            {label: '6', value: '6'},
+                                            {label: '7', value: '7'},
+                                            {label: '8', value: '8'},
+                                            {label: '9', value: '9'},
+                                            {label: '10', value: '10'},
+                                            {label: '20', value: '20'},
+                                            {label: '30', value: '30'},
+                                            {label: '40', value: '40'},
+                                            {label: '50', value: '50'},
+                                        ]}
+                                        placeholder="Select"
+                                        placeholderStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                            color: 'lightgray',
+                                        }}
+                                        itemStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                        }}
+                                        labelStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                        }}
+                                        defaultValue={quantity}
+                                        containerStyle={{
+                                            height: 60,
+                                            borderRadius: 20,
+                                        }}
+                                        style={{
+                                            backgroundColor: 'white',
+                                            width: DeviceWidth * 0.35,
+                                            marginTop: 10,
+                                            borderWidth: 2,
+                                            borderTopLeftRadius: 20,
+                                            borderTopRightRadius: 20,
+                                            borderBottomLeftRadius: 20,
+                                            borderBottomRightRadius: 20,
+                                            borderColor: '#80CAFF',
+                                        }}
+                                        dropDownStyle={{
+                                            backgroundColor: 'white',
+                                            width: DeviceWidth * 0.35,
+                                            marginTop: 10,
+                                            borderBottomLeftRadius: 20,
+                                            borderBottomRightRadius: 20,
+                                            borderWidth: 2,
+                                            borderColor: '#80CAFF',
+                                        }}
+                                        onChangeItem={(currentQuantity) => {
+                                            //setComputed(false);
+                                            itemQuantity=currentQuantity.label;
+                                            setQuantity(currentQuantity.value);
+                                        }}
+                                        onOpen={() => {
+                                            //setComputed(false);
+                                            setSelect(true);
+                                            setError({status: false, message: ''});
+                                        }}
+                                        onClose={() => {
+                                            setSelect(false);
+                                        }}
+                                    />
+                                </View>
+                                <View style={{
+                                    alignItems: 'center'
                                 }}>
-                                    Frequency
-                                </Text>
-                                <DropDownPicker
-                                    items={[
-                                        {label: 'a day', value: 'per_day'},
-                                        {label: 'a week', value: 'per_week'},
-                                        {label: 'a month', value: 'per_month'},
-                                        {label: 'a year', value: 'per_year'},
-                                    ]}
-                                    placeholder="Select"
-                                    placeholderStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                        color: 'lightgray',
-                                    }}
-                                    itemStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                    }}
-                                    labelStyle={{
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                    }}
-                                    defaultValue={frequency}
-                                    containerStyle={{
-                                        height: 60,
-                                        borderRadius: 20,
-                                    }}
-                                    style={{
-                                        backgroundColor: 'white',
-                                        width: DeviceWidth * 0.45,
-                                        marginTop: 10,
-                                        borderWidth: 2,
-                                        borderTopLeftRadius: 20,
-                                        borderTopRightRadius: 20,
-                                        borderBottomLeftRadius: 20,
-                                        borderBottomRightRadius: 20,
-                                        borderColor: '#80CAFF',
-                                    }}
-                                    dropDownStyle={{
-                                        backgroundColor: 'white',
-                                        width: DeviceWidth * 0.45,
-                                        marginTop: 10,
-                                        borderBottomLeftRadius: 20,
-                                        borderBottomRightRadius: 20,
-                                        borderWidth: 2,
-                                        borderColor: '#80CAFF',
-                                    }}
-                                    onChangeItem={(currentFrequency) => {
-                                        //setComputed(false);
-                                        itemFrequency=currentFrequency.value;
-                                        setFrequency(currentFrequency.value);
-                                    }}
-                                    onOpen={() => {
-                                        //setComputed(false);
-                                        setSelect(true);
-                                        setError({status: false, message: ''});
-                                    }}
-                                    onClose={() => {
-                                        setSelect(false);
-                                    }}
-                                />
+                                    <Text style={{
+                                        fontSize: 25,
+                                        marginTop: 30,
+                                        fontWeight: '500',
+                                    }}>
+                                        Frequency
+                                    </Text>
+                                    <DropDownPicker
+                                        items={[
+                                            {label: 'a day', value: 'per_day'},
+                                            {label: 'a week', value: 'per_week'},
+                                            {label: 'a month', value: 'per_month'},
+                                            {label: 'a year', value: 'per_year'},
+                                        ]}
+                                        placeholder="Select"
+                                        placeholderStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                            color: 'lightgray',
+                                        }}
+                                        itemStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                        }}
+                                        labelStyle={{
+                                            textAlign: 'center',
+                                            fontSize: 20,
+                                        }}
+                                        defaultValue={frequency}
+                                        containerStyle={{
+                                            height: 60,
+                                            borderRadius: 20,
+                                        }}
+                                        style={{
+                                            backgroundColor: 'white',
+                                            width: DeviceWidth * 0.45,
+                                            marginTop: 10,
+                                            borderWidth: 2,
+                                            borderTopLeftRadius: 20,
+                                            borderTopRightRadius: 20,
+                                            borderBottomLeftRadius: 20,
+                                            borderBottomRightRadius: 20,
+                                            borderColor: '#80CAFF',
+                                        }}
+                                        dropDownStyle={{
+                                            backgroundColor: 'white',
+                                            width: DeviceWidth * 0.45,
+                                            marginTop: 10,
+                                            borderBottomLeftRadius: 20,
+                                            borderBottomRightRadius: 20,
+                                            borderWidth: 2,
+                                            borderColor: '#80CAFF',
+                                        }}
+                                        onChangeItem={(currentFrequency) => {
+                                            //setComputed(false);
+                                            itemFrequency=currentFrequency.value;
+                                            setFrequency(currentFrequency.value);
+                                        }}
+                                        onOpen={() => {
+                                            //setComputed(false);
+                                            setSelect(true);
+                                            setError({status: false, message: ''});
+                                        }}
+                                        onClose={() => {
+                                            setSelect(false);
+                                        }}
+                                    />
+                                </View>
                             </View>
                         </View>
-                    </View>
-
-                    {/* Computation result and buttons */}
-                    {computed && (
+                        {/* Computation result and buttons */}
                         <View style={{
                             backgroundColor: 'white',
                             alignItems: 'center',
-                            marginBottom: 20}}>
+                            marginBottom: 20
+                        }}>
                             <Text
                                 style={{
                                     fontSize: 25,
@@ -669,12 +801,14 @@ export default function ItemDetail({ route }) {
                                 }}>
                                 Individual Total
                             </Text>
-                            <CalculateTotal
-                                value={individual_total}
-                                unit={globalUnit}
-                                id={category}
-                                type="individual"
-                            />
+                            {individual_total !== null && (
+                                <CalculateTotal
+                                    value={individual_total}
+                                    unit={globalUnit}
+                                    id={category}
+                                    type="individual"
+                                />
+                            )}
                             <Text
                                 style={{
                                     fontSize: 25,
@@ -684,111 +818,112 @@ export default function ItemDetail({ route }) {
                                 }}>
                                 Yearly Total
                             </Text>
-                            <CalculateTotal
-                                value={individual_total * frequency_values[frequency]*quantity_values[quantity]}
-                                unit={globalUnit}
-                                id={category}
-                                type="yearly"
-                            />
+                            {individual_total !== null && (
+                                <CalculateTotal
+                                    value={individual_total * frequency_values[frequency] * quantity_values[quantity]}
+                                    unit={globalUnit}
+                                    id={category}
+                                    type="yearly"
+                                />
+                            )}
                         </View>
-                    )}
-                    {computed && (
-                        <View style={{
-                            alignItems: 'center',
-                            alignSelf: 'center',
-                        }}>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    setComputed(false)
-                                    setCalculatorHeight(280)
-                                    setQuantity(null)
-                                    setFrequency(null)
-                                }}
-                                style={{
-                                    padding: 15,
-                                    borderRadius: 30,
-                                    width: DeviceWidth * 0.4,
-                                    backgroundColor: 'orange',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}>
-                                <View style={{alignItems: 'center'}}>
-                                    <Text
-                                        style={{
-                                            textAlign: 'center',
-                                            width: DeviceWidth * 0.4,
-                                            fontWeight: 'bold',
-                                            fontSize: 20,
-                                            color: 'white',
-                                            alignItems: 'center',
-                                        }}>
-                                        Clear
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+                        {computed && (
                             <View style={{
-                                flexDirection: 'row',
-                                marginTop: 15
+                                alignItems: 'center',
+                                alignSelf: 'center',
                             }}>
-                                <View>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setShowContext(true)
-                                            setModalVisible(true)
-                                        }}
-                                        style={{
-                                            padding: 15,
-                                            borderRadius: 30,
-                                            width: DeviceWidth * 0.4,
-                                            backgroundColor: '#404040',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                        }}>
-                                        <View style={{alignItems: 'center'}}>
-                                            <Text
-                                                style={{
-                                                    fontWeight: 'bold',
-                                                    fontSize: 20,
-                                                    color: 'white',
-                                                    alignItems: 'center',
-                                                }}>
-                                                Context
-                                            </Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <View>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            setShowContext(false);
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setComputed(false)
+                                        setQuantity(null)
+                                        setFrequency(null)
+                                    }}
+                                    style={{
+                                        padding: 15,
+                                        borderRadius: 30,
+                                        width: DeviceWidth * 0.4,
+                                        backgroundColor: 'orange',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}>
+                                    <View style={{alignItems: 'center'}}>
+                                        <Text
+                                            style={{
+                                                textAlign: 'center',
+                                                width: DeviceWidth * 0.4,
+                                                fontWeight: 'bold',
+                                                fontSize: 20,
+                                                color: 'white',
+                                                alignItems: 'center',
+                                            }}>
+                                            Clear
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    marginTop: 15
+                                }}>
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setShowContext(true)
+                                                setModalVisible(true)
+                                            }}
+                                            style={{
+                                                padding: 15,
+                                                borderRadius: 30,
+                                                width: DeviceWidth * 0.4,
+                                                backgroundColor: '#404040',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                            }}>
+                                            <View style={{alignItems: 'center'}}>
+                                                <Text
+                                                    style={{
+                                                        fontWeight: 'bold',
+                                                        fontSize: 20,
+                                                        color: 'white',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                    Context
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setShowContext(false);
                                                 setModalVisible(true);
-                                        }}
-                                        style={{
-                                            padding: 15,
-                                            borderRadius: 30,
-                                            width: DeviceWidth * 0.4,
-                                            marginLeft: 10,
-                                            backgroundColor: '#29A3FE',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                        }}>
-                                        <View style={{alignItems: 'center'}}>
-                                            <Text
-                                                style={{
-                                                    fontWeight: 'bold',
-                                                    fontSize: 20,
-                                                    color: 'white',
-                                                    alignItems: 'center',
-                                                }}>
-                                                Challenge
-                                            </Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                            }}
+                                            style={{
+                                                padding: 15,
+                                                borderRadius: 30,
+                                                width: DeviceWidth * 0.4,
+                                                marginLeft: 10,
+                                                backgroundColor: '#29A3FE',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                            }}>
+                                            <View style={{alignItems: 'center'}}>
+                                                <Text
+                                                    style={{
+                                                        fontWeight: 'bold',
+                                                        fontSize: 20,
+                                                        color: 'white',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                    Challenge
+                                                </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
-                    )}
-                </View>
+                        )}
+                    </View>
+                )}
 
                 {/* Pop up window of 'Context' and 'Challenge' */}
                 <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -979,7 +1114,7 @@ export default function ItemDetail({ route }) {
                                     textAlign: 'left',
                                 }}>
                                 Rain water (Green water): The amount of rainwater required
-                                to make an item
+                                to make this item
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
@@ -1021,7 +1156,7 @@ export default function ItemDetail({ route }) {
                                     textAlign: 'left',
                                 }}>
                                 Irrigated water (Blue water): The amount of surface water
-                                and groundwater required to produce an item.
+                                and groundwater required to produce this item.
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
@@ -1081,8 +1216,169 @@ export default function ItemDetail({ route }) {
                     </View>
                 </Modal>
 
+                {/* Info button modal */}
+                <Modal animationType="slide" transparent={true} visible={infoVisible}>
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: 22,
+                        }}>
+                        {infoShown === 'Decompose' && (
+                            <View style={{
+                                marginLeft: 20,
+                                marginRight: 20,
+                                backgroundColor: 'white',
+                                borderColor: '#00ADEF',
+                                borderWidth: 1.5,
+                                borderRadius: 20,
+                                shadowColor: '#000',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 3.84,
+                                elevation: 5,
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setInfoVisible(false);
+                                    }}
+                                    style={{
+                                        zIndex: 10,
+                                        alignSelf: 'flex-end',
+                                        position: 'absolute'
+                                    }}>
+                                    <Image
+                                        source={itemDetailImages.closeInfoModal}
+                                        style={{
+                                            width: 50,
+                                            height: 50
+                                        }}/>
+                                </TouchableOpacity>
+                                <View style={{
+                                    margin: 15,
+                                    padding: 15
+                                }}>
+                                    <Text style={{fontWeight: '500'}}>
+                                        Time to Decompose
+                                    </Text>
+                                    <Text>
+                                        Times reflect average time to decompose in a landfill.
+                                        {"\n\n"}
+                                        Rates of decomposition will vary widely based on the item, your climate,
+                                        humidity levels, and landfill conditions, such as how much dirt, air, and
+                                        sun exposure the landfill receives. Most landfills are anaerobic (without
+                                        oxygen) as they are compacted so tightly, which slows decomposition.
+                                    </Text>
+                                </View>
+                            </View>
+                        )}
+                        {infoShown === 'Compostable' && (
+                            <View style={{
+                                marginLeft: 20,
+                                marginRight: 20,
+                                backgroundColor: 'white',
+                                borderColor: '#00ADEF',
+                                borderWidth: 1.5,
+                                borderRadius: 20,
+                                shadowColor: '#000',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 3.84,
+                                elevation: 5,
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setInfoVisible(false);
+                                    }}
+                                    style={{
+                                        zIndex: 10,
+                                        alignSelf: 'flex-end',
+                                        position: 'absolute'
+                                    }}>
+                                    <Image
+                                        source={itemDetailImages.closeInfoModal}
+                                        style={{
+                                            width: 50,
+                                            height: 50
+                                        }}/>
+                                </TouchableOpacity>
+                                <View style={{
+                                    margin: 15,
+                                    padding: 15
+                                }}>
+                                    <Text style={{fontWeight: '500'}}>
+                                        Compost Times
+                                    </Text>
+                                    <Text>
+                                        Compost times will vary based on many factors including: how wet your pile is,
+                                        how hot your compost runs, how often your turn it, airation...
+                                    </Text>
+                                </View>
+                            </View>
+                        )}
+                        {infoShown === 'Recyclable' && (
+                            <View style={{
+                                marginLeft: 20,
+                                marginRight: 20,
+                                backgroundColor: 'white',
+                                borderColor: '#00ADEF',
+                                borderWidth: 1.5,
+                                borderRadius: 20,
+                                shadowColor: '#000',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 3.84,
+                                elevation: 5,
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setInfoVisible(false);
+                                    }}
+                                    style={{
+                                        zIndex: 10,
+                                        alignSelf: 'flex-end',
+                                        position: 'absolute'
+                                    }}>
+                                    <Image
+                                        source={itemDetailImages.closeInfoModal}
+                                        style={{
+                                            width: 50,
+                                            height: 50
+                                        }}/>
+                                </TouchableOpacity>
+                                <View style={{
+                                    margin: 15,
+                                    padding: 15
+                                }}>
+                                    <Text style={{fontWeight: '500'}}>
+                                        Recycle Information
+                                    </Text>
+                                    <Text>
+                                        Always check what your local Recycle Center  accepts. What one Center accepts
+                                        can be completely different from another, even in the same city.
+                                        {"\n\n"}
+                                        The technical capabilities of your Recycle Center and the ever-changing
+                                        marketplace that renders items recyclable from one day to the next are driving
+                                        forces that determine what can can, and cannot be recycled.
+                                    </Text>
+                                </View>
+                            </View>
+                        )}
+                    </View>
+                </Modal>
+
                 {/* Delete later */}
-                <View style={{backgroundColor: 'grey', margin: 20}}>
+                {/*<View style={{backgroundColor: 'grey', margin: 20}}>
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>RAW DATA</Text>
                     {Object.keys(item).map((key, i) =>(
                             <Text key={i} style={{marginTop: 10}}>
@@ -1090,7 +1386,7 @@ export default function ItemDetail({ route }) {
                             </Text>
                         )
                     )}
-                </View>
+                </View>*/}
             </ScrollView>
         </SafeAreaView>
     )
