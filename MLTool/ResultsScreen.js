@@ -20,7 +20,7 @@ import {CLASSES} from "./Siitch_20epochs/class_names";
 
 export default function ResultsScreen({route, navigation}){
     // Get image and model reference from Camera Screen
-    const { image, myModel } = route.params
+    const { image } = route.params
     // Store prediction results
     const [predictions, setPredictions] = useState(null);
     // The status of prediction
@@ -82,7 +82,7 @@ export default function ResultsScreen({route, navigation}){
             const imageTensor = imageToTensor(raw);
 
             // Get prediction results from our model
-            const newPredictions = await myModel.predict(imageTensor);
+            const newPredictions = await siitchmodel.predict(imageTensor);
 
             // Confidence for all items the model can identify
             const values = newPredictions.dataSync();
@@ -186,8 +186,8 @@ export default function ResultsScreen({route, navigation}){
                         flex: 1,
                         flexDirection: 'column',
                         justifyContent: 'flex-end',
-                        marginLeft: '5%',
-                        marginRight: '5%',
+                        marginLeft: '8%',
+                        marginRight: '8%',
                     }}>
                         {predictions.map((p, index) => {
                             // Used for debug
@@ -197,12 +197,20 @@ export default function ResultsScreen({route, navigation}){
                                     key={index}
                                     mode="contained"
                                     color={"#ffffff"}
+                                    uppercase={false}
                                     style={{
                                         marginTop: '3%',
                                         marginBottom: '3%',
                                         borderRadius: 100,
                                         borderColor: 'black',
                                         borderWidth: 1,
+                                    }}
+                                    contentStyle={{
+                                        height: 52,
+                                    }}
+                                    labelStyle={{
+                                        fontWeight:'300',
+                                        fontSize:22
                                     }}
                                     onPress={() => {
                                         /* When one item button is tapped, forward item name to ItemDetail screen */
@@ -214,11 +222,19 @@ export default function ResultsScreen({route, navigation}){
                         })}
                         <MaterialButton
                             mode="contained"
-                            color={"#ff8f00"}
+                            color={"#FFD359"}
+                            uppercase={false}
                             style={{
                                 marginTop: '3%',
-                                marginBottom: '10%',
+                                marginBottom: '12%',
                                 borderRadius: 100,
+                            }}
+                            contentStyle={{
+                                height: 52,
+                            }}
+                            labelStyle={{
+                                fontWeight:'300',
+                                fontSize:22
                             }}
                             onPress={() => {
                                 navigation.push('Catalogue')
@@ -226,14 +242,23 @@ export default function ResultsScreen({route, navigation}){
                             Nope, see catalogue
                         </MaterialButton>
                         <MaterialButton
-                            icon={"reload"}
+                            //icon={"reload"}
                             mode="contained"
-                            color={"#7cb342"}
+                            color={"#8DC73F"}
+                            uppercase={false}
                             style={{
                                 marginBottom: '5%',
                                 borderRadius: 100,
                                 alignSelf: 'center',
                                 width: 200
+                            }}
+                            contentStyle={{
+                                height: 52,
+                            }}
+                            labelStyle={{
+                                fontWeight:'300',
+                                fontSize:22,
+                                color: 'white'
                             }}
                             onPress={() => {
                                 navigation.goBack(null)
