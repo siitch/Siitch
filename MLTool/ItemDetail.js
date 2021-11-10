@@ -447,18 +447,25 @@ export default function ItemDetail({ route }) {
                                     alignItems: 'center'
                                 }}>
                                     <Image source={itemDetailImages.earth} style={{width: 28, height: 28}}/>
-                                    <Text style={{fontWeight: 'bold', marginLeft: 5}}>
-                                        To make 1 {individualUnit !== '' ? individualUnit.split('/')[1] : itemName}{/* {itemName}*/}:
+                                    <Text style={{
+                                        fontSize: 17,
+                                        fontWeight: '500',
+                                        marginLeft: 5}}>
+                                        To make 1 {individualUnit !== '' ? individualUnit.split('/')[1] : itemName}{/* {itemName}*/}
+                                    </Text>
+                                    <Text>
+
                                     </Text>
                                 </View>
 
                                 <View style={{
-                                    flexDirection: 'row'
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
                                 }}>
-                                    <Image source={Profiles.water} style={{width: 28, height: 28}}/>
+                                    <Image source={Profiles.water} style={{width: 20, height: 20}}/>
                                     <Text style={{
                                         textAlign: 'center',
-                                        fontSize:25,
+                                        fontSize:20,
                                         fontWeight:'bold',
                                         color: '#00ADEF'
                                     }}>{displayWater !== null ?
@@ -490,7 +497,10 @@ export default function ItemDetail({ route }) {
                                 alignItems: 'center'
                             }}>
                                 <Image source={itemDetailImages.decompose} style={{width: 28, height: 28}}/>
-                                <Text style={{fontWeight: 'bold', marginLeft: 5}}>
+                                <Text style={{
+                                    fontSize: 17,
+                                    fontWeight: '500',
+                                    marginLeft: 5}}>
                                     Time to Decompose
                                 </Text>
                                 <TouchableOpacity
@@ -503,7 +513,7 @@ export default function ItemDetail({ route }) {
                             </View>
                         </View>
                         {timetodecompose !== '' && (
-                            <Text style={{marginLeft: 15, marginBottom: 5}}>
+                            <Text style={{marginLeft: 15, marginBottom: 15}}>
                                 {timetodecompose}
                             </Text>
                         )}
@@ -531,7 +541,10 @@ export default function ItemDetail({ route }) {
                                 alignItems: 'center'
                             }}>
                                 <Image source={itemDetailImages.compostable} style={{width: 28, height: 28}}/>
-                                <Text style={{fontWeight: 'bold', marginLeft: 5}}>
+                                <Text style={{
+                                    fontSize: 17,
+                                    fontWeight: '500',
+                                    marginLeft: 5}}>
                                     Compostable?
                                 </Text>
                                 <TouchableOpacity
@@ -550,7 +563,7 @@ export default function ItemDetail({ route }) {
                             )}
                         </View>
                         {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
-                            <Text style={{marginLeft: 15, marginBottom: 5}}>
+                            <Text style={{marginLeft: 15, marginBottom: 15}}>
                                 {compostable}
                             </Text>
                         )}
@@ -576,7 +589,10 @@ export default function ItemDetail({ route }) {
                             alignItems: 'center'
                         }}>
                             <Image source={itemDetailImages.recyclable} style={{width: 28, height: 28}}/>
-                            <Text style={{fontWeight: 'bold', marginLeft: 5}}>
+                            <Text style={{
+                                fontSize: 17,
+                                fontWeight: '500',
+                                marginLeft: 5}}>
                                 Recyclable?
                             </Text>
                             <TouchableOpacity
@@ -1098,7 +1114,7 @@ export default function ItemDetail({ route }) {
                                     textAlign: 'left',
                                 }}>
                                 Rain water (Green water): The amount of rainwater required
-                                to make an item
+                                to make this item
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
@@ -1140,7 +1156,7 @@ export default function ItemDetail({ route }) {
                                     textAlign: 'left',
                                 }}>
                                 Irrigated water (Blue water): The amount of surface water
-                                and groundwater required to produce an item.
+                                and groundwater required to produce this item.
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
