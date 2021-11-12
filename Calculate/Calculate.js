@@ -320,6 +320,11 @@ function CalculateScreen() {
     itemCostLList=[];
     itemYearlyCostList=[];
     itemYearlyLCostList=[];
+    setYearlyCostLTotal(0);
+    setYearlyCostTotal(0);
+    setMixCostLTotal(0);
+    setMixCostTotal(0);
+
     upgradePages();
     console.log("------------")
 
@@ -1377,8 +1382,8 @@ function CalculateScreen() {
                   style={{width: 30, height: 30, marginTop:25}}
                   source={require('./../images/water_drop_150px_wide2.png')}
                 />
-                {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
+                {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
              </View>
               
           </View>
