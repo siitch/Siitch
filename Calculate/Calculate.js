@@ -1043,8 +1043,8 @@ function CalculateScreen() {
                     }
                   />
                   <Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]}</Text>
-                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>g/p</Text>)}
-                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>lbs/p</Text>)}
+                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>p/lb</Text>)}
+                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>p/kg</Text>)}
                 </View>
       
                 <View style={{flexDirection: 'row',
@@ -1197,8 +1197,8 @@ function CalculateScreen() {
                     }}
                   />
 
-                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{itemCostList[i]*itemQuantityList[i]}</Text>)}
-                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{itemCostLList[i]*itemQuantityList[i]}</Text>)}
+                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
+                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
 
                   <TouchableHighlight  onPress={(i) => deleteItemFromList(index)}>
                     <Image                 
@@ -1296,8 +1296,8 @@ function CalculateScreen() {
                 style={{width: 30, height: 30, marginLeft:'40%',marginTop:15,marginBottom:20}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
-              {unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostTotal)} Gal</Text>)}
-              {!unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostLTotal)} Lbs</Text>)}
+              {unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostTotal)} G</Text>)}
+              {!unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostLTotal)} L</Text>)}
             </View>
           </View>
           )}
@@ -1378,7 +1378,7 @@ function CalculateScreen() {
                   source={require('./../images/water_drop_150px_wide2.png')}
                 />
                 {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} Lbs</Text>)}
+                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
              </View>
               
           </View>
