@@ -67,7 +67,7 @@ If you run it on a simulator with m1 chip mac, the app will still crash during i
 2. Open a terminal under the project root.
 3. Run `npm install` or `yarn install`.
 4. Enter ios folder through `cd ios` and then do `pod install`. If using m1 chip mac, run `arch -x86_64 pod install`.
-5. Go back to root folder by `cd ..`.
+5. Go back to root folder by `cd ..`. (Step 4 and 5 are not required when use Expo)
 6. Start through `expo start`(Use Expo) or `react-native start`(Use simulator).
 ### Second(Use Expo):
 1. Browser will open automatically, a developer page will show up
