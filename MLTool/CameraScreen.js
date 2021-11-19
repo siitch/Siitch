@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 // Tensorflow.js
 import * as tf from "@tensorflow/tfjs";
-// Used to import model file
+// Used to import .bin model file
 import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
     //ActivityIndicator, // Native iOS loading circle, doesn't look good
@@ -14,8 +14,6 @@ import { // Native components
     View
 } from "react-native";
 import {Camera} from "expo-camera";
-// Great button with flexible config, but can't wrap Drew's camera image so currently commented out and use TouchOpacity
-import {Button as MaterialButton} from "react-native-paper";
 // Third party loading indicator, looks great
 import {ActivityIndicator} from "react-native-paper";
 // Used to change the dimension of photo
@@ -27,7 +25,8 @@ import ItemDetail from "./ItemDetail";
 import Catalogue from "./Catalogue";
 import ResultsScreen from "./ResultsScreen";
 import {CategoryPage} from "./CategoryPage";
-// Used to show <- image inside the go back button
+import {Virtual} from "../Menu/Virtual";
+// Used to show arrow <- image inside the go back button
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // Used to unmount the camera when this screen is not focused
 import {useIsFocused} from "@react-navigation/native";
@@ -43,7 +42,7 @@ export default function CameraScreen({navigation}) {
     const [granted, setGranted] = useState(null);
     // Status of model loading
     const [isModelReady, setIsModelReady] = useState(false);
-    // Reference of model
+    // Reference of model, used for debug
     const [myModel, setMyModel] = useState(null);
 
     // Instance of device camera
@@ -51,7 +50,7 @@ export default function CameraScreen({navigation}) {
     // Set different color according to the model loading status
     const [loadingColor, setLoadingColor] = useState('grey');
 
-    // Device's dimension, used to set the size of camera preview and the size of photo
+    // Device's dimension, used to set the size of camera preview and the size of image
     const Height = Dimensions.get('screen').height;
     const Width = Dimensions.get('screen').width;
 
@@ -71,8 +70,9 @@ export default function CameraScreen({navigation}) {
             const loadedModel = await tf.loadGraphModel(
                 bundleResourceIO(model, weights)
             );
-            // Set model reference
+            // Set model reference for debug
             setMyModel(loadedModel);
+            // Set the model as a global variable so that ResultsScreen can use it to do prediction
             global.siitchmodel = loadedModel
             // Set model loading status
             setIsModelReady(true);
@@ -121,7 +121,8 @@ export default function CameraScreen({navigation}) {
                 }
             }
         }
-        if(init){
+        if(init){ // After all the functions are called when this screen is initializing, don't call them again when
+            // changes of isFocused, granted, visited update this screen
             getCameraPermissionAsync();
             checkPermissionAsync();
             initializeTfAsync();
@@ -145,10 +146,9 @@ export default function CameraScreen({navigation}) {
                         [{resize: {width: Width, height: Height}}],
                         {compress: 1, format: ImageManipulator.SaveFormat.JPEG}
                     );
-                    // Pass the image and the model reference to 'ResultsScreen.js' to do prediction
+                    // Pass the image to 'ResultsScreen.js' to do prediction
                     navigation.push('Confirm', {image: manipulateResponse})
                 }});
-
         } catch (error) {
             console.log(error);
         }
@@ -205,7 +205,7 @@ export default function CameraScreen({navigation}) {
                             alignItems: 'center',
                             borderRadius: 100,
                         }}
-                        onPress={isModelReady ? takePictureAsync : ()=>{alert('Model loading')}}>
+                        onPress={isModelReady ? takePictureAsync : ()=>{Alert.alert('Model loading')}}>
                         {/* Camera button image*/}
                         <Image style={{
                             width: 80,
@@ -235,29 +235,13 @@ export default function CameraScreen({navigation}) {
                             </View>
                         )}
                     </TouchableOpacity>
-
-                    {/* Amazing third party button*/}
-                    {/*<MaterialButton
-                        icon={"camera"}
-                        mode="contained"
-                        color={"#2196f3"}
-                        disabled={!isModelReady} //if mobilenet is not ready, disable and turn grey
-                        //loading={!isModelReady} //when predicting, show loading animation
-                        style={{
-                            marginBottom: '5%',
-                            borderRadius: 100,
-                        }}
-                        onPress={takePictureAsync}//take picture
-                    >
-                        Take Photo
-                    </MaterialButton>*/}
                 </SafeAreaView>
             </Camera>
         )
     )
 }
 
-// Create screen stack for tab 'MLTool'
+// Create screen stack for tab 'Camera'
 const CameraScreenStack = createStackNavigator();
 
 // Leveraged from Ranking
@@ -364,6 +348,25 @@ export const camerascreenScreen = () => (
         <CameraScreenStack.Screen
             name="Catalogue"
             component={Catalogue}
+            options={({navigation}) => ({
+                headerBackTitleVisible: false,
+                headerRight: () => (
+                    <MaterialCommunityIcons
+                        name="home"
+                        size={25}
+                        color={'grey'}
+                        style={{
+                            paddingRight: 15
+                        }}
+                        onPress={() => navigation.navigate('Home')}
+                    />
+                ),
+            })}
+        />
+        {/* Virtual Water screen */}
+        <CameraScreenStack.Screen
+            name="Virtual Water"
+            component={Virtual}
             options={({navigation}) => ({
                 headerBackTitleVisible: false,
                 headerRight: () => (
