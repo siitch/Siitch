@@ -504,6 +504,25 @@ const landingdetails = () => {
                         ),
                     })}
                 />
+                {/* Virtual Water screen */}
+                <Stack.Screen
+                    name="Virtual Water"
+                    component={Virtual}
+                    options={({navigation}) => ({
+                        headerBackTitleVisible: false,
+                        headerRight: () => (
+                            <MaterialCommunityIcons
+                                name="home"
+                                size={25}
+                                color={'grey'}
+                                style={{
+                                    paddingRight: 15
+                                }}
+                                onPress={() => navigation.navigate('Home')}
+                            />
+                        ),
+                    })}
+                />
                 <Stack.Screen name="What" component={toWhat} />
             </Stack.Navigator>
         </NavigationContainer>
