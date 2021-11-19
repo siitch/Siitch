@@ -37,7 +37,7 @@ const Search = ({searchData, navigation}) => {
   const [name, setName] = useState('');
   const Tab = createBottomTabNavigator();
   var itemArr = [];
-  var itemsList = [];
+  let itemsList = [];
 
   var config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
@@ -57,24 +57,32 @@ const Search = ({searchData, navigation}) => {
       return;
     } else {
       let input =
-        keyword.charAt(0).toUpperCase() +
-        keyword.slice(1, keyword.length).toLowerCase();
+          keyword.charAt(0).toUpperCase() +
+          keyword.slice(1, keyword.length).toLowerCase();
       readData(input);
     }
   };
   const readData = image => {
     firebase
-      .database()
-      .ref(image)
-      .on('value', get =>
-        get.val() === null && image !== 'Makeup' ? (
-          <View>
-            {Alert.alert('Error!', "Can't find result for this keyword")}
-          </View>
-        ) : (
-          navigation.navigate('Search', {name: image, value: get.val()})
-        ),
-      );
+        .database()
+        .ref(image)
+        .on('value', get => {
+              if (image === 'Beef' || image === 'Jeans' || image === 'Makeup'){
+                navigation.navigate('Search', {name: image, value: get.val()})
+              } else if (get.val() === null) {
+                Alert.alert('Error!', "Can't find result for this keyword")
+              } else {
+                navigation.navigate('Detail', {itemName: image})
+              }
+            }
+            //   get.val() === null && image !== 'Makeup' ? (
+            //     <View>
+            //       {Alert.alert('Error!', "Can't find result for this keyword")}
+            //     </View>
+            //   ) : (
+            //     navigation.navigate('Search', {name: image, value: get.val()})
+            //   ),
+        );
   };
   useEffect(() => {
     let index = 0;
@@ -99,67 +107,67 @@ const Search = ({searchData, navigation}) => {
     setItem(itemArr);
   }, [keyword]);
   return (
-    <View style={{backgroundColor: '#FFFFFF'}}>
-      <View style={styles.searchFrame}>
-        <ScrollView
-          style={{backgroundColor: '#FFFFFF'}}
-          contentContainerStyle={{alignItems: 'center'}}>
-          <Text style={styles.title}>Search</Text>
-          <Searchbar
-            placeholder="Search"
-            onChangeText={text => setKeyword(text)}
-            onIconPress={toDatabase}
-            style={{
-              borderColor: '#80CAFF',
-              shadowOpacity: 0,
-              marginTop: 20,
-              height: 50,
-              borderWidth: 2,
-              borderRadius: 20,
-              width: DeviceWidth * 0.7,
-              textAlign: 'center',
-              fontSize: 20,
-            }}
-          />
+      <View style={{backgroundColor: '#FFFFFF'}}>
+        <View style={styles.searchFrame}>
+          <ScrollView
+              style={{backgroundColor: '#FFFFFF'}}
+              contentContainerStyle={{alignItems: 'center'}}>
+            <Text style={styles.title}>Search</Text>
+            <Searchbar
+                placeholder="Search"
+                onChangeText={text => setKeyword(text)}
+                onIconPress={toDatabase}
+                style={{
+                  borderColor: '#80CAFF',
+                  shadowOpacity: 0,
+                  marginTop: 20,
+                  height: 50,
+                  borderWidth: 2,
+                  borderRadius: 20,
+                  width: DeviceWidth * 0.7,
+                  textAlign: 'center',
+                  fontSize: 20,
+                }}
+            />
 
-          <Text style={{fontSize: 15, marginTop: 30, marginBottom: 10, marginHorizontal: 20, textAlign: 'center'}}>
-            For the prototype, <Text style={{fontSize: 16, marginTop: 30, marginBottom: 10, textAlign: 'center', fontWeight: 'bold'}}>only the Beef, Jeans & Makeup
-            search page are active.</Text> We're curious what you think.
-          </Text>
+            <Text style={{fontSize: 15, marginTop: 30, marginBottom: 10, marginHorizontal: 20, textAlign: 'center'}}>
+              For the prototype, <Text style={{fontSize: 16, marginTop: 30, marginBottom: 10, textAlign: 'center', fontWeight: 'bold'}}>only the Beef, Jeans & Makeup
+              search page are active.</Text> We're curious what you think.
+            </Text>
 
-          {item.map((row, i) => (
-            <View key={i} style={styles.avatarView}>
-              {row.map(url => (
-                <TouchableHighlight
-                  key={url.name}
-                  onPress={() => readData(url.name)}
-                  activeOpacity={1}
-                  underlayColor="transparent"
-                  style={{marginLeft: 10}}>
-                  <View style={styles.eachAvatar}>
-                    <Image
-                      source={url.image}
-                      style={{
-                        backgroundColor: 'white',
-                        width: 60,
-                        height: 60,
-                        marginBottom: 10,
-                        marginTop: 10,
-                      }}
-                      resizeMode="contain"
-                    />
-                    <Text style={{width: 90, textAlign: 'center'}}>
-                      {url.name}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              ))}
-            </View>
-          ))}
-          <View style={{marginBottom: 40}} />
-        </ScrollView>
+            {item.map((row, i) => (
+                <View key={i} style={styles.avatarView}>
+                  {row.map(url => (
+                      <TouchableHighlight
+                          key={url.name}
+                          onPress={() => readData(url.name)}
+                          activeOpacity={1}
+                          underlayColor="transparent"
+                          style={{marginLeft: 10}}>
+                        <View style={styles.eachAvatar}>
+                          <Image
+                              source={Profiles[url.name]}
+                              style={{
+                                backgroundColor: 'white',
+                                width: 60,
+                                height: 60,
+                                marginBottom: 10,
+                                marginTop: 10,
+                              }}
+                              resizeMode="contain"
+                          />
+                          <Text style={{width: 90, textAlign: 'center'}}>
+                            {url.name}
+                          </Text>
+                        </View>
+                      </TouchableHighlight>
+                  ))}
+                </View>
+            ))}
+            <View style={{marginBottom: 40}} />
+          </ScrollView>
+        </View>
       </View>
-    </View>
   );
 };
 
