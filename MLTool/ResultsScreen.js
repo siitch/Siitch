@@ -1,12 +1,4 @@
-import { // Native components
-    ActivityIndicator, Dimensions,
-    Image,
-    ImageBackground,
-    Modal,
-    SafeAreaView,
-    Text,
-    View
-} from "react-native";
+import {ActivityIndicator, Dimensions, Image, ImageBackground, Modal, SafeAreaView, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 // Great button with flexible config
 import {Button as MaterialButton} from "react-native-paper";
@@ -19,7 +11,7 @@ import {FileSystem} from "react-native-unimodules";
 import {CLASSES} from "./Siitch_20epochs/class_names";
 
 export default function ResultsScreen({route, navigation}){
-    // Get image and model reference from Camera Screen
+    // Get the image from Camera Screen
     const { image } = route.params
     // Store prediction results
     const [predictions, setPredictions] = useState(null);
@@ -30,7 +22,7 @@ export default function ResultsScreen({route, navigation}){
     const Width = Dimensions.get('screen').width;
     // Choose the shorter side to crop image
     const CorpSize = Height >= Width ? Width : Height;
-    // Compute the starting X, Y axis value of the crop
+    // Compute the starting X, Y axis value of the crop area
     let CorpX
     let CorpY
     if(Height >= Width){
@@ -58,7 +50,6 @@ export default function ResultsScreen({route, navigation}){
             const manipResponse = await ImageManipulator.manipulateAsync(
                 image.uri,
                 [{ crop: { height: CorpSize, originX: CorpX, originY: CorpY, width: CorpSize } }],
-                { compress: 1, format: ImageManipulator.SaveFormat.JPEG }
             );
 
             // Pass the edited image to next function
@@ -144,7 +135,7 @@ export default function ResultsScreen({route, navigation}){
         const expanded_img = resized_img.expandDims(0);
 
         // normalise the rgb values to -1-+1
-        return expanded_img.toFloat().div(tf.scalar(127)).sub(tf.scalar(1));
+        return expanded_img.toFloat().div(tf.scalar(255)).sub(tf.scalar(0));
     };
 
     return (
@@ -222,11 +213,11 @@ export default function ResultsScreen({route, navigation}){
                         })}
                         <MaterialButton
                             mode="contained"
-                            color={"#FFD359"}
+                            color={"#ffce39"}
                             uppercase={false}
                             style={{
                                 marginTop: '3%',
-                                marginBottom: '12%',
+                                marginBottom: '9.3%',
                                 borderRadius: 100,
                             }}
                             contentStyle={{
@@ -242,12 +233,11 @@ export default function ResultsScreen({route, navigation}){
                             Nope, see catalogue
                         </MaterialButton>
                         <MaterialButton
-                            //icon={"reload"}
                             mode="contained"
                             color={"#8DC73F"}
                             uppercase={false}
                             style={{
-                                marginBottom: '5%',
+                                marginBottom: '7.7%',
                                 borderRadius: 100,
                                 alignSelf: 'center',
                                 width: 200
