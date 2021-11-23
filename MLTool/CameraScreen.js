@@ -86,8 +86,6 @@ export default function CameraScreen({navigation}) {
                 if(value == null){ // If permission is not asked before
                     AsyncStorage.setItem('permissionAsked', 'true');
                     setVisited(false); // , app won't lead user to setting.
-                } else {
-                    setVisited(true); // Otherwise, app will lead user to setting if permission is not granted.
                 }
             });
 
@@ -118,6 +116,9 @@ export default function CameraScreen({navigation}) {
                         ]
                     );
                     navigation.goBack(null); // Block user from entering this screen if permission not granted.
+                } else {
+                    setVisited(true); // App will lead user to setting next time if permission is not granted.
+                    navigation.goBack(null); // Block user from entering this screen if permission not granted for the first time.
                 }
             }
         }
