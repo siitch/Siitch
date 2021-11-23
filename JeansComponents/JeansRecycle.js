@@ -131,7 +131,7 @@ const JeansRecycle = ({inputData, navigation}) => {
             alignItems: 'center',
             marginTop: '8%',
           }}>
-          10 - 12 Months
+          3+ Years
         </Text>
       </View>
       <TouchableHighlight
