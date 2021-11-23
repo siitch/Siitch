@@ -151,7 +151,6 @@ const Profiles = {
   'Olive oil': require('../images/Image_new/Oils/olive_oil.png'),
   'Peanut oil': require('../images/Image_new/Oils/peanut_oil.png'),
   'Sunflower seed oil': require('../images/Image_new/Oils/sunflower_seed_oil.png'),
-  'Sunflower seed oil crude': require('../images/Image_new/Oils/sunflower_seed_oil.png'),
   'Palm oil': require('../images/Image_new/Oils/palm_oil.png'),
   'Cocunut oil': require('../images/Image_new/Oils/coconut_oil.png'),
   'Canola oil': require('../images/Image_new/Oils/rapeseed_oil.png'),
