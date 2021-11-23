@@ -132,7 +132,7 @@ const Search = ({searchData, navigation}) => {
 
             <Text style={{fontSize: 15, marginTop: 30, marginBottom: 10, marginHorizontal: 20, textAlign: 'center'}}>
               For the prototype, <Text style={{fontSize: 16, marginTop: 30, marginBottom: 10, textAlign: 'center', fontWeight: 'bold'}}>only the Beef, Jeans & Makeup
-              search page are active.</Text> We're curious what you think.
+              search pages are active.</Text> We're curious what you think.
             </Text>
 
             {item.map((row, i) => (
