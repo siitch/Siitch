@@ -1,6 +1,6 @@
 import {
     Dimensions,
-    Image, Modal,
+    Image, Linking, Modal,
     SafeAreaView,
     ScrollView,
     Text,
@@ -9,6 +9,7 @@ import {
     View
 } from "react-native";
 import {Divider, Button} from "react-native-paper";
+import Hyperlink from 'react-native-hyperlink';
 import {Card,} from 'react-native-ui-lib';
 import firebase from "firebase";
 import React, {useEffect, useState} from "react";
@@ -16,10 +17,10 @@ import ResultImage from "./ResultImage";
 import Profiles from '../ImageDB.js';
 import itemDetailImages from "./ItemDetailImages/itemDetailImages";
 import DropDownPicker from "react-native-dropdown-picker";
-import {CalculateTotal} from "../Calculate/CalculateTotal";
 import {styles} from "../Comparing/Styles";
+import {SimpleCalculator} from "./SimpleCalculator";
 
-export default function ItemDetail({ route }) {
+export default function ItemDetail({ route, navigation }) {
     // Get item name passed from other screen
     const { itemName } = route.params;
     // Item data fetched from the database, only used to show the raw data for debug and UI design, can be removed later
@@ -76,14 +77,17 @@ export default function ItemDetail({ route }) {
 
     // Fourth section - Time to decompose:
     const [timetodecompose, setTimetodecompose] = useState('')
+    const [decomposetime, setDecomposetime] = useState('')
 
     // Fifth section - Compostable?
     const [compostable, setCompostable] = useState('')
-    const [check, setCheck] = useState(false);
-    const [cross, setCross] = useState(false);
+    const [compostableCheck, setCompostableCheck] = useState(false);
+    const [compostableCross, setCompostableCross] = useState(false);
 
     // Sixth section - Recyclable?
-    const [recyclable, setRecyclable] = useState(null);
+    const [recyclable, setRecyclable] = useState('');
+    const [recyclableCheck, setRecyclableCheck] = useState(false);
+    const [recyclableCross, setRecyclableCross] = useState(false);
 
     // Seventh section - Simple calculator leveraged from Lingchen's code
     const DeviceWidth = Dimensions.get('window').width;
@@ -157,8 +161,9 @@ export default function ItemDetail({ route }) {
         compute()
         changeMetric()
         checkCompostable()
+        checkRecyclable()
         changeColor()
-    }, [globalUnit, gallons, individualUnitG, metricToDisplay, timetodecompose, quantity, frequency]);
+    }, [globalUnit, gallons, individualUnitG, metricToDisplay, timetodecompose, recyclable, quantity, frequency]);
 
     // When the global metric changes, do corresponding changes
     const changeMetric = ()=>{
@@ -183,7 +188,7 @@ export default function ItemDetail({ route }) {
 
     // Used to change the color of the text to RED when the metric is years
     const changeColor = ()=>{
-        if(metricToDisplay === 'years'){
+        if(metricToDisplay !== 'gallons' && metricToDisplay !== 'liters'){
             setColor('#f32133')
         } else {
             setColor('#00ADEF')
@@ -193,10 +198,23 @@ export default function ItemDetail({ route }) {
     // Check compostable
     const checkCompostable = ()=>{
         if(compostable !== ''){
-            if(compostable[0] === 'N'){
-                setCross(true)
-            } else if (compostable[0] === 'Y') {
-                setCheck(true)
+            const firstWord = compostable.split(' ')[0]
+            if(firstWord === 'No' || firstWord === 'No.'){
+                setCompostableCross(true)
+            } else if (firstWord === 'Yes' || firstWord === 'Yes.') {
+                setCompostableCheck(true)
+            }
+        }
+    }
+
+    // Check recyclable
+    const checkRecyclable = ()=>{
+        if(recyclable !== ''){
+            const firstWord = recyclable.split(' ')[0]
+            if (firstWord === 'No' || firstWord === 'No.'){
+                setRecyclableCross(true)
+            } else if (firstWord === 'Yes' || firstWord === 'Yes.'){
+                setRecyclableCheck(true)
             }
         }
     }
@@ -245,12 +263,13 @@ export default function ItemDetail({ route }) {
 
                         // Fourth section
                         setTimetodecompose(itemObj['Time to decompose'])
+                        setDecomposetime(itemObj['Decomposition Time'])
 
                         // Fifth section
                         setCompostable(itemObj['Compostable'])
 
                         // Sixth section
-                        setRecyclable('?')
+                        setRecyclable(itemObj['Recycle'])
 
                         // Seventh section
                         setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
@@ -319,10 +338,10 @@ export default function ItemDetail({ route }) {
                         <View style={{
                             flexDirection: 'row',
                         }}>
-                            {metricToDisplay !== 'years' && (
+                            {(metricToDisplay === 'gallons' || metricToDisplay === 'liters') && (
                                 <Image source={Profiles.water} style={{width: 28, height: 28}}/>
                             )}
-                            {metricToDisplay === 'years' && (
+                            {!(metricToDisplay === 'gallons' || metricToDisplay === 'liters') && (
                                 <Image source={Profiles.clock} style={{width: 28, height: 28}}/>
                             )}
                             <Text style={{
@@ -485,12 +504,11 @@ export default function ItemDetail({ route }) {
                     )}
 
                     {/* Time to decompose*/}
-                    <View>
+                    <View style={{margin: 10}}>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            margin: 10
                         }}>
                             <View style={{
                                 flexDirection: 'row',
@@ -512,9 +530,14 @@ export default function ItemDetail({ route }) {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        {timetodecompose !== '' && (
+                        {/*{timetodecompose !== '' && (
                             <Text style={{marginLeft: 15, marginBottom: 15}}>
                                 {timetodecompose}
+                            </Text>
+                        )}*/}
+                        {decomposetime !== '' && (
+                            <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
+                                {decomposetime}
                             </Text>
                         )}
                     </View>
@@ -529,12 +552,11 @@ export default function ItemDetail({ route }) {
                     />
 
                     {/* Compostable? */}
-                    <View>
+                    <View style={{margin: 10}}>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            margin: 10
                         }}>
                             <View style={{
                                 flexDirection: 'row',
@@ -555,17 +577,19 @@ export default function ItemDetail({ route }) {
                                     <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
                                 </TouchableOpacity>
                             </View>
-                            {check && (
+                            {compostableCheck && (
                                 <Image source={itemDetailImages.greenCheck} style={{width: 30, height: 30}}/>
                             )}
-                            {cross && (
+                            {compostableCross && (
                                 <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
                             )}
                         </View>
                         {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
-                            <Text style={{marginLeft: 15, marginBottom: 15}}>
-                                {compostable}
-                            </Text>
+                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                                <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
+                                    {compostable}
+                                </Text>
+                            </Hyperlink>
                         )}
                     </View>
 
@@ -578,35 +602,49 @@ export default function ItemDetail({ route }) {
                     />
 
                     {/* Recyclable? */}
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        margin: 10
-                    }}>
+                    <View style={{margin: 10}}>
                         <View style={{
                             flexDirection: 'row',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+
                         }}>
-                            <Image source={itemDetailImages.recyclable} style={{width: 28, height: 28}}/>
-                            <Text style={{
-                                fontSize: 17,
-                                fontWeight: '500',
-                                marginLeft: 5}}>
-                                Recyclable?
-                            </Text>
-                            <TouchableOpacity
-                                onPress={()=>{
-                                    setInfoVisible(true)
-                                    setInfoShown('Recyclable')
-                                }}>
-                                <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
-                            </TouchableOpacity>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center'
+                            }}>
+                                <Image source={itemDetailImages.recyclable} style={{width: 28, height: 28}}/>
+                                <Text style={{
+                                    fontSize: 17,
+                                    fontWeight: '500',
+                                    marginLeft: 5}}>
+                                    Recyclable?
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={()=>{
+                                        setInfoVisible(true)
+                                        setInfoShown('Recyclable')
+                                    }}>
+                                    <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
+                                </TouchableOpacity>
+                            </View>
+                            {recyclableCheck && (
+                                <Image source={itemDetailImages.greenCheck} style={{width: 30, height: 30}}/>
+                            )}
+                            {recyclableCross && (
+                                <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
+                            )}
                         </View>
-                        <Text style={{color: 'red'}}>
-                            ?
-                        </Text>
+                        {!(recyclable === 'Yes' || recyclable === 'No') && recyclable !== '' && (
+                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                                <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
+                                    {recyclable}
+                                </Text>
+                            </Hyperlink>
+                        )}
+
                     </View>
+
 
                 </View>
 
@@ -619,7 +657,7 @@ export default function ItemDetail({ route }) {
                 />
 
                 {/* Simple calculator */}
-                {metricToDisplay !== null && metricToDisplay !== 'years' && (
+                {metricToDisplay !== null && (metricToDisplay === 'gallons' || metricToDisplay === 'liters') && (
                     <View style={{
                         height: calculatorHeight
                     }}>
@@ -802,10 +840,11 @@ export default function ItemDetail({ route }) {
                                 Individual Total
                             </Text>
                             {individual_total !== null && (
-                                <CalculateTotal
+                                <SimpleCalculator
                                     value={individual_total}
                                     unit={globalUnit}
                                     id={category}
+                                    individualUnit={individualUnit}
                                     type="individual"
                                 />
                             )}
@@ -819,10 +858,11 @@ export default function ItemDetail({ route }) {
                                 Yearly Total
                             </Text>
                             {individual_total !== null && (
-                                <CalculateTotal
+                                <SimpleCalculator
                                     value={individual_total * frequency_values[frequency] * quantity_values[quantity]}
                                     unit={globalUnit}
                                     id={category}
+                                    individualUnit={individualUnit}
                                     type="yearly"
                                 />
                             )}
@@ -1115,6 +1155,16 @@ export default function ItemDetail({ route }) {
                                 }}>
                                 Rain water (Green water): The amount of rainwater required
                                 to make this item
+                                {"\n\n"}
+                                These Green, Blue and Gray water statistics reflect the globally averaged Virtual Water
+                                required to make each item. Virtual Water is the total volume of water required to
+                                produce an item. Click
+                                <Text
+                                    onPress={() => {
+                                        navigation.navigate('Virtual Water')
+                                        setRainModalVisible(!rainModalVisible)
+                                    }}
+                                    style={{color: '#00ADEF'}}> Virtual Water</Text> for details.
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
@@ -1201,7 +1251,8 @@ export default function ItemDetail({ route }) {
                                 required to dilute the wastewater generated in
                                 manufacturing, in order to maintain water quality, as
                                 determined by state and local standards. Definitions:
-                                www.watercalculator.org
+                                <Text onPress={() => Linking.openURL('https://www.watercalculator.org')}
+                                      style={{color: '#00ADEF'}}>www.watercalculator.org</Text>
                             </Text>
                             <TouchableHighlight
                                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
@@ -1263,13 +1314,13 @@ export default function ItemDetail({ route }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Time to Decompose
+                                        Time to Decompose:
                                     </Text>
                                     <Text>
-                                        Times reflect average time to decompose in a landfill.
+                                        The time frames listed reflect the average time to decompose in a landfill.
                                         {"\n\n"}
                                         Rates of decomposition will vary widely based on the item, your climate,
-                                        humidity levels, and landfill conditions, such as how much dirt, air, and
+                                        moisture levels, and landfill conditions, such as how much dirt, air, and
                                         sun exposure the landfill receives. Most landfills are anaerobic (without
                                         oxygen) as they are compacted so tightly, which slows decomposition.
                                     </Text>
@@ -1314,12 +1365,28 @@ export default function ItemDetail({ route }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Compost Times
+                                        Compost Times:
                                     </Text>
                                     <Text>
-                                        Compost times will vary based on many factors including: how wet your pile is,
-                                        how hot your compost runs, how often your turn it, airation...
+                                        Compost times will vary based on many factors including the temperature of the
+                                        pile, the moisture content of the pile, how often you turn it and how much
+                                        air the pile gets (aeration), the surface area of the pile, the concentration of
+                                        carbon and nitrogen in the organic material, and the volume of material being
+                                        composted.
+                                        {'\n\n'}
+                                        <Hyperlink
+                                            linkDefault={ true }
+                                            linkStyle={ { color: '#00ADEF' } }
+                                            linkText={ url => url === 'https://growensemble.com/benefits-of-composting/' ?
+                                                '15 Benefits of Composting' : url }
+                                        >
+                                            <Text style={ { } }>
+                                                Composting reduces methane emissions from landfills and lowers your carbon
+                                                footprint. Here's https://growensemble.com/benefits-of-composting/
+                                            </Text>
+                                        </Hyperlink>
                                     </Text>
+
                                 </View>
                             </View>
                         )}
@@ -1361,15 +1428,18 @@ export default function ItemDetail({ route }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Recycle Information
+                                        Recycle Information:
                                     </Text>
                                     <Text>
-                                        Always check what your local Recycle Center  accepts. What one Center accepts
+                                        Always check what your local Recycle Center accepts. What one Center accepts
                                         can be completely different from another, even in the same city.
                                         {"\n\n"}
-                                        The technical capabilities of your Recycle Center and the ever-changing
-                                        marketplace that renders items recyclable from one day to the next are driving
-                                        forces that determine what can can, and cannot be recycled.
+                                        There’s more to recycling than just plastics, but get to know what types of
+                                        plastic (numbered 1-7) your Recycle Center accepts.
+                                        {"\n\n"}
+                                        Know that the technical capabilities of your Recycle Center and the ever-changing
+                                        marketplace that renders items recyclable from one day to the next, are driving
+                                        forces that determine what can and cannot be recycled.
                                     </Text>
                                 </View>
                             </View>
