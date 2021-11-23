@@ -275,7 +275,7 @@ const landingdetails = () => {
                     name="MLTool"
                     component={camerascreenScreen}
                     options={({route})=>({
-                        tabBarLabel: 'Camera',
+                        tabBarLabel: 'Eco-Cam',
                         tabBarVisible: ((route) => {
                             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
                             return routeName === "Confirm" || routeName === "Detail";
