@@ -9,6 +9,7 @@ import {
     View
 } from "react-native";
 import {Divider, Button} from "react-native-paper";
+import Hyperlink from 'react-native-hyperlink';
 import {Card,} from 'react-native-ui-lib';
 import firebase from "firebase";
 import React, {useEffect, useState} from "react";
@@ -584,9 +585,11 @@ export default function ItemDetail({ route, navigation }) {
                             )}
                         </View>
                         {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
-                            <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
-                                {compostable}
-                            </Text>
+                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                                <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
+                                    {compostable}
+                                </Text>
+                            </Hyperlink>
                         )}
                     </View>
 
@@ -633,9 +636,11 @@ export default function ItemDetail({ route, navigation }) {
                             )}
                         </View>
                         {!(recyclable === 'Yes' || recyclable === 'No') && recyclable !== '' && (
-                            <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
-                                {recyclable}
-                            </Text>
+                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                                <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
+                                    {recyclable}
+                                </Text>
+                            </Hyperlink>
                         )}
 
                     </View>
@@ -1309,13 +1314,13 @@ export default function ItemDetail({ route, navigation }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Time to Decompose
+                                        Time to Decompose:
                                     </Text>
                                     <Text>
-                                        Times reflect average time to decompose in a landfill.
+                                        The time frames listed reflect the average time to decompose in a landfill.
                                         {"\n\n"}
                                         Rates of decomposition will vary widely based on the item, your climate,
-                                        humidity levels, and landfill conditions, such as how much dirt, air, and
+                                        moisture levels, and landfill conditions, such as how much dirt, air, and
                                         sun exposure the landfill receives. Most landfills are anaerobic (without
                                         oxygen) as they are compacted so tightly, which slows decomposition.
                                     </Text>
@@ -1360,12 +1365,28 @@ export default function ItemDetail({ route, navigation }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Compost Times
+                                        Compost Times:
                                     </Text>
                                     <Text>
-                                        Compost times will vary based on many factors including: how wet your pile is,
-                                        how hot your compost runs, how often your turn it, airation...
+                                        Compost times will vary based on many factors including the temperature of the
+                                        pile, the moisture content of the pile, how often you turn it and how much
+                                        air the pile gets (aeration), the surface area of the pile, the concentration of
+                                        carbon and nitrogen in the organic material, and the volume of material being
+                                        composted.
+                                        {'\n\n'}
+                                        <Hyperlink
+                                            linkDefault={ true }
+                                            linkStyle={ { color: '#00ADEF' } }
+                                            linkText={ url => url === 'https://growensemble.com/benefits-of-composting/' ?
+                                                '15 Benefits of Composting' : url }
+                                        >
+                                            <Text style={ { } }>
+                                                Composting reduces methane emissions from landfills and lowers your carbon
+                                                footprint. Here's https://growensemble.com/benefits-of-composting/
+                                            </Text>
+                                        </Hyperlink>
                                     </Text>
+
                                 </View>
                             </View>
                         )}
@@ -1407,15 +1428,18 @@ export default function ItemDetail({ route, navigation }) {
                                     padding: 15
                                 }}>
                                     <Text style={{fontWeight: '500'}}>
-                                        Recycle Information
+                                        Recycle Information:
                                     </Text>
                                     <Text>
-                                        Always check what your local Recycle Center  accepts. What one Center accepts
+                                        Always check what your local Recycle Center accepts. What one Center accepts
                                         can be completely different from another, even in the same city.
                                         {"\n\n"}
-                                        The technical capabilities of your Recycle Center and the ever-changing
-                                        marketplace that renders items recyclable from one day to the next are driving
-                                        forces that determine what can can, and cannot be recycled.
+                                        There’s more to recycling than just plastics, but get to know what types of
+                                        plastic (numbered 1-7) your Recycle Center accepts.
+                                        {"\n\n"}
+                                        Know that the technical capabilities of your Recycle Center and the ever-changing
+                                        marketplace that renders items recyclable from one day to the next, are driving
+                                        forces that determine what can and cannot be recycled.
                                     </Text>
                                 </View>
                             </View>
