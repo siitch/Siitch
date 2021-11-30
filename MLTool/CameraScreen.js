@@ -116,7 +116,7 @@ export default function CameraScreen({navigation}) {
             ]
           );
           navigation.goBack(null); // Block user from entering this screen if permission not granted.
-        } else {
+        } else if(isFocused && !granted && !visited) {
           setVisited(true); // App will lead user to setting next time if permission is not granted.
           navigation.goBack(null); // Block user from entering this screen if permission not granted for the first time.
         }
