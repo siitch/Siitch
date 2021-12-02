@@ -23,7 +23,7 @@ export const About = ({ navigation }) => {
           textAlign: 'center',
           marginTop: 30,
         }}>
-        How We Started 
+        How We Started
       </Text>
       <Text
         style={{
@@ -33,10 +33,10 @@ export const About = ({ navigation }) => {
           marginTop: 20,
           marginRight: '7%',
         }}>
-         Siitch started as a Party Tool to help people save money 
-         and reduce food waste. People were achieving both (see below), 
+         Siitch started as a Party Tool to help people save money
+         and reduce food waste. People were achieving both (see below),
          but they were curious about their environmental impact.
-         {'\n'}{'\n'}Per feedback, we’re seeing if a simple app like this, 
+         {'\n'}{'\n'}Per feedback, we’re seeing if a simple app like this,
          in addition to the party tool, can help you make a greater impact.
       </Text>
       <View
@@ -50,12 +50,12 @@ export const About = ({ navigation }) => {
               justifyContent: 'center',
               marginTop: 35,
               marginLeft: '7%',
-            }}> 
+            }}>
             <Text style={{fontSize: 17.5, color: 'white', fontWeight: 'bold', marginLeft: '3%', marginRight: '15%'}}>
             {'\n'}
             We cannot solve the climate crisis by being ‘good’ consumers. {'\n'}
             But we absolutely can make things much better by being good citizens. {'\n'}
-            
+
             {'\n'} <Text style={{fontWeight: 'bold',}}>- Emma Marris {'\n'}
             (Contributer, National Geographic)</Text>{' '}
             {'\n'}</Text>
@@ -87,15 +87,15 @@ export const About = ({ navigation }) => {
           marginTop: 40,
           marginRight: '7%',
         }}>
-         Every time you open your wallet, you get to vote. 
-         Our hope is by shedding light on the environmental cost of items, 
-         you can make the decision that’s right for your siitch-uation, 
+         Every time you open your wallet, you get to vote.
+         Our hope is by shedding light on the environmental cost of items,
+         you can make the decision that’s right for your siitch-uation,
          and the planet.
         {'\n'}{'\n'}
-        Like Kelly below when she used the party tool, 
-        she knew exactly how much to buy, and she knew what NOT to buy. 
-        That helped her save $145 and reduce food waste. 
-        It also helped reduce her event’s environmental footprint by over 
+        Like Kelly below when she used the party tool,
+        she knew exactly how much to buy, and she knew what NOT to buy.
+        That helped her save $145 and reduce food waste.
+        It also helped reduce her event’s environmental footprint by over
         12,000 gallons of water.
       </Text>
       <Text
@@ -130,7 +130,7 @@ export const About = ({ navigation }) => {
           textAlign: 'center',
           marginTop: 50,
         }}>
-        Your Voice Matters 
+        Your Voice Matters
       </Text>
       <Text
         style={{
@@ -147,22 +147,24 @@ export const About = ({ navigation }) => {
       </Text>
       <TouchableOpacity
         style={{
-            alignItems: "center",
             backgroundColor: "#70BF41",
-            flexDirection: 'row',
             borderRadius: 30,
-            borderWidth: 3,
-            borderColor: '#70BF41',
-            alignItems: 'center',
-            marginLeft: '15%',
-            marginRight: '15%',
+            width: width / 2,
+            height: 50,
             marginBottom: '5%',
             justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
         }}
         onPress={() => navigation.navigate('Feedback')}
         >
-            <Text style={{fontSize: 20,fontWeight: 'bold', color: 'white', textAlign: 'center', marginTop: '7%'}}>
-              FEEDBACK {'\n'}
+            <Text style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center'
+            }}>
+              FEEDBACK
             </Text>
         </TouchableOpacity>
         <Text
@@ -172,7 +174,7 @@ export const About = ({ navigation }) => {
           textAlign: 'center',
           marginTop: 25,
         }}>
-        Contact Us 
+        Contact Us
       </Text>
       <Text
         style={{
