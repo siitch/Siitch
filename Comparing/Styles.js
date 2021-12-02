@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   searchBarContainerStyle: {
     marginBottom: 10,
     flexDirection: "row",
-    height: 40,
+    height: 60,
     shadowOpacity: 1.0,
     shadowRadius: 5,
     shadowOffset: {
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   calculateLabelTextStyle: {
     color: "#000",
