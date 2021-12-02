@@ -379,7 +379,7 @@ export const comparePage = ({route}) => {
         let prod3Val = selectedcategory3.localeCompare('Time to decompose') != 0 ? parseInt(f3[selectedcategory3]*prod3Total) : Number.MAX_VALUE;
         let prod4Val = selectedcategory4.localeCompare('Time to decompose') != 0 ? parseInt(f4[selectedcategory4]*prod4Total) : Number.MAX_VALUE;
         let prod5Val = selectedcategory5.localeCompare('Time to decompose') != 0 ? parseInt(f5[selectedcategory5]*prod5Total) : Number.MAX_VALUE;
-        let prod6Val = selectedcategory6.localeCompare('Time to decompose') != 0 ? parseInt(f6[selectedcategory6]*prod1Total) : Number.MAX_VALUE;
+        let prod6Val = selectedcategory6.localeCompare('Time to decompose') != 0 ? parseInt(f6[selectedcategory6]*prod6Total) : Number.MAX_VALUE;
 
         if(prod3 && !prod4 && !prod5 && !prod6) {
             return Math.min(prod1Val, prod2Val, prod3Val);
@@ -565,7 +565,7 @@ export const comparePage = ({route}) => {
                                 /> }
                                 <Text style={selectedcategory1.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f1[selectedcategory1])*prod1Total)} {f1[selectedmetrictodisplay]}</Text>
                             </View>
-                            <Text style={styles.textFormatCompare}>{f1[selectedmeasurement]}</Text>
+                            <Text style={styles.textFormatCompare}>{prod1Total == 1 ? f1[selectedmeasurement] : "total"}</Text>
                             <Text style={styles.textFormatCompare}>{f1[selectedsize]}</Text>
                         </View>
                         <View center style={getTextStyle(parseInt(f2[selectedcategory2]*prod2Total), getMinValue())}>
@@ -590,7 +590,7 @@ export const comparePage = ({route}) => {
                                 /> }
                                 <Text style={selectedcategory2.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f2[selectedcategory2])*prod2Total)} {f2[selectedmetrictodisplay]}</Text>
                             </View>
-                            <Text style={styles.textFormatCompare}>{f2[selectedmeasurement]}</Text>
+                            <Text style={styles.textFormatCompare}>{prod2Total == 1 ? f2[selectedmeasurement] : "total"}</Text>
                             <Text style={styles.textFormatCompare}>{f2[selectedsize]}</Text>
                         </View>
                     </View>
@@ -621,7 +621,7 @@ export const comparePage = ({route}) => {
                                         /> }
                                         <Text style={selectedcategory3.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f3[selectedcategory3])*prod3Total)} {f3[selectedmetrictodisplay]}</Text>
                                     </View>
-                                    <Text style={styles.textFormatCompare}>{f3[selectedmeasurement]}</Text>
+                                    <Text style={styles.textFormatCompare}>{prod3Total == 1 ? f3[selectedmeasurement] : "total"}</Text>
                                     <Text style={styles.textFormatCompare}>{f3[selectedsize]}</Text>
                                 </View>
                             }
@@ -651,7 +651,7 @@ export const comparePage = ({route}) => {
                                         /> }
                                         <Text style={selectedcategory4.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f4[selectedcategory4])*prod4Total)} {f4[selectedmetrictodisplay]}</Text>
                                     </View>
-                                    <Text style={styles.textFormatCompare}>{f4[selectedmeasurement]}</Text>
+                                    <Text style={styles.textFormatCompare}>{prod4Total == 1 ? f4[selectedmeasurement] : "total"}</Text>
                                     <Text style={styles.textFormatCompare}>{f4[selectedsize]}</Text>
                                 </View>
                             }
@@ -684,7 +684,7 @@ export const comparePage = ({route}) => {
                                         /> }
                                         <Text style={selectedcategory5.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f5[selectedcategory5])*prod5Total)} {f6[selectedmetrictodisplay]}</Text>
                                     </View>
-                                    <Text style={styles.textFormatCompare}>{f5[selectedmeasurement]}</Text>
+                                    <Text style={styles.textFormatCompare}>{prod5Total == 1 ? f5[selectedmeasurement] : "total"}</Text>
                                     <Text style={styles.textFormatCompare}>{f5[selectedsize]}</Text>
                                 </View>
                             }
@@ -714,7 +714,7 @@ export const comparePage = ({route}) => {
                                         /> }
                                         <Text style={selectedcategory6.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f6[selectedcategory6])*prod6Total)} {f6[selectedmetrictodisplay]}</Text>
                                     </View>
-                                    <Text style={styles.textFormatCompare}>{f6[selectedmeasurement]}</Text>
+                                    <Text style={styles.textFormatCompare}>{prod6Total == 1 ? f6[selectedmeasurement] : "total"}</Text>
                                     <Text style={styles.textFormatCompare}>{f6[selectedsize]}</Text>
                                 </View>
                             }
