@@ -1,3 +1,4 @@
+
 import React, {useState,setState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
@@ -19,6 +20,7 @@ import firebase from 'firebase';
 import {CalculateTotal} from './CalculateTotal';
 import RNPicker from 'rn-modal-picker';
 import { cos } from 'react-native-reanimated';
+import { screensEnabled } from 'react-native-screens';
 
 // var pages=[];
 var itemNameList=[];
@@ -28,6 +30,11 @@ var itemCostList=[];
 var itemCostLList=[];
 var itemYearlyCostList=[];
 var itemYearlyLCostList=[];
+var itemUnitList = [];
+var itemMeasurementListL = [];
+var itemMeasurementListG = [];
+var itemIndividualUnitListL = [];
+var itemIndividualUnitListG = [];
 
 var itemName;
 var itemQuantity;
@@ -36,6 +43,11 @@ var itemCost;
 var itemCostL;
 var itemYearlyCost;
 var itemYearlyLCost;
+var itemUnit;
+var itemMeasurementL = [];
+var itemMeasurementG = [];
+var itemIndividualUnitL =[];
+var itemIndividualUnitG =[];
 
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -82,6 +94,7 @@ function CalculateScreen() {
 
     var individual_sum = 0;
 
+    const [focusHeight,setFocusHeight] = useState(0);
     const [pages,setPages] = useState([]);
     const [frequency, setFrequency] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -181,6 +194,11 @@ function CalculateScreen() {
         setYearlyCostLTotal(yearlyCostLTotal-itemYearlyLCostList[index])
 
         itemNameList.splice(index,1);
+        itemMeasurementListG.splice(index,1);
+        itemMeasurementListL.splice(index,1);
+        itemIndividualUnitListG.splice(index,1);
+        itemIndividualUnitListL.splice(index,1);
+        itemUnitList.splice(index,1);
         itemCostList.splice(index,1);
         itemCostLList.splice(index,1);
         itemFrequencyList.splice(index,1);
@@ -188,12 +206,20 @@ function CalculateScreen() {
         itemYearlyCostList.splice(index,1);
         itemYearlyLCostList.splice(index,1);
 
+        if(itemNameList.length ===0)
+            setShowlist(false);
+
         updateYearlyCostTotal();
         updateMixCostTotal();
 
 
         console.log("mixCostTotal",mixCostTotal);
         console.log("itemNameList",itemNameList)
+        console.log("itemMeasurementListL",itemMeasurementListL)
+        console.log("itemMeasurementListG",itemMeasurementListG)
+        console.log("itemIndividualUnitListG",itemIndividualUnitListG)
+        console.log("itemIndividualUnitListL",itemIndividualUnitListL)
+        console.log("itemUnitList",itemUnitList)
         console.log("itemQuantityList",itemQuantityList)
         console.log("itemFrequencyList",itemFrequencyList)
         console.log("itemCostList",itemCostList)
@@ -241,6 +267,10 @@ function CalculateScreen() {
 
                 if (item in fetchedData) {
                     id = fetchedData[item]['Category'];
+                    itemMeasurementL = fetchedData[item]['Measurement L'];
+                    itemMeasurementG = fetchedData[item]['Measurement1'];
+                    itemIndividualUnitG = fetchedData[item]['Individiual Unit Gal'];
+                    itemIndividualUnitL = fetchedData[item]['Individiual Unit L'];
                 }
                 itemName=item;
 
@@ -258,10 +288,12 @@ function CalculateScreen() {
                     setIndividualTotal(fetchedData[item][waterParameter(id,'G')]);
                     itemCost=fetchedData[item][waterParameter(id,'G')];
                     itemCostL=fetchedData[item][waterParameter(id,'L')];
+                    itemUnit=waterParameter(id,'G')
+                    console.log("id",id)
                     console.log("waterParameter(id,'G')",waterParameter(id,'G'))
+                    console.log("waterParameter(id,'L')",waterParameter(id,'L'))
                     console.log("itemCost",itemCost)
                     console.log("itemCostL",itemCostL)
-                    console.log("id",id)
                     console.log("item",item)
                     addtoList(fetchedData[item][waterParameter(id,'G')]);
                     setError({status: false, message: ''});
@@ -305,15 +337,25 @@ function CalculateScreen() {
         individual_sum = individual_sum + cost;
     }
 
+    clickToScroll =() =>
+    {
+        this._scrollView.scrollTo({y:600,animated: true});
+    }
+
     const clearElements = () => {
         setComputed(false);
         setInputValue('');
         setItem('');
         setIndividualTotal(null);
         setShowlist(false);
-
-
+        setFrequency(null);
+        setQuantity(null);
         itemNameList=[];
+        itemMeasurementListG = [];
+        itemMeasurementListL = [];
+        itemIndividualUnitListG=[];
+        itemIndividualUnitListL=[];
+        itemUnitList=[];
         itemQuantityList=[];
         itemFrequencyList=[];
         itemCostList=[];
@@ -332,7 +374,7 @@ function CalculateScreen() {
     };
 
     return (
-        <ScrollView style={{backgroundColor: 'white'}}>
+        <ScrollView ref={view => this._scrollView = view} style={{backgroundColor: 'white'}}>
             <View style={{flexDirection: 'row'}}>
                 <View
                     style={{
@@ -351,15 +393,6 @@ function CalculateScreen() {
                         onPress={() => {
                             setUnitG(true);
                             setUnit('G');
-                            if (individual_total) {
-                                setIndividualTotal(
-                                    fetchedData[item][
-                                        id === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'
-                                        ],
-                                );
-                            } else {
-                                calculate(item, frequency,quantity);
-                            }
                         }}>
                         <Text
                             style={{
@@ -376,15 +409,6 @@ function CalculateScreen() {
                         onPress={() => {
                             setUnit('L');
                             setUnitG(false);
-                            if (individual_total) {
-                                setIndividualTotal(
-                                    fetchedData[item][
-                                        id === 'EDI' ? 'Single item   L' : 'Global Liters p kg'
-                                        ],
-                                );
-                            } else {
-                                calculate(item, frequency,quantity);
-                            }
                         }}>
                         <Text
                             style={{
@@ -404,7 +428,7 @@ function CalculateScreen() {
                             fontSize: 30,
                             marginTop: '21%',
                             paddingTop: 30,
-                            paddingLeft: 50,
+                            paddingLeft: '12%',
                             paddingRight: 10,
                             paddingBottom: 10,
                         }}>
@@ -415,15 +439,13 @@ function CalculateScreen() {
             <View style={styles.rankingPage}>
                 <Image
                     style={{
-                        width: 100,
-                        height: 100,
-                        marginLeft: DeviceWidth * 0.38,
+                        width: 150,
+                        height: 150,
+                        marginLeft: DeviceWidth * 0.3,
                         marginTop: 20,
                         marginBottom: 30,
                     }}
-                    source={
-                        computed && Profiles[item] ? Profiles[item] : Profiles.calculator
-                    }
+                    source={require('./../images/Calculator_two_leaves.png')}
                     resizeMode="contain"
                 />
                 <View style={{alignItems: 'center'}}>
@@ -466,7 +488,6 @@ function CalculateScreen() {
                     </View>
                     <View style={{flexDirection: 'row',
                         justifyContent: 'space-between',
-
                         marginLeft:20,
                         marginRight:20}}>
                         <View style={{marginRight:50}}>
@@ -504,7 +525,7 @@ function CalculateScreen() {
                                     textAlign: 'center',
                                     fontSize: 20,
                                 }}
-                                defaultNull
+                                defaultValue={quantity}
                                 containerStyle={{
                                     height: 60,
                                     borderRadius: 20,
@@ -523,12 +544,14 @@ function CalculateScreen() {
                                 dropDownStyle={{
                                     backgroundColor: 'white',
                                     width: DeviceWidth * 0.35,
+                                    height:180,
                                     marginTop: 10,
                                     borderBottomLeftRadius: 20,
                                     borderBottomRightRadius: 20,
                                     borderWidth: 2,
                                     borderColor: '#80CAFF',
                                 }}
+                                dropDownMaxHeight={250}
                                 onChangeItem={(currentQuantity) => {
                                     setComputed(false);
                                     itemQuantity=currentQuantity.label;
@@ -569,7 +592,7 @@ function CalculateScreen() {
                                     textAlign: 'center',
                                     fontSize: 20,
                                 }}
-                                defaultNull
+                                defaultValue={frequency}
                                 containerStyle={{
                                     height: 60,
                                     borderRadius: 20,
@@ -589,11 +612,13 @@ function CalculateScreen() {
                                     backgroundColor: 'white',
                                     width: DeviceWidth * 0.35,
                                     marginTop: 10,
+                                    height:180,
                                     borderBottomLeftRadius: 20,
                                     borderBottomRightRadius: 20,
                                     borderWidth: 2,
                                     borderColor: '#80CAFF',
                                 }}
+                                dropDownMaxHeight={250}
                                 onChangeItem={(currentFrequency) => {
                                     setComputed(false);
                                     itemFrequency=currentFrequency.value;
@@ -783,12 +808,34 @@ function CalculateScreen() {
                             }}>
                             Individual Total
                         </Text>
-                        <CalculateTotal
-                            value={individual_total}
-                            unit={unit}
-                            id={id}
-                            type="individual"
-                        />
+
+                        {unitG && (<Text style={{
+                            borderColor: '#80CAFF',
+                            marginTop: 10,
+                            height: 50,
+                            borderWidth: 2,
+                            borderRadius: 20,
+                            width: DeviceWidth * 0.9,
+                            textAlign: 'center',
+                            fontSize: 20,
+                            paddingTop: 10,
+                            fontWeight: 'bold',
+                        }}>
+                            {numberWithCommas(itemCost)} {itemIndividualUnitG}
+                        </Text>)}
+
+                        {!unitG && (<Text style={{
+                            borderColor: '#80CAFF',
+                            marginTop: 10,
+                            height: 50,
+                            borderWidth: 2,
+                            borderRadius: 20,
+                            width: DeviceWidth * 0.9,
+                            textAlign: 'center',
+                            fontSize: 20,
+                            paddingTop: 10,
+                            fontWeight: 'bold',
+                        }}>{numberWithCommas(itemCostL)} {itemIndividualUnitL}</Text>)}
                         <Text
                             style={{
                                 fontSize: 25,
@@ -798,12 +845,34 @@ function CalculateScreen() {
                             }}>
                             Yearly Total
                         </Text>
-                        <CalculateTotal
-                            value={individual_total * frequency_values[frequency]*Quantity_values[quantity]}
-                            unit={unit}
-                            id={id}
-                            type="yearly"
-                        />
+                        {unitG && (<Text style={{
+                            borderColor: '#80CAFF',
+                            marginTop: 10,
+                            height: 50,
+                            borderWidth: 2,
+                            borderRadius: 20,
+                            width: DeviceWidth * 0.9,
+                            textAlign: 'center',
+                            fontSize: 20,
+                            paddingTop: 10,
+                            fontWeight: 'bold',
+                        }}>
+                            {numberWithCommas(itemCost* frequency_values[frequency]*Quantity_values[quantity])} gal.
+                        </Text>)}
+
+                        {!unitG && (<Text style={{
+                            borderColor: '#80CAFF',
+                            marginTop: 10,
+                            height: 50,
+                            borderWidth: 2,
+                            borderRadius: 20,
+                            width: DeviceWidth * 0.9,
+                            textAlign: 'center',
+                            fontSize: 20,
+                            paddingTop: 10,
+                            fontWeight: 'bold',
+                        }}>{numberWithCommas(itemCostL* frequency_values[frequency]*Quantity_values[quantity])} L.</Text>)}
+
                     </View>
                 )}
 
@@ -814,7 +883,7 @@ function CalculateScreen() {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        marginTop: selectOpened ? 160 : 20,
+                        marginTop: selectOpened ? 200 : 20,
                         marginBottom: 10,
                     }}>
 
@@ -915,7 +984,7 @@ function CalculateScreen() {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        marginTop: selectOpened ? 160 : 20,
+                        marginTop: selectOpened ? 200 : 20,
                         marginBottom: 20,
                     }}>
                     {computed && (
@@ -961,6 +1030,11 @@ function CalculateScreen() {
 
                                     //Add those
                                     itemNameList.push(itemName);
+                                    itemMeasurementListG.push(itemMeasurementG);
+                                    itemMeasurementListL.push(itemMeasurementL);
+                                    itemIndividualUnitListL.push(itemIndividualUnitL);
+                                    itemIndividualUnitListG.push(itemIndividualUnitG);
+                                    itemUnitList.push(itemUnit);
                                     itemFrequencyList.push(frequency);
                                     itemQuantityList.push(quantity);
                                     itemCostList.push(itemCost);
@@ -975,12 +1049,16 @@ function CalculateScreen() {
                                     setYearlyCostLTotal(yearlyCostLTotal+itemYearlyLCost);
                                     setMixCostTotal(mixCostTotal+itemCost*Quantity_values[quantity]);
                                     setMixCostLTotal(mixCostLTotal+itemCostL*Quantity_values[quantity]);
-
+                                    setItem('');
+                                    setFrequency(null)
+                                    setQuantity(null)
+                                    clickToScroll();
                                     console.log("---------")
                                     console.log("itemCost",itemCost)
                                     console.log("itemQuantity",quantity)
                                     console.log("itemFrequency",frequency)
                                     console.log("itemNameList",itemNameList)
+                                    console.log("itemUnitList",itemUnitList)
                                     console.log("itemQuantityList",itemQuantityList)
                                     console.log("itemFrequencyList",itemFrequencyList)
                                     console.log("itemCostList",itemCostList)
@@ -1016,6 +1094,7 @@ function CalculateScreen() {
                 </View>
 
                 {showlist && (
+
                     <View style={{flexDirection: 'row',
                         justifyContent: 'space-between',
                         backgroundColor: 'rgba(198, 198, 198, 0.2)',
@@ -1047,9 +1126,9 @@ function CalculateScreen() {
                                         Profiles[itemNameList[index]]
                                     }
                                 />
-                                <Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]}</Text>
-                                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>p/lb</Text>)}
-                                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>p/kg</Text>)}
+
+                                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListG[index]}</Text>)}
+                                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListL[index]}</Text>)}
                             </View>
 
                             <View style={{flexDirection: 'row',
@@ -1108,12 +1187,14 @@ function CalculateScreen() {
                                                     backgroundColor: 'white',
                                                     opacity: 1,
                                                     width: DeviceWidth * 0.2,
+                                                    height:180,
                                                     marginTop: 0,
                                                     borderBottomLeftRadius: 20,
                                                     borderBottomRightRadius: 20,
                                                     borderWidth: 2,
                                                     borderColor: '#80CAFF',
                                                 }}
+                                                dropDownMaxHeight={250}
                                                 setValue={itemQuantityList[i]}
 
                                                 onChangeItem={(currentQuantity) => {
@@ -1177,6 +1258,7 @@ function CalculateScreen() {
                                                 dropDownStyle={{
                                                     backgroundColor: 'white',
                                                     width: DeviceWidth * 0.2,
+                                                    height: 180,
                                                     marginLeft:10,
                                                     marginTop: 0,
                                                     borderBottomLeftRadius: 20,
@@ -1184,6 +1266,7 @@ function CalculateScreen() {
                                                     borderWidth: 2,
                                                     borderColor: '#80CAFF',
                                                 }}
+                                                dropDownMaxHeight={250}
                                                 onChangeItem={(currentFrequency) => {
                                                     itemFrequencyList[index]=currentFrequency.value;
                                                     itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
@@ -1220,7 +1303,7 @@ function CalculateScreen() {
                                 style={{
                                     borderBottomColor: 'rgba(0, 0, 0, 0.2)',
                                     borderBottomWidth: 1,
-                                    marginTop: (sOpened&&itemOpenList[index]) ? 160 : 1,
+                                    marginTop: (sOpened&&itemOpenList[index]) ? 200 : 1,
                                 }}
                             />
                         </View>);
@@ -1234,7 +1317,7 @@ function CalculateScreen() {
                         <View
                             style={{
                                 flexDirection: 'row',
-                                borderColor: '#00ADEF',
+                                borderColor: '#80CAFF',
                                 marginLeft:'3%',
                                 borderWidth: 2,
                                 marginTop: 10,
@@ -1249,15 +1332,13 @@ function CalculateScreen() {
                                 onPress={() => {
                                     setUnit('G');
                                     setUnitG(true);
-                                    if (individual_total) {
-                                        setIndividualTotal(
-                                            fetchedData[item][
-                                                id === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'
-                                                ],
-                                        );
-                                    } else {
-                                        calculate(item, frequency,quantity);
-                                    }
+                                    // if (individual_total) {
+                                    //   setIndividualTotal(
+                                    //     fetchedData[item][waterParameter(id,'G')],
+                                    //   );
+                                    // } else {
+                                    //   calculate(item, frequency,quantity);
+                                    // }
                                 }}>
                                 <Text
                                     style={{
@@ -1274,15 +1355,13 @@ function CalculateScreen() {
                                 onPress={() => {
                                     setUnit('L');
                                     setUnitG(false);
-                                    if (individual_total) {
-                                        setIndividualTotal(
-                                            fetchedData[item][
-                                                id === 'EDI' ? 'Single item   L' : 'Global Liters p kg'
-                                                ],
-                                        );
-                                    } else {
-                                        calculate(item, frequency,quantity);
-                                    }
+                                    // if (individual_total) {
+                                    //   setIndividualTotal(
+                                    //     fetchedData[item][waterParameter(id,'L')],
+                                    //   );
+                                    // } else {
+                                    //   calculate(item, frequency,quantity);
+                                    // }
                                 }}>
                                 <Text
                                     style={{
@@ -1358,12 +1437,14 @@ function CalculateScreen() {
                                         dropDownStyle={{
                                             backgroundColor: 'white',
                                             width: DeviceWidth * 0.8,
+                                            height: 180,
                                             marginTop: 5,
                                             borderBottomLeftRadius: 20,
                                             borderBottomRightRadius: 20,
                                             borderWidth: 2,
                                             borderColor: '#80CAFF',
                                         }}
+                                        dropDownMaxHeight={250}
                                         onChangeItem={(currentUnit) => {
                                             updateReallyOutput(currentUnit.value)
                                         }}
@@ -1382,8 +1463,8 @@ function CalculateScreen() {
                                 style={{width: 30, height: 30, marginTop:25}}
                                 source={require('./../images/water_drop_150px_wide2.png')}
                             />
-                            {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-                            {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 160 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
+                            {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                            {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
                         </View>
 
                     </View>
