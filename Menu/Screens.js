@@ -198,9 +198,9 @@ export const MenuMain = ({ navigation }) => {
               marginTop: 40,
               marginLeft: '5%',
               marginRight: '5%',
-            }}> 
+            }}>
             <Text style={{fontSize: 18, color: 'black', margin: '5%',}}>
-            Dear Environmentalists,
+                Hi there,
             {'\n'}{'\n'}
             This is an early release, so we'd love your thoughts
             on how to improve it. Share your ideas by clicking our <Text
