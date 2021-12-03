@@ -30,24 +30,21 @@ var itemCostList=[];
 var itemCostLList=[];
 var itemYearlyCostList=[];
 var itemYearlyLCostList=[];
-var itemUnitList = [];
 var itemMeasurementListL = [];
 var itemMeasurementListG = [];
 var itemIndividualUnitListL = [];
 var itemIndividualUnitListG = [];
 
 var itemName;
-var itemQuantity;
-var itemFrequency;
 var itemCost;
 var itemCostL;
 var itemYearlyCost;
 var itemYearlyLCost;
-var itemUnit;
 var itemMeasurementL = [];
 var itemMeasurementG = [];
 var itemIndividualUnitL =[];
 var itemIndividualUnitG =[];
+var loading = false;
 
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -105,7 +102,6 @@ function CalculateScreen() {
   const [selectOpened, setSelect] = useState(false);
   const [sOpened,setSelectopen] = useState(false);
   const [sOutputOpened,setOutputOpened] = useState(false);
-  const [individual_total, setIndividualTotal] = useState();
   const [error, setError] = useState({status: false, message: ''});
   const [modalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -113,6 +109,7 @@ function CalculateScreen() {
   const [unitG,setUnitG] = useState(true);
   const [reallyOutputs,setReallyOutput] = useState(0);
   const [reallyLOutputs,setReallyLOutput] = useState(0);
+  const [showAnotherRunningtotal,setShowAnotherRunningtotal] = useState(false);
 
   var [yearlyCostTotal, setYearlyCostTotal] = useState(0);
   var [mixCostTotal, setMixCostTotal] = useState(0); 
@@ -136,8 +133,8 @@ function CalculateScreen() {
     }
     else if(currentUnit=="weekly")
     {
-      setReallyOutput(~~(yearlyCostTotal/56));
-      setReallyLOutput(~~(yearlyCostLTotal/56));
+      setReallyOutput(~~(yearlyCostTotal/365)*7);
+      setReallyLOutput(~~(yearlyCostLTotal/365)*7);
     }
     else
     {
@@ -152,7 +149,11 @@ function CalculateScreen() {
     for(var i=0;i<itemYearlyCostList.length;i++)
     {
       sum+=itemYearlyCostList[i];
+      // console.log("itemQuantity",itemQuantityList[i])
+      // console.log("itemFrequency",itemFrequencyList[i])
+      // console.log("itemYearlyCost",itemYearlyCostList[i]);
       sumL+=itemYearlyLCostList[i];
+      // console.log("sum",sum);
     }
     setYearlyCostTotal(sum);
     setYearlyCostLTotal(sumL);
@@ -198,7 +199,6 @@ function CalculateScreen() {
     itemMeasurementListL.splice(index,1);
     itemIndividualUnitListG.splice(index,1);
     itemIndividualUnitListL.splice(index,1);
-    itemUnitList.splice(index,1);
     itemCostList.splice(index,1);
     itemCostLList.splice(index,1);
     itemFrequencyList.splice(index,1);
@@ -209,21 +209,14 @@ function CalculateScreen() {
     if(itemNameList.length ===0)
       setShowlist(false);
 
+    if(itemNameList.length ===0)
+      clearElements();
+
+    if(itemNameList.length ===0)
+      setShowAnotherRunningtotal(false);
+
     updateYearlyCostTotal();
     updateMixCostTotal();
-
-
-    console.log("mixCostTotal",mixCostTotal);
-    console.log("itemNameList",itemNameList)
-    console.log("itemMeasurementListL",itemMeasurementListL)
-    console.log("itemMeasurementListG",itemMeasurementListG)
-    console.log("itemIndividualUnitListG",itemIndividualUnitListG)
-    console.log("itemIndividualUnitListL",itemIndividualUnitListL)
-    console.log("itemUnitList",itemUnitList)
-    console.log("itemQuantityList",itemQuantityList)
-    console.log("itemFrequencyList",itemFrequencyList)
-    console.log("itemCostList",itemCostList)
-    console.log("itemCostLList",itemCostLList)
     upgradePages();
   }
 
@@ -248,7 +241,7 @@ function CalculateScreen() {
 
   fetchList();
 
-  const fetchData = (item) => {
+  const fetchData = () => {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
@@ -267,8 +260,8 @@ function CalculateScreen() {
 
         if (item in fetchedData) {
           id = fetchedData[item]['Category'];
-          itemMeasurementL = fetchedData[item]['Measurement L'];
-          itemMeasurementG = fetchedData[item]['Measurement1'];
+          itemMeasurementL = fetchedData[item]['Display Unit Metric'];
+          itemMeasurementG = fetchedData[item]['Display Unit Imperial'];
           itemIndividualUnitG = fetchedData[item]['Individiual Unit Gal'];
           itemIndividualUnitL = fetchedData[item]['Individiual Unit L'];
         }
@@ -285,24 +278,51 @@ function CalculateScreen() {
           item in fetchedData &&
           fetchedData[item][waterParameter(id,'G')]
         ) {
-          setIndividualTotal(fetchedData[item][waterParameter(id,'G')]);
           itemCost=fetchedData[item][waterParameter(id,'G')];
           itemCostL=fetchedData[item][waterParameter(id,'L')];
-          itemUnit=waterParameter(id,'G')
-          console.log("id",id)
-          console.log("waterParameter(id,'G')",waterParameter(id,'G'))
-          console.log("waterParameter(id,'L')",waterParameter(id,'L'))
-          console.log("itemCost",itemCost)
-          console.log("itemCostL",itemCostL)
-          console.log("item",item)
           addtoList(fetchedData[item][waterParameter(id,'G')]);
           setError({status: false, message: ''});
           setComputed(true);
         }
-      });
+      })
+      .then(()=>{
+        console.log(loading)
+        
+        if(loading)
+        {
+          setComputed(false);
+          selectedItem.push(item);
+          //Add those
+          itemNameList.push(item);
+          itemMeasurementListG.push(itemMeasurementG);
+          itemMeasurementListL.push(itemMeasurementL);
+          itemIndividualUnitListL.push(itemIndividualUnitL);
+          itemIndividualUnitListG.push(itemIndividualUnitG);
+          itemFrequencyList.push(frequency);
+          itemQuantityList.push(quantity);
+          itemCostList.push(itemCost);
+          itemCostLList.push(itemCostL);
+
+          itemYearlyCost = itemCost * frequency_values[frequency]*Quantity_values[quantity];
+          itemYearlyLCost = itemCostL * frequency_values[frequency]*Quantity_values[quantity];
+          itemYearlyCostList.push(itemYearlyCost);
+          itemYearlyLCostList.push(itemYearlyLCost);
+          itemOpenList.push(false);
+          setYearlyCostTotal(yearlyCostTotal+itemYearlyCost);
+          setYearlyCostLTotal(yearlyCostLTotal+itemYearlyLCost);
+          setMixCostTotal(mixCostTotal+itemCost*Quantity_values[quantity]);
+          setMixCostLTotal(mixCostLTotal+itemCostL*Quantity_values[quantity]);
+          setItem('');
+          setFrequency(null)
+          setQuantity(null)
+          clickToScroll();
+          upgradePages();
+          loading=false;
+        }
+      })
   };
 
-  const calculate = (item, frequency,quantity) => {
+  const calculate = () => {
     if (!item) {
       setError({status: true, message: 'Please select an item'});
     } else if (!frequency) {
@@ -311,7 +331,7 @@ function CalculateScreen() {
       setError({status: true, message: 'Please select a quantity'});
     }
     else {
-      fetchData(item, frequency);
+      fetchData();
     }
   };
 
@@ -343,10 +363,12 @@ function CalculateScreen() {
   }
 
   const clearElements = () => {
+    setShowAnotherRunningtotal(false);
+    setReallyOutput(0);
+    setReallyLOutput(0);
     setComputed(false);
     setInputValue('');
     setItem('');
-    setIndividualTotal(null);
     setShowlist(false);
     setFrequency(null);
     setQuantity(null);
@@ -355,7 +377,6 @@ function CalculateScreen() {
     itemMeasurementListL = [];
     itemIndividualUnitListG=[];
     itemIndividualUnitListL=[];
-    itemUnitList=[];
     itemQuantityList=[];
     itemFrequencyList=[];
     itemCostList=[];
@@ -797,7 +818,7 @@ function CalculateScreen() {
           </View>
         </Modal>
 
-        {computed && (
+        {computed && !showAnotherRunningtotal && (
           <View style={{alignItems: 'center', marginBottom: 20}}>
             <Text
               style={{
@@ -883,14 +904,13 @@ function CalculateScreen() {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: selectOpened ? 200 : 20,
-            marginBottom: 10,
+            marginTop: selectOpened ? 200 : 0,
           }}>
 
-          { !computed && (
-            <View>
+          { !computed && !showAnotherRunningtotal && (
+            <View style={{marginTop:30}}>
             <TouchableOpacity
-              onPress={() => {calculate(item, frequency,quantity);
+              onPress={() => {calculate();
 
               }}
               style={{
@@ -919,11 +939,11 @@ function CalculateScreen() {
             </View>
         )}
 
-          {computed && (
+          {computed && !showAnotherRunningtotal && (
           <View>
             <TouchableOpacity
               onPress={() => {
-                computed ? clearElements() : calculate(item, frequency,quantity);
+                computed ? clearElements() : calculate();
                 // calculate(item,frequency);
               }}
               style={{
@@ -950,7 +970,7 @@ function CalculateScreen() {
           </View>
           )}
 
-          {computed && (
+          {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
                 onPress={() => {setContext(false), 
@@ -984,10 +1004,10 @@ function CalculateScreen() {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: selectOpened ? 200 : 20,
+            marginTop: selectOpened ? 20 : 20,
             marginBottom: 20,
           }}>
-            {computed && (
+            {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
                 onPress={() => {setContext(true), 
@@ -1015,18 +1035,13 @@ function CalculateScreen() {
               </TouchableOpacity>
             </View>
           )}
-          {computed && (
+          {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
                 onPress={() => {setShowlist(true);
 
                   setComputed(false);
                   selectedItem.push(item);
-                  // console.log("itemlist:",selectedItem);
-                  // console.log("itemlist[0]", selectedItem[0]);
-                  // console.log(typeof selectedItem[0]);
-                  // console.log("item:",item);
-                  // console.log(typeof item);
 
                   //Add those
                   itemNameList.push(itemName);
@@ -1034,13 +1049,12 @@ function CalculateScreen() {
                   itemMeasurementListL.push(itemMeasurementL);
                   itemIndividualUnitListL.push(itemIndividualUnitL);
                   itemIndividualUnitListG.push(itemIndividualUnitG);
-                  itemUnitList.push(itemUnit);
                   itemFrequencyList.push(frequency);
                   itemQuantityList.push(quantity);
                   itemCostList.push(itemCost);
                   itemCostLList.push(itemCostL);
                   
-                  itemYearlyCost = individual_total * frequency_values[frequency]*Quantity_values[quantity];
+                  itemYearlyCost = itemCost * frequency_values[frequency]*Quantity_values[quantity];
                   itemYearlyLCost = itemCostL * frequency_values[frequency]*Quantity_values[quantity];
                   itemYearlyCostList.push(itemYearlyCost);
                   itemYearlyLCostList.push(itemYearlyLCost);
@@ -1053,21 +1067,21 @@ function CalculateScreen() {
                   setFrequency(null)
                   setQuantity(null)
                   clickToScroll();
-                  console.log("---------")
-                  console.log("itemCost",itemCost)
-                  console.log("itemQuantity",quantity)
-                  console.log("itemFrequency",frequency)
-                  console.log("itemNameList",itemNameList)
-                  console.log("itemUnitList",itemUnitList)
-                  console.log("itemQuantityList",itemQuantityList)
-                  console.log("itemFrequencyList",itemFrequencyList)
-                  console.log("itemCostList",itemCostList)
-                  console.log("itemYearlyCostList",itemYearlyCostList)
-                  console.log("itemYearlyCost",itemYearlyCost)
-                  console.log("yearlyCostTotal",yearlyCostTotal)
+                  // console.log("---------")
+                  // console.log("itemCost",itemCost)
+                  // console.log("itemQuantity",quantity)
+                  // console.log("itemFrequency",frequency)
+                  // console.log("itemNameList",itemNameList)
+                  // console.log("itemQuantityList",itemQuantityList)
+                  // console.log("itemFrequencyList",itemFrequencyList)
+                  // console.log("itemCostList",itemCostList)
+                  // console.log("itemYearlyCostList",itemYearlyCostList)
+                  // console.log("itemYearlyCost",itemYearlyCost)
+                  // console.log("yearlyCostTotal",yearlyCostTotal)
                   // console.log("mixCostTotal",mixCostTotal)
                   upgradePages();
-
+                  if(itemNameList.length !==0)
+                    setShowAnotherRunningtotal(true);
                 }}
                 style={{
                   padding: 15,
@@ -1091,6 +1105,78 @@ function CalculateScreen() {
               </TouchableOpacity>
             </View>
           )}
+          <View style={{flexDirection: 'row',
+                  marginLeft:10,
+                  marginRight:10,}}>
+
+          {showAnotherRunningtotal && (
+            <View>
+            <TouchableOpacity
+              onPress={() => {calculate();
+                setShowAnotherRunningtotal(false);
+
+              }}
+              style={{
+                padding: 15,
+                borderRadius: 30,
+                backgroundColor: 'orange',
+                margintop:10,
+                marginLeft: '3%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor:'#70BF41',
+              }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                    }}>
+                    Calculate
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+        )}
+
+          {showAnotherRunningtotal && (
+            <View>
+              <TouchableOpacity
+                onPress={() => {setShowlist(true);
+                  console.log(loading)
+                  loading=true;
+                  console.log(loading)
+                  calculate();
+                  console.log(loading)
+                }}
+
+                style={{
+                  padding: 15,
+                  borderRadius: 30,
+                  marginLeft: 10,
+                  backgroundColor: '#70BF41',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                    }}>
+                    Add to Running Total
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+
+        </View>
+
         </View>
         
         {showlist && (
@@ -1332,13 +1418,6 @@ function CalculateScreen() {
                 onPress={() => {
                   setUnit('G');
                   setUnitG(true);
-                  // if (individual_total) {
-                  //   setIndividualTotal(
-                  //     fetchedData[item][waterParameter(id,'G')],
-                  //   );
-                  // } else {
-                  //   calculate(item, frequency,quantity);
-                  // }
                 }}>
                 <Text
                   style={{
@@ -1355,13 +1434,6 @@ function CalculateScreen() {
                 onPress={() => {
                   setUnit('L');
                   setUnitG(false);
-                  // if (individual_total) {
-                  //   setIndividualTotal(
-                  //     fetchedData[item][waterParameter(id,'L')],
-                  //   );
-                  // } else {
-                  //   calculate(item, frequency,quantity);
-                  // }
                 }}>
                 <Text
                   style={{
