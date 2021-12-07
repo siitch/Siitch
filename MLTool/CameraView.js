@@ -4,7 +4,6 @@ import * as tf from "@tensorflow/tfjs";
 // Used to import .bin model file
 import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
-    //ActivityIndicator, // Native iOS loading circle, doesn't look good
     Alert,
     AsyncStorage,
     Dimensions, Image,
@@ -32,8 +31,10 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import {useIsFocused} from "@react-navigation/native";
 // Get camera button image from here
 import Profiles from "../ImageDB";
+// Expo's firebase analytics library
+import * as Analytics from "expo-firebase-analytics";
 
-export default function CameraScreen({navigation}) {
+function CameraView({navigation}) {
     // init status
     const [init, setInit] = useState(true);
     // Get the status if the camera screen is the first time visited
@@ -65,8 +66,8 @@ export default function CameraScreen({navigation}) {
 
         // Load our model from resource folder
         const initializeModelAsync = async () => {
-            const model = require("./Siitch_20epochs/model.json");
-            const weights = require("./Siitch_20epochs/model.bin");
+            const model = require("./Siitch_model/model.json");
+            const weights = require("./Siitch_model/group1-shard1of1.bin");
             const loadedModel = await tf.loadGraphModel(
                 bundleResourceIO(model, weights)
             );
@@ -139,7 +140,7 @@ export default function CameraScreen({navigation}) {
         try {
             camera.pausePreview()
             // Get the photo user took
-            let response = await camera.takePictureAsync({onPictureSaved: async (picture) => {
+            await camera.takePictureAsync({onPictureSaved: async (picture) => {
                     // Resize image to avoid out of memory crashes, also set it to the size of the screen so that we
                     // can display it as background in the Result Screen
                     const manipulateResponse = await ImageManipulator.manipulateAsync(
@@ -150,6 +151,11 @@ export default function CameraScreen({navigation}) {
                     // Pass the image to 'ResultsScreen.js' to do prediction
                     navigation.push('Confirm', {image: manipulateResponse})
                 }});
+            // Log an event named 'take_photo' to firebase
+            await Analytics.logEvent('take_photo', {
+                screen: 'Camera view',
+                userAction: 'User took a photo'
+            });
         } catch (error) {
             console.log(error);
         }
@@ -308,12 +314,12 @@ const DrinksNonAlcoholic = () => {
 }
 
 // Screen stack navigation
-export const camerascreenScreen = () => (
+export const cameraScreen = () => (
     <CameraScreenStack.Navigator>
         {/* This screen */}
         <CameraScreenStack.Screen
             name="CameraView"
-            component={CameraScreen}
+            component={CameraView}
             options={{
                 headerShown: false,
             }}
