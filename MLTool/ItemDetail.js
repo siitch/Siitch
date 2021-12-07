@@ -8,9 +8,8 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {Divider, Button} from "react-native-paper";
 import Hyperlink from 'react-native-hyperlink';
-import {Card,} from 'react-native-ui-lib';
+import {Card} from 'react-native-ui-lib';
 import firebase from "firebase";
 import React, {useEffect, useState} from "react";
 import ResultImage from "./ResultImage";
@@ -19,6 +18,7 @@ import itemDetailImages from "./ItemDetailImages/itemDetailImages";
 import DropDownPicker from "react-native-dropdown-picker";
 import {styles} from "../Comparing/Styles";
 import {SimpleCalculator} from "./SimpleCalculator";
+import * as Analytics from "expo-firebase-analytics";
 
 export default function ItemDetail({ route, navigation }) {
     // Get item name passed from other screen
@@ -164,6 +164,16 @@ export default function ItemDetail({ route, navigation }) {
         checkRecyclable()
         changeColor()
     }, [globalUnit, gallons, individualUnitG, metricToDisplay, timetodecompose, recyclable, quantity, frequency]);
+
+    useEffect(() => {
+        async function logItemName(){
+            await Analytics.logEvent('ViewItem', {
+                ItemName: itemName
+            });
+        }
+        // Log the current item name to firebase
+        logItemName()
+    },[]);
 
     // When the global metric changes, do corresponding changes
     const changeMetric = ()=>{
@@ -1156,7 +1166,7 @@ export default function ItemDetail({ route, navigation }) {
                                 Rain water (Green water): The amount of rainwater required
                                 to make this item
                                 {"\n\n"}
-                                These Green, Blue and Gray water statistics reflect the globally averaged Virtual Water
+                                These Green, Blue and Gray water statistics reflect the globally averaged, Virtual Water
                                 required to make each item. Virtual Water is the total volume of water required to
                                 produce an item. Click
                                 <Text
