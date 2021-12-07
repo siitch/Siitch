@@ -1,16 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {useState} from 'react';
-const {width, height} = Dimensions.get('screen');
-import { WebView } from 'react-native-webview';
-import {View, Text, Image, Dimensions, Linking, Pressable, Button, TouchableOpacity, TouchableHighlight, ScrollView, StyleSheet} from 'react-native';
-import { styles } from '../Ranking/Styles';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScreenContainer } from 'react-native-screens';
-const Width = width;
+import {Text, Linking, ScrollView} from 'react-native';
 
 export const Sources = ({ navigation }) => {
     return (
@@ -23,9 +13,10 @@ export const Sources = ({ navigation }) => {
           marginTop: '10%',
           marginRight: '6%',
         }}>
-        All attempts have been made to represent the most accurate information
-        possible. Facts and statistics have been sourced from numerous publicly available scientific 
-        studies, white papers, and news articles. The main sources are listed below.
+          All attempts have been made to represent the most accurate information possible.
+          Facts and statistics have been sourced from numerous publicly available scientific studies,
+          white papers and news articles, and from conversations with the Supervisors of the Burbank Recycle Center
+          and Burbank Landfill. The main sources listed below.
       </Text>
       <Text
             onPress={() =>
@@ -194,7 +185,7 @@ export const Sources = ({ navigation }) => {
             marginTop: 5
             }
             }>
-            The Green Blue Book - Rogers & Kostigen
+            The Green Blue Book - Kostigen
           </Text>
           <Text
             onPress={() =>
@@ -211,6 +202,66 @@ export const Sources = ({ navigation }) => {
             }>
             National Geographic{' '}
           </Text>
+            <Text
+                onPress={() =>
+                    Linking.openURL(
+                        'https://www.nps.gov/index.htm',
+                    )
+                }
+                style={{
+                    color: '#00ADEF',
+                    fontSize: 20,
+                    marginLeft: '6%',
+                    marginTop: 5
+                }
+                }>
+                US National Park Service
+            </Text>
+            <Text
+                onPress={() =>
+                    Linking.openURL(
+                        'https://www.burbankca.gov/web/public-works/recycle-center',
+                    )
+                }
+                style={{
+                    color: '#00ADEF',
+                    fontSize: 20,
+                    marginLeft: '6%',
+                    marginTop: 5
+                }
+                }>
+                Burbank Recycle Center
+            </Text>
+            <Text
+                onPress={() =>
+                    Linking.openURL(
+                        'https://www.calrecycle.ca.gov',
+                    )
+                }
+                style={{
+                    color: '#00ADEF',
+                    fontSize: 20,
+                    marginLeft: '6%',
+                    marginTop: 5
+                }
+                }>
+                CalRecycle
+            </Text>
+            <Text
+                onPress={() =>
+                    Linking.openURL(
+                        'https://www.epa.gov',
+                    )
+                }
+                style={{
+                    color: '#00ADEF',
+                    fontSize: 20,
+                    marginLeft: '6%',
+                    marginTop: 5
+                }
+                }>
+                USEPA
+            </Text>
           <Text
         style={{
           fontSize: 18,
@@ -219,8 +270,8 @@ export const Sources = ({ navigation }) => {
           marginTop: 30,
           marginRight: '7%',
         }}>
-        We are in deep gratitude to the Professors, Scientists and Journalists 
-        working to shed light on the true costs of what we consume. 
+        We are in deep gratitude to the Professors, Scientists and Journalists
+        working to shed light on the true costs of what we consume.
         We encourage everyone to explore these sources.
       </Text>
       <Text
