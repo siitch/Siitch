@@ -26,10 +26,14 @@ import WhatMakeUp from './MakeupComponents/WhatMakeUp';
 import 'react-native-gesture-handler';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import React from 'react';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'react-native';
+import * as Analytics from 'expo-firebase-analytics';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {
+    NavigationContainer,
+    useNavigationContainerRef,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -53,7 +57,7 @@ import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
-import CameraScreen, {camerascreenScreen} from "./MLTool/CameraScreen";
+import {cameraScreen} from "./MLTool/CameraView";
 import ItemDetail from "./MLTool/ItemDetail";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
@@ -273,7 +277,7 @@ const landingdetails = () => {
 
                 <Tab.Screen
                     name="MLTool"
-                    component={camerascreenScreen}
+                    component={cameraScreen}
                     options={({route})=>({
                         tabBarLabel: 'Eco-Cam',
                         tabBarVisible: ((route) => {
@@ -460,8 +464,35 @@ const landingdetails = () => {
         );
     };
 
+
+    const navigationRef = useNavigationContainerRef();
+    const routeNameRef = useRef();
     return (
-        <NavigationContainer independent={true}>
+        <NavigationContainer
+            independent={true}
+            ref={navigationRef}
+            onReady={() => {
+                routeNameRef.current = navigationRef.getCurrentRoute().name;
+            }}
+            onStateChange={async () => {
+                const previousRouteName = routeNameRef.current;
+                const currentRouteName = navigationRef.getCurrentRoute().name;
+
+                if (previousRouteName !== currentRouteName) {
+                    // The line below uses the expo-firebase-analytics tracker
+                    // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
+                    // Change this line to use another Mobile analytics SDK
+
+                    await Analytics.logEvent("screen_view",{
+                        firebase_screen: currentRouteName,
+                        screen_name: currentRouteName
+                    })
+                }
+
+                // Save the current route name for later comparison
+                routeNameRef.current = currentRouteName;
+            }}
+        >
             <Stack.Navigator>
                 <Stack.Screen
                     name="Home"
