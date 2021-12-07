@@ -32,36 +32,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-  databaseView: {
-    width: 350,
-  },
-  barTitle: {
-    width: 300,
-  },
-  eachAvatar: {
-    paddingRight: 20,
-  },
-  avatarView: {
-    paddingTop: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  searchTab: {
-    width: 100,
-    height: 70,
-  },
-  searchInput: {
-    borderColor: 'black',
-    width: 200,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-  searchFrame: {
-    textAlign: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
   title: {
     color: 'black',
     fontWeight: 'bold',
