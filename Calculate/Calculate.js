@@ -21,6 +21,7 @@ import {CalculateTotal} from './CalculateTotal';
 import RNPicker from 'rn-modal-picker';
 import { cos } from 'react-native-reanimated';
 import { screensEnabled } from 'react-native-screens';
+import analytics from '@react-native-firebase/analytics';
 
 // var pages=[];
 var itemNameList=[];
@@ -414,6 +415,9 @@ function CalculateScreen() {
             onPress={() => {
               setUnitG(true);
               setUnit('G');
+              analytics().logEvent('Use_GL_switch',{
+                switch_to: 'Gallons'
+              })
             }}>
             <Text
               style={{
@@ -430,6 +434,9 @@ function CalculateScreen() {
             onPress={() => {
               setUnit('L');
               setUnitG(false);
+              analytics().logEvent('Use_GL_switch',{
+                switch_to: 'Liters'
+              })
             }}>
             <Text
               style={{
@@ -910,8 +917,9 @@ function CalculateScreen() {
           { !computed && !showAnotherRunningtotal && (
             <View style={{marginTop:30}}>
               <TouchableOpacity
-                onPress={() => {calculate();
-
+                onPress={() => {
+                  calculate();
+                  analytics().logEvent('Calculate')
                 }}
                 style={{
                   padding: 15,
@@ -973,8 +981,10 @@ function CalculateScreen() {
           {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
-                onPress={() => {setContext(false),
-                  setModalVisible(true);
+                onPress={() => {
+                  setContext(false)
+                  setModalVisible(true)
+                  analytics().logEvent('Challenge_pressed')
                 }}
                 style={{
                   padding: 15,
@@ -1010,8 +1020,10 @@ function CalculateScreen() {
           {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
-                onPress={() => {setContext(true),
-                  setModalVisible(true);
+                onPress={() => {
+                  setContext(true)
+                  setModalVisible(true)
+                  analytics().logEvent('Context_pressed')
                 }}
                 style={{
                   padding: 15,
@@ -1082,6 +1094,7 @@ function CalculateScreen() {
                   upgradePages();
                   if(itemNameList.length !==0)
                     setShowAnotherRunningtotal(true);
+                  analytics().logEvent('Add_to_running_total')
                 }}
                 style={{
                   padding: 15,
@@ -1114,7 +1127,7 @@ function CalculateScreen() {
                 <TouchableOpacity
                   onPress={() => {calculate();
                     setShowAnotherRunningtotal(false);
-
+                    analytics().logEvent('Calculate')
                   }}
                   style={{
                     padding: 15,
@@ -1150,6 +1163,7 @@ function CalculateScreen() {
                     console.log(loading)
                     calculate();
                     console.log(loading)
+                    analytics().logEvent('Add_to_running_total')
                   }}
 
                   style={{
@@ -1418,6 +1432,9 @@ function CalculateScreen() {
                 onPress={() => {
                   setUnit('G');
                   setUnitG(true);
+                  analytics().logEvent('Use_GL_switch',{
+                    switch_to: 'Gallons'
+                  })
                 }}>
                 <Text
                   style={{
@@ -1434,6 +1451,9 @@ function CalculateScreen() {
                 onPress={() => {
                   setUnit('L');
                   setUnitG(false);
+                  analytics().logEvent('Use_GL_switch',{
+                    switch_to: 'Liters'
+                  })
                 }}>
                 <Text
                   style={{
@@ -1583,7 +1603,7 @@ const CalculateStack = createStackNavigator();
 export const CalculateStackScreen = () => (
   <CalculateStack.Navigator>
     <CalculateStack.Screen
-      name="Calculate"
+      name="Calculator"
       component={CalculateScreen}
       options={{headerShown: false}}
     />

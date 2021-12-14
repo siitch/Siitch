@@ -61,7 +61,8 @@ export const RankingItem = ({ max, cost, item, image, unit, category, displayUni
                     />
                     <Text style={rankStyles.progressTxt}>
                         {numberWithCommas(cost)} {`${unit === 'L' ? 'Liters' : 'Gallons'} ${displayUnit}`}
-                        {/*<TouchableOpacity onPress={() => setModalVisible(true)} >
+                        {/*
+                        <TouchableOpacity onPress={() => setModalVisible(true)} >
                             <View style={rankStyles.infoBtn}>
                                 <Text style={{textAlign: "center", color:"darkgray"}}>i</Text>
                             </View>

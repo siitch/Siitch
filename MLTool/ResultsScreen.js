@@ -22,6 +22,8 @@ import {CLASSES} from './Siitch_model/class_names';
 import firebase from 'firebase';
 // For category images, if needed
 import Profiles from '../ImageDB.js';
+// Firebase analytics
+import analytics from '@react-native-firebase/analytics';
 
 export default function ResultsScreen({route, navigation}) {
     // Get the image from Camera Screen
@@ -349,6 +351,9 @@ export default function ResultsScreen({route, navigation}) {
                         onPress={() => {
                             let categoryNavName = getCategoryNavName(category);
                             navigation.navigate(categoryNavName);
+                            analytics().logEvent('Category_button_pressed',{
+                                userAction: 'User pressed the category button on top of the three predictions'
+                            })
                         }}>
                           {/* TODO: Create state for category string */}
                           {categoryDisplayName}
@@ -403,6 +408,7 @@ export default function ResultsScreen({route, navigation}) {
                       }}
                       onPress={() => {
                           navigation.push('Catalogue');
+                          analytics().logEvent('Nope_see_catalogue')
                       }}>
                         Nope, see catalogue
                     </MaterialButton>
@@ -428,6 +434,7 @@ export default function ResultsScreen({route, navigation}) {
                       onPress={() => {
                           setCategory(''); // Reset Category
                           navigation.goBack(null);
+                          analytics().logEvent('Try_Again')
                       }} //take picture
                     >
                         Try Again

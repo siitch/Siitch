@@ -152,7 +152,6 @@ function CameraView({navigation}) {
           navigation.push('Confirm', {image: manipulateResponse})
         }});
       await analytics().logEvent('take_photo', {
-        screen: 'Camera view',
         userAction: 'User took a photo'
       });
     } catch (error) {

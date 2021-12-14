@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { ScrollView, View, Text, Image, Dimensions, Linking, TouchableHighlight, TouchableOpacity } from 'react-native';
 import Counter from 'react-native-counters'
 import { styles } from './Styles';
@@ -10,6 +10,7 @@ const DeviceWidth = Dimensions.get('window').width;
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 import { lessThan, onChange } from 'react-native-reanimated';
+import analytics from '@react-native-firebase/analytics';
 
 let fetchedData = {};
 let p1 = {};
@@ -55,6 +56,19 @@ export const comparePage = ({route}) => {
     const [isProduct6Present, setIsProduct6Present] = useState(false);
 
     const [unit, setUnit] = useState('G');
+
+    const [collapse1, setCollapse1] = useState(false);
+    const [collapse2, setCollapse2] = useState(false);
+    const [collapse3, setCollapse3] = useState(false);
+    const [collapse4, setCollapse4] = useState(false);
+    const [itemNumber, setItemNumber] = useState(0);
+    useEffect(()=>{
+        if (itemNumber !== 0){
+            analytics().logEvent('Compare',{
+                quantity: itemNumber
+            })
+        }
+    },[itemNumber])
 
     const [prod1Total, changeProd1Total] = useState(1);
     const [prod2Total, changeProd2Total] = useState(1);
@@ -214,6 +228,7 @@ export const comparePage = ({route}) => {
         handleFetch2(false);
         p2 = {};
         f2 = {};
+        setItemNumber(2);
     }
 
     if(prod3 && !fetched3) {
@@ -226,6 +241,7 @@ export const comparePage = ({route}) => {
         handleFetch3(false);
         p3 = {};
         f3 = {};
+        setItemNumber(3);
     }
 
     if(prod4 && !fetched4) {
@@ -238,6 +254,7 @@ export const comparePage = ({route}) => {
         handleFetch4(false);
         p4 = {};
         f4 = {};
+        setItemNumber(4);
     }
 
     if(prod5 && !fetched5) {
@@ -250,6 +267,7 @@ export const comparePage = ({route}) => {
         handleFetch5(false);
         p5 = {};
         f5 = {};
+        setItemNumber(5);
     }
 
     if(prod6 && !fetched6) {
@@ -262,6 +280,7 @@ export const comparePage = ({route}) => {
         handleFetch6(false);
         p6 = {};
         f6 = {};
+        setItemNumber(6);
     }
 
     const setMetric = (obj) => {
@@ -438,7 +457,7 @@ export const comparePage = ({route}) => {
 
     const numberWithCommas = (x) => {
         if(isNaN(x)){
-            return "NA"
+            return "Will never"
         }
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -461,11 +480,19 @@ export const comparePage = ({route}) => {
                           paddingRight: 10,
                           height: 40
                       }}>
-                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G');}} >
+                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G');
+                              analytics().logEvent('Use_GL_switch',{
+                                  switch_to: 'Gallons'
+                              })
+                          }} >
                               <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                           </TouchableOpacity>
                           <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }}>
+                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L');
+                              analytics().logEvent('Use_GL_switch',{
+                                  switch_to: 'Liters'
+                              })
+                          }}>
                               <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                           </TouchableOpacity>
                       </View>
@@ -485,7 +512,7 @@ export const comparePage = ({route}) => {
                                 ((selectedcategory5.localeCompare('Time to decompose') != 0 && isProduct5Present) ? parseInt(f5[selectedcategory5])*prod5Total : 0) +
                                 ((selectedcategory6.localeCompare('Time to decompose') != 0 && isProduct6Present) ? parseInt(f6[selectedcategory6])*prod6Total : 0))
                                 .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }
-                              {unit == 'G' ? ' gal.' : ' li.'} </Text>
+                              {unit == 'G' ? ' G.' : ' L.'} </Text>
                       </View>
                   </View>
                   {/* <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
@@ -773,7 +800,18 @@ export const comparePage = ({route}) => {
                       <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
                   </View>
               }
-              <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}}>
+              <Collapse
+                style={{ marginTop: '5%', width: DeviceWidth/1.2}}
+                isExpanded={collapse1}
+                onToggle={(isExpanded)=>{
+                    setCollapse1(!collapse1)
+                    if(isExpanded){
+                        analytics().logEvent('Compare_info_pressed',{
+                            contextName: 'Breakdown'
+                        })
+                    }
+                }}
+              >
                   <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#FFD359', width: DeviceWidth / 1.2,borderColor: '#FFD359', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                       <View style={{alignItems:'center'}}>
                           <Text style={{fontWeight:'bold', fontSize: 20}}>Breakdown</Text>
@@ -863,7 +901,18 @@ export const comparePage = ({route}) => {
                   </CollapseBody>
               </Collapse>
 
-              <Collapse style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}}>
+              <Collapse
+                style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}}
+                isExpanded={collapse2}
+                onToggle={(isExpanded)=>{
+                    setCollapse2(!collapse2)
+                    if(isExpanded){
+                        analytics().logEvent('Compare_info_pressed',{
+                            contextName: 'Rain'
+                        })
+                    }
+                }}
+              >
                   <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#70BF41', width: DeviceWidth / 1.2,borderColor: '#70BF41', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                       <View style={{alignItems:'center'}}>
                           <Text style={{fontWeight:'bold', fontSize: 20}}>Rain</Text>
@@ -877,7 +926,18 @@ export const comparePage = ({route}) => {
                   </CollapseBody>
               </Collapse>
 
-              <Collapse style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}}>
+              <Collapse
+                style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}}
+                isExpanded={collapse3}
+                onToggle={(isExpanded)=>{
+                    setCollapse3(!collapse3)
+                    if(isExpanded){
+                        analytics().logEvent('Compare_info_pressed',{
+                            contextName: 'Irrigation'
+                        })
+                    }
+                }}
+              >
                   <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#00ADEF', width: DeviceWidth / 1.2,borderColor: '#00ADEF', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                       <View style={{alignItems:'center'}}>
                           <Text style={{fontWeight:'bold', fontSize: 20}}>Irrigation</Text>
@@ -891,7 +951,18 @@ export const comparePage = ({route}) => {
                   </CollapseBody>
               </Collapse>
 
-              <Collapse style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}}>
+              <Collapse
+                style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}}
+                isExpanded={collapse4}
+                onToggle={(isExpanded)=>{
+                    setCollapse4(!collapse4)
+                    if(isExpanded){
+                        analytics().logEvent('Compare_info_pressed',{
+                            contextName: 'Cleaning'
+                        })
+                    }
+                }}
+              >
                   <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#C2C2C2', width: DeviceWidth / 1.2,borderColor: '#C2C2C2', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                       <View style={{alignItems:'center'}}>
                           <Text style={{fontWeight:'bold', fontSize: 20}}>Cleaning</Text>

@@ -314,6 +314,9 @@ export default function ItemDetail({ route, navigation }) {
                         <TouchableOpacity
                             onPress={() => {
                                 setGlobalUnit('G');
+                                analytics().logEvent('Use_GL_switch',{
+                                    switch_to: 'Gallons'
+                                })
                             }}>
                             <Text
                                 style={{
@@ -329,6 +332,9 @@ export default function ItemDetail({ route, navigation }) {
                         <TouchableOpacity
                             onPress={() => {
                                 setGlobalUnit('L');
+                                analytics().logEvent('Use_GL_switch',{
+                                    switch_to: 'Liters'
+                                })
                             }}>
                             <Text
                                 style={{
@@ -404,6 +410,9 @@ export default function ItemDetail({ route, navigation }) {
                                     flex
                                     onPress={()=>{
                                         console.log('rain pressed')
+                                        analytics().logEvent('Water_Card_pressed',{
+                                            cardName: 'Rain'
+                                        })
                                         setRainModalVisible(true)}}
                                 >
                                     <Text style={{color:'white'}}>Rain</Text>
@@ -424,6 +433,9 @@ export default function ItemDetail({ route, navigation }) {
                                     flex
                                     onPress={()=>{
                                         console.log('irrigation pressed')
+                                        analytics().logEvent('Water_Card_pressed',{
+                                            cardName: 'Irrigation'
+                                        })
                                         setIrrigationModalVisible(true)}}
                                 >
                                     <Text style={{color:'white'}}>Irrigation</Text>
@@ -444,6 +456,9 @@ export default function ItemDetail({ route, navigation }) {
                                     flex
                                     onPress={()=>{
                                         console.log('card pressed')
+                                        analytics().logEvent('Water_Card_pressed',{
+                                            cardName: 'Cleaning'
+                                        })
                                         setCleaningModalVisible(true)}}
                                 >
                                     <Text style={{color:'white'}}>Cleaning</Text>
@@ -535,6 +550,9 @@ export default function ItemDetail({ route, navigation }) {
                                     onPress={()=>{
                                         setInfoVisible(true)
                                         setInfoShown('Decompose')
+                                        analytics().logEvent('Info_button_pressed',{
+                                            infoName: 'Time to Decompose'
+                                        })
                                     }}>
                                     <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
                                 </TouchableOpacity>
@@ -583,6 +601,9 @@ export default function ItemDetail({ route, navigation }) {
                                     onPress={()=>{
                                         setInfoVisible(true)
                                         setInfoShown('Compostable')
+                                        analytics().logEvent('Info_button_pressed',{
+                                            infoName: 'Compostable?'
+                                        })
                                     }}>
                                     <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
                                 </TouchableOpacity>
@@ -634,6 +655,9 @@ export default function ItemDetail({ route, navigation }) {
                                     onPress={()=>{
                                         setInfoVisible(true)
                                         setInfoShown('Recyclable')
+                                        analytics().logEvent('Info_button_pressed',{
+                                            infoName: 'Recyclable?'
+                                        })
                                     }}>
                                     <Image source={itemDetailImages.info} style={{width: 25, height: 25}}/>
                                 </TouchableOpacity>
@@ -740,12 +764,14 @@ export default function ItemDetail({ route, navigation }) {
                                         dropDownStyle={{
                                             backgroundColor: 'white',
                                             width: DeviceWidth * 0.35,
+                                            height: 180,
                                             marginTop: 10,
                                             borderBottomLeftRadius: 20,
                                             borderBottomRightRadius: 20,
                                             borderWidth: 2,
                                             borderColor: '#80CAFF',
                                         }}
+                                        dropDownMaxHeight={250}
                                         onChangeItem={(currentQuantity) => {
                                             //setComputed(false);
                                             itemQuantity=currentQuantity.label;
@@ -811,12 +837,14 @@ export default function ItemDetail({ route, navigation }) {
                                         dropDownStyle={{
                                             backgroundColor: 'white',
                                             width: DeviceWidth * 0.45,
+                                            height: 180,
                                             marginTop: 10,
                                             borderBottomLeftRadius: 20,
                                             borderBottomRightRadius: 20,
                                             borderWidth: 2,
                                             borderColor: '#80CAFF',
                                         }}
+                                        dropDownMaxHeight={250}
                                         onChangeItem={(currentFrequency) => {
                                             //setComputed(false);
                                             itemFrequency=currentFrequency.value;
@@ -919,6 +947,7 @@ export default function ItemDetail({ route, navigation }) {
                                             onPress={() => {
                                                 setShowContext(true)
                                                 setModalVisible(true)
+                                                analytics().logEvent('Context_pressed')
                                             }}
                                             style={{
                                                 padding: 15,
@@ -944,8 +973,9 @@ export default function ItemDetail({ route, navigation }) {
                                     <View>
                                         <TouchableOpacity
                                             onPress={() => {
-                                                setShowContext(false);
-                                                setModalVisible(true);
+                                                setShowContext(false)
+                                                setModalVisible(true)
+                                                analytics().logEvent('Challenge_pressed')
                                             }}
                                             style={{
                                                 padding: 15,
