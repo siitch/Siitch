@@ -19,6 +19,8 @@ import {
   TouchableHighlight,
   Dimensions,
 } from 'react-native';
+import * as WebBrowser from "expo-web-browser";
+import analytics from '@react-native-firebase/analytics';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 const arr = [
@@ -103,7 +105,12 @@ const Vs = ({navigation}) => {
       ))}
         <View style={{alignItems: 'center'}}>
         <TouchableHighlight
-          onPress={() => navigation.navigate('What')}
+          onPress={() => {
+              navigation.navigate('What')
+              analytics().logEvent('What_can_I_do',{
+                  item: 'Beef - Vs'
+              })
+          }}
           activeOpacity={1}
           underlayColor="#8DC73F"
           style={{
@@ -111,7 +118,7 @@ const Vs = ({navigation}) => {
             height: 50,
             borderWidth: 2,
             borderColor: '#8DC73F',
-            borderRadius: 30, 
+            borderRadius: 30,
             width: Width*0.9,
             textAlign: 'center',
             fontSize: 20,
@@ -125,41 +132,116 @@ const Vs = ({navigation}) => {
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold',marginTop:5}}>Doing good</Text>
           <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
-          <Image source={images.down_arrow} style={{width:60,height:60}}></Image>
+          <Image source={images.down_arrow} style={{width: 60, height: 60}}/>
         </View>
-        <View  style={{flexDirection:'column',alignItems:'center'}}>
-          <View style={{flexDirection:'row'}}>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://impossiblefoods.com/grocery/')}}>
-            <ImageIcon category='brand' image={images.impossible}></ImageIcon>
-            </TouchableHighlight>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.beyondmeat.com/')}}>
-            <Image source={images.beyond_meat} style={{width:130,height:130}}></Image>
-            </TouchableHighlight>
-          </View>
-          <View style={{flexDirection:'row',marginTop:'5%'}}>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://lightlife.com/')}}>
-              <ImageIcon category='brand' image={images.lightlife}></ImageIcon>
-            </TouchableHighlight>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.hungryplanetfoods.com/')}}>
-              <ImageIcon category='brand' image={images.hungry_planet}></ImageIcon>
-            </TouchableHighlight>
-          </View>
-          <View style={{flexDirection:'row',marginTop:'5%'}}>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.nextlevelburger.com/')}}>
-              <ImageIcon category='brand' image={images.nextlevel}></ImageIcon>
-            </TouchableHighlight>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.quorn.us/')}}>
-              <ImageIcon category='brand' image={images.quorn}></ImageIcon>
-            </TouchableHighlight>
-          </View>
-          <View style={{flexDirection:'row',marginTop:'5%'}}>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.bocaburger.com/')}}>
-              <ImageIcon category='brand' image={images.boca}></ImageIcon>
-            </TouchableHighlight>
-            <TouchableHighlight activeOpacity={1} underlayColor="transperant" style={{ width: Width/2,alignItems:'center'}} onPress={ ()=>{ Linking.openURL('https://www.gardein.com/')}}>
-              <ImageIcon category='brand' image={images.gardein}></ImageIcon>
-            </TouchableHighlight>
-          </View>
+        <View style={{flexDirection: 'column', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://impossiblefoods.com/grocery/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'IMPOSSIBLE foods'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.impossible} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.beyondmeat.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'BEYOND MEAT'
+                        })
+                    }}>
+                    <Image
+                        source={images.beyond_meat}
+                        style={{width: 130, height: 130}}
+                    />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://lightlife.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Lightlife'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.lightlife} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.hungryplanetfoods.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'HUNGRY PLANET foods'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.hungry_planet} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.nextlevelburger.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Next Level Burger'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.nextlevel} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.quorn.us/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Quorn'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.quorn} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.bocaburger.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'BOCA burger'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.boca} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.gardein.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'gardein'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.gardein} />
+                </TouchableHighlight>
+            </View>
         </View>
         <View style={{height:Height/10}}/>
       </ScrollView>

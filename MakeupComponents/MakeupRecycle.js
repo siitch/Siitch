@@ -17,6 +17,8 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import analytics from '@react-native-firebase/analytics';
+import * as WebBrowser from "expo-web-browser";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -54,7 +56,12 @@ const MakeupRecycle = ({inputData, navigation}) => {
           The average moisturizer pot takes 1,000 years to decompose
         </Text>
         <TouchableHighlight
-          onPress={() => navigation.navigate('What')}
+          onPress={() => {
+              navigation.navigate('What')
+              analytics().logEvent('What_can_I_do',{
+                  item: 'Makeup - Recycle'
+              })
+          }}
           activeOpacity={1}
           underlayColor="#8DC73F"
           style={{
@@ -89,10 +96,15 @@ const MakeupRecycle = ({inputData, navigation}) => {
           Many companies make sustainable makeup. Here’s a few to get started,
           as recommended and rated by
           <Text
-            onPress={() =>
-              Linking.openURL(
-                'https://www.sustainablejungle.com/best-of-sustainable-beauty/zero-waste-make-up/',
-              )
+            onPress={() => {
+                WebBrowser.openBrowserAsync(
+                    'https://www.sustainablejungle.com/best-of-sustainable-beauty/zero-waste-make-up/',
+                )
+                analytics().logEvent('Source_click',{
+                    source_name: 'Sustainable Jungle',
+                    source_url: 'https://www.sustainablejungle.com/best-of-sustainable-beauty/zero-waste-make-up/'
+                })
+            }
             }
             style={{color: '#00ADEF'}}>
             {' '}
@@ -101,213 +113,255 @@ const MakeupRecycle = ({inputData, navigation}) => {
         </Text>
         <Image source={images.down_arrow} style={{width: 60, height: 60}} />
       </View>
-      <View style={{flexDirection: 'column', alignItems: 'center'}}>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://axiologybeauty.com/');
-            }}>
-            <ImageIcon category="brand" image={images.axiology_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.etsy.com/market/dab_herb_makeup/');
-            }}>
-            <ImageIcon category="brand" image={images.dab_logo} />
-          </TouchableHighlight>
+        <View style={{flexDirection: 'column', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://axiologybeauty.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'AXIOLOGY beauty'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.axiology_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.etsy.com/market/dab_herb_makeup/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Dab Herb Makeup'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.dab_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.axiology_rate} />
+                <Image source={images.dab_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.fatandthemoon.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'FAT AND THE MOON'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.fat_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.etsy.com/shop/plantmakeup/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Plant Makeup'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.plant_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.fat_rate} />
+                <Image source={images.plant_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.etsy.com/shop/NudiGoods/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Nudi Goods'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.nudi_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://elatebeauty.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'elate beauty'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.elate_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.nudi_rate} />
+                <Image source={images.elate_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.etsy.com/shop/CleanFacedCosmetics');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Clean Faced Cosmetics'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.cleanfaced_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://seawitchbotanicals.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Sea Witch Botanicals'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.sea_witch_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.cleanfaced_rate} />
+                <Image source={images.sea_witch_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.100percentpure.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: '100% pure'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.percent100_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.phbethicalbeauty.co.uk/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'PHB ETHICAL BEAUTY'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.phb_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.percent100_rate} />
+                <Image source={images.phb_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://odylique.com/');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'ODYLIQUE'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.odylique_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.etsy.com/shop/VyanaPlantBeauty');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Vyana Plant Beauty'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.vyana_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.odylique_rate} />
+                <Image source={images.vyana_rate} />
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync(
+                            'https://www.etsy.com/market/dirty_hippie_cosmetics',
+                        );
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'Dirty Hippie Cosmetics'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.dirty_logo} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.biome.com.au/489_neek');
+                        analytics().logEvent('Doing_good',{
+                            brandName: 'NEEK'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.neek_logo} />
+                </TouchableHighlight>
+            </View>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    marginLeft: '5%',
+                    alignItems: 'center',
+                }}>
+                <Image source={images.dirty_rate} />
+                <Image source={images.neek_rate} />
+            </View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.axiology_rate} />
-          <Image source={images.dab_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.fatandthemoon.com/');
-            }}>
-            <ImageIcon category="brand" image={images.fat_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.etsy.com/shop/plantmakeup/');
-            }}>
-            <ImageIcon category="brand" image={images.plant_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.fat_rate} />
-          <Image source={images.plant_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.etsy.com/shop/NudiGoods/');
-            }}>
-            <ImageIcon category="brand" image={images.nudi_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://elatebeauty.com/');
-            }}>
-            <ImageIcon category="brand" image={images.elate_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.nudi_rate} />
-          <Image source={images.elate_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.etsy.com/shop/CleanFacedCosmetics');
-            }}>
-            <ImageIcon category="brand" image={images.cleanfaced_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://seawitchbotanicals.com/');
-            }}>
-            <ImageIcon category="brand" image={images.sea_witch_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.cleanfaced_rate} />
-          <Image source={images.sea_witch_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.100percentpure.com/');
-            }}>
-            <ImageIcon category="brand" image={images.percent100_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.phbethicalbeauty.co.uk/');
-            }}>
-            <ImageIcon category="brand" image={images.phb_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.percent100_rate} />
-          <Image source={images.phb_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://odylique.com/');
-            }}>
-            <ImageIcon category="brand" image={images.odylique_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.etsy.com/shop/VyanaPlantBeauty');
-            }}>
-            <ImageIcon category="brand" image={images.vyana_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.odylique_rate} />
-          <Image source={images.vyana_rate} />
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL(
-                'https://www.etsy.com/market/dirty_hippie_cosmetics',
-              );
-            }}>
-            <ImageIcon category="brand" image={images.dirty_logo} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.biome.com.au/489_neek');
-            }}>
-            <ImageIcon category="brand" image={images.neek_logo} />
-          </TouchableHighlight>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginLeft: '5%',
-            alignItems: 'center',
-          }}>
-          <Image source={images.dirty_rate} />
-          <Image source={images.neek_rate} />
-        </View>
-      </View>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

@@ -16,6 +16,8 @@ import {
   Dimensions,
 } from 'react-native';
 import {images} from '../ImageURL';
+import * as WebBrowser from "expo-web-browser";
+import analytics from '@react-native-firebase/analytics';
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -61,7 +63,7 @@ const What = () => {
         </View>
         <View style={{width:'90%'}}>
           <Text style={{fontSize:16,color:'white',fontWeight:'bold'}}>Emissions you’d save if you eat one less serving of beef every week for a year. A family of four? They’d save 1,300 miles.</Text>
-        </View>  
+        </View>
       </View>
       <View>
         <View style={{width:Width,alignItems:'center'}}>
@@ -96,9 +98,16 @@ const What = () => {
           </View>
       </View>
       </View>
-      
+
       <Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%', marginRight:'10%'}}>
-      <Text onPress={() => Linking.openURL('https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')} style={{color:'#00ADEF'}}>Plan your meals, </Text>
+      <Text onPress={() => {
+          WebBrowser.openBrowserAsync('https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')
+          analytics().logEvent('Source_click',{
+              source_name: 'The beginners guide to meal planning - What to know, how to succeed, and what to skip',
+              source_url: 'https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413'
+          })
+      }}
+            style={{color:'#00ADEF'}}>Plan your meals, </Text>
          and plan for leftovers so you don’t waste meat, or any dairy product</Text>
       <View style={{
         height: Height / 7,

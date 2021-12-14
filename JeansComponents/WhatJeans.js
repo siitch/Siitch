@@ -15,7 +15,9 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 import {images} from '../ImageURL';
+import analytics from '@react-native-firebase/analytics';
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -45,7 +47,13 @@ const WhatJeans = () => {
           repurpose them. Here are{' '}
           <Text
             style={{color: 'blue'}}
-            onPress={() => Linking.openURL('https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$')}>
+            onPress={() => {
+                WebBrowser.openBrowserAsync('https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$')
+                analytics().logEvent('Source_click',{
+                    source_name: '15 ways to repurpose old jeans',
+                    source_url: 'https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$'
+                })
+            }}>
             15 ways to repurpose old jeans.
           </Text>
         </Text>
@@ -125,7 +133,13 @@ const WhatJeans = () => {
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Recycle</Text>
         <Text style={{fontSize: 16}}>Recycle them:</Text>
         <Text
-          onPress={() => Linking.openURL('https://bluejeansgogreen.org/')}
+          onPress={() => {
+              WebBrowser.openBrowserAsync('https://bluejeansgogreen.org/')
+              analytics().logEvent('Source_click',{
+                  source_name: 'Blue jeans go green',
+                  source_url: 'https://bluejeansgogreen.org/'
+              })
+          }}
           style={{color: 'blue'}}>
           bluejeansgogreen.org
         </Text>

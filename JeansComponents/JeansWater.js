@@ -18,6 +18,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import {images} from '../ImageURL';
+import * as Analytics from "expo-firebase-analytics";
+import * as WebBrowser from 'expo-web-browser';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -322,7 +324,12 @@ const JeansWater = ({inputData, navigation}) => {
         </ImageBackground>
       </View>
       <TouchableHighlight
-        onPress={() => navigation.navigate('What')}
+        onPress={() => {
+            navigation.navigate('What')
+            Analytics.logEvent('What_can_I_do',{
+                item: 'Jeans - Water'
+            })
+        }}
         activeOpacity={1}
         underlayColor="#8DC73F"
         style={{
@@ -350,7 +357,13 @@ const JeansWater = ({inputData, navigation}) => {
         <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
-            onPress={() => Linking.openURL('https://goodonyou.eco/')}
+            onPress={() => {
+                WebBrowser.openBrowserAsync('https://goodonyou.eco/')
+                Analytics.logEvent('Source_click',{
+                    source_name: 'Good On You',
+                    source_url: 'https://goodonyou.eco/'
+                })
+            }}
             style={{color: '#00ADEF'}}>
             {' '}
             Good On You,{' '}
@@ -366,7 +379,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.asket.com/');
+              WebBrowser.openBrowserAsync('https://www.asket.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'ASKET'
+                })
             }}>
             <ImageIcon category="brand" image={images.asket} />
           </TouchableHighlight>
@@ -375,7 +391,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.outlanddenim.com/');
+              WebBrowser.openBrowserAsync('https://www.outlanddenim.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'OUTLAND DENIM'
+                })
             }}>
             <ImageIcon category="brand" image={images.outland} />
           </TouchableHighlight>
@@ -386,7 +405,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.patagonia.com/home/');
+              WebBrowser.openBrowserAsync('https://www.patagonia.com/home/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'patagonia'
+                })
             }}>
             <ImageIcon category="brand" image={images.patagonia} />
           </TouchableHighlight>
@@ -395,7 +417,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.boyish.com/');
+              WebBrowser.openBrowserAsync('https://www.boyish.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'Boyish'
+                })
             }}>
             <ImageIcon category="brand" image={images.boyish} />
           </TouchableHighlight>
@@ -406,7 +431,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.outerknown.com/');
+              WebBrowser.openBrowserAsync('https://www.outerknown.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'OUTERKNOWN'
+                })
             }}>
             <ImageIcon category="brand" image={images.outerknown} />
           </TouchableHighlight>
@@ -415,7 +443,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://amourvert.com/');
+              WebBrowser.openBrowserAsync('https://amourvert.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'AMOUR VERT'
+                })
             }}>
             <ImageIcon category="brand" image={images.amourvert} />
           </TouchableHighlight>
@@ -426,7 +457,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://citizensofhumanity.com/');
+              WebBrowser.openBrowserAsync('https://citizensofhumanity.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'CITIZENS of HUMANITY'
+                })
             }}>
             <ImageIcon category="brand" image={images.citizens} />
           </TouchableHighlight>
@@ -435,7 +469,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://triarchy.com/');
+              WebBrowser.openBrowserAsync('https://triarchy.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'Triarchy'
+                })
             }}>
             <ImageIcon category="brand" image={images.triarchy} />
           </TouchableHighlight>
@@ -446,7 +483,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.dl1961.com/');
+              WebBrowser.openBrowserAsync('https://www.dl1961.com/');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'DL 1961'
+                })
             }}>
             <ImageIcon category="brand" image={images.dl} />
           </TouchableHighlight>
@@ -455,7 +495,10 @@ const JeansWater = ({inputData, navigation}) => {
             underlayColor="transperant"
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
-              Linking.openURL('https://www.g-star.com/en_us');
+              WebBrowser.openBrowserAsync('https://www.g-star.com/en_us');
+                Analytics.logEvent('Doing_good',{
+                    brandName: 'G-STAR'
+                })
             }}>
             <ImageIcon category="brand" image={images.g_star} />
           </TouchableHighlight>
