@@ -12,7 +12,7 @@ const Tutorial = ({navigation}) => {
     return(
         <Onboarding
     showDone={false}
-    onSkip={() => navigation.replace("Landing Page")}
+    onSkip={() => navigation.goBack("Landing Page")}
     pages={[
       {
         title: '',
@@ -33,7 +33,7 @@ const Tutorial = ({navigation}) => {
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
             , width:width}} source={require('../images2/OnboardP2.png')}/>
-          </ScrollView>        
+          </ScrollView>
         ),
       },
       {
@@ -103,15 +103,15 @@ const Tutorial = ({navigation}) => {
             </ScrollView>
         ),
       },
-      
-      
+
+
       {
         title: "",
         subtitle: (
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              navigation.replace("Landing Page")
+              navigation.goBack("Landing Page")
             }}
             >
         <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
       marginTop: '-10%',
       borderRadius: 25,
       justifyContent: 'center'
-      
+
     },
     countContainer: {
       alignItems: "center",

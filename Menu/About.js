@@ -28,7 +28,7 @@ export const About = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 20,
           marginRight: '7%',
@@ -82,7 +82,7 @@ export const About = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 40,
           marginRight: '7%',
@@ -135,7 +135,7 @@ export const About = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 10,
           marginBottom: 40,

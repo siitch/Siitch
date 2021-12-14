@@ -18,18 +18,18 @@ export const Mission = ({ navigation }) => {
         <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: '10%',
           marginRight: '7%',
         }}>
-        The mission of Siitch is to help you make a <Text style={{color: '#70BF41'}} > MASSIVE IMPACT </Text> 
-        on the environment over your lifetime by focusing on day to day decisions. 
+        The mission of Siitch is to help you make a <Text style={{color: '#70BF41'}} > MASSIVE IMPACT </Text>
+        on the environment over your lifetime by focusing on day to day decisions.
       </Text>
       <Text
         style={{
           fontSize: 22,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 30,
           marginRight: '7%',
@@ -40,15 +40,15 @@ export const Mission = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 7,
           marginRight: '7%',
         }}>
-     Change starts with <Text style={{color: '#70BF41'}} >AWARENESS</Text>. 
-    With Siitch, you’ll learn about the 
-    environmental cost of what you buy, and 
-    tips on how you can do better, so you can 
+     Change starts with <Text style={{color: '#70BF41'}} >AWARENESS</Text>.
+    With Siitch, you’ll learn about the
+    environmental cost of what you buy, and
+    tips on how you can do better, so you can
     make every decision and every purchase count.
       </Text>
       <View
@@ -93,13 +93,13 @@ export const Mission = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 40,
           marginRight: '7%',
         }}>
-            Our goal is to provide tips, games and challenges within 
-            the app to make spreading awareness easy and fun. 
+            Our goal is to provide tips, games and challenges within
+            the app to make spreading awareness easy and fun.
       </Text>
       <View
             style={{
@@ -112,9 +112,9 @@ export const Mission = ({ navigation }) => {
               justifyContent: 'center',
               marginTop: 20,
               marginLeft: '7%',
-            }}> 
+            }}>
             <Text style={{fontSize: 18, color: 'white', marginRight: '13%', marginLeft: '3%'}}>
-            Never doubt that a small group of thoughtful, 
+            Never doubt that a small group of thoughtful,
             committed citizens can change the world. {'\n'}
             It's the only thing that ever has.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold'}}>- Margaret Meade</Text>{' '}
              {'\n'}   (Anthropologist) </Text>
@@ -122,7 +122,7 @@ export const Mission = ({ navigation }) => {
       <Text
         style={{
           fontSize: 22,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 30,
           marginRight: '7%',
@@ -133,18 +133,18 @@ export const Mission = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 7,
           marginRight: '7%',
         }}>
-        You won’t see these tips and games: most of the app 
+        You won’t see these tips and games: most of the app
         is placeholders to see what features you want the most.
       </Text>
       <Text
         style={{
           fontSize: 22,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 30,
           marginRight: '7%',
@@ -155,14 +155,14 @@ export const Mission = ({ navigation }) => {
       <Text
         style={{
           fontSize: 18,
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           marginLeft: '7%',
           marginTop: 7,
           marginRight: '7%',
         }}>
-        We’re focusing on water first, carbon later. 
-        Many factors determine whether a product is sustainable. 
-        But water is something we can all relate to. 
+        We’re focusing on water first, carbon later.
+        Many factors determine whether a product is sustainable.
+        But water is something we can all relate to.
       </Text>
       <View
           style={{
@@ -229,9 +229,9 @@ export const Mission = ({ navigation }) => {
               marginTop: 20,
               marginRight: 20,
               marginLeft: -20,
-            }}> 
+            }}>
             <Text style={{fontSize: 19, color: 'white', marginLeft: 20, }}>
-            If you give nature a chance, it recovers.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold', Left: 30,}}>- Sir David Attenborough</Text>{' '}
+            If you give nature a chance, it recovers.  {'\n'}{'\n'} <Text style={{fontWeight: 'bold', marginLeft: 30,}}>- Sir David Attenborough</Text>{' '}
             {'\n'}   (Host, Planet Earth)</Text>
         </View>
       </ScrollView>

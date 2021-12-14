@@ -74,7 +74,7 @@ export const MenuMain = ({ navigation }) => {
         style={{
           fontSize: 17,
           color: 'black',
-          alignContent: 'auto',
+          alignContent: 'flex-start',
           margin: '5%',
           marginBottom: '7%',
           marginTop: '10%',
