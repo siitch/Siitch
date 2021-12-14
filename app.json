@@ -2,26 +2,22 @@
   "expo": {
     "name": "AwesomeProject",
     "slug": "awesome_project",
-    "version": "1.0.0",
+    "version": "0.1.1",
     "orientation": "portrait",
+    "userInterfaceStyle": "light",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.reactjs.native.example.Siitch",
+      "userInterfaceStyle": "light",
+      "bundleIdentifier": "com.siitch.siitch",
+      "buildNumber": "4",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
-        "UIUserInterfaceStyle": "Light",
         "NSCameraUsageDescription": "Allow camera access to enjoy this AR experience"
       }
     },
