@@ -6,7 +6,6 @@ import {Searchbar, Avatar} from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profiles from './SearchDB';
-import RNPicker from 'rn-modal-picker';
 
 import {
   SafeAreaView,
