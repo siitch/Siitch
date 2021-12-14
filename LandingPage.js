@@ -110,7 +110,7 @@ const Stack = createStackNavigator();
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
         <HomeStack.Screen
-            name="Home"
+            name="HomeScreen"
             component={HomeScreen}
             options={({navigation}) => ({
                 headerBackTitleVisible: false,
@@ -230,7 +230,7 @@ const landingdetails = () => {
                     }}
                 />
                 <Tab.Screen
-                    name="Search2"
+                    name="Search Tool"
                     component={GoToSearch}
                     options={{
                         tabBarLabel: 'Search',
@@ -397,7 +397,7 @@ const landingdetails = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="Grass"
+                        name="Env"
                         component={GrassPage}
                         options={{
                             tabBarIcon: ({focused}) =>
@@ -417,7 +417,7 @@ const landingdetails = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="Heart"
+                        name="Health"
                         component={HeartPage}
                         options={{
                             tabBarIcon: ({focused}) =>
@@ -458,9 +458,9 @@ const landingdetails = () => {
                     />
                 </Tab.Navigator>
             );
-        } else {}
+        }
         return (
-            <NewNormalSearch name={route.params.name} inputData={route.params.value} />
+            <NormalSearch name={route.params.name} inputData={route.params.value} />
         );
     };
 
@@ -485,7 +485,9 @@ const landingdetails = () => {
 
                     await Analytics.logEvent("screen_view",{
                         firebase_screen: currentRouteName,
-                        screen_name: currentRouteName
+                        firebase_screen_class: currentRouteName,
+                        screen_name: currentRouteName,
+                        screen_class: currentRouteName
                     })
                 }
 
@@ -495,7 +497,7 @@ const landingdetails = () => {
         >
             <Stack.Navigator>
                 <Stack.Screen
-                    name="Home"
+                    name="HomeTabs"
                     component={HomeTabs}
                     options={{headerShown: false}}
                 />
