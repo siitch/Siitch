@@ -1,9 +1,10 @@
 import Profiles from '../ImageDB.js';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight, Modal, Dimensions } from 'react-native';
 import { styles } from './Styles';
 import { RankingItem } from './RankingItem';
 import firebase from 'firebase';
+import * as Analytics from 'expo-firebase-analytics';
 
 let fetchedData = {};
 let items = {};
@@ -18,6 +19,15 @@ export const RankingPage = ({category, id}) => {
     const [currentCategory, changeCategory] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [unit, setUnit] = useState('G');
+
+    useEffect(() => {
+        async function logRanking (){
+            await Analytics.logEvent('View_ranking',{
+                Ranking_category: category
+            })
+        }
+        logRanking()
+    },[])
 
     const waterParameter = () => {
         if(unit === 'L') {
@@ -143,11 +153,19 @@ export const RankingPage = ({category, id}) => {
                         paddingLeft: 10,
                         paddingRight: 10
                     }}>
-                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G'); }} >
+                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G');
+                            Analytics.logEvent('Use_GL_switch',{
+                                switch_to: 'Gallons'
+                            })
+                        }} >
                             <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
                         </TouchableOpacity>
                         <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L'); }} >
+                        <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L');
+                            Analytics.logEvent('Use_GL_switch',{
+                                switch_to: 'Liters'
+                            })
+                        }} >
                             <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                         </TouchableOpacity>
                     </View>
@@ -208,6 +226,7 @@ export const RankingPage = ({category, id}) => {
                         <TouchableOpacity
                             onPress={() => {
                                 setModalVisible(true);
+                                Analytics.logEvent('Ranking_Learn_more')
                             }
                             }
                         >

@@ -153,7 +153,6 @@ function CameraView({navigation}) {
                 }});
             // Log an event named 'take_photo' to firebase
             await Analytics.logEvent('take_photo', {
-                screen: 'Camera view',
                 userAction: 'User took a photo'
             });
         } catch (error) {

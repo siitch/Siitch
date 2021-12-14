@@ -4,6 +4,7 @@ import {useState} from 'react';
 const {width} = Dimensions.get('screen');
 import {View, Text, Dimensions, Linking, TouchableHighlight, ScrollView,} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as Analytics from 'expo-firebase-analytics';
 
 const Width = width;
 
@@ -40,7 +41,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand(!expand)}>
+              onPress={() => {
+                  if(!expand){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'What can Siitch do for me?'
+                      })
+                  }
+                  setExpand(!expand)
+              }}>
               What can Siitch do for me?
               </Text>
               {expand ? (
@@ -100,7 +108,14 @@ export const FAQ = ({ navigation }) => {
                 fontWeight: 'bold',
                 color: '#2f97ef'
               }}
-              onPress={() => setExpand1(!expand1)}>
+              onPress={() => {
+                  if(!expand1){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'What am I supposed to do with this information?'
+                      })
+                  }
+                  setExpand1(!expand1)
+              }}>
               <Text>
               What am I supposed to do with this information?
               </Text>
@@ -164,7 +179,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand2(!expand2)}>
+              onPress={() => {
+                  if(!expand2){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'Why did you build this app?'
+                      })
+                  }
+                  setExpand2(!expand2)
+              }}>
               <Text>
               Why did you build this app?
               </Text>
@@ -225,7 +247,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand3(!expand3)}>
+              onPress={() => {
+                  if(!expand3){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'Why should I care about water?'
+                      })
+                  }
+                  setExpand3(!expand3)
+              }}>
               <Text>
               Why should I care about water?
               </Text>
@@ -293,7 +322,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand4(!expand4)}>
+              onPress={() => {
+                  if(!expand4){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'What is virtual water, and why should I care?'
+                      })
+                  }
+                  setExpand4(!expand4)
+              }}>
               <Text>
               What is virtual water, and why should I care?
               </Text>
@@ -367,7 +403,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand5(!expand5)}>
+              onPress={() => {
+                  if(!expand5){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'How much water does the average person use every day?'
+                      })
+                  }
+                  setExpand5(!expand5)
+              }}>
               <Text>
               How much water does the average person use every day?
               </Text>
@@ -445,7 +488,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand6(!expand6)}>
+              onPress={() => {
+                  if(!expand6){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'Is there a scale that shows me where I am compared to everyone else?'
+                      })
+                  }
+                  setExpand6(!expand6)
+              }}>
               <Text>
               Is there a scale that shows me where I am compared to everyone else?
               </Text>
@@ -504,7 +554,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand7(!expand7)}>
+              onPress={() => {
+                  if(!expand7){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'If the average American uses 1,802 gallons of water per day, what should we be aiming for?'
+                      })
+                  }
+                  setExpand7(!expand7)
+              }}>
               <Text>
               If the average American uses 1,802 gallons of water per day, what should we be aiming for?
               </Text>
@@ -562,7 +619,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand8(!expand8)}>
+              onPress={() => {
+                  if(!expand8){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'These statistics are shocking. What are your sources?'
+                      })
+                  }
+                  setExpand8(!expand8)
+              }}>
               <Text>
               These statistics are shocking. What are your sources?
               </Text>
@@ -631,7 +695,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand9(!expand9)}>
+              onPress={() => {
+                  if(!expand9){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'So, should I stop eating avocados?'
+                      })
+                  }
+                  setExpand9(!expand9)
+              }}>
               <Text>
               So, should I stop eating avocados?
               </Text>
@@ -693,7 +764,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand10(!expand10)}>
+              onPress={() => {
+                  if(!expand10){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'Are you going to show other statistics in the future?'
+                      })
+                  }
+                  setExpand10(!expand10)
+              }}>
               <Text>
               Are you going to show other statistics {'\n'}in the future?
               </Text>
@@ -750,7 +828,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand11(!expand11)}>
+              onPress={() => {
+                  if(!expand11){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'What can I do to reduce my impact?'
+                      })
+                  }
+                  setExpand11(!expand11)
+              }}>
               <Text>
               What can I do to reduce my impact?
               </Text>
@@ -841,7 +926,14 @@ export const FAQ = ({ navigation }) => {
                 paddingBottom: 10,
                 fontWeight: 'bold',
               }}
-              onPress={() => setExpand12(!expand12)}>
+              onPress={() => {
+                  if(!expand12){
+                      Analytics.logEvent('FAQ_question_pressed',{
+                          question: 'Why does my screen look misaligned/weird?'
+                      })
+                  }
+                  setExpand12(!expand12)
+              }}>
               <Text>
               Why does my screen look misaligned/weird?
               </Text>
@@ -861,7 +953,7 @@ export const FAQ = ({ navigation }) => {
                    currently not supported. We plan on supporting all platforms in the future.
               </Text>
               ) : null}
-            {expand10 ? (
+            {expand12 ? (
               <TouchableHighlight
                 style={{marginLeft: Width / 1.125, marginTop: -20}}
                 onPress={() => setExpand12(false)}

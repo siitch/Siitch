@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { ScrollView, View, Text, Image, Dimensions, Linking, TouchableHighlight, TouchableOpacity } from 'react-native';
 import Counter from 'react-native-counters'
 import { styles } from './Styles';
@@ -10,6 +10,7 @@ const DeviceWidth = Dimensions.get('window').width;
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 import { lessThan, onChange } from 'react-native-reanimated';
+import * as Analytics from "expo-firebase-analytics";
 
 let fetchedData = {};
 let p1 = {};
@@ -55,6 +56,19 @@ export const comparePage = ({route}) => {
     const [isProduct6Present, setIsProduct6Present] = useState(false);
 
     const [unit, setUnit] = useState('G');
+
+    const [collapse1, setCollapse1] = useState(false);
+    const [collapse2, setCollapse2] = useState(false);
+    const [collapse3, setCollapse3] = useState(false);
+    const [collapse4, setCollapse4] = useState(false);
+    const [itemNumber, setItemNumber] = useState(0);
+    useEffect(()=>{
+        if (itemNumber !== 0){
+            Analytics.logEvent('Compare',{
+                quantity: itemNumber
+            })
+        }
+    },[itemNumber])
 
     const [prod1Total, changeProd1Total] = useState(1);
     const [prod2Total, changeProd2Total] = useState(1);
@@ -180,18 +194,18 @@ export const comparePage = ({route}) => {
         }
 
         firebase
-            .database()
-            .ref('/')
-            .once('value', data => {
-                fetchedData = data.val();
-                for (var item in fetchedData) {
-                    if(item === prod6) {
-                        p6[item] = fetchedData[item];
-                        f6 = p6[prod6]
-                    }
-                }
-                handleFetch6(true);
-            });
+          .database()
+          .ref('/')
+          .once('value', data => {
+              fetchedData = data.val();
+              for (var item in fetchedData) {
+                  if(item === prod6) {
+                      p6[item] = fetchedData[item];
+                      f6 = p6[prod6]
+                  }
+              }
+              handleFetch6(true);
+          });
     }
 
     if(!fetched1) {
@@ -214,6 +228,7 @@ export const comparePage = ({route}) => {
         handleFetch2(false);
         p2 = {};
         f2 = {};
+        setItemNumber(2);
     }
 
     if(prod3 && !fetched3) {
@@ -226,6 +241,7 @@ export const comparePage = ({route}) => {
         handleFetch3(false);
         p3 = {};
         f3 = {};
+        setItemNumber(3);
     }
 
     if(prod4 && !fetched4) {
@@ -238,6 +254,7 @@ export const comparePage = ({route}) => {
         handleFetch4(false);
         p4 = {};
         f4 = {};
+        setItemNumber(4);
     }
 
     if(prod5 && !fetched5) {
@@ -250,6 +267,7 @@ export const comparePage = ({route}) => {
         handleFetch5(false);
         p5 = {};
         f5 = {};
+        setItemNumber(5);
     }
 
     if(prod6 && !fetched6) {
@@ -262,6 +280,7 @@ export const comparePage = ({route}) => {
         handleFetch6(false);
         p6 = {};
         f6 = {};
+        setItemNumber(6);
     }
 
     const setMetric = (obj) => {
@@ -438,57 +457,65 @@ export const comparePage = ({route}) => {
 
     const numberWithCommas = (x) => {
         if(isNaN(x)){
-            return "NA"
+            return "Will never"
         }
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
 
     return (
-        <ScrollView style={{backgroundColor:'white'}}>
-            <View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <View style={{flexDirection: 'row', width: DeviceWidth*.9, marginTop: '3%'}}>
-                        <View style={{
-                            flexDirection: 'row',
-                            marginTop: '5%',
-                            marginLeft: 20,
-                            borderColor: '#00ADEF',
-                            borderWidth: 2,
-                            borderRadius: 10,
-                            width: 65,
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                            height: 40
-                        }}>
-                            <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G');}} >
-                                <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
-                            </TouchableOpacity>
-                            <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-                            <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L'); }}>
-                                <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
-                            </TouchableOpacity>
-                        </View>
-                        {/* Total Gallons Component */}
-                        <View style = {{
-                            flexDirection: 'row',
-                            marginTop: '5%',
-                            justifyContent: 'flex-end',
-                            width: DeviceWidth*.9-65
-                        }}>
-                            <Image style={{width: 20, height: 20, marginTop: '3%'}} source={Profiles.water}/>
-                            <Text style={{fontSize: 25, marginTop: '1%'}}> Total: {
-                                ((selectedcategory1.localeCompare('Time to decompose') != 0 && parseInt(f1[selectedcategory1])*prod1Total) +
-                                    (selectedcategory2.localeCompare('Time to decompose') != 0 && parseInt(f2[selectedcategory2])*prod2Total) +
-                                    ((selectedcategory3.localeCompare('Time to decompose') != 0 && isProduct3Present) ? parseInt(f3[selectedcategory3])*prod3Total : 0) +
-                                    ((selectedcategory4.localeCompare('Time to decompose') != 0 && isProduct4Present) ? parseInt(f4[selectedcategory4])*prod4Total : 0) +
-                                    ((selectedcategory5.localeCompare('Time to decompose') != 0 && isProduct5Present) ? parseInt(f5[selectedcategory5])*prod5Total : 0) +
-                                    ((selectedcategory6.localeCompare('Time to decompose') != 0 && isProduct6Present) ? parseInt(f6[selectedcategory6])*prod6Total : 0))
-                                    .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }
-                                {unit == 'G' ? ' gal.' : ' li.'} </Text>
-                        </View>
-                    </View>
-                    {/* <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
+      <ScrollView style={{backgroundColor:'white'}}>
+          <View>
+              <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <View style={{flexDirection: 'row', width: DeviceWidth*.9, marginTop: '3%'}}>
+                      <View style={{
+                          flexDirection: 'row',
+                          marginTop: '5%',
+                          marginLeft: 20,
+                          borderColor: '#00ADEF',
+                          borderWidth: 2,
+                          borderRadius: 10,
+                          width: 65,
+                          paddingLeft: 10,
+                          paddingRight: 10,
+                          height: 40
+                      }}>
+                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('G');
+                                Analytics.logEvent('Use_GL_switch',{
+                                  switch_to: 'Gallons'
+                              })
+                          }} >
+                              <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
+                          </TouchableOpacity>
+                          <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
+                          <TouchableOpacity onPress={() => {handleFetch1(false);handleFetch2(false);handleFetch3(false);handleFetch4(false);handleFetch5(false);handleFetch6(true); setUnit('L');
+                                Analytics.logEvent('Use_GL_switch',{
+                                  switch_to: 'Liters'
+                              })
+                          }}>
+                              <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
+                          </TouchableOpacity>
+                      </View>
+                      {/* Total Gallons Component */}
+                      <View style = {{
+                          flexDirection: 'row',
+                          marginTop: '5%',
+                          justifyContent: 'flex-end',
+                          width: DeviceWidth*.9-65
+                      }}>
+                          <Image style={{width: 20, height: 20, marginTop: '3%'}} source={Profiles.water}/>
+                          <Text style={{fontSize: 25, marginTop: '1%'}}> Total: {
+                              ((selectedcategory1.localeCompare('Time to decompose') != 0 && parseInt(f1[selectedcategory1])*prod1Total) +
+                                (selectedcategory2.localeCompare('Time to decompose') != 0 && parseInt(f2[selectedcategory2])*prod2Total) +
+                                ((selectedcategory3.localeCompare('Time to decompose') != 0 && isProduct3Present) ? parseInt(f3[selectedcategory3])*prod3Total : 0) +
+                                ((selectedcategory4.localeCompare('Time to decompose') != 0 && isProduct4Present) ? parseInt(f4[selectedcategory4])*prod4Total : 0) +
+                                ((selectedcategory5.localeCompare('Time to decompose') != 0 && isProduct5Present) ? parseInt(f5[selectedcategory5])*prod5Total : 0) +
+                                ((selectedcategory6.localeCompare('Time to decompose') != 0 && isProduct6Present) ? parseInt(f6[selectedcategory6])*prod6Total : 0))
+                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }
+                              {unit == 'G' ? ' G.' : ' L.'} </Text>
+                      </View>
+                  </View>
+                  {/* <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%', marginBottom: '5%', width: DeviceWidth*0.7}}>
           <Text style={{fontSize:20,fontWeight:'bold'}}> {prod1} </Text>
           <Text style={{fontSize:20,fontWeight:'bold'}}>vs. {prod2}</Text>
           {
@@ -773,7 +800,18 @@ export const comparePage = ({route}) => {
                         <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
                     </View>
                 }
-                <Collapse style={{ marginTop: '5%', width: DeviceWidth/1.2}}>
+                <Collapse
+                    style={{ marginTop: '5%', width: DeviceWidth/1.2}}
+                    isExpanded={collapse1}
+                    onToggle={(isExpanded)=>{
+                        setCollapse1(!collapse1)
+                        if(isExpanded){
+                            Analytics.logEvent('Compare_info_pressed',{
+                                contextName: 'Breakdown'
+                            })
+                        }
+                    }}
+                >
                     <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#FFD359', width: DeviceWidth / 1.2,borderColor: '#FFD359', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <View style={{alignItems:'center'}}>
                             <Text style={{fontWeight:'bold', fontSize: 20}}>Breakdown</Text>
@@ -863,7 +901,18 @@ export const comparePage = ({route}) => {
                     </CollapseBody>
                 </Collapse>
 
-                <Collapse style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}}>
+                <Collapse
+                    style={{ borderColor:'#70BF41', marginTop: '2%',width: DeviceWidth/1.2}}
+                    isExpanded={collapse2}
+                    onToggle={(isExpanded)=>{
+                        setCollapse2(!collapse2)
+                        if(isExpanded){
+                            Analytics.logEvent('Compare_info_pressed',{
+                                contextName: 'Rain'
+                            })
+                        }
+                    }}
+                >
                     <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#70BF41', width: DeviceWidth / 1.2,borderColor: '#70BF41', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <View style={{alignItems:'center'}}>
                             <Text style={{fontWeight:'bold', fontSize: 20}}>Rain</Text>
@@ -877,7 +926,18 @@ export const comparePage = ({route}) => {
                     </CollapseBody>
                 </Collapse>
 
-                <Collapse style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}}>
+                <Collapse
+                    style={{ borderColor:'#00ADEF', marginTop: '2%', width: DeviceWidth/1.2}}
+                    isExpanded={collapse3}
+                    onToggle={(isExpanded)=>{
+                        setCollapse3(!collapse3)
+                        if(isExpanded){
+                            Analytics.logEvent('Compare_info_pressed',{
+                                contextName: 'Irrigation'
+                            })
+                        }
+                    }}
+                >
                     <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#00ADEF', width: DeviceWidth / 1.2,borderColor: '#00ADEF', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <View style={{alignItems:'center'}}>
                             <Text style={{fontWeight:'bold', fontSize: 20}}>Irrigation</Text>
@@ -891,7 +951,18 @@ export const comparePage = ({route}) => {
                     </CollapseBody>
                 </Collapse>
 
-                <Collapse style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}}>
+                <Collapse
+                    style={{ borderColor:'#C2C2C2', marginTop: '2%', width: DeviceWidth/1.2}}
+                    isExpanded={collapse4}
+                    onToggle={(isExpanded)=>{
+                        setCollapse4(!collapse4)
+                        if(isExpanded){
+                            Analytics.logEvent('Compare_info_pressed',{
+                                contextName: 'Cleaning'
+                            })
+                        }
+                    }}
+                >
                     <CollapseHeader style={{alignItems:'center',padding:10,backgroundColor:'#C2C2C2', width: DeviceWidth / 1.2,borderColor: '#C2C2C2', borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <View style={{alignItems:'center'}}>
                             <Text style={{fontWeight:'bold', fontSize: 20}}>Cleaning</Text>
