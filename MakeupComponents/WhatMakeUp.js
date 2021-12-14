@@ -17,6 +17,8 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
+import * as Analytics from "expo-firebase-analytics";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -151,10 +153,15 @@ const WhatMakeUp = () => {
         packaging, Reduction or elimination of preservatives, Reduction of CO2
         emissions and energy consumption.
         <Text
-          onPress={() =>
-            Linking.openURL(
-              'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328',
-            )
+          onPress={() => {
+              WebBrowser.openBrowserAsync(
+                  'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328',
+              )
+              Analytics.logEvent('Source_click',{
+                  source_name: 'Blue gold Water in cosmetics',
+                  source_url: 'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328'
+              })
+          }
           }
           style={{color: '#00ADEF'}}>
           {' '}
@@ -216,14 +223,25 @@ const WhatMakeUp = () => {
                 For more zero-waste tips and solutions:
               </Text>
               <Text
-                onPress={() =>
-                  Linking.openURL('https://www.goingzerowaste.com/')
+                onPress={() => {
+                    WebBrowser.openBrowserAsync('https://www.goingzerowaste.com/')
+                    Analytics.logEvent('Source_click',{
+                        source_name: 'Going Zero Waste',
+                        source_url: 'https://www.goingzerowaste.com/'
+                    })
+                }
                 }
                 style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Going Zero Waste
               </Text>
               <Text
-                onPress={() => Linking.openURL('https://packagefreeshop.com/')}
+                onPress={() => {
+                    WebBrowser.openBrowserAsync('https://packagefreeshop.com/')
+                    Analytics.logEvent('Source_click',{
+                        source_name: 'Package Free Shop',
+                        source_url: 'https://packagefreeshop.com/'
+                    })
+                }}
                 style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Package Free Shop
               </Text>
@@ -289,8 +307,13 @@ const WhatMakeUp = () => {
       </Text>
       <Text style={{marginLeft: '10%', marginRight: '10%'}}>
         <Text
-          onPress={() =>
-            Linking.openURL('https://www.ewg.org/californiacosmetics/toxic12')
+          onPress={() => {
+              WebBrowser.openBrowserAsync('https://www.ewg.org/californiacosmetics/toxic12')
+              Analytics.logEvent('Source_click',{
+                  source_name: 'Toxic 12 Chemicals and Contaminants',
+                  source_url: 'https://www.ewg.org/californiacosmetics/toxic12'
+              })
+          }
           }
           style={{color: '#00ADEF'}}>
           The Toxic 12 Chemicals and Contaminants in Your Cosmetics
@@ -324,8 +347,13 @@ const WhatMakeUp = () => {
         Use old makeup palettes to store pills, jewelry, bobby pins. Use old
         nail polish to liven up old glasses. Here’s
         <Text
-          onPress={() =>
-            Linking.openURL('https://homehacks.co/upcycle-old-perfume-bottles/')
+          onPress={() => {
+              WebBrowser.openBrowserAsync('https://homehacks.co/upcycle-old-perfume-bottles/')
+              Analytics.logEvent('Source_click',{
+                  source_name: '15 ways to upcycle old perfume bottles',
+                  source_url: 'https://homehacks.co/upcycle-old-perfume-bottles/'
+              })
+          }
           }
           style={{color: '#00ADEF'}}>
           {' '}
@@ -378,7 +406,13 @@ const WhatMakeUp = () => {
         }}>
         <Text>2. Sign up for </Text>
         <Text
-          onPress={() => Linking.openURL('https://www.terracycle.com/en-US/')}
+          onPress={() => {
+              WebBrowser.openBrowserAsync('https://www.terracycle.com/en-US/')
+              Analytics.logEvent('Source_click',{
+                  source_name: 'Terrancycle',
+                  source_url: 'https://www.terracycle.com/en-US/'
+              })
+          }}
           style={{color: '#00ADEF'}}>
           Terracycle.
         </Text>
@@ -410,10 +444,15 @@ const WhatMakeUp = () => {
         ‘Natural’ & ‘Clean’ are marketing terms with zero substance. Get to know
         what is real vs. fake. To learn more, check out
         <Text
-          onPress={() =>
-            Linking.openURL(
-              'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/',
-            )
+          onPress={() => {
+              WebBrowser.openBrowserAsync(
+                  'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/',
+              )
+              Analytics.logEvent('Source_click',{
+                  source_name: 'How to Read a Cosmetic Label',
+                  source_url: 'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/'
+              })
+          }
           }
           style={{color: '#00ADEF'}}>
           {' '}

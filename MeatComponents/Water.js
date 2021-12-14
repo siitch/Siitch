@@ -1,26 +1,21 @@
-import React, {useState, useEffect, Component, PropTypes} from 'react';
+import React, {useState} from 'react';
 import {Image} from 'react-native';
 import {Dimensions} from 'react-native';
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 import {ImageIcon} from '../ImageIcon';
 import {styles} from '../Ranking/Styles';
 
 import {
-  SafeAreaView,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
   View,
   Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  Pressable,
   TouchableHighlight,
-  Alert,
   Modal,
 } from 'react-native';
 import {images} from '../ImageURL';
+import * as Analytics from "expo-firebase-analytics";
+import * as WebBrowser from 'expo-web-browser';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -119,7 +114,6 @@ const Water = ({inputData, navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
             marginTop: '5%',
-            width: width,
           }}>
           <View style={{width: width / 2, alignItems: 'center'}}>
             <Image
@@ -404,7 +398,12 @@ const Water = ({inputData, navigation}) => {
         </View>
         <View style={{alignItems: 'center'}}>
           <TouchableHighlight
-            onPress={() => navigation.navigate('What')}
+            onPress={() => {
+                navigation.navigate('What')
+                Analytics.logEvent('What_can_I_do',{
+                    item: 'Beef - Water'
+                })
+            }}
             activeOpacity={1}
             underlayColor="#8DC73F"
             style={{
@@ -442,7 +441,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://impossiblefoods.com/grocery/');
+                WebBrowser.openBrowserAsync('https://impossiblefoods.com/grocery/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'IMPOSSIBLE foods'
+                  })
               }}>
               <ImageIcon category="brand" image={images.impossible} />
             </TouchableHighlight>
@@ -451,7 +453,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.beyondmeat.com/');
+                WebBrowser.openBrowserAsync('https://www.beyondmeat.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'BEYOND MEAT'
+                  })
               }}>
               <Image
                 source={images.beyond_meat}
@@ -465,7 +470,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://lightlife.com/');
+                WebBrowser.openBrowserAsync('https://lightlife.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'Lightlife'
+                  })
               }}>
               <ImageIcon category="brand" image={images.lightlife} />
             </TouchableHighlight>
@@ -474,7 +482,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.hungryplanetfoods.com/');
+                WebBrowser.openBrowserAsync('https://www.hungryplanetfoods.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'HUNGRY PLANET foods'
+                  })
               }}>
               <ImageIcon category="brand" image={images.hungry_planet} />
             </TouchableHighlight>
@@ -485,7 +496,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.nextlevelburger.com/');
+                WebBrowser.openBrowserAsync('https://www.nextlevelburger.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'Next Level Burger'
+                  })
               }}>
               <ImageIcon category="brand" image={images.nextlevel} />
             </TouchableHighlight>
@@ -494,7 +508,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.quorn.us/');
+                WebBrowser.openBrowserAsync('https://www.quorn.us/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'Quorn'
+                  })
               }}>
               <ImageIcon category="brand" image={images.quorn} />
             </TouchableHighlight>
@@ -505,7 +522,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.bocaburger.com/');
+                WebBrowser.openBrowserAsync('https://www.bocaburger.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'BOCA burger'
+                  })
               }}>
               <ImageIcon category="brand" image={images.boca} />
             </TouchableHighlight>
@@ -514,7 +534,10 @@ const Water = ({inputData, navigation}) => {
               underlayColor="transperant"
               style={{width: Width / 2, alignItems: 'center'}}
               onPress={() => {
-                Linking.openURL('https://www.gardein.com/');
+                WebBrowser.openBrowserAsync('https://www.gardein.com/');
+                  Analytics.logEvent('Doing_good',{
+                      brandName: 'gardein'
+                  })
               }}>
               <ImageIcon category="brand" image={images.gardein} />
             </TouchableHighlight>

@@ -17,6 +17,8 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import * as Analytics from "expo-firebase-analytics";
+import * as WebBrowser from "expo-web-browser";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
@@ -53,10 +55,15 @@ const JeansHeart = ({inputData, navigation}) => {
         <Text style={{fontSize: 18, width: Width / 1.3}}>
           Check out Good on You’s
           <Text
-            onPress={() =>
-              Linking.openURL(
-                'https://goodonyou.eco/material-guide-ethical-denim/',
-              )
+            onPress={() => {
+                WebBrowser.openBrowserAsync(
+                    'https://goodonyou.eco/material-guide-ethical-denim/',
+                )
+                Analytics.logEvent('Source_click',{
+                    source_name: 'Material Guide: How Ethical is Denim',
+                    source_url: 'https://goodonyou.eco/material-guide-ethical-denim/'
+                })
+            }
             }
             style={{color: '#00ADEF'}}>
             {' '}
@@ -65,7 +72,12 @@ const JeansHeart = ({inputData, navigation}) => {
         </Text>
       </View>
       <TouchableHighlight
-        onPress={() => navigation.navigate('What')}
+        onPress={() => {
+            navigation.navigate('What')
+            Analytics.logEvent('What_can_I_do',{
+                item: 'Jeans - Health'
+            })
+        }}
         activeOpacity={1}
         underlayColor="#8DC73F"
         style={{
@@ -93,7 +105,13 @@ const JeansHeart = ({inputData, navigation}) => {
         <Text style={{fontSize: 16, width: Width / 1.3,textAlign:'center',marginTop:'2%'}}>
           U.S.A companies, as recommended by
           <Text
-            onPress={() => Linking.openURL('https://goodonyou.eco/')}
+            onPress={() => {
+                WebBrowser.openBrowserAsync('https://goodonyou.eco/')
+                Analytics.logEvent('Source_click',{
+                    source_name: 'Good On You',
+                    source_url: 'https://goodonyou.eco/'
+                })
+            }}
             style={{color: '#00ADEF'}}>
             {' '}
             Good On You,{' '}
@@ -102,108 +120,138 @@ const JeansHeart = ({inputData, navigation}) => {
         </Text>
         <Image source={images.down_arrow} style={{width: 60, height: 60}} />
       </View>
-      <View style={{flexDirection: 'column', alignItems: 'center'}}>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.asket.com/');
-            }}>
-            <ImageIcon category="brand" image={images.asket} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.outlanddenim.com/');
-            }}>
-            <ImageIcon category="brand" image={images.outland} />
-          </TouchableHighlight>
+        <View style={{flexDirection: 'column', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.asket.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'ASKET'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.asket} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.outlanddenim.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'OUTLAND DENIM'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.outland} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.patagonia.com/home/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'patagonia'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.patagonia} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.boyish.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'Boyish'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.boyish} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.outerknown.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'OUTERKNOWN'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.outerknown} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://amourvert.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'AMOUR VERT'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.amourvert} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://citizensofhumanity.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'CITIZENS of HUMANITY'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.citizens} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://triarchy.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'Triarchy'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.triarchy} />
+                </TouchableHighlight>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: '5%'}}>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.dl1961.com/');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'DL 1961'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.dl} />
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={1}
+                    underlayColor="transperant"
+                    style={{width: Width / 2, alignItems: 'center'}}
+                    onPress={() => {
+                        WebBrowser.openBrowserAsync('https://www.g-star.com/en_us');
+                        Analytics.logEvent('Doing_good',{
+                            brandName: 'G-STAR'
+                        })
+                    }}>
+                    <ImageIcon category="brand" image={images.g_star} />
+                </TouchableHighlight>
+            </View>
         </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.patagonia.com/home/');
-            }}>
-            <ImageIcon category="brand" image={images.patagonia} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.boyish.com/');
-            }}>
-            <ImageIcon category="brand" image={images.boyish} />
-          </TouchableHighlight>
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.outerknown.com/');
-            }}>
-            <ImageIcon category="brand" image={images.outerknown} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://amourvert.com/');
-            }}>
-            <ImageIcon category="brand" image={images.amourvert} />
-          </TouchableHighlight>
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://citizensofhumanity.com/');
-            }}>
-            <ImageIcon category="brand" image={images.citizens} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://triarchy.com/');
-            }}>
-            <ImageIcon category="brand" image={images.triarchy} />
-          </TouchableHighlight>
-        </View>
-        <View style={{flexDirection: 'row', marginTop: '5%'}}>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.dl1961.com/');
-            }}>
-            <ImageIcon category="brand" image={images.dl} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor="transperant"
-            style={{width: Width / 2, alignItems: 'center'}}
-            onPress={() => {
-              Linking.openURL('https://www.g-star.com/en_us');
-            }}>
-            <ImageIcon category="brand" image={images.g_star} />
-          </TouchableHighlight>
-        </View>
-      </View>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );
