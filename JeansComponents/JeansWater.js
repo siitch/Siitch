@@ -18,7 +18,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import {images} from '../ImageURL';
-import * as Analytics from "expo-firebase-analytics";
+import analytics from '@react-native-firebase/analytics';
 import * as WebBrowser from 'expo-web-browser';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
@@ -326,7 +326,7 @@ const JeansWater = ({inputData, navigation}) => {
       <TouchableHighlight
         onPress={() => {
             navigation.navigate('What')
-            Analytics.logEvent('What_can_I_do',{
+            analytics().logEvent('What_can_I_do',{
                 item: 'Jeans - Water'
             })
         }}
@@ -359,7 +359,7 @@ const JeansWater = ({inputData, navigation}) => {
           <Text
             onPress={() => {
                 WebBrowser.openBrowserAsync('https://goodonyou.eco/')
-                Analytics.logEvent('Source_click',{
+                analytics().logEvent('Source_click',{
                     source_name: 'Good On You',
                     source_url: 'https://goodonyou.eco/'
                 })
@@ -380,7 +380,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.asket.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'ASKET'
                 })
             }}>
@@ -392,7 +392,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.outlanddenim.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'OUTLAND DENIM'
                 })
             }}>
@@ -406,7 +406,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.patagonia.com/home/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'patagonia'
                 })
             }}>
@@ -418,7 +418,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.boyish.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'Boyish'
                 })
             }}>
@@ -432,7 +432,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.outerknown.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'OUTERKNOWN'
                 })
             }}>
@@ -444,7 +444,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://amourvert.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'AMOUR VERT'
                 })
             }}>
@@ -458,7 +458,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://citizensofhumanity.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'CITIZENS of HUMANITY'
                 })
             }}>
@@ -470,7 +470,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://triarchy.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'Triarchy'
                 })
             }}>
@@ -484,7 +484,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.dl1961.com/');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'DL 1961'
                 })
             }}>
@@ -496,7 +496,7 @@ const JeansWater = ({inputData, navigation}) => {
             style={{width: Width / 2, alignItems: 'center'}}
             onPress={() => {
               WebBrowser.openBrowserAsync('https://www.g-star.com/en_us');
-                Analytics.logEvent('Doing_good',{
+                analytics().logEvent('Doing_good',{
                     brandName: 'G-STAR'
                 })
             }}>
