@@ -1,6 +1,6 @@
 import {
     Dimensions,
-    Image, Linking, Modal,
+    Image, Modal,
     SafeAreaView,
     ScrollView,
     Text,
@@ -19,6 +19,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import {styles} from "../Comparing/Styles";
 import {SimpleCalculator} from "./SimpleCalculator";
 import analytics from '@react-native-firebase/analytics';
+import * as WebBrowser from "expo-web-browser";
 
 export default function ItemDetail({ route, navigation }) {
     // Get item name passed from other screen
@@ -616,7 +617,16 @@ export default function ItemDetail({ route, navigation }) {
                             )}
                         </View>
                         {!(compostable === 'Yes' || compostable === 'No') && compostable !== '' && (
-                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                          <Hyperlink
+                            linkStyle={ { color: '#00ADEF' } }
+                            onPress={(url => {
+                                WebBrowser.openBrowserAsync(url)
+                                analytics().logEvent('Source_click',{
+                                    source_name: url,
+                                    source_url: url
+                                })
+                            })}
+                          >
                                 <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
                                     {compostable}
                                 </Text>
@@ -670,7 +680,16 @@ export default function ItemDetail({ route, navigation }) {
                             )}
                         </View>
                         {!(recyclable === 'Yes' || recyclable === 'No') && recyclable !== '' && (
-                            <Hyperlink linkDefault={ true } linkStyle={ { color: '#00ADEF' } }>
+                          <Hyperlink
+                            linkStyle={ { color: '#00ADEF' } }
+                            onPress={(url => {
+                                WebBrowser.openBrowserAsync(url)
+                                analytics().logEvent('Source_click',{
+                                    source_name: url,
+                                    source_url: url
+                                })
+                            })}
+                          >
                                 <Text style={{marginTop: 10, marginLeft: 5, marginBottom: 5}}>
                                     {recyclable}
                                 </Text>
@@ -1291,7 +1310,13 @@ export default function ItemDetail({ route, navigation }) {
                                 required to dilute the wastewater generated in
                                 manufacturing, in order to maintain water quality, as
                                 determined by state and local standards. Definitions:
-                                <Text onPress={() => Linking.openURL('https://www.watercalculator.org')}
+                                <Text onPress={() => {
+                                    WebBrowser.openBrowserAsync('https://www.watercalculator.org')
+                                    analytics().logEvent('Source_click',{
+                                        source_name: 'Water Calculator',
+                                        source_url: 'https://www.watercalculator.org'
+                                    })
+                                }}
                                       style={{color: '#00ADEF'}}>www.watercalculator.org</Text>
                             </Text>
                             <TouchableHighlight
@@ -1414,19 +1439,17 @@ export default function ItemDetail({ route, navigation }) {
                                         carbon and nitrogen in the organic material, and the volume of material being
                                         composted.
                                         {'\n\n'}
-                                        <Hyperlink
-                                            linkDefault={ true }
-                                            linkStyle={ { color: '#00ADEF' } }
-                                            linkText={ url => url === 'https://growensemble.com/benefits-of-composting/' ?
-                                                '15 Benefits of Composting' : url }
-                                        >
-                                            <Text style={ { } }>
-                                                Composting reduces methane emissions from landfills and lowers your carbon
-                                                footprint. Here's https://growensemble.com/benefits-of-composting/
-                                            </Text>
-                                        </Hyperlink>
+                                        Composting reduces methane emissions from landfills and lowers your carbon
+                                        footprint. Here's
+                                        <Text onPress={() => {
+                                            WebBrowser.openBrowserAsync('https://growensemble.com/benefits-of-composting/')
+                                            analytics().logEvent('Source_click',{
+                                                source_name: '15 Benefits of Composting',
+                                                source_url: 'https://growensemble.com/benefits-of-composting/'
+                                            })
+                                        }}
+                                              style={{color: '#00ADEF'}}> 15 Benefits of Composting</Text>
                                     </Text>
-
                                 </View>
                             </View>
                         )}
