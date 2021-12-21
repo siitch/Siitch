@@ -394,6 +394,16 @@ function CalculateScreen() {
     DropDownPicker.value = null;
   };
 
+  const clearElement = () => {
+    setComputed(false);
+    setInputValue('');
+    setItem('');
+    setFrequency(null);
+    setQuantity(null);
+
+    DropDownPicker.value = null;
+  };
+
   return (
     <ScrollView ref={view => this._scrollView = view} style={{backgroundColor: 'white'}}>
       <View style={{flexDirection: 'row'}}>
@@ -943,7 +953,7 @@ function CalculateScreen() {
           <View>
             <TouchableOpacity
               onPress={() => {
-                computed ? clearElements() : calculate();
+                computed ? clearElement() : calculate();
                 // calculate(item,frequency);
               }}
               style={{
@@ -1145,11 +1155,8 @@ function CalculateScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => {setShowlist(true);
-                  console.log(loading)
                   loading=true;
-                  console.log(loading)
                   calculate();
-                  console.log(loading)
                 }}
 
                 style={{
@@ -1182,13 +1189,12 @@ function CalculateScreen() {
         {showlist && (
 
           <View style={{flexDirection: 'row',
-          justifyContent: 'space-between',
           backgroundColor: 'rgba(198, 198, 198, 0.2)',
           height:40
           }}>
             <Text style={{fontSize: 23, fontWeight: '500',marginLeft:20,marginTop:7}}>Running Total</Text>
               <Image
-                style={{width: 30, height: 30,marginRight:65,marginTop:5}}
+                style={{width: 30, height: 30, position:'absolute',right:45, marginTop:5}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
           </View>
@@ -1213,8 +1219,8 @@ function CalculateScreen() {
                     }
                   />
                   
-                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListG[index]}</Text>)}
-                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListL[index]}</Text>)}
+                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:7,marginTop:10}}>{itemNameList[index]} {itemMeasurementListG[index]}</Text>)}
+                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:7,marginTop:10}}>{itemNameList[index]} {itemMeasurementListL[index]}</Text>)}
                 </View>
       
                 <View style={{flexDirection: 'row',
@@ -1371,8 +1377,9 @@ function CalculateScreen() {
                     }}
                   />
 
-                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
-                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
+                  <View style={{flexDirection: 'row',position: 'absolute', right:0 }}>
+                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
+                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
 
                   <TouchableHighlight  onPress={(i) => deleteItemFromList(index)}>
                     <Image                 
@@ -1384,6 +1391,8 @@ function CalculateScreen() {
                       }}
                       source={require('./../images/red_x.png')}/>
                   </TouchableHighlight>
+                  </View>
+
                 </View>            
                   <View
                     style={{
@@ -1399,7 +1408,6 @@ function CalculateScreen() {
         {showlist && (
           <View style={{flexDirection: 'row'}}>
             <Text style={{fontSize: 20, fontWeight: '500',marginLeft:20, marginTop: 20, marginBottom: 20}}>Total</Text>
-
             <View
               style={{
                 flexDirection: 'row',
@@ -1447,9 +1455,9 @@ function CalculateScreen() {
               </TouchableOpacity>
             </View>
 
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'center', position: 'absolute', right:0 }}>
               <Image
-                style={{width: 30, height: 30, marginLeft:'40%',marginTop:15,marginBottom:20}}
+                style={{width: 30, height: 30, marginTop:15,marginBottom:20}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
               {unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostTotal)} G</Text>)}
