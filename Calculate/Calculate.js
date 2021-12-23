@@ -107,10 +107,10 @@ function CalculateScreen() {
   const [inputValue, setInputValue] = useState('');
   const [unit, setUnit] = useState('G');
   const [unitG,setUnitG] = useState(true);
-  const [reallyOutputs,setReallyOutput] = useState(0);
-  const [reallyLOutputs,setReallyLOutput] = useState(0);
+  var [reallyOutputs,setReallyOutput] = useState(0);
+  var [reallyLOutputs,setReallyLOutput] = useState(0);
   const [showAnotherRunningtotal,setShowAnotherRunningtotal] = useState(false);
-
+  var [impactUnit,setImpactUnit] = useState('yearly');
   var [yearlyCostTotal, setYearlyCostTotal] = useState(0);
   var [mixCostTotal, setMixCostTotal] = useState(0); 
   var [mixCostLTotal, setMixCostLTotal] = useState(0);
@@ -136,11 +136,17 @@ function CalculateScreen() {
       setReallyOutput(~~(yearlyCostTotal/365)*7);
       setReallyLOutput(~~(yearlyCostLTotal/365)*7);
     }
-    else
+    else if(currentUnit=="daily")
     {
       setReallyOutput(~~(yearlyCostTotal/365));
       setReallyLOutput(~~(yearlyCostLTotal/365));
     }
+    console.log("****")
+    console.log(yearlyCostTotal)
+    console.log(currentUnit)
+    console.log(reallyLOutputs)
+    console.log(reallyOutputs)
+    console.log("****")
   }
 
   const updateYearlyCostTotal = () =>{
@@ -336,6 +342,7 @@ function CalculateScreen() {
   };
 
   const upgradePages =() =>{
+    console.log("updatePages")
     // pages=[]
     // setPages([]);
     var temppages=[];
@@ -363,6 +370,7 @@ function CalculateScreen() {
   }
 
   const clearElements = () => {
+    setImpactUnit('yearly')
     setShowAnotherRunningtotal(false);
     setReallyOutput(0);
     setReallyLOutput(0);
@@ -1087,9 +1095,10 @@ function CalculateScreen() {
                   // console.log("itemCostList",itemCostList)
                   // console.log("itemYearlyCostList",itemYearlyCostList)
                   // console.log("itemYearlyCost",itemYearlyCost)
-                  // console.log("yearlyCostTotal",yearlyCostTotal)
+                  console.log("yearlyCostTotal",yearlyCostTotal)
                   // console.log("mixCostTotal",mixCostTotal)
                   upgradePages();
+                  console.log("yearlyCostTotal",yearlyCostTotal)
                   if(itemNameList.length !==0)
                     setShowAnotherRunningtotal(true);
                 }}
@@ -1526,7 +1535,7 @@ function CalculateScreen() {
                   }}
                   dropDownMaxHeight={250}
                   onChangeItem={(currentUnit) => {
-                    updateReallyOutput(currentUnit.value)
+                    setImpactUnit(currentUnit.value)
                   }}
                   onOpen={() => {
                     // setComputed(false);
@@ -1543,8 +1552,20 @@ function CalculateScreen() {
                   style={{width: 30, height: 30, marginTop:25}}
                   source={require('./../images/water_drop_150px_wide2.png')}
                 />
-                {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
+
+                {unitG && (impactUnit=='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostTotal/365)))} Gal</Text>)}
+                {unitG && (impactUnit=='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/365)*7)} Gal</Text>)}
+                {unitG && (impactUnit=='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/12))} Gal</Text>)}
+                {unitG && (impactUnit=='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                {!unitG && (impactUnit=='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostLTotal/365)))} L</Text>)}
+                {!unitG && (impactUnit=='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/365)*7)} L</Text>)}
+                {!unitG && (impactUnit=='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/12))} L</Text>)}
+                {!unitG && (impactUnit=='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostLTotal)} L</Text>)}
+
+                {/* {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                
+                
+                {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)} */}
              </View>
               
           </View>
