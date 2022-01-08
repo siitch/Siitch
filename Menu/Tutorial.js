@@ -21,7 +21,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP1.png')}/>
+            , width:width}} source={require('../images2/Tutorial1.png')}/>
             </ScrollView>
         ),
       },
@@ -32,7 +32,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP2.png')}/>
+            , width:width}} source={require('../images2/Tutorial2.png')}/>
           </ScrollView>
         ),
       },
@@ -43,7 +43,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP3.png')}/>
+            , width:width}} source={require('../images2/Tutorial3.png')}/>
             </ScrollView>
         ),
       },
@@ -54,7 +54,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP4.png')}/>
+            , width:width}} source={require('../images2/Tutorial4.png')}/>
             </ScrollView>
         ),
       },
@@ -65,7 +65,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP5.png')}/>
+            , width:width}} source={require('../images2/Tutorial5.png')}/>
             </ScrollView>
 
         ),
@@ -77,7 +77,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP6.png')}/>
+            , width:width}} source={require('../images2/Tutorial6.png')}/>
             </ScrollView>
         ),
       },
@@ -88,7 +88,7 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP7.png')}/>
+            , width:width}} source={require('../images2/Tutorial7.png')}/>
             </ScrollView>
         ),
       },
@@ -99,10 +99,23 @@ const Tutorial = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
           <Image style={{height:height
-            , width:width}} source={require('../images2/OnboardP8.png')}/>
+            , width:width}} source={require('../images2/Tutorial8.png')}/>
             </ScrollView>
         ),
       },
+      /*
+      {
+        title: '',
+        subtitle: '',
+        backgroundColor: '#ffffff',
+        image: (
+          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
+          <Image style={{height:height
+            , width:width}} source={require('../images2/Tutorial9.png')}/>
+            </ScrollView>
+        ),
+      },
+      */
 
 
       {

@@ -22,7 +22,7 @@ const OnboardingScreen = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP1.png')}/>
+            , width:width}} source={require('./images2/Onboard1.png')}/>
             </ScrollView>
         ),
       },
@@ -33,7 +33,7 @@ const OnboardingScreen = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP2.png')}/>
+            , width:width}} source={require('./images2/Onboard2.png')}/>
           </ScrollView>        
         ),
       },
@@ -44,7 +44,7 @@ const OnboardingScreen = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP3.png')}/>
+            , width:width}} source={require('./images2/Onboard3.png')}/>
             </ScrollView>
         ),
       },
@@ -55,7 +55,7 @@ const OnboardingScreen = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP4.png')}/>
+            , width:width}} source={require('./images2/Onboard4.png')}/>
             </ScrollView>
         ),
       },
@@ -66,12 +66,12 @@ const OnboardingScreen = ({navigation}) => {
         image: (
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
-            , width:width}} source={require('./images2/OnboardP5.png')}/>
+            , width:width}} source={require('./images2/Onboard5.png')}/>
             </ScrollView>
 
         ),
       },
-      {
+      /*{
         title: '',
         subtitle: '',
         backgroundColor: '#ffffff',
@@ -104,11 +104,11 @@ const OnboardingScreen = ({navigation}) => {
             </ScrollView>
         ),
       },
-      
+      */
       
       {
         title: "",
-        subtitle: (
+        subtitle: (            
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -117,22 +117,16 @@ const OnboardingScreen = ({navigation}) => {
             >
         <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
           </TouchableOpacity>
-          // <Button
-          // style={{backgroundColor: '#70BF41'}}
-          //   title={'Get Started'}
-          //   color='#70BF41'
-          //   backgroundColor={'#1E6738'}
-          //   containerViewStyle={{ marginTop: 20 }}
-          //   borderRadius={5}
-            // onPress={() => {
-            //   navigation.navigate("Landing Page")
-            // }}
-          // />
         ),
         backgroundColor: '#FFFFFF',
         image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
+            <Text style={{fontSize: 32, alignContent: 'center', textAlign: 'center', marginTop: 30, marginHorizontal: '10%'}}>
+            Made for people who
+          care about the planet      </Text>
           <Image style={{height:height/3
-            , width:width, resizeMode:'contain'}} source={require('./images/Image_new/Onboarding/graphic.png')}/>
+            , width:width-10, resizeMode:'contain', marginTop: '5%'}} source={require('./images2/OnboardFinalImage.png')}/>
+        </ScrollView>
         ),
       },
     ]}
