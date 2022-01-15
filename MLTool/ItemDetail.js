@@ -20,6 +20,7 @@ import {styles} from "../Comparing/Styles";
 import {SimpleCalculator} from "./SimpleCalculator";
 import * as Analytics from "expo-firebase-analytics";
 import * as WebBrowser from "expo-web-browser";
+import SpecialItem from "./SpecialItem";
 
 export default function ItemDetail({ route, navigation }) {
     // Get item name passed from other screen
@@ -264,9 +265,9 @@ export default function ItemDetail({ route, navigation }) {
                         setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
                         setCleaning(itemObj['Global Imperial Gray Gal p lb'])
 
-                        setRainKg(itemObj['USA Green L p kg'])
-                        setIrrigationKg(itemObj['USA Blue L p kg'])
-                        setCleaningKg(itemObj['USA Gray L p kg'])
+                        setRainKg(itemObj['Global Green L p kg'])
+                        setIrrigationKg(itemObj['Global Blue L p kg'])
+                        setCleaningKg(itemObj['Global Gray L p kg'])
 
                         // Third section
                         setIndividualUnitG(itemObj['Individiual Unit Gal'])
@@ -371,14 +372,6 @@ export default function ItemDetail({ route, navigation }) {
                         <Text>{measurement}</Text>
                     </View>
 
-                    {/* First divider */}
-                    <View
-                        style={{
-                            borderBottomColor: 'rgba(0,0,0,0.25)',
-                            borderBottomWidth: 1,
-                        }}
-                    />
-
                     {/* Second section */}
                     {(rain !== '' || irrigation !== '' || cleaning !== '') && (
                         <View>
@@ -417,7 +410,7 @@ export default function ItemDetail({ route, navigation }) {
                                         setRainModalVisible(true)}}
                                 >
                                     <Text style={{color:'white'}}>Rain</Text>
-                                    <Text style={{color:'white'}}>{globalUnit === 'G' ? rain : rainKg} {globalUnit === 'G' ?
+                                    <Text style={{color:'white'}}>{globalUnit === 'G' ? numberWithCommas(rain) : numberWithCommas(rainKg)} {globalUnit === 'G' ?
                                         individualUnitG.split(' ')[0] : individualUnitL.split(' ')[0]}</Text>
                                 </Card>
 
@@ -440,7 +433,7 @@ export default function ItemDetail({ route, navigation }) {
                                         setIrrigationModalVisible(true)}}
                                 >
                                     <Text style={{color:'white'}}>Irrigation</Text>
-                                    <Text style={{color:'white'}}>{globalUnit === 'G' ? irrigation : irrigationKg} {globalUnit === 'G' ?
+                                    <Text style={{color:'white'}}>{globalUnit === 'G' ? numberWithCommas(irrigation) : numberWithCommas(irrigationKg)} {globalUnit === 'G' ?
                                         individualUnitG.split(' ')[0] : individualUnitL.split(' ')[0]}</Text>
                                 </Card>
 
@@ -464,19 +457,21 @@ export default function ItemDetail({ route, navigation }) {
                                 >
                                     <Text style={{color:'white'}}>Cleaning</Text>
                                     { cleaning !== '' && (
-                                        <Text style={{color:'white'}}>{globalUnit === 'G' ? cleaning : cleaningKg} {globalUnit === 'G' ?
+                                        <Text style={{color:'white'}}>{globalUnit === 'G' ? numberWithCommas(cleaning) : numberWithCommas(cleaningKg)} {globalUnit === 'G' ?
                                             individualUnitG.split(' ')[0] : individualUnitL.split(' ')[0]}</Text>)}
                                 </Card>
                             </View>
-                            {/* Divider attached to three cards*/}
-                            <View
-                                style={{
-                                    borderBottomColor: 'rgba(0,0,0,0.25)',
-                                    borderBottomWidth: 1,
-                                }}
-                            />
+
                         </View>
                     )}
+
+                    {/* Divider attached to three cards*/}
+                    <View
+                        style={{
+                            borderBottomColor: 'rgba(0,0,0,0.25)',
+                            borderBottomWidth: 1,
+                        }}
+                    />
 
                     {/* To make 1 */}
                     {individualUnit !== '' && (
@@ -610,7 +605,7 @@ export default function ItemDetail({ route, navigation }) {
                                 </TouchableOpacity>
                             </View>
                             {compostableCheck && (
-                                <Image source={itemDetailImages.greenCheck} style={{width: 30, height: 30}}/>
+                                <Image source={itemDetailImages.greenCheck} style={{width: 33, height: 33}}/>
                             )}
                             {compostableCross && (
                                 <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
@@ -673,7 +668,7 @@ export default function ItemDetail({ route, navigation }) {
                                 </TouchableOpacity>
                             </View>
                             {recyclableCheck && (
-                                <Image source={itemDetailImages.greenCheck} style={{width: 30, height: 30}}/>
+                                <Image source={itemDetailImages.greenCheck} style={{width: 33, height: 33}}/>
                             )}
                             {recyclableCross && (
                                 <Image source={itemDetailImages.redCross} style={{width: 30, height: 30}}/>
@@ -708,6 +703,10 @@ export default function ItemDetail({ route, navigation }) {
                         borderBottomWidth: 1,
                     }}
                 />
+
+                {itemName === 'Oranges' && (
+                    <SpecialItem navigation={navigation} globalUnit={globalUnit}/>
+                )}
 
                 {/* Simple calculator */}
                 {metricToDisplay !== null && (metricToDisplay === 'gallons' || metricToDisplay === 'liters') && (
