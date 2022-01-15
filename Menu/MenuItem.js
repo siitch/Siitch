@@ -6,7 +6,7 @@ export const MenuItem = ({navigation, menuItemName}) => {
     function icon() {
         switch (menuItemName) {
             case "Tutorial":
-                return require('./../images2/Tutorial2.png')
+                return require('./../images2/Tutorial.png')
             case "Sources":
                 return require('./../images2/Source_PNG.png')
             case "Mission":
@@ -42,52 +42,52 @@ export const MenuItem = ({navigation, menuItemName}) => {
     }
 
     return(
-        <View>
-            <TouchableOpacity
-                style={{
-                    flexDirection: 'row',
-                    height: 75,
-                    alignItems: 'center',
-                    backgroundColor: 'white',
-                }}
-                onPress={() => navigation.navigate(menuItemName)}
-            >
-                <View style={{
-                    width: 45,
-                    height: 45,
-                    marginHorizontal: 5,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <Image
-                        source={icon()}
-                        style={{
-                            width: 34,
-                            height: 34,
-                        }}
-                    />
-                </View>
+      <View>
+          <TouchableOpacity
+            style={{
+                flexDirection: 'row',
+                height: 75,
+                alignItems: 'center',
+                backgroundColor: 'white',
+            }}
+            onPress={() => navigation.navigate(menuItemName)}
+          >
+              <View style={{
+                  width: 45,
+                  height: 45,
+                  marginHorizontal: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center'
+              }}>
+                  <Image
+                    source={icon()}
+                    style={{
+                        width: 34,
+                        height: 34,
+                    }}
+                  />
+              </View>
 
-                <View style={{
-                    flex: 1,
-                }}>
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
+              <View style={{
+                  flex: 1,
+              }}>
+                  <View style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
 
-                    }}>
-                        <Text style={{fontSize: 20, color: 'black'}}>
-                            {name()}
-                        </Text>
-                        <View style={{marginRight: 5}}>
-                            <MaterialCommunityIcons name = 'chevron-right' size = {35}/>
-                        </View>
-                    </View>
-                    <View style={{borderBottomColor: 'gray', borderBottomWidth: 1}}/>
-                </View>
-            </TouchableOpacity>
-        </View>
+                  }}>
+                      <Text style={{fontSize: 20, color: 'black'}}>
+                          {name()}
+                      </Text>
+                      <View style={{marginRight: 5}}>
+                          <MaterialCommunityIcons name = 'chevron-right' size = {35}/>
+                      </View>
+                  </View>
+                  <View style={{borderBottomColor: 'gray', borderBottomWidth: 1}}/>
+              </View>
+          </TouchableOpacity>
+      </View>
     )
 }
