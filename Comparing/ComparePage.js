@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { ScrollView, View, Text, Image, Dimensions, Linking, TouchableHighlight, TouchableOpacity } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Text,
+    Image,
+    Dimensions,
+    Linking,
+    TouchableHighlight,
+    TouchableOpacity,
+    Modal
+} from 'react-native';
 import Counter from 'react-native-counters'
 import { styles } from './Styles';
 import firebase from 'firebase';
@@ -11,6 +21,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 import { lessThan, onChange } from 'react-native-reanimated';
 import * as Analytics from "expo-firebase-analytics";
+import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 
 let fetchedData = {};
 let p1 = {};
@@ -26,7 +37,7 @@ let f4 = {};
 let f5 = {};
 let f6 = {};
 
-export const comparePage = ({route}) => {
+export const comparePage = ({navigation, route}) => {
     const { prodarray } = route.params;
     const prod1 = prodarray[0];
     const prod2 = prodarray[1];
@@ -56,6 +67,7 @@ export const comparePage = ({route}) => {
     const [isProduct6Present, setIsProduct6Present] = useState(false);
 
     const [unit, setUnit] = useState('G');
+    const [infoVisible, setInfoVisible] = useState(false);
 
     const [collapse1, setCollapse1] = useState(false);
     const [collapse2, setCollapse2] = useState(false);
@@ -457,7 +469,7 @@ export const comparePage = ({route}) => {
 
     const numberWithCommas = (x) => {
         if(isNaN(x)){
-            return "Will never"
+            return "NA"
         }
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -503,6 +515,16 @@ export const comparePage = ({route}) => {
                           justifyContent: 'flex-end',
                           width: DeviceWidth*.9-65
                       }}>
+                          <TouchableOpacity
+                              style={{paddingTop: 8}}
+                              onPress={()=>{
+                                  setInfoVisible(true)
+                                  Analytics.logEvent('Info_button_pressed',{
+                                      infoName: 'Virtual_Water'
+                                  })
+                              }}>
+                              <Image source={itemDetailImages.info} style={{width: 30, height: 22}}/>
+                          </TouchableOpacity>
                           <Image style={{width: 20, height: 20, marginTop: '3%'}} source={Profiles.water}/>
                           <Text style={{fontSize: 25, marginTop: '1%'}}> Total: {
                               ((selectedcategory1.localeCompare('Time to decompose') != 0 && parseInt(f1[selectedcategory1])*prod1Total) +
@@ -977,6 +999,68 @@ export const comparePage = ({route}) => {
                     </CollapseBody>
                 </Collapse>
             </View>
+
+          {/* Info button modal */}
+          <Modal animationType="slide" transparent={true} visible={infoVisible}>
+              <View
+                  style={{
+                      flex: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 22,
+                  }}>
+                  <View style={{
+                      marginLeft: 20,
+                      marginRight: 20,
+                      backgroundColor: 'white',
+                      borderColor: '#00ADEF',
+                      borderWidth: 1.5,
+                      borderRadius: 20,
+                      shadowColor: '#000',
+                      shadowOffset: {
+                          width: 0,
+                          height: 2,
+                      },
+                      shadowOpacity: 0.25,
+                      shadowRadius: 3.84,
+                      elevation: 5,
+                  }}>
+                      <TouchableOpacity
+                          onPress={() => {
+                              setInfoVisible(false);
+                          }}
+                          style={{
+                              zIndex: 10,
+                              alignSelf: 'flex-end',
+                              position: 'absolute'
+                          }}>
+                          <Image
+                              source={itemDetailImages.closeInfoModal}
+                              style={{
+                                  width: 50,
+                                  height: 50
+                              }}/>
+                      </TouchableOpacity>
+                      <View style={{
+                          marginTop: 20,
+                          marginHorizontal: 15,
+                          marginBottom: 15,
+                          padding: 15
+                      }}>
+                          <Text>
+                              These numbers represent the Virtual Water totals. Virtual water is the total volume of
+                              water used in the production of a good or service. See our
+                              <Text
+                                  onPress={() => {
+                                      navigation.navigate('Virtual Water')
+                                      setInfoVisible(false)
+                                  }}
+                                  style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information.
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+          </Modal>
         </ScrollView>
     );
 }
