@@ -27,7 +27,7 @@ import 'react-native-gesture-handler';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import React from 'react';
 import {useState, useRef} from 'react';
-import {View, Text, Image, Dimensions, Button, Pressable, ScrollView} from 'react-native';
+import {View, Text, Image, Dimensions, Button, Pressable, ScrollView, TouchableOpacity} from 'react-native';
 import analytics from '@react-native-firebase/analytics';
 
 import {
@@ -59,13 +59,14 @@ import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
 import {cameraScreen} from "./MLTool/CameraView";
 import ItemDetail from "./MLTool/ItemDetail";
+import comparePage from "./Comparing/ComparePage";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
 
 
 
-function HomeScreen() {
+function HomeScreen({navigation}) {
     return (
         <ScrollView style={{backgroundColor: 'white'}}>
             <View style={styles.MainContainer}>
@@ -97,7 +98,139 @@ function HomeScreen() {
                     color: '#70BF41',
                     fontSize: 22,
                 }}>IMPACT</Text>,</Text>
-                <Text style={styles.bottomtext}>one Siitch-uation at a time</Text>
+              <Text style={styles.bottomtext}>one Siitch-uation at a time{'\n\n'}</Text>
+              <Text style={{
+                alignSelf: 'center',
+                fontWeight: 'bold',
+                fontSize: 23,
+                marginBottom: '10%'
+              }}>Choose from the FIVE TOOLS</Text>
+
+              <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginHorizontal: '5%',
+                marginBottom: '8%'
+              }}>
+                <View style={{
+                  flex: 2,
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                    onPress={()=>{
+                      navigation.navigate('Rank')
+                    }}>
+                    <Image
+                      source={require('./images2/HomepageIcons/RankingIcon.png')}
+                      style={{
+                        height: 49,
+                        width: 58
+                      }}
+                    />
+                    <Text style={{fontSize: 16, margin: 5}}>Rank</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                    onPress={()=>{
+                      navigation.navigate('Compare')
+                    }}>
+                    <Image
+                      source={require('./images2/HomepageIcons/Compare.png')}
+                      style={{
+                        height: 49,
+                        width: 79
+                      }}
+                    />
+                    <Text style={{fontSize: 16, margin: 5}}>Compare</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginHorizontal: '5%',
+                marginBottom: '8%'
+              }}>
+                <View style={{
+                  flex: 2,
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                    onPress={()=>{
+                      navigation.navigate('Search Tool')
+                    }}>
+                    <Image
+                      source={require('./images2/HomepageIcons/Search.png')}
+                      style={{
+                        height: 86,
+                        width: 86
+                      }}
+                    />
+                    <Text style={{fontSize: 16, margin: 5}}>Search</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                    onPress={()=>{
+                      navigation.navigate('Calculate')
+                    }}>
+                    <Image
+                      source={require('./images2/HomepageIcons/Calculator.png')}
+                      style={{
+                        height: 86,
+                        width: 82
+                      }}
+                    />
+                    <Text style={{fontSize: 16, margin: 5}}>Eco-Calculator</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginHorizontal: '5%'
+              }}>
+                <View style={{
+                  flex: 2,
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                    onPress={()=>{
+                      navigation.navigate('MLTool')
+                    }}>
+                    <Image
+                      source={require('./images2/HomepageIcons/EcoCam.png')}
+                      style={{
+                        height: 97,
+                        width: 97
+                      }}
+                    />
+                    <Text style={{fontSize: 16, margin: 5}}>Eco-Cam</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
         </ScrollView>
     );
@@ -530,25 +663,62 @@ const landingdetails = () => {
                         ),
                     })}
                 />
-                {/* Virtual Water screen */}
-                <Stack.Screen
-                    name="Virtual Water"
-                    component={Virtual}
-                    options={({navigation}) => ({
-                        headerBackTitleVisible: false,
-                        headerRight: () => (
-                            <MaterialCommunityIcons
-                                name="home"
-                                size={25}
-                                color={'grey'}
-                                style={{
-                                    paddingRight: 15
-                                }}
-                                onPress={() => navigation.navigate('Home')}
-                            />
-                        ),
-                    })}
-                />
+              <Stack.Screen
+                name="Compare Details"
+                component={comparePage}
+                options={({navigation}) => ({
+                  headerBackTitleVisible: false,
+                  headerRight: () => (
+                    <MaterialCommunityIcons
+                      name="home"
+                      size={25}
+                      color={'grey'}
+                      style={{
+                        paddingRight: 15
+                      }}
+                      onPress={() => navigation.navigate('Home')}
+                    />
+                  ),
+                })}
+              />
+              {/* Virtual Water screen */}
+              <Stack.Screen
+                name="Virtual Water"
+                component={Virtual}
+                options={({navigation}) => ({
+                  headerBackTitleVisible: false,
+                  headerRight: () => (
+                    <MaterialCommunityIcons
+                      name="home"
+                      size={25}
+                      color={'grey'}
+                      style={{
+                        paddingRight: 15
+                      }}
+                      onPress={() => navigation.navigate('Home')}
+                    />
+                  ),
+                })}
+              />
+              {/* Sources & Resources screen */}
+              <Stack.Screen
+                name="Sources & Resources"
+                component={Sources}
+                options={({navigation}) => ({
+                  headerBackTitleVisible: false,
+                  headerRight: () => (
+                    <MaterialCommunityIcons
+                      name="home"
+                      size={25}
+                      color={'grey'}
+                      style={{
+                        paddingRight: 15
+                      }}
+                      onPress={() => navigation.navigate('Home')}
+                    />
+                  ),
+                })}
+              />
                 <Stack.Screen name="What" component={toWhat} />
             </Stack.Navigator>
         </NavigationContainer>
