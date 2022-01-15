@@ -39,24 +39,24 @@ function RankScreen({navigation}) {
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Grains')} >
                         <CategoryIcon category='Grains' image={Profiles.grains}/>
-                    </TouchableOpacity>         
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Drinks-Alcoholic')} >
                         <CategoryIcon category='Drinks-Alcoholic' image={Profiles.alcoholic_drinks} />
-                    </TouchableOpacity>         
+                    </TouchableOpacity>
                 </View>
                 <View className="column3">
                     <TouchableOpacity onPress={() => navigation.navigate('Vegetables')} >
                         <CategoryIcon category='Vegetables' image={Profiles.vegetables} />
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Nuts, Beans')} >
                         <CategoryIcon category='Nuts, Beans' image={Profiles.Peanuts} />
-                    </TouchableOpacity>          
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Oils')} >
                         <CategoryIcon category='Oils' image={Profiles['Olive oil']} />
-                    </TouchableOpacity>           
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Drinks-NonAlcoholic')} >
                         <CategoryIcon category='Drinks-NonAlcoholic' image={Profiles.non_alcoholic_drinks} />
-                    </TouchableOpacity>        
+                    </TouchableOpacity>
                 </View>
             </View>
         </ScrollView>
@@ -66,64 +66,64 @@ function RankScreen({navigation}) {
 
 const RankStack = createStackNavigator();
 
-const Meats = () => {
+const Meats = ({navigation}) => {
     return (
-        <RankingPage category='Meats' id='Meat' />
+      <RankingPage category='Meats' id='Meat' navigation={navigation}/>
     )
 }
-const Fruits = () => {
+const Fruits = ({navigation}) => {
     return (
-        <RankingPage category='Fruits' id='Fruit' />
+      <RankingPage category='Fruits' id='Fruit' navigation={navigation}/>
     )
 }
-const Vegetables = () => {
+const Vegetables = ({navigation}) => {
     return (
-        <RankingPage category='Vegetables' id='Vegetables' />
+      <RankingPage category='Vegetables' id='Vegetables' navigation={navigation}/>
     )
 }
-const EverydayFoods = () => {
+const EverydayFoods = ({navigation}) => {
     return (
-        <RankingPage category='Everyday Foods' id='EDF' />
+      <RankingPage category='Everyday Foods' id='EDF' navigation={navigation}/>
     )
 }
-const EverydayItems = () => {
+const EverydayItems = ({navigation}) => {
     return (
-        <RankingPage category='Everyday Items' id='EDI' />
+      <RankingPage category='Everyday Items' id='EDI' navigation={navigation}/>
     )
 }
-const NutsBeans = () => {
+const NutsBeans = ({navigation}) => {
     return (
-        <RankingPage category='Nuts and Beans' id='Nuts & Beans' />
+      <RankingPage category='Nuts and Beans' id='Nuts & Beans' navigation={navigation}/>
     )
 }
-const Grains = () => {
+const Grains = ({navigation}) => {
     return (
-        <RankingPage category='Grains' id='Grains' />
+      <RankingPage category='Grains' id='Grains' navigation={navigation}/>
     )
 }
-const Seeds = () => {
+const Seeds = ({navigation}) => {
     return (
-        <RankingPage category='Seeds' id='Seeds' />
+      <RankingPage category='Seeds' id='Seeds' navigation={navigation}/>
     )
 }
-const Oils = () => {
+const Oils = ({navigation}) => {
     return (
-        <RankingPage category='Oils' id='Oils' />
+      <RankingPage category='Oils' id='Oils' navigation={navigation}/>
     )
 }
-const DrinksAll = () => {
+const DrinksAll = ({navigation}) => {
     return (
-        <RankingPage category='All Drinks' id='Drinks - All' />
+      <RankingPage category='All Drinks' id='Drinks - All' navigation={navigation}/>
     )
 }
-const DrinksAlcoholic = () => {
+const DrinksAlcoholic = ({navigation}) => {
     return (
-        <RankingPage category='Alcoholic' id='Drinks - Alc' />
+      <RankingPage category='Alcoholic' id='Drinks - Alc' navigation={navigation}/>
     )
 }
-const DrinksNonAlcoholic = () => {
+const DrinksNonAlcoholic = ({navigation}) => {
     return (
-        <RankingPage category='Non-Alcoholic' id='Drinks - NA' />
+      <RankingPage category='Non-Alcoholic' id='Drinks - NA' navigation={navigation}/>
     )
 }
 

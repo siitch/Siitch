@@ -5,6 +5,7 @@ import { styles } from './Styles';
 import { RankingItem } from './RankingItem';
 import firebase from 'firebase';
 import analytics from '@react-native-firebase/analytics';
+import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 
 let fetchedData = {};
 let items = {};
@@ -13,12 +14,15 @@ let max = 0;
 
 const DeviceWidth = Dimensions.get('window').width;
 
-export const RankingPage = ({category, id}) => {
+export const RankingPage = ({category, id, navigation}) => {
 
     const [fetched, handleFetch] = useState(false);
     const [currentCategory, changeCategory] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [infoVisible, setInfoVisible] = useState(false);
     const [unit, setUnit] = useState('G');
+    const exceptionCategories = ['Everyday Foods', 'Everyday Items', 'All Drinks', 'Alcoholic', 'Non-Alcoholic'];
+    const specialCategory = exceptionCategories.includes(category);
 
     useEffect(() => {
         async function logRanking (){
@@ -169,10 +173,20 @@ export const RankingPage = ({category, id}) => {
                             <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{alignItems: 'center', marginTop: 10, width: DeviceWidth*0.6}}>
-                        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, paddingTop: 15, paddingLeft: 10, paddingRight: 10, paddingBottom: 10}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, width: DeviceWidth*0.6}}>
+                        <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, paddingTop: 15, paddingLeft: 10, paddingRight: 0, paddingBottom: 10}}>
                             {category}
                         </Text>
+                        <TouchableOpacity
+                          style={{paddingTop: 8}}
+                          onPress={()=>{
+                              setInfoVisible(true)
+                              analytics().logEvent('Info_button_pressed',{
+                                  infoName: 'Virtual_Water'
+                              })
+                          }}>
+                            <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -183,7 +197,7 @@ export const RankingPage = ({category, id}) => {
                     {
                         sortable.map((item, index) => {
                             return(
-                                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]}/>
+                                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]} navigation={navigation}/>
                             )
                         })
                     }
@@ -191,7 +205,7 @@ export const RankingPage = ({category, id}) => {
                     <View style={{alignItems: 'center'}}>
                         <View style={{width: DeviceWidth, marginLeft: 20, marginRight: 20, marginTop: 40, borderBottomColor: 'lightgray', borderBottomWidth: 1 }}></View>
                         <Text style={{fontWeight: 'bold', color: '#002363' ,fontSize: 16, paddingTop: 10, marginTop: 10, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
-                            The average person in the US uses {('\n')}about 1,800 gallons (6,820 Liters) per day
+                            The average person in the US uses {('\n')}about 1,800 gallons (6,820 Liters) of water per day.
                         </Text>
                         <Text style={{fontSize: 16, paddingTop: 10, marginTop: 10, marginLeft: 20, marginRight: 20, paddingLeft: 20, paddingRight: 20, textAlign: 'center'}}>
                             Water awareness is key, but many factors determine the eco-cost of a product.&nbsp;
@@ -240,6 +254,90 @@ export const RankingPage = ({category, id}) => {
                     </View>
                 </View>
             </ScrollView>
+
+            {/* Info button modal */}
+            <Modal animationType="slide" transparent={true} visible={infoVisible}>
+                <View
+                  style={{
+                      flex: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 22,
+                  }}>
+                    <View style={{
+                        marginLeft: 20,
+                        marginRight: 20,
+                        backgroundColor: 'white',
+                        borderColor: '#00ADEF',
+                        borderWidth: 1.5,
+                        borderRadius: 20,
+                        shadowColor: '#000',
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+                        elevation: 5,
+                    }}>
+                        <TouchableOpacity
+                          onPress={() => {
+                              setInfoVisible(false);
+                          }}
+                          style={{
+                              zIndex: 10,
+                              alignSelf: 'flex-end',
+                              position: 'absolute'
+                          }}>
+                            <Image
+                              source={itemDetailImages.closeInfoModal}
+                              style={{
+                                  width: 50,
+                                  height: 50
+                              }}/>
+                        </TouchableOpacity>
+                        <View style={{
+                            marginHorizontal: 15,
+                            marginBottom: 15,
+                            marginTop: 20,
+                            padding: 15
+                        }}>
+                            {specialCategory && (
+                              <Text>
+                                  Virtual Water is the total volume of water used in the production of a good or service.
+                                  See our
+                                  <Text
+                                    onPress={() => {
+                                        navigation.navigate('Virtual Water')
+                                        setInfoVisible(false)
+                                    }}
+                                    style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information. Most
+                                  numbers shown represent the Virtual Water totals. Where Virtual water amounts are
+                                  unknown, we’ve sourced statistics found on our
+                                  <Text
+                                    onPress={() => {
+                                        navigation.navigate('Sources & Resources')
+                                        setInfoVisible(false)
+                                    }}
+                                    style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
+                              </Text>
+                            )}
+                            {!specialCategory && (
+                              <Text>
+                                  These numbers represent the Virtual Water totals. Virtual water is the total volume of
+                                  water used in the production of a good or service. See our
+                                  <Text
+                                    onPress={() => {
+                                        navigation.navigate('Virtual Water')
+                                        setInfoVisible(false)
+                                    }}
+                                    style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information.
+                              </Text>
+                            )}
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
