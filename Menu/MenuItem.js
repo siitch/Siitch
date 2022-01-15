@@ -6,7 +6,7 @@ export const MenuItem = ({navigation, menuItemName}) => {
     function icon() {
         switch (menuItemName) {
             case "Tutorial":
-                return require('./../images2/Tutorial2.png')
+                return require('./../images2/Tutorial.png')
             case "Sources":
                 return require('./../images2/Source_PNG.png')
             case "Mission":

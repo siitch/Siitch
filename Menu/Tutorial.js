@@ -1,6 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { View, Text, Button, Image,StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+  ImageBackground
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
 
@@ -103,48 +113,34 @@ const Tutorial = ({navigation}) => {
             </ScrollView>
         ),
       },
-      /*
       {
         title: '',
         subtitle: '',
         backgroundColor: '#ffffff',
         image: (
-          <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
-          <Image style={{height:height
-            , width:width}} source={require('../images2/Tutorial9.png')}/>
+            <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
+              <ImageBackground style={{height:height
+                , width:width, flexDirection: 'column-reverse'}} source={require('../images2/Tutorial9.png')}>
+                <TouchableOpacity
+                    style={{
+                      width: 300,
+                      height: 50,
+                      color: '#ffffff',
+                      alignItems: "center",
+                      backgroundColor: "#70BF41",
+                      marginBottom: height/7,
+                      borderRadius: 25,
+                      alignSelf: 'center',
+                      justifyContent: 'center'
+                    }}
+                    onPress={() => {
+                      navigation.goBack("Landing Page")
+                    }}
+                >
+                  <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GO!</Text>
+                </TouchableOpacity>
+              </ImageBackground>
             </ScrollView>
-        ),
-      },
-      */
-
-
-      {
-        title: "",
-        subtitle: (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.goBack("Landing Page")
-            }}
-            >
-        <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
-          </TouchableOpacity>
-          // <Button
-          // style={{backgroundColor: '#70BF41'}}
-          //   title={'Get Started'}
-          //   color='#70BF41'
-          //   backgroundColor={'#1E6738'}
-          //   containerViewStyle={{ marginTop: 20 }}
-          //   borderRadius={5}
-            // onPress={() => {
-            //   navigation.navigate("Landing Page")
-            // }}
-          // />
-        ),
-        backgroundColor: '#FFFFFF',
-        image: (
-          <Image style={{height:height/3
-            , width:width, resizeMode:'contain'}} source={require('../images/Image_new/Onboarding/graphic.png')}/>
         ),
       },
     ]}
