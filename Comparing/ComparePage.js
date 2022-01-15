@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { ScrollView, View, Text, Image, Dimensions, Linking, TouchableHighlight, TouchableOpacity } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Text,
+    Image,
+    Dimensions,
+    Linking,
+    TouchableHighlight,
+    TouchableOpacity,
+    Modal
+} from 'react-native';
 import Counter from 'react-native-counters'
 import { styles } from './Styles';
 import firebase from 'firebase';
@@ -11,6 +21,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 import { lessThan, onChange } from 'react-native-reanimated';
 import analytics from '@react-native-firebase/analytics';
+import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 
 let fetchedData = {};
 let p1 = {};
@@ -26,7 +37,7 @@ let f4 = {};
 let f5 = {};
 let f6 = {};
 
-export const comparePage = ({route}) => {
+export const comparePage = ({navigation, route}) => {
     const { prodarray } = route.params;
     const prod1 = prodarray[0];
     const prod2 = prodarray[1];
@@ -56,6 +67,7 @@ export const comparePage = ({route}) => {
     const [isProduct6Present, setIsProduct6Present] = useState(false);
 
     const [unit, setUnit] = useState('G');
+    const [infoVisible, setInfoVisible] = useState(false);
 
     const [collapse1, setCollapse1] = useState(false);
     const [collapse2, setCollapse2] = useState(false);
@@ -457,7 +469,7 @@ export const comparePage = ({route}) => {
 
     const numberWithCommas = (x) => {
         if(isNaN(x)){
-            return "Will never"
+            return "NA"
         }
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -503,6 +515,16 @@ export const comparePage = ({route}) => {
                           justifyContent: 'flex-end',
                           width: DeviceWidth*.9-65
                       }}>
+                          <TouchableOpacity
+                            style={{paddingTop: 8}}
+                            onPress={()=>{
+                                setInfoVisible(true)
+                                analytics().logEvent('Info_button_pressed',{
+                                    infoName: 'Virtual_Water'
+                                })
+                            }}>
+                              <Image source={itemDetailImages.info} style={{width: 30, height: 22}}/>
+                          </TouchableOpacity>
                           <Image style={{width: 20, height: 20, marginTop: '3%'}} source={Profiles.water}/>
                           <Text style={{fontSize: 25, marginTop: '1%'}}> Total: {
                               ((selectedcategory1.localeCompare('Time to decompose') != 0 && parseInt(f1[selectedcategory1])*prod1Total) +
@@ -631,130 +653,130 @@ export const comparePage = ({route}) => {
                       </View>
                   </View>
                   {
-                      (isProduct3Present || isProduct4Present) &&
-                      <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
-                          {
-                              isProduct3Present &&
-                              <View center style={getTextStyle(parseInt(f3[selectedcategory3]*prod3Total), getMinValue())}>
-                                  {(selectedcategory3.localeCompare('Time to decompose') != 0  &&
-                                    <View style={styles.counterView}>
-                                        <Counter
-                                          buttonStyle={{ borderWidth: 0 }}
-                                          buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
-                                          countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
-                                          start={1}  onChange={(len, type) => {
-                                            changeProd3Total(prod3Total + (type == "+" ? 1 : -1))
-                                        }}/>
-                                    </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
-                                  <Image source = {Profiles[prod3]}
-                                         style = {{width: 180, height: 180, alignItems:'center'}}
-                                         resizeMode="contain"/>
-                                  <Text style={styles.boldTextFormatCompare}>{prod3}</Text>
-                                  <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                                      {<Image
-                                        style={selectedcategory3.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
-                                        source={selectedcategory3.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
-                                      /> }
-                                      <Text style={selectedcategory3.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f3[selectedcategory3])*prod3Total)} {f3[selectedmetrictodisplay]}</Text>
-                                  </View>
-                                  <Text style={styles.textFormatCompare}>{prod3Total == 1 ? f3[selectedmeasurement] : "total"}</Text>
-                                  <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f3[selectedsize]}</Text>
+                    (isProduct3Present || isProduct4Present) &&
+                    <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
+                        {
+                          isProduct3Present &&
+                          <View center style={getTextStyle(parseInt(f3[selectedcategory3]*prod3Total), getMinValue())}>
+                              {(selectedcategory3.localeCompare('Time to decompose') != 0  &&
+                                <View style={styles.counterView}>
+                                    <Counter
+                                      buttonStyle={{ borderWidth: 0 }}
+                                      buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
+                                      countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
+                                      start={1}  onChange={(len, type) => {
+                                        changeProd3Total(prod3Total + (type == "+" ? 1 : -1))
+                                    }}/>
+                                </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
+                              <Image source = {Profiles[prod3]}
+                                     style = {{width: 180, height: 180, alignItems:'center'}}
+                                     resizeMode="contain"/>
+                              <Text style={styles.boldTextFormatCompare}>{prod3}</Text>
+                              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                  {<Image
+                                    style={selectedcategory3.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
+                                    source={selectedcategory3.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
+                                  /> }
+                                  <Text style={selectedcategory3.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f3[selectedcategory3])*prod3Total)} {f3[selectedmetrictodisplay]}</Text>
                               </View>
-                          }
-                          {
-                              isProduct4Present &&
-                              <View center style={getTextStyle(parseInt(f4[selectedcategory4]*prod4Total), getMinValue())}>
+                              <Text style={styles.textFormatCompare}>{prod3Total == 1 ? f3[selectedmeasurement] : "total"}</Text>
+                              <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f3[selectedsize]}</Text>
+                          </View>
+                        }
+                        {
+                          isProduct4Present &&
+                          <View center style={getTextStyle(parseInt(f4[selectedcategory4]*prod4Total), getMinValue())}>
 
-                                  {(selectedcategory4.localeCompare('Time to decompose') != 0  &&
-                                    <View style={styles.counterView}>
-                                        <Counter
-                                          buttonStyle={{ borderWidth: 0 }}
-                                          buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
-                                          countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
-                                          start={1}  onChange={(len, type) => {
-                                            changeProd4Total(prod4Total + (type == "+" ? 1 : -1))
-                                        }}/>
-                                    </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
+                              {(selectedcategory4.localeCompare('Time to decompose') != 0  &&
+                                <View style={styles.counterView}>
+                                    <Counter
+                                      buttonStyle={{ borderWidth: 0 }}
+                                      buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
+                                      countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
+                                      start={1}  onChange={(len, type) => {
+                                        changeProd4Total(prod4Total + (type == "+" ? 1 : -1))
+                                    }}/>
+                                </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
 
-                                  <Image source = {Profiles[prod4]}
-                                         style = {{width: 180, height: 180, alignItems:'center'}}
-                                         resizeMode="contain"/>
-                                  <Text style={styles.boldTextFormatCompare}>{prod4}</Text>
-                                  <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                                      {<Image
-                                        style={selectedcategory4.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
-                                        source={selectedcategory4.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
-                                      /> }
-                                      <Text style={selectedcategory4.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f4[selectedcategory4])*prod4Total)} {f4[selectedmetrictodisplay]}</Text>
-                                  </View>
-                                  <Text style={styles.textFormatCompare}>{prod4Total == 1 ? f4[selectedmeasurement] : "total"}</Text>
-                                  <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f4[selectedsize]}</Text>
+                              <Image source = {Profiles[prod4]}
+                                     style = {{width: 180, height: 180, alignItems:'center'}}
+                                     resizeMode="contain"/>
+                              <Text style={styles.boldTextFormatCompare}>{prod4}</Text>
+                              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                  {<Image
+                                    style={selectedcategory4.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
+                                    source={selectedcategory4.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
+                                  /> }
+                                  <Text style={selectedcategory4.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f4[selectedcategory4])*prod4Total)} {f4[selectedmetrictodisplay]}</Text>
                               </View>
-                          }
-                      </View>
+                              <Text style={styles.textFormatCompare}>{prod4Total == 1 ? f4[selectedmeasurement] : "total"}</Text>
+                              <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f4[selectedsize]}</Text>
+                          </View>
+                        }
+                    </View>
                   }
                   {
-                      (isProduct5Present || isProduct6Present) &&
-                      <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
-                          {
-                              isProduct5Present &&
-                              <View center style={getTextStyle(parseInt(f5[selectedcategory5]*prod5Total), getMinValue())}>
-                                  {(selectedcategory5.localeCompare('Time to decompose') != 0  &&
-                                    <View style={styles.counterView}>
-                                        <Counter
-                                          buttonStyle={{ borderWidth: 0 }}
-                                          buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
-                                          countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
-                                          start={1}  onChange={(len, type) => {
-                                            changeProd5Total(prod5Total + (type == "+" ? 1 : -1))
-                                        }}/>
-                                    </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
-                                  <Image source = {Profiles[prod5]}
-                                         style = {{width: 180, height: 180, alignItems:'center'}}
-                                         resizeMode="contain"/>
-                                  <Text style={styles.boldTextFormatCompare}>{prod5}</Text>
-                                  <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                                      {<Image
-                                        style={selectedcategory5.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
-                                        source={selectedcategory5.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
-                                      /> }
-                                      <Text style={selectedcategory5.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f5[selectedcategory5])*prod5Total)} {f6[selectedmetrictodisplay]}</Text>
-                                  </View>
-                                  <Text style={styles.textFormatCompare}>{prod5Total == 1 ? f5[selectedmeasurement] : "total"}</Text>
-                                  <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f5[selectedsize]}</Text>
+                    (isProduct5Present || isProduct6Present) &&
+                    <View  style={{flex: 2, flexDirection:'row',justifyContent:'space-between'}}>
+                        {
+                          isProduct5Present &&
+                          <View center style={getTextStyle(parseInt(f5[selectedcategory5]*prod5Total), getMinValue())}>
+                              {(selectedcategory5.localeCompare('Time to decompose') != 0  &&
+                                <View style={styles.counterView}>
+                                    <Counter
+                                      buttonStyle={{ borderWidth: 0 }}
+                                      buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
+                                      countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
+                                      start={1}  onChange={(len, type) => {
+                                        changeProd5Total(prod5Total + (type == "+" ? 1 : -1))
+                                    }}/>
+                                </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
+                              <Image source = {Profiles[prod5]}
+                                     style = {{width: 180, height: 180, alignItems:'center'}}
+                                     resizeMode="contain"/>
+                              <Text style={styles.boldTextFormatCompare}>{prod5}</Text>
+                              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                  {<Image
+                                    style={selectedcategory5.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
+                                    source={selectedcategory5.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
+                                  /> }
+                                  <Text style={selectedcategory5.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f5[selectedcategory5])*prod5Total)} {f6[selectedmetrictodisplay]}</Text>
                               </View>
-                          }
-                          {
-                              isProduct6Present &&
-                              <View center style={getTextStyle(parseInt(f6[selectedcategory6]*prod6Total), getMinValue())}>
+                              <Text style={styles.textFormatCompare}>{prod5Total == 1 ? f5[selectedmeasurement] : "total"}</Text>
+                              <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f5[selectedsize]}</Text>
+                          </View>
+                        }
+                        {
+                          isProduct6Present &&
+                          <View center style={getTextStyle(parseInt(f6[selectedcategory6]*prod6Total), getMinValue())}>
 
-                                  {(selectedcategory6.localeCompare('Time to decompose') != 0  &&
-                                    <View style={styles.counterView}>
-                                        <Counter
-                                          buttonStyle={{ borderWidth: 0 }}
-                                          buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
-                                          countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
-                                          start={1}  onChange={(len, type) => {
-                                            changeProd6Total(prod6Total + (type == "+" ? 1 : -1))
-                                        }}/>
-                                    </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
+                              {(selectedcategory6.localeCompare('Time to decompose') != 0  &&
+                                <View style={styles.counterView}>
+                                    <Counter
+                                      buttonStyle={{ borderWidth: 0 }}
+                                      buttonTextStyle={{ color: '#0e0f0f', fontSize: 25, fontWeight: '500'}}
+                                      countTextStyle={{ color: '#0e0f0f', fontSize: 21}}
+                                      start={1}  onChange={(len, type) => {
+                                        changeProd6Total(prod6Total + (type == "+" ? 1 : -1))
+                                    }}/>
+                                </View>) ||  <Text style={{marginBottom: 23}}>  </Text>}
 
-                                  <Image source = {Profiles[prod6]}
-                                         style = {{width: 180, height: 180, alignItems:'center'}}
-                                         resizeMode="contain"/>
-                                  <Text style={styles.boldTextFormatCompare}>{prod6}</Text>
-                                  <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                                      {<Image
-                                        style={selectedcategory6.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
-                                        source={selectedcategory6.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
-                                      /> }
-                                      <Text style={selectedcategory6.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f6[selectedcategory6])*prod6Total)} {f6[selectedmetrictodisplay]}</Text>
-                                  </View>
-                                  <Text style={styles.textFormatCompare}>{prod6Total == 1 ? f6[selectedmeasurement] : "total"}</Text>
-                                  <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f6[selectedsize]}</Text>
+                              <Image source = {Profiles[prod6]}
+                                     style = {{width: 180, height: 180, alignItems:'center'}}
+                                     resizeMode="contain"/>
+                              <Text style={styles.boldTextFormatCompare}>{prod6}</Text>
+                              <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                                  {<Image
+                                    style={selectedcategory6.localeCompare('Time to decompose') != 0 && {width: 20, height: 20, marginTop: '3%'} || {width: 28, height: 28, marginTop: '1%'}}
+                                    source={selectedcategory6.localeCompare('Time to decompose') != 0 && Profiles.water || Profiles.clock}
+                                  /> }
+                                  <Text style={selectedcategory6.localeCompare('Time to decompose') != 0 && styles.boldTextFormatBlueCompare || styles.boldTextFormatRedCompare}>{numberWithCommas(parseInt(f6[selectedcategory6])*prod6Total)} {f6[selectedmetrictodisplay]}</Text>
                               </View>
-                          }
-                      </View>
+                              <Text style={styles.textFormatCompare}>{prod6Total == 1 ? f6[selectedmeasurement] : "total"}</Text>
+                              <Text style={styles.textFormatCompare, {paddingBottom: 5}}>{f6[selectedsize]}</Text>
+                          </View>
+                        }
+                    </View>
                   }
               </View>
           </View>
@@ -763,42 +785,42 @@ export const comparePage = ({route}) => {
 
           <View style={{marginTop: 0, alignItems: 'center', marginBottom:'10%'}}>
               {
-                  (f1['Notes to appear'] != "" )&&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
-                  </View>
+                (f1['Notes to appear'] != "" )&&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize:18, textAlign: 'left'}}>{f1['Notes to appear']}</Text>
+                </View>
               }
 
               {
-                  (f2['Notes to appear'] != "" )&&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
-                  </View>
+                (f2['Notes to appear'] != "" )&&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize: 18, textAlign: 'left'}}>{f2['Notes to appear']}</Text>
+                </View>
               }
 
               {
-                  (isProduct3Present && f3['Notes to appear'] != "") &&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
-                  </View>
+                (isProduct3Present && f3['Notes to appear'] != "") &&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize:18, textAlign: 'left'}}>{f3['Notes to appear']}</Text>
+                </View>
               }
               {
-                  (isProduct4Present && f4['Notes to appear'] != "") &&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
-                  </View>
+                (isProduct4Present && f4['Notes to appear'] != "") &&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize:18, textAlign: 'left'}}>{f4['Notes to appear']}</Text>
+                </View>
               }
               {
-                  (isProduct5Present && f5['Notes to appear'] != "") &&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize:18, textAlign: 'left'}}>{f5['Notes to appear']}</Text>
-                  </View>
+                (isProduct5Present && f5['Notes to appear'] != "") &&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize:18, textAlign: 'left'}}>{f5['Notes to appear']}</Text>
+                </View>
               }
               {
-                  (isProduct6Present && f6['Notes to appear'] != "") &&
-                  <View style={{width: DeviceWidth/1.2}}>
-                      <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
-                  </View>
+                (isProduct6Present && f6['Notes to appear'] != "") &&
+                <View style={{width: DeviceWidth/1.2}}>
+                    <Text style={{fontSize:18, textAlign: 'left'}}>{f6['Notes to appear']}</Text>
+                </View>
               }
               <Collapse
                 style={{ marginTop: '5%', width: DeviceWidth/1.2}}
@@ -858,44 +880,44 @@ export const comparePage = ({route}) => {
                               <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f2[selectedcategory2]))}</Text></View>
                           </View>
                           {
-                              isProduct3Present &&
-                              <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
-                                  <View style={{width:DeviceWidth/6}}><Text>{prod3}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygreen]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategoryblue]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygray]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f3[selectedcategory3]))}</Text></View>
-                              </View>
+                            isProduct3Present &&
+                            <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                                <View style={{width:DeviceWidth/6}}><Text>{prod3}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygreen]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategoryblue]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f3[selectedcategorygray]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f3[selectedcategory3]))}</Text></View>
+                            </View>
                           }
                           {
-                              isProduct4Present &&
-                              <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
-                                  <View style={{width:DeviceWidth/6}}><Text>{prod4}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygreen]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategoryblue]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygray]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4[selectedcategory4]))}</Text></View>
-                              </View>
+                            isProduct4Present &&
+                            <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                                <View style={{width:DeviceWidth/6}}><Text>{prod4}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygreen]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategoryblue]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f4[selectedcategorygray]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f4[selectedcategory4]))}</Text></View>
+                            </View>
                           }
                           {
-                              isProduct5Present &&
-                              <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
-                                  <View style={{width:DeviceWidth/6}}><Text>{prod5}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygreen]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategoryblue]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygray]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f5[selectedcategory5]))}</Text></View>
-                              </View>
+                            isProduct5Present &&
+                            <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                                <View style={{width:DeviceWidth/6}}><Text>{prod5}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygreen]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategoryblue]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f5[selectedcategorygray]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f5[selectedcategory5]))}</Text></View>
+                            </View>
                           }
                           {
-                              isProduct6Present &&
-                              <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
-                                  <View style={{width:DeviceWidth/6}}><Text>{prod6}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygreen]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategoryblue]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygray]))}</Text></View>
-                                  <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f6[selectedcategory6]))}</Text></View>
-                              </View>
+                            isProduct6Present &&
+                            <View style={{flexDirection: "row", flex: 1, justifyContent: "space-between"}}>
+                                <View style={{width:DeviceWidth/6}}><Text>{prod6}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygreen]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategoryblue]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text>{numberWithCommas(parseInt(f6[selectedcategorygray]))}</Text></View>
+                                <View style={{width:DeviceWidth/6}}><Text style={{fontWeight:'bold'}}>{numberWithCommas(parseInt(f6[selectedcategory6]))}</Text></View>
+                            </View>
                           }
                       </View>
                   </CollapseBody>
@@ -977,6 +999,68 @@ export const comparePage = ({route}) => {
                   </CollapseBody>
               </Collapse>
           </View>
+
+          {/* Info button modal */}
+          <Modal animationType="slide" transparent={true} visible={infoVisible}>
+              <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 22,
+                }}>
+                  <View style={{
+                      marginLeft: 20,
+                      marginRight: 20,
+                      backgroundColor: 'white',
+                      borderColor: '#00ADEF',
+                      borderWidth: 1.5,
+                      borderRadius: 20,
+                      shadowColor: '#000',
+                      shadowOffset: {
+                          width: 0,
+                          height: 2,
+                      },
+                      shadowOpacity: 0.25,
+                      shadowRadius: 3.84,
+                      elevation: 5,
+                  }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                            setInfoVisible(false);
+                        }}
+                        style={{
+                            zIndex: 10,
+                            alignSelf: 'flex-end',
+                            position: 'absolute'
+                        }}>
+                          <Image
+                            source={itemDetailImages.closeInfoModal}
+                            style={{
+                                width: 50,
+                                height: 50
+                            }}/>
+                      </TouchableOpacity>
+                      <View style={{
+                          marginTop: 20,
+                          marginHorizontal: 15,
+                          marginBottom: 15,
+                          padding: 15
+                      }}>
+                          <Text>
+                              These numbers represent the Virtual Water totals. Virtual water is the total volume of
+                              water used in the production of a good or service. See our
+                              <Text
+                                onPress={() => {
+                                    navigation.navigate('Virtual Water')
+                                    setInfoVisible(false)
+                                }}
+                                style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information.
+                          </Text>
+                      </View>
+                  </View>
+              </View>
+          </Modal>
       </ScrollView>
     );
 }
