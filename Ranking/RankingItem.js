@@ -5,7 +5,7 @@ import * as Progress from 'react-native-progress';
 const DeviceWidth = Dimensions.get('window').width;
 const DeviceHeight = Dimensions.get('window').height;
 
-export const RankingItem = ({ max, cost, item, image, unit, category, displayUnit }) => {
+export const RankingItem = ({ max, cost, item, image, unit, category, displayUnit, navigation }) => {
 
     const percentage = 1-(max-parseInt(cost))/max < 0.01 ? 0.01 : 1-(max-parseInt(cost))/max;
 
@@ -42,13 +42,15 @@ export const RankingItem = ({ max, cost, item, image, unit, category, displayUni
                 </View>
             </Modal>
             <View style = {rankStyles.container}>
-                <View style={rankStyles.itemCol}>
-                    <Image
-                        style={rankStyles.itemImg}
-                        source={image}
-                    />
-                    { sliceItem(category, item) }
-                </View>
+                <TouchableOpacity onPress={()=>{navigation.navigate('Detail', {itemName: item})}}>
+                    <View style={rankStyles.itemCol}>
+                        <Image
+                            style={rankStyles.itemImg}
+                            source={image}
+                        />
+                        { sliceItem(category, item) }
+                    </View>
+                </TouchableOpacity>
                 <View style={rankStyles.progressCol}>
                     <Progress.Bar
                         progress={percentage}
