@@ -1,5 +1,4 @@
-
-import React, {useState,setState} from 'react';
+import React, {useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   Text,
@@ -7,7 +6,6 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  TextInput,
   TouchableHighlight,
   Modal,
   TouchableOpacity,
@@ -17,35 +15,33 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {styles} from '../Comparing/Styles';
 import Profiles from '../ImageDB.js';
 import firebase from 'firebase';
-import {CalculateTotal} from './CalculateTotal';
 import RNPicker from 'rn-modal-picker';
-import { cos } from 'react-native-reanimated';
-import { screensEnabled } from 'react-native-screens';
 import analytics from '@react-native-firebase/analytics';
+import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 
 // var pages=[];
-var itemNameList=[];
-var itemQuantityList=[];
-var itemFrequencyList=[];
-var itemCostList=[];
-var itemCostLList=[];
-var itemYearlyCostList=[];
-var itemYearlyLCostList=[];
-var itemMeasurementListL = [];
-var itemMeasurementListG = [];
-var itemIndividualUnitListL = [];
-var itemIndividualUnitListG = [];
+let itemNameList = [];
+let itemQuantityList = [];
+let itemFrequencyList = [];
+let itemCostList = [];
+let itemCostLList=[];
+let itemYearlyCostList=[];
+let itemYearlyLCostList=[];
+let itemMeasurementListL = [];
+let itemMeasurementListG = [];
+let itemIndividualUnitListL = [];
+let itemIndividualUnitListG = [];
 
-var itemName;
-var itemCost;
-var itemCostL;
-var itemYearlyCost;
-var itemYearlyLCost;
-var itemMeasurementL = [];
-var itemMeasurementG = [];
-var itemIndividualUnitL =[];
-var itemIndividualUnitG =[];
-var loading = false;
+let itemName;
+let itemCost;
+let itemCostL;
+let itemYearlyCost;
+let itemYearlyLCost;
+let itemMeasurementL = [];
+let itemMeasurementG = [];
+let itemIndividualUnitL =[];
+let itemIndividualUnitG =[];
+let loading = false;
 
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -75,9 +71,9 @@ const Quantity_values ={
 
 let fetchedData = {};
 
-function CalculateScreen() {
+function CalculateScreen({ navigation }) {
   let itemsList = [];
-  var selectedItem = [];
+  let selectedItem = [];
 
   const config = {
     apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
@@ -90,9 +86,8 @@ function CalculateScreen() {
     measurementId: 'G-13MVLQ6ZPF',
   };
 
-  var individual_sum = 0;
+  let individual_sum = 0;
 
-  const [focusHeight,setFocusHeight] = useState(0);
   const [pages,setPages] = useState([]);
   const [frequency, setFrequency] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -112,32 +107,33 @@ function CalculateScreen() {
   const [reallyLOutputs,setReallyLOutput] = useState(0);
   const [showAnotherRunningtotal,setShowAnotherRunningtotal] = useState(false);
 
-  var [yearlyCostTotal, setYearlyCostTotal] = useState(0);
-  var [mixCostTotal, setMixCostTotal] = useState(0);
-  var [mixCostLTotal, setMixCostLTotal] = useState(0);
-  var [yearlyCostLTotal, setYearlyCostLTotal] = useState(0);
+  const [impactUnit, setImpactUnit] = useState('yearly');
+  const [yearlyCostTotal, setYearlyCostTotal] = useState(0);
+  const [mixCostTotal, setMixCostTotal] = useState(0);
+  const [mixCostLTotal, setMixCostLTotal] = useState(0);
+  const [yearlyCostLTotal, setYearlyCostLTotal] = useState(0);
 
-  var [itemOpenList,setItemOpenList] = useState([]);
+  const [itemOpenList, setItemOpenList] = useState([]);
 
-
+  const [infoVisible, setInfoVisible] = useState(false);
 
   const updateReallyOutput = (currentUnit) =>{
-    if(currentUnit=="yearly")
+    if(currentUnit==="yearly")
     {
       setReallyOutput(yearlyCostTotal);
       setReallyLOutput(yearlyCostLTotal);
     }
-    else if(currentUnit=="monthly")
+    else if(currentUnit==="monthly")
     {
       setReallyOutput(~~(yearlyCostTotal/12));
       setReallyLOutput(~~(yearlyCostLTotal/12));
     }
-    else if(currentUnit=="weekly")
+    else if(currentUnit==="weekly")
     {
       setReallyOutput(~~(yearlyCostTotal/365)*7);
       setReallyLOutput(~~(yearlyCostLTotal/365)*7);
     }
-    else
+    else if(currentUnit==="daily")
     {
       setReallyOutput(~~(yearlyCostTotal/365));
       setReallyLOutput(~~(yearlyCostLTotal/365));
@@ -145,9 +141,9 @@ function CalculateScreen() {
   }
 
   const updateYearlyCostTotal = () =>{
-    var sum=0;
-    var sumL=0;
-    for(var i=0;i<itemYearlyCostList.length;i++)
+    let sum = 0;
+    let sumL = 0;
+    for(let i=0; i<itemYearlyCostList.length; i++)
     {
       sum+=itemYearlyCostList[i];
       // console.log("itemQuantity",itemQuantityList[i])
@@ -161,9 +157,9 @@ function CalculateScreen() {
   }
 
   const updateMixCostTotal =()=>{
-    var sum=0;
-    var sumL=0;
-    for(var i=0;i<itemCostList.length;i++)
+    let sum = 0;
+    let sumL = 0;
+    for(let i=0; i<itemCostList.length; i++)
     {
       sum+=itemCostList[i]*itemQuantityList[i];
       sumL+=itemCostLList[i]*itemQuantityList[i];
@@ -246,6 +242,7 @@ function CalculateScreen() {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+    let id;
 
     firebase
       .database()
@@ -339,8 +336,8 @@ function CalculateScreen() {
   const upgradePages =() =>{
     // pages=[]
     // setPages([]);
-    var temppages=[];
-    for(var i=0;i<itemFrequencyList.length;i++)
+    let temppages = [];
+    for(let i=0; i<itemFrequencyList.length; i++)
     {
       temppages.push(
         <Text>abc</Text>
@@ -358,12 +355,12 @@ function CalculateScreen() {
     individual_sum = individual_sum + cost;
   }
 
-  clickToScroll =() =>
-  {
-    this._scrollView.scrollTo({y:600,animated: true});
+  const clickToScroll = () => {
+    this.scrollView.scrollTo({y:600,animated: true});
   }
 
   const clearElements = () => {
+    setImpactUnit('yearly')
     setShowAnotherRunningtotal(false);
     setReallyOutput(0);
     setReallyLOutput(0);
@@ -395,8 +392,18 @@ function CalculateScreen() {
     DropDownPicker.value = null;
   };
 
+  const clearElement = () => {
+    setComputed(false);
+    setInputValue('');
+    setItem('');
+    setFrequency(null);
+    setQuantity(null);
+
+    DropDownPicker.value = null;
+  };
+
   return (
-    <ScrollView ref={view => this._scrollView = view} style={{backgroundColor: 'white'}}>
+    <ScrollView ref={view => this.scrollView = view} style={{backgroundColor: 'white'}}>
       <View style={{flexDirection: 'row'}}>
         <View
           style={{
@@ -582,7 +589,6 @@ function CalculateScreen() {
                 dropDownMaxHeight={250}
                 onChangeItem={(currentQuantity) => {
                   setComputed(false);
-                  itemQuantity=currentQuantity.label;
                   setQuantity(currentQuantity.value);
                 }}
                 onOpen={() => {
@@ -649,7 +655,6 @@ function CalculateScreen() {
                 dropDownMaxHeight={250}
                 onChangeItem={(currentFrequency) => {
                   setComputed(false);
-                  itemFrequency=currentFrequency.value;
                   setFrequency(currentFrequency.value);
                 }}
                 onOpen={() => {
@@ -924,8 +929,6 @@ function CalculateScreen() {
                 style={{
                   padding: 15,
                   borderRadius: 30,
-                  backgroundColor: 'orange',
-                  margintop:10,
                   marginLeft: '19%',
                   marginRight: '19%',
                   alignItems: 'center',
@@ -951,7 +954,7 @@ function CalculateScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  computed ? clearElements() : calculate();
+                  computed ? clearElement() : calculate();
                   // calculate(item,frequency);
                 }}
                 style={{
@@ -1132,8 +1135,6 @@ function CalculateScreen() {
                   style={{
                     padding: 15,
                     borderRadius: 30,
-                    backgroundColor: 'orange',
-                    margintop:10,
                     marginLeft: '3%',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -1158,11 +1159,8 @@ function CalculateScreen() {
               <View>
                 <TouchableOpacity
                   onPress={() => {setShowlist(true);
-                    console.log(loading)
                     loading=true;
-                    console.log(loading)
                     calculate();
-                    console.log(loading)
                     analytics().logEvent('Add_to_running_total')
                   }}
 
@@ -1196,13 +1194,12 @@ function CalculateScreen() {
         {showlist && (
 
           <View style={{flexDirection: 'row',
-            justifyContent: 'space-between',
             backgroundColor: 'rgba(198, 198, 198, 0.2)',
             height:40
           }}>
             <Text style={{fontSize: 23, fontWeight: '500',marginLeft:20,marginTop:7}}>Running Total</Text>
             <Image
-              style={{width: 30, height: 30,marginRight:65,marginTop:5}}
+              style={{width: 30, height: 30, position:'absolute',right:45, marginTop:5}}
               source={require('./../images/water_drop_150px_wide2.png')}
             />
           </View>
@@ -1210,7 +1207,7 @@ function CalculateScreen() {
 
         <View>
           { pages.map((elem,index)=>{
-            var i =index
+            let i = index;
             return (<View>
               <View style={{flexDirection: 'row',
                 marginTop: 5,
@@ -1227,8 +1224,8 @@ function CalculateScreen() {
                   }
                 />
 
-                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListG[index]}</Text>)}
-                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:15,marginTop:10}}>{itemNameList[index]} {itemMeasurementListL[index]}</Text>)}
+                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:7,marginTop:10}}>{itemNameList[index]} {itemMeasurementListG[index]}</Text>)}
+                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginLeft:7,marginTop:10}}>{itemNameList[index]} {itemMeasurementListL[index]}</Text>)}
               </View>
 
               <View style={{flexDirection: 'row',
@@ -1384,20 +1381,22 @@ function CalculateScreen() {
                                   itemOpenList[index]=false;
                                 }}
                 />
+                <View style={{flexDirection: 'row',position: 'absolute', right:0 }}>
+                  {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
+                  {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
 
-                {unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
-                {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',width:100,textAlign:'right',marginLeft:50,marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
+                  <TouchableHighlight  onPress={() => deleteItemFromList(index)}>
+                    <Image
+                      style={{
+                        width: 25,
+                        height: 25,
+                        marginLeft:15,
+                        marginTop:10
+                      }}
+                      source={require('./../images/red_x.png')}/>
+                  </TouchableHighlight>
+                </View>
 
-                <TouchableHighlight  onPress={(i) => deleteItemFromList(index)}>
-                  <Image
-                    style={{
-                      width: 25,
-                      height: 25,
-                      marginLeft:15,
-                      marginTop:10
-                    }}
-                    source={require('./../images/red_x.png')}/>
-                </TouchableHighlight>
               </View>
               <View
                 style={{
@@ -1413,7 +1412,6 @@ function CalculateScreen() {
         {showlist && (
           <View style={{flexDirection: 'row'}}>
             <Text style={{fontSize: 20, fontWeight: '500',marginLeft:20, marginTop: 20, marginBottom: 20}}>Total</Text>
-
             <View
               style={{
                 flexDirection: 'row',
@@ -1467,9 +1465,9 @@ function CalculateScreen() {
               </TouchableOpacity>
             </View>
 
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'center', position: 'absolute', right:0 }}>
               <Image
-                style={{width: 30, height: 30, marginLeft:'40%',marginTop:15,marginBottom:20}}
+                style={{width: 30, height: 30, marginTop:15,marginBottom:20}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
               {unitG &&(<Text style={{fontSize: 20, fontWeight: '500', marginRight:20, marginTop:20,marginBottom:20}}>{numberWithCommas(mixCostTotal)} G</Text>)}
@@ -1486,7 +1484,17 @@ function CalculateScreen() {
             alignItems: 'center',
             justifyContent: 'center',}}>
             <View style={{flexDirection: 'row'}}>
-              <Text style={{fontSize: 30, fontWeight: '600'}}>Impact</Text>
+              <Text style={{fontSize: 30, fontWeight: '600', alignItems: 'center'}}>Impact
+                <TouchableOpacity
+                  onPress={()=>{
+                    setInfoVisible(true)
+                    analytics().logEvent('Info_button_pressed',{
+                      infoName: 'Virtual_Water'
+                    })
+                  }}>
+                  <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
+                </TouchableOpacity>
+              </Text>
             </View>
 
             <DropDownPicker defaultValue='yearly'
@@ -1538,7 +1546,7 @@ function CalculateScreen() {
                             }}
                             dropDownMaxHeight={250}
                             onChangeItem={(currentUnit) => {
-                              updateReallyOutput(currentUnit.value)
+                              setImpactUnit(currentUnit.value)
                             }}
                             onOpen={() => {
                               // setComputed(false);
@@ -1555,8 +1563,14 @@ function CalculateScreen() {
                 style={{width: 30, height: 30, marginTop:25}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
-              {unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyOutputs!=0)?numberWithCommas(reallyOutputs):numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-              {!unitG && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{(reallyLOutputs!=0)?numberWithCommas(reallyLOutputs):numberWithCommas(yearlyCostLTotal)} L</Text>)}
+              {unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostTotal/365)))} Gal</Text>)}
+              {unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/365)*7)} Gal</Text>)}
+              {unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/12))} Gal</Text>)}
+              {unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+              {!unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostLTotal/365)))} L</Text>)}
+              {!unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/365)*7)} L</Text>)}
+              {!unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/12))} L</Text>)}
+              {!unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostLTotal)} L</Text>)}
             </View>
 
           </View>
@@ -1575,7 +1589,6 @@ function CalculateScreen() {
                 marginLeft: '19%',
                 marginRight: '19%',
                 marginBottom: '10%',
-                backgroundColor: 'orange',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
@@ -1594,6 +1607,76 @@ function CalculateScreen() {
           </View>
         )}
       </View>
+
+      {/* Info button modal */}
+      <Modal animationType="slide" transparent={true} visible={infoVisible}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 22,
+          }}>
+          <View style={{
+            marginLeft: 20,
+            marginRight: 20,
+            backgroundColor: 'white',
+            borderColor: '#00ADEF',
+            borderWidth: 1.5,
+            borderRadius: 20,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+          }}>
+            <TouchableOpacity
+              onPress={() => {
+                setInfoVisible(false);
+              }}
+              style={{
+                zIndex: 10,
+                alignSelf: 'flex-end',
+                position: 'absolute'
+              }}>
+              <Image
+                source={itemDetailImages.closeInfoModal}
+                style={{
+                  width: 50,
+                  height: 50
+                }}/>
+            </TouchableOpacity>
+            <View style={{
+              marginHorizontal: 15,
+              marginBottom: 15,
+              marginTop: 20,
+              padding: 15
+            }}>
+              <Text>
+                Virtual Water is the total volume of water used in the production of a good or service.
+                See our
+                <Text
+                  onPress={() => {
+                    navigation.navigate('Virtual Water')
+                    setInfoVisible(false)
+                  }}
+                  style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information. Most
+                numbers shown represent the Virtual Water totals. Where Virtual water amounts are
+                unknown, we’ve sourced statistics found on our
+                <Text
+                  onPress={() => {
+                    navigation.navigate('Sources & Resources')
+                    setInfoVisible(false)
+                  }}
+                  style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
