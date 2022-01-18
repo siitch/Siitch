@@ -4,7 +4,8 @@ import {useState} from 'react';
 const {width} = Dimensions.get('screen');
 import {View, Text, Dimensions, Linking, TouchableHighlight, ScrollView,} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import analytics from '@react-native-firebase/analytics';
+import analytics from "@react-native-firebase/analytics";
+import * as WebBrowser from "expo-web-browser";
 
 const Width = width;
 
@@ -22,6 +23,7 @@ export const FAQ = ({ navigation }) => {
   const [expand10, setExpand10] = useState(false);
   const [expand11, setExpand11] = useState(false);
   const [expand12, setExpand12] = useState(false);
+  const [expand13, setExpand13] = useState(false);
 
   return (
     <ScrollView
@@ -511,7 +513,16 @@ export const FAQ = ({ navigation }) => {
             }}>
             The 1,802 gallons per day statistic is broad.
             We are not affiliated with the GRACE Communications Foundation,
-            but their terrific Water Calculator can help you see how you compare.
+            but their terrific
+            <Text onPress={() => {
+              WebBrowser.openBrowserAsync('https://www.watercalculator.org')
+              analytics().logEvent('Source_click',{
+                source_name: 'Water Calculator',
+                source_url: 'https://www.watercalculator.org/'
+              })
+            }}
+                  style={{color: '#00ADEF'}}> Water Calculator </Text>
+            can help you see how you compare.
           </Text>
         ) : null}
         {expand6 ? (
@@ -716,8 +727,7 @@ export const FAQ = ({ navigation }) => {
               marginRight: "3%" ,
 
             }}>
-            No! Avocados are good for you! Just because certain foods/items take a lot of resources,
-            does not mean you should stop eating them. What's important is being aware
+            No! Avocados are good for you! What's important is being aware
             of what it takes to make them, so you don't waste them.
             If you buy a pound of avocados and let them go bad, you've just wasted 237 gallons of water.
             Worse still, if you're not composting, they will then sit in a landfill with other trash and emit carbon and methane,
@@ -748,7 +758,9 @@ export const FAQ = ({ navigation }) => {
           </TouchableHighlight>
         )}
       </View>
+
       <View style={{borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingTop: '3%'}}/>
+
       <View
         style={{
           marginTop: 20,
@@ -767,13 +779,13 @@ export const FAQ = ({ navigation }) => {
           onPress={() => {
             if(!expand10){
               analytics().logEvent('FAQ_question_pressed',{
-                question: 'Are you going to show other statistics in the future?'
+                question: 'Why can\'t I find information for items like Pop Tarts and mac & cheese?'
               })
             }
             setExpand10(!expand10)
           }}>
           <Text>
-            Are you going to show other statistics {'\n'}in the future?
+            Why can't I find information for items like Pop Tarts and mac & cheese?
           </Text>
         </Text>
         {expand10 ? (
@@ -785,7 +797,8 @@ export const FAQ = ({ navigation }) => {
               marginRight: "3%" ,
 
             }}>
-            That's the goal.
+            Statistics for processed foods or foods with multiple ingredients are hard to find.
+            Our database currently has ~200 items and we plan to add more.
           </Text>
         ) : null}
         {expand10 ? (
@@ -812,7 +825,9 @@ export const FAQ = ({ navigation }) => {
           </TouchableHighlight>
         )}
       </View>
+
       <View style={{borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingTop: '3%'}}/>
+
       <View
         style={{
           marginTop: 20,
@@ -831,13 +846,13 @@ export const FAQ = ({ navigation }) => {
           onPress={() => {
             if(!expand11){
               analytics().logEvent('FAQ_question_pressed',{
-                question: 'What can I do to reduce my impact?'
+                question: 'Are you going to show other statistics in the future?'
               })
             }
             setExpand11(!expand11)
           }}>
           <Text>
-            What can I do to reduce my impact?
+            Are you going to show other statistics {'\n'}in the future?
           </Text>
         </Text>
         {expand11 ? (
@@ -849,40 +864,7 @@ export const FAQ = ({ navigation }) => {
               marginRight: "3%" ,
 
             }}>
-            There are hundreds of small things you can do every day to make a difference.
-            The first step? Know what you’re consuming. And stick to the 8 R's of sustainability:
-            refuse, reduce, reuse, refill, repair, regift, recycle, repeat. {'\n'} {'\n'}
-            In the Search pages, you'll see a list of ideas within the 'What Can I Do'
-            links. {'\n'} {'\n'}
-            A few other terrific sites, this for water: <Text
-            onPress={() => Linking.openURL(
-              'https://wateruseitwisely.com/100-ways-to-conserve-water',
-            )}
-            style={{
-              color: 'blue',
-              textDecorationLine: 'underline',
-              fontSize: 17,
-              marginTop: 10,
-              paddingBottom: '7%',
-              alignSelf: 'center',
-            }
-            }>
-            www.wateruseitwisely.com
-          </Text> {'\n'}And this for reducing your waste: <Text
-            onPress={() => Linking.openURL(
-              'https://zerowastehome.com/tips/',
-            )}
-            style={{
-              color: 'blue',
-              fontSize: 17,
-              marginTop: 10,
-              textDecorationLine: 'underline',
-              paddingBottom: '7%',
-              alignSelf: 'center',
-            }
-            }>
-            www.zerowastehome.com
-          </Text>
+            That's the goal.
           </Text>
         ) : null}
         {expand11 ? (
@@ -909,12 +891,13 @@ export const FAQ = ({ navigation }) => {
           </TouchableHighlight>
         )}
       </View>
+
       <View style={{borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingTop: '3%'}}/>
+
       <View
         style={{
           marginTop: 20,
           backgroundColor: '#FFFFFF',
-          marginBottom: '5%',
           width: Width,
         }}>
         <Text
@@ -929,13 +912,13 @@ export const FAQ = ({ navigation }) => {
           onPress={() => {
             if(!expand12){
               analytics().logEvent('FAQ_question_pressed',{
-                question: 'Why does my screen look misaligned/weird?'
+                question: 'What can I do to reduce my impact?'
               })
             }
             setExpand12(!expand12)
           }}>
           <Text>
-            Why does my screen look misaligned/weird?
+            What can I do to reduce my impact?
           </Text>
         </Text>
         {expand12 ? (
@@ -947,10 +930,50 @@ export const FAQ = ({ navigation }) => {
               marginRight: "3%" ,
 
             }}>
-            This app is just in its beginning stages. Right now Siitch looks
-            best on newer iPhones with regular non-zoomed in text. {'\n'}
-            Android devices, iPads, Apple Watches, older phones, and iPhones with zoomed in displays are
-            currently not supported. We plan on supporting all platforms in the future.
+            There are hundreds of small things you can do every day to make a difference.
+            The first step? Know what you’re consuming. And stick to the 8 R's of sustainability:
+            refuse, reduce, reuse, refill, repair, regift, recycle, repeat. {'\n'} {'\n'}
+            In the Search pages, you'll see a list of ideas within the 'What Can I Do'
+            links. {'\n'} {'\n'}
+            A few other terrific sites, this for water: <Text
+            onPress={() => {
+              WebBrowser.openBrowserAsync(
+                'https://wateruseitwisely.com/100-ways-to-conserve-water')
+              analytics().logEvent('Source_click',{
+                source_name: '100 ways to conserve water',
+                source_url: 'https://wateruseitwisely.com/100-ways-to-conserve-water'
+              })
+            }}
+            style={{
+              color: 'blue',
+              textDecorationLine: 'underline',
+              fontSize: 17,
+              marginTop: 10,
+              paddingBottom: '7%',
+              alignSelf: 'center',
+            }
+            }>
+            www.wateruseitwisely.com
+          </Text> {'\n'}And this for reducing your waste: <Text
+            onPress={() => {
+              WebBrowser.openBrowserAsync(
+                'https://zerowastehome.com/tips/')
+              analytics().logEvent('Source_click',{
+                source_name: 'Tips for reducing waste',
+                source_url: 'https://zerowastehome.com/tips/'
+              })
+            }}
+            style={{
+              color: 'blue',
+              fontSize: 17,
+              marginTop: 10,
+              textDecorationLine: 'underline',
+              paddingBottom: '7%',
+              alignSelf: 'center',
+            }
+            }>
+            www.zerowastehome.com
+          </Text>
           </Text>
         ) : null}
         {expand12 ? (
@@ -968,6 +991,76 @@ export const FAQ = ({ navigation }) => {
           <TouchableHighlight
             style={{marginLeft: Width / 1.125, marginTop: -37}}
             onPress={() => setExpand12(true)}
+            underlayColor="transparent">
+            <MaterialCommunityIcons
+              name="menu-down"
+              color="black"
+              style={{fontSize: 40}}
+            />
+          </TouchableHighlight>
+        )}
+      </View>
+
+      <View style={{borderBottomColor: 'lightgray', borderBottomWidth: 1, paddingTop: '3%'}}/>
+
+      <View
+        style={{
+          marginTop: 20,
+          backgroundColor: '#FFFFFF',
+          marginBottom: '5%',
+          width: Width,
+        }}>
+        <Text
+          style={{
+            fontSize: 17,
+            paddingTop: '1%',
+            marginLeft: '3%',
+            paddingRight: 15,
+            paddingBottom: 10,
+            fontWeight: 'bold',
+          }}
+          onPress={() => {
+            if(!expand13){
+              analytics().logEvent('FAQ_question_pressed',{
+                question: 'Why does my screen look misaligned/weird?'
+              })
+            }
+            setExpand13(!expand13)
+          }}>
+          <Text>
+            Why does my screen look misaligned/weird?
+          </Text>
+        </Text>
+        {expand13 ? (
+          <Text
+            style= {{
+              fontWeight: 'normal',
+              fontSize: 17,
+              marginLeft: '3%',
+              marginRight: "3%" ,
+
+            }}>
+            This app is just in its beginning stages. Right now Siitch looks
+            best on newer iPhones with regular non-zoomed in text. {'\n'}
+            Android devices, iPads, Apple Watches, older phones, and iPhones with zoomed in displays are
+            currently not supported. We plan on supporting all platforms in the future.
+          </Text>
+        ) : null}
+        {expand13 ? (
+          <TouchableHighlight
+            style={{marginLeft: Width / 1.125, marginTop: -20}}
+            onPress={() => setExpand13(false)}
+            underlayColor="transparent">
+            <MaterialCommunityIcons
+              name="menu-up"
+              color="black"
+              style={{fontSize: 40}}
+            />
+          </TouchableHighlight>
+        ) : (
+          <TouchableHighlight
+            style={{marginLeft: Width / 1.125, marginTop: -37}}
+            onPress={() => setExpand13(true)}
             underlayColor="transparent">
             <MaterialCommunityIcons
               name="menu-down"
