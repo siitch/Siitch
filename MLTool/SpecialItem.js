@@ -60,6 +60,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
   const [badSiitch, setBadSiitch] = useState('Bad Siitch')
   let DeviceWidth = Dimensions.get('window').width
 
+  // Button shaking
   const shakeAnimation = useRef(new Animated.Value(0)).current;
   const startShake = () => {
     Animated.sequence([
@@ -73,7 +74,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
   const [sound, setSound] = useState()
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
-      require('./ItemDetailImages/achievement.mp3')
+      require('./ItemDetailImages/Orange-win.mp3')
     );
     setSound(sound);
     await sound.playAsync();
