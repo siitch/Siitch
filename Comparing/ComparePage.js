@@ -469,7 +469,7 @@ export const comparePage = ({navigation, route}) => {
 
     const numberWithCommas = (x) => {
         if(isNaN(x)){
-            return "NA"
+            return " -"
         }
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -1048,14 +1048,22 @@ export const comparePage = ({navigation, route}) => {
                           padding: 15
                       }}>
                           <Text>
-                              These numbers represent the Virtual Water totals. Virtual water is the total volume of
-                              water used in the production of a good or service. See our
+                              Virtual Water is the total volume of water used in the production of a good or service.
+                              See our
                               <Text
                                   onPress={() => {
                                       navigation.navigate('Virtual Water')
                                       setInfoVisible(false)
                                   }}
-                                  style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information.
+                                  style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information. Most
+                              numbers shown represent the Virtual Water totals. Where Virtual water amounts are
+                              unknown, we’ve sourced statistics found on our
+                              <Text
+                                  onPress={() => {
+                                      navigation.navigate('Sources & Resources')
+                                      setInfoVisible(false)
+                                  }}
+                                  style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
                           </Text>
                       </View>
                   </View>
