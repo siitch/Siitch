@@ -34,7 +34,7 @@ const OnboardingScreen = ({navigation}) => {
           <ScrollView style={{backgroundColor: 'white'}}>
           <Image style={{height:height
             , width:width}} source={require('./images2/Onboard2.png')}/>
-          </ScrollView>        
+          </ScrollView>
         ),
       },
       {
@@ -68,6 +68,37 @@ const OnboardingScreen = ({navigation}) => {
           <Image style={{height:height
             , width:width}} source={require('./images2/Onboard5.png')}/>
             </ScrollView>
+
+        ),
+      },
+      {
+        title: '',
+        subtitle: '',
+        backgroundColor: '#ffffff',
+        image: (
+          <ScrollView style={{backgroundColor: 'white'}}>
+            <ImageBackground style={{height:height
+              , width:width, flexDirection: 'column-reverse'}} source={require('./images2/Onboard6.png')}>
+              <TouchableOpacity
+                style={{
+                  width: 300,
+                  height: 50,
+                  color: '#ffffff',
+                  alignItems: "center",
+                  backgroundColor: "#70BF41",
+                  marginBottom: height/7,
+                  borderRadius: 25,
+                  alignSelf: 'center',
+                  justifyContent: 'center'
+                }}
+                onPress={() => {
+                  navigation.replace("Landing Page")
+                }}
+              >
+                <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
+              </TouchableOpacity>
+            </ImageBackground>
+          </ScrollView>
 
         ),
       },
@@ -105,10 +136,10 @@ const OnboardingScreen = ({navigation}) => {
         ),
       },
       */
-      
-      {
+
+      /*{
         title: "",
-        subtitle: (            
+        subtitle: (
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -128,7 +159,7 @@ const OnboardingScreen = ({navigation}) => {
             , width:width-10, resizeMode:'contain', marginTop: '5%'}} source={require('./images2/OnboardFinalImage.png')}/>
         </ScrollView>
         ),
-      },
+      },*/
     ]}
   />
 
@@ -152,7 +183,7 @@ const styles = StyleSheet.create({
       padding: 10,
       borderRadius: 25,
       justifyContent: 'center'
-      
+
     },
     countContainer: {
       alignItems: "center",
