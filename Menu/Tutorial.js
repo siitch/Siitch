@@ -118,9 +118,16 @@ const Tutorial = ({navigation}) => {
           subtitle: '',
           backgroundColor: '#ffffff',
           image: (
-            <ScrollView style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
-              <ImageBackground style={{height:height
-                , width:width, flexDirection: 'column-reverse'}} source={require('../images2/Tutorial9.png')}>
+            <View style={{backgroundColor: 'white', marginTop: height - (height * 1.2)}}>
+              <ImageBackground
+                style={{
+                  width: width,
+                  height: 3584 * width / 1656,
+                  flexDirection: 'column-reverse'
+                }}
+                source={require('../images2/Tutorial9.png')}
+                resizeMode={'contain'}
+              >
                 <TouchableOpacity
                   style={{
                     width: 300,
@@ -128,8 +135,8 @@ const Tutorial = ({navigation}) => {
                     color: '#ffffff',
                     alignItems: "center",
                     backgroundColor: "#70BF41",
-                    marginBottom: height/7,
                     borderRadius: 25,
+                    marginBottom: (1656 / 3584) * 3584 * (1 / 13),
                     alignSelf: 'center',
                     justifyContent: 'center'
                   }}
@@ -140,7 +147,7 @@ const Tutorial = ({navigation}) => {
                   <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GO!</Text>
                 </TouchableOpacity>
               </ImageBackground>
-            </ScrollView>
+            </View>
           ),
         },
       ]}
