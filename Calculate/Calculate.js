@@ -480,7 +480,9 @@ function CalculateScreen({ navigation }) {
                         marginTop: 20,
                         marginBottom: 30,
                     }}
-                    source={require('./../images/Calculator_two_leaves.png')}
+                    source={
+                        computed && Profiles[item] ? Profiles[item] : require('./../images/Calculator_two_leaves.png')
+                    }
                     resizeMode="contain"
                 />
                 <View style={{alignItems: 'center'}}>
