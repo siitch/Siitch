@@ -97,6 +97,7 @@ function HomeScreen({navigation}) {
                     textAlign: 'center',
                     color: '#70BF41',
                     fontSize: 22,
+                    fontWeight: 'bold'
                 }}>IMPACT</Text>,</Text>
                 <Text style={styles.bottomtext}>one Siitch-uation at a time{'\n\n'}</Text>
                 <Text style={{
@@ -223,8 +224,8 @@ function HomeScreen({navigation}) {
                             <Image
                                 source={require('./images2/HomepageIcons/EcoCam.png')}
                                 style={{
-                                    height: 97,
-                                    width: 97
+                                    height: 70,
+                                    width: 75
                                 }}
                             />
                             <Text style={{fontSize: 16, margin: 5}}>Eco-Cam</Text>
