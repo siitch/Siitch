@@ -74,7 +74,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
     const [sound, setSound] = useState()
     async function playSound() {
         const { sound } = await Audio.Sound.createAsync(
-            require('./ItemDetailImages/achievement.mp3')
+            require('./ItemDetailImages/Orange-win.mp3')
         );
         setSound(sound);
         await sound.playAsync();
