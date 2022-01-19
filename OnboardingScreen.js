@@ -1,6 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { View, Text, Button, Image,StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
 import Profiles from './ImageDB';
