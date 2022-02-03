@@ -45,6 +45,8 @@
 	<string>Allow camera access to enjoy this AR experience</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow microphone access to enjoy</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
