@@ -672,7 +672,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Siitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siitch.siitch;
 				PRODUCT_NAME = AwesomeProject;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -706,7 +706,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Siitch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siitch.siitch;
 				PRODUCT_NAME = AwesomeProject;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
