@@ -485,7 +485,7 @@ function CalculateScreen() {
             marginBottom: 30,
           }}
           source={
-            computed && Profiles[item] ? Profiles[item] : require('./../images/Calculator_two_leaves.png')
+            Profiles[item] ? Profiles[item] : require('./../images/Calculator_two_leaves.png')
           }
           resizeMode="contain"
         />
@@ -523,7 +523,8 @@ function CalculateScreen() {
                   setComputed(false);
                   setItem(currentItem.name);
                   setError({status: false, message: ''});
-                }}
+                }
+              }
               />
             </View>
           </View>
@@ -1551,7 +1552,7 @@ function CalculateScreen() {
 
               <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <Image
-                  style={{width: 30, height: 30, marginTop:25}}
+                  style={{width: 30, height: 30, marginTop: sOutputOpened ? 205 : 25}}
                   source={require('./../images/water_drop_150px_wide2.png')}
                 />
 
