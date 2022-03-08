@@ -56,7 +56,7 @@ export default function Catalogue ({navigation}){
             toValue: 0,
             duration: 2000
         }).start();
-    };
+    }
 
     const keyboard = new Map([
         ['a', new Set(['q', 'w', 's', 'x', 'z', ' '])],

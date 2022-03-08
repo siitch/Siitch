@@ -1,7 +1,6 @@
 import {
     Dimensions,
     Image, Modal,
-    SafeAreaView,
     ScrollView,
     Text,
     TouchableHighlight,
@@ -292,10 +291,7 @@ export default function ItemDetail({ route, navigation }) {
     };
 
     return(
-        <SafeAreaView style={{
-            backgroundColor: 'white'
-        }}>
-            <ScrollView>
+    <ScrollView style={{backgroundColor: 'white'}}>
                 <View>
                     {/* First section */}
                     <View
@@ -711,7 +707,8 @@ export default function ItemDetail({ route, navigation }) {
                 {/* Simple calculator */}
                 {metricToDisplay !== null && (metricToDisplay === 'gallons' || metricToDisplay === 'liters') && (
                     <View style={{
-                        height: calculatorHeight
+          height: calculatorHeight,
+          marginBottom: 20
                     }}>
                         <View style={{
                             alignItems: 'center',
@@ -1520,6 +1517,5 @@ export default function ItemDetail({ route, navigation }) {
                     )}
                 </View>*/}
             </ScrollView>
-        </SafeAreaView>
     )
 }
