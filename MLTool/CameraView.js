@@ -33,6 +33,8 @@ import {useIsFocused} from "@react-navigation/native";
 import Profiles from "../ImageDB";
 // Expo's firebase analytics library
 import * as Analytics from "expo-firebase-analytics";
+// Expo's filesystem library to delete temp photo
+import * as FileSystem from 'expo-file-system';
 
 function CameraView({navigation}) {
     // init status
@@ -52,11 +54,11 @@ function CameraView({navigation}) {
     const [loadingColor, setLoadingColor] = useState('grey');
 
     // Device's dimension, used to set the size of camera preview and the size of image
-    const Height = Dimensions.get('screen').height;
-    const Width = Dimensions.get('screen').width;
+    let Height = Dimensions.get('screen').height;
+    let Width = Dimensions.get('screen').width;
 
     // If this screen is the current screen on top. Used to un-mount camera when this screen is not focused
-    const isFocused = useIsFocused();
+    let isFocused = useIsFocused();
 
     useEffect(() => {
         // Initialize tensorflow.js
@@ -148,6 +150,7 @@ function CameraView({navigation}) {
                         [{resize: {width: Width, height: Height}}],
                         {compress: 1, format: ImageManipulator.SaveFormat.JPEG}
                     );
+                    await FileSystem.deleteAsync(picture.uri)
                     // Pass the image to 'ResultsScreen.js' to do prediction
                     navigation.push('Confirm', {image: manipulateResponse})
                 }});
@@ -313,7 +316,7 @@ const DrinksNonAlcoholic = () => {
 }
 
 // Screen stack navigation
-export const cameraScreen = () => (
+export const CameraScreen = () => (
     <CameraScreenStack.Navigator>
         {/* This screen */}
         <CameraScreenStack.Screen

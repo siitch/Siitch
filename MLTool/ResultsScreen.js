@@ -15,7 +15,6 @@ import {Button as MaterialButton} from 'react-native-paper';
 import * as jpeg from 'jpeg-js';
 import * as tf from '@tensorflow/tfjs';
 import * as ImageManipulator from 'expo-image-manipulator';
-import {FileSystem} from 'react-native-unimodules';
 // Used to map index results to item names
 import {CLASSES} from './Siitch_model/class_names';
 // Used to get item category from itemName
@@ -24,6 +23,8 @@ import firebase from 'firebase';
 import Profiles from '../ImageDB.js';
 // Firebase analytics
 import * as Analytics from 'expo-firebase-analytics';
+// Expo's filesystem library to delete temp photo
+import * as FileSystem from 'expo-file-system';
 
 export default function ResultsScreen({route, navigation}) {
   // Get the image from Camera Screen
@@ -200,6 +201,7 @@ export default function ResultsScreen({route, navigation}) {
       // Pass the edited image to next function
       const source = {uri: manipResponse.uri};
       await classifyImageAsync(source);
+      await FileSystem.deleteAsync(manipResponse.uri)
     } catch (error) {
       console.log('Image error: ', error);
     }
@@ -435,6 +437,7 @@ export default function ResultsScreen({route, navigation}) {
                 setCategory(''); // Reset Category
                 navigation.goBack(null);
                 Analytics.logEvent('Try_Again')
+                FileSystem.deleteAsync(image.uri)
               }} //take picture
             >
               Try Again
