@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   Text,
@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
   Modal,
   TouchableOpacity,
-  Alert,
+  Alert, ImageBackground, Share
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {styles} from '../Comparing/Styles';
@@ -18,6 +18,17 @@ import firebase from 'firebase';
 import RNPicker from 'rn-modal-picker';
 import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
+
+// New imports for Export
+import ViewShot from "react-native-view-shot";
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
+import {showMessage} from "react-native-flash-message";
+import header from '../images/header.png'
+import watermark from '../images/watermark_running_total.png'
+import {BlurView} from "expo-blur";
+import {FloatingButton, Button} from "react-native-ui-lib";
+import CalculateContainer from "../util/CalculateContainer";
 
 // var pages=[];
 let itemNameList = [];
@@ -43,7 +54,7 @@ let itemIndividualUnitL =[];
 let itemIndividualUnitG =[];
 let loading = false;
 
-const DeviceWidth = Dimensions.get('window').width;
+let DeviceWidth = Dimensions.get('window').width;
 
 const frequency_values = {
   per_day: 365,
@@ -72,7 +83,6 @@ const Quantity_values ={
 let fetchedData = {};
 
 function CalculateScreen({ navigation }) {
-  let itemsList = [];
   let selectedItem = [];
 
   const config = {
@@ -116,6 +126,60 @@ function CalculateScreen({ navigation }) {
   const [itemOpenList, setItemOpenList] = useState([]);
 
   const [infoVisible, setInfoVisible] = useState(false);
+
+  // Export a photo of the current running total list
+  const [modalShareVisible, setModalShareVisible] = useState(false)
+  const headerImage = Image.resolveAssetSource(header).uri
+  const watermarkImage = Image.resolveAssetSource(watermark).uri
+  const [listPhoto, setListPhoto] = useState('')
+  const [sharePhoto, setSharePhoto] = useState('')
+  const refCaptureRunningTotal = useRef(null);
+  const refShareRunningTotal = useRef(null);
+  const [listHeight, setListHeight] = useState(0)
+  const [headerHeight, setHeaderHeight] = useState(0)
+  const [watermarkHeight, setWatermarkHeight] = useState(0)
+  useEffect(()=>{
+    Image.getSize(headerImage,
+      (width, height) => {
+        setHeaderHeight(height * DeviceWidth * 0.9 / width)
+      })
+    Image.getSize(watermarkImage,
+      (width, height) => {
+        setWatermarkHeight(height * DeviceWidth * 0.3 / width)
+      })
+  })
+  const captureAndShareScreenshot = () => {
+    analytics().logEvent('Export_Running_Total_List')
+    refCaptureRunningTotal.current.capture().then((uri) => {
+      FileSystem.getInfoAsync(uri).then((FileInfo) => {
+        Image.getSize(FileInfo.uri,
+          (width, height) =>{
+            setListHeight(height * DeviceWidth * 0.9 / width)
+          })
+        setListPhoto(FileInfo.uri)
+        setModalShareVisible(true)
+        setTimeout(() => {
+          refShareRunningTotal.current.capture().then((uri) => {
+            FileSystem.getInfoAsync(uri).then((FileInfo) => {
+              setSharePhoto(FileInfo.uri)
+            })
+          })
+        },350)
+      })
+    });
+  };
+
+  function saveSuccessful() {
+    showMessage({
+      message: "Running Total Screenshot Saved!",
+      type: "success",
+      icon: "success",
+      duration: 2000,
+      style: {
+        backgroundColor: '#70BF41'
+      }
+    })
+  }
 
   const updateReallyOutput = (currentUnit) =>{
     if(currentUnit==="yearly")
@@ -217,27 +281,6 @@ function CalculateScreen({ navigation }) {
     upgradePages();
   }
 
-  const fetchList = () => {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
-    }
-
-    firebase
-      .database()
-      .ref('/')
-      .once('value', (data) => {
-        fetchedData = data.val();
-
-        for (let item in fetchedData) {
-          itemsList.push({
-            name: item,
-          });
-        }
-      });
-  };
-
-  fetchList();
-
   const fetchData = () => {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
@@ -249,12 +292,6 @@ function CalculateScreen({ navigation }) {
       .ref('/')
       .once('value', (data) => {
         fetchedData = data.val();
-
-        for (let item in fetchedData) {
-          itemsList.push({
-            name: item,
-          });
-        }
 
         if (item in fetchedData) {
           id = fetchedData[item]['Category'];
@@ -481,7 +518,7 @@ function CalculateScreen({ navigation }) {
             marginBottom: 30,
           }}
           source={
-            computed && Profiles[item] ? Profiles[item] : require('./../images/Calculator_two_leaves.png')
+            Profiles[item] ? Profiles[item] : require('./../images/Calculator_two_leaves.png')
           }
           resizeMode="contain"
         />
@@ -496,8 +533,8 @@ function CalculateScreen({ navigation }) {
                 alignContent: 'center',
               }}>
               <RNPicker
-                dataSource={itemsList}
-                dummyDataSource={itemsList}
+                dataSource={globalList}
+                dummyDataSource={globalList}
                 defaultValue={false}
                 pickerTitle={'Search Items'}
                 showSearchBar={true}
@@ -1193,6 +1230,12 @@ function CalculateScreen({ navigation }) {
 
         </View>
 
+        <ViewShot
+          ref={refCaptureRunningTotal}
+          options={{
+            format: "jpg",
+            quality: 1
+        }}>
         {showlist && (
 
           <View style={{flexDirection: 'row',
@@ -1387,7 +1430,7 @@ function CalculateScreen({ navigation }) {
                   {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
                   {!unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostLList[i]*itemQuantityList[i])}</Text>)}
 
-                  <TouchableHighlight  onPress={() => deleteItemFromList(index)}>
+                    <TouchableOpacity  onPress={() => deleteItemFromList(index)}>
                     <Image
                       style={{
                         width: 25,
@@ -1396,7 +1439,7 @@ function CalculateScreen({ navigation }) {
                         marginTop:10
                       }}
                       source={require('./../images/red_x.png')}/>
-                  </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
               </View>
@@ -1560,37 +1603,43 @@ function CalculateScreen({ navigation }) {
                             }}
             />
 
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <View style={{flexDirection: 'row', justifyContent: 'center', width: DeviceWidth}}>
               <Image
-                style={{width: 30, height: 30, marginTop:25}}
+                  style={{width: 30, height: 30, marginTop: sOutputOpened ? 205 : 25}}
                 source={require('./../images/water_drop_150px_wide2.png')}
               />
-              {unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostTotal/365)))} Gal</Text>)}
-              {unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/365)*7)} Gal</Text>)}
-              {unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostTotal/12))} Gal</Text>)}
-              {unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostTotal)} Gal</Text>)}
-              {!unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas((~~(yearlyCostLTotal/365)))} L</Text>)}
-              {!unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/365)*7)} L</Text>)}
-              {!unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(~~(yearlyCostLTotal/12))} L</Text>)}
-              {!unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20,marginRight:20}}>{numberWithCommas(yearlyCostLTotal)} L</Text>)}
+                {unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas((~~(yearlyCostTotal/365)))} Gal</Text>)}
+                {unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(~~(yearlyCostTotal/365)*7)} Gal</Text>)}
+                {unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(~~(yearlyCostTotal/12))} Gal</Text>)}
+                {unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(yearlyCostTotal)} Gal</Text>)}
+                {!unitG && (impactUnit==='daily') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas((~~(yearlyCostLTotal/365)))} L</Text>)}
+                {!unitG && (impactUnit==='weekly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(~~(yearlyCostLTotal/365)*7)} L</Text>)}
+                {!unitG && (impactUnit==='monthly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(~~(yearlyCostLTotal/12))} L</Text>)}
+                {!unitG && (impactUnit==='yearly') && (<Text style={{fontSize: 30, fontWeight: '500',marginTop: sOutputOpened ? 200 : 20}}>{numberWithCommas(yearlyCostLTotal)} L</Text>)}
             </View>
+              <CalculateContainer impactUnit={impactUnit} yearlyCostTotal={yearlyCostTotal}/>
 
           </View>
         )}
 
+        </ViewShot>
+
         {showlist &&(
-          <View>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: '10%',
+            marginHorizontal: '4%',
+          }}>
             <TouchableOpacity
               onPress={() => {setShowlist(false);
                 clearElements();
               }}
               style={{
+                width: 200,
                 padding: 15,
                 borderRadius: 30,
                 backgroundColor: 'orange',
-                marginLeft: '19%',
-                marginRight: '19%',
-                marginBottom: '10%',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
@@ -1606,8 +1655,62 @@ function CalculateScreen({ navigation }) {
                 </Text>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={captureAndShareScreenshot}
+              style={{
+                width: 130,
+                padding: 15,
+                borderRadius: 30,
+                backgroundColor: '#00ADEF',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <View style={{alignItems: 'center'}}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                    color: 'white',
+                    alignItems: 'center',
+                  }}>
+                  Export
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        )}
+        )}{/*{showlist &&(
+          <TouchableOpacity
+            onPress={() => {
+              setContext(true)
+              setModalVisible(true)
+              Analytics.logEvent('Context_pressed')
+            }}
+            style={{
+              width: 150,
+              padding: 15,
+              marginTop: '-5%',
+              marginBottom: '5%',
+              borderRadius: 30,
+              backgroundColor: '#404040',
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View style={{alignItems: 'center'}}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                  color: 'white',
+                  alignItems: 'center',
+                }}>
+                Context
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}*/}
+
+
       </View>
 
       {/* Info button modal */}
@@ -1679,6 +1782,134 @@ function CalculateScreen({ navigation }) {
           </View>
         </View>
       </Modal>
+
+        {/*Running total list Export modal*/}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalShareVisible}
+        >
+          <BlurView
+            intensity={90}
+            tint="light"
+            style={{
+              flex: 1
+            }}
+          >
+            <ScrollView
+              contentContainerStyle={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+              <View
+                style={{
+                  marginTop: '8%',
+                  marginBottom: '8%',
+                  borderRadius: 20,
+                  padding: 35,
+                  alignItems: "center",
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 4,
+                  elevation: 5
+                }}>
+                <ViewShot
+                  ref={refShareRunningTotal}
+                  options={{
+                    format: "jpg",
+                    quality: 1
+                  }}>
+                  <ImageBackground
+                    style={{
+                      height: headerHeight + listHeight,
+                      width: Dimensions.get('screen').width * 0.9,
+                    }}
+                    imageStyle={{
+                      position: 'absolute',
+                      top: headerHeight + 50,
+                      left: '47%',
+                      height: watermarkHeight,
+                      width: Dimensions.get('screen').width * 0.3,
+                      zIndex: 1
+                    }}
+                    source={watermark}>
+                    <Image
+                      source={{uri: headerImage}}
+                      style={{
+                        height: headerHeight,
+                        width: Dimensions.get('screen').width * 0.9,
+                      }}/>
+                    <Image
+                      source={{uri: listPhoto}}
+                      style={{
+                        height: listHeight,
+                        width: Dimensions.get('screen').width * 0.9,
+                      }}/>
+                  </ImageBackground>
+                </ViewShot>
+              </View>
+            </ScrollView>
+            <FloatingButton
+              visible={true}
+              button={{
+                disabled: true,
+                disabledBackgroundColor: 'transparent'
+              }}
+              secondaryButton={{
+                label: 'Cancel',
+                onPress: ()=>{
+                  setModalShareVisible(!modalShareVisible)
+                },
+                color: 'black'
+              }}
+              bottomMargin={40}
+              // hideBackgroundOverlay
+              // withoutAnimation
+            />
+            <View style={{
+              width: Dimensions.get('screen').width * 0.8,
+              position: 'absolute',
+              bottom: 80,
+              alignSelf: 'center',
+            }}>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+                <Button
+                  label={"Share"}
+                  backgroundColor={"#00ADEF"}
+                  enableShadow={true}
+                  onPress={()=>{
+                    Share.share(
+                      {
+                        url: sharePhoto
+                      }
+                    )
+                    analytics().logEvent('Share_Running_Total_List')
+                  }}
+                />
+                <Button
+                  label={"Save to Photo"}
+                  backgroundColor={"#70BF41"}
+                  enableShadow={true}
+                  onPress={()=>{
+                    MediaLibrary.saveToLibraryAsync(sharePhoto).then(() => {
+                      setModalShareVisible(!modalShareVisible)
+                      saveSuccessful()
+                      analytics().logEvent('Save_Running_Total_List')
+                    })
+                  }}
+                />
+              </View>
+            </View>
+          </BlurView>
+        </Modal>
+
     </ScrollView>
   );
 }
