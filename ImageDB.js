@@ -28,6 +28,7 @@ const Profiles = {
     'gray water': require('./images/gray_water_3.png'),
     'blue water': require('./images/blue_water_3.png'),
     'green water': require('./images/green_water_3.png'),
+    'white water': require('./images/white_water_3.png'),
     Beef: require('./images/Image_new/Meats/beef.png'),
     Lamb: require('./images/Image_new/Meats/lamb.png'),
     Pork: require('./images/Image_new/Meats/pork.png'),
@@ -210,7 +211,7 @@ const Profiles = {
     'Grape juice 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/grape_juice.png'),
     'Wine 5 oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/wine_glass.png'),
     'Coffee beans': require('./images/Image_new/Nuts_&_Beans/ALT/coffee_beans.png'),
-    'Coffee 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/coffee.png'),
+    'Coffee 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/coffee_replace.png'),
     'Grapefruit juice': require('./images/Image_new/Drinks_Non_Alcoholic/grapefruit_juice.png'),
     'Grapefruit juice 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/grapefruit_juice.png'),
     Beer: require('./images/Image_new/Drinks_Alcoholic/Single_units/beer_glass.png'),
@@ -222,5 +223,7 @@ const Profiles = {
     'Tea 1 cup': require('./images/Image_new/Drinks_Non_Alcoholic/tea.png'),
     'Gin one & half oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/gin_glass.png'),
     'Vodka one & half oz': require('./images/Image_new/Drinks_Alcoholic/Single_units/vodka_glass.png'),
+    Globe: require('./images/Globe.png'),
+    Chart: require('./images/Chart.png')
   };
   export default Profiles;

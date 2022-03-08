@@ -23,7 +23,7 @@ export const images = {
   heart: require('./images/Navigation_Icons/Health_icon_B&W.png'),
   recycle: require('./images/Navigation_Icons/Recycle_icon_B&W.png'),
   recycle_select: require('./images/Navigation_Icons/Recycle_icon_brown.png'),
-  vs: require('./images/Navigation_Icons/VS_BW_2x.png'),
+  vs: require('./images/Navigation_Icons/VS_BW_3x.png'),
   vs_select: require('./images/Navigation_Icons/VS_blue_3x.png'),
   down_arrow: require('./images/Navigation_Icons/down_arrow.png'),
 
@@ -134,7 +134,7 @@ export const images = {
   vyana_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Vyana_logo_1x.png'),
   dirty_logo : require('./images/Makeup_Image_Folder/Brand_Logos/DirtyHippie_logo_1x.png'),
   neek_logo : require('./images/Makeup_Image_Folder/Brand_Logos/Neek_logo_1x.png'),
-  
+
 
   //makeup brands rating
   axiology_rate: require('./images/Makeup_Image_Folder/Brand_Logos/Axiology_ratings_1x.png'),
