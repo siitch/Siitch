@@ -5,7 +5,7 @@ import Recycle from './MeatComponents/Recycle';
 import Heart from './MeatComponents/Heart';
 import Water from './MeatComponents/Water';
 import Search from './Search/Search';
-import Compare, {compareScreen} from './Comparing/Compare';
+import Compare, {CompareScreen} from './Comparing/Compare';
 import NormalSearch from './NormalSearchingComponents/NormalSearch';
 import What from './MeatComponents/What';
 // Jeans import
@@ -57,9 +57,9 @@ import {images} from './ImageURL';
 import Profiles from './ImageDB';
 import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
-import {cameraScreen} from "./MLTool/CameraView";
+import {CameraScreen} from "./MLTool/CameraView";
 import ItemDetail from "./MLTool/ItemDetail";
-import comparePage from "./Comparing/ComparePage";
+import ComparePage from "./Comparing/ComparePage";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
@@ -317,14 +317,14 @@ const HomeStackScreen = () => (
     </HomeStack.Navigator>
 );
 
-const landingdetails = () => {
+const LandingDetails = () => {
     const [status, setStatus] = useState(true);
     const [getData, setGetData] = useState({});
     const [keyword, setKeyword] = useState('');
     const GoToSearch = ({navigation}) => {
         return <Search searchData={searchData} navigation={navigation} />;
     };
-    const toWhat = () => {
+    const ToWhat = () => {
         if (keyword === 'Beef') {
             return <What />;
         } else if (keyword === 'Jeans') {
@@ -393,8 +393,8 @@ const landingdetails = () => {
                     }}
                 />
                 <Tab.Screen
-                    name="Compare"
-                    component={compareScreen}
+                    name="CompareTab"
+                    component={CompareScreen}
                     options={{
                         tabBarLabel: 'Compare',
                         tabBarIcon: ({focused}) =>
@@ -411,7 +411,7 @@ const landingdetails = () => {
 
                 <Tab.Screen
                     name="MLTool"
-                    component={cameraScreen}
+                    component={CameraScreen}
                     options={({route})=>({
                         tabBarLabel: 'Eco-Cam',
                         tabBarVisible: ((route) => {
@@ -472,7 +472,7 @@ const landingdetails = () => {
         }
     };
 
-    const searchDetail = ({route}) => {
+    const SearchDetail = ({route}) => {
         setGetData(route.params.value);
         let detail = true;
         if (
@@ -630,7 +630,7 @@ const landingdetails = () => {
                 />
                 <Stack.Screen
                     name="Search"
-                    component={searchDetail}
+                    component={SearchDetail}
                     options={({navigation}) => ({
                         headerBackTitleVisible: false,
                         headerRight: () => (
@@ -666,7 +666,7 @@ const landingdetails = () => {
                 />
               <Stack.Screen
                 name="Compare Details"
-                component={comparePage}
+                component={ComparePage}
                 options={({navigation}) => ({
                   headerBackTitleVisible: false,
                   headerRight: () => (
@@ -720,12 +720,12 @@ const landingdetails = () => {
                   ),
                 })}
               />
-                <Stack.Screen name="What" component={toWhat} />
+                <Stack.Screen name="What" component={ToWhat} />
             </Stack.Navigator>
         </NavigationContainer>
     );
 };
 
 export {
-    landingdetails
+    LandingDetails
 }
