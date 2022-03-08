@@ -144,8 +144,8 @@ export const FAQItem = ({question, navigation, color}) => {
           "Worse still, if you're not composting, they will then sit in a landfill with other trash and emit carbon and " +
           "methane, further contributing to climate change. Your daily micro-actions have a major impact."
       case "Why can't I find information for items like Pop Tarts and mac & cheese?":
-        return "Statistics for processed foods or foods with multiple ingredients are hard to find. Our database " +
-          "currently has ~200 items and we plan to add more."
+        return "Statistics for processed foods or foods with multiple ingredients are hard to find. Our database currently" +
+          " has ~200 items. Do we plan to add more? Oh yes! And we'll need your help with that."
       case "Are you going to show other statistics in the future?":
         return "That's the goal."
       case "What can I do to reduce my impact?":

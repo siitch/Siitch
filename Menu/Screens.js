@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 const {width} = Dimensions.get('screen');
-import {View, Text, Dimensions, ScrollView} from 'react-native';
+import {View, Text, Dimensions, ScrollView, TouchableOpacity, Share} from 'react-native';
 
 import {MenuItem} from "./MenuItem";
 
@@ -70,6 +70,37 @@ export const MenuMain = ({ navigation }) => {
             Thank you!
             </Text>
         </View>
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'black',
+            alignContent: 'flex-start',
+            margin: '5%',
+            marginBottom: '7%',
+            marginTop: '10%',
+            textAlign: 'center'
+          }}>
+          Have friends who love the planet?{'\n'}
+          Feel free to share our app.{'\n'}
+          The more feedback the better.
+        </Text>
+        <TouchableOpacity
+          style={{
+            alignSelf: 'center',
+            backgroundColor: '#70BF41',
+            borderRadius: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 49,
+            width: 270
+        }}
+          onPress={()=>{
+            Share.share({
+              message: "This will be the public link"
+            })
+          }}>
+          <Text style={{fontSize: 26, fontWeight: '600', color: 'white'}}>SHARE</Text>
+        </TouchableOpacity>
       <Text
         style={{
           fontSize: 17,
