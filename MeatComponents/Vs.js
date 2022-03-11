@@ -131,7 +131,11 @@ const Vs = ({navigation}) => {
         </View>
         <View style={{flexDirection:'column',alignItems:'center',marginTop:'5%'}}>
           <Text style={{fontSize:20,fontWeight:'bold',marginTop:5}}>Doing good</Text>
-          <Text style={{fontSize:16,marginTop:5}}>Ranked in no particular order.</Text>
+          <Text style={{fontSize: 16, marginTop: 5, textAlign: 'center'}}>
+            Ranked in no particular order.{'\n'}
+            Click on these companies to see{'\n'}
+            how they're making a difference.
+          </Text>
           <Image source={images.down_arrow} style={{width: 60, height: 60}}/>
         </View>
         <View style={{flexDirection: 'column', alignItems: 'center'}}>
