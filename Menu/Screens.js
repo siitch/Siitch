@@ -96,7 +96,7 @@ export const MenuMain = ({ navigation }) => {
         }}
           onPress={()=>{
             Share.share({
-              message: "This will be the public link"
+              message: "https://testflight.apple.com/join/0HGzm3Xo"
             })
           }}>
         <Text style={{fontSize: 26, fontWeight: '600', color: 'white'}}>SHARE</Text>
