@@ -209,23 +209,29 @@ export default function ComparePage ({navigation, route}) {
       case 'Rain':
         return (
           <View style={{marginTop: 10}}>
-            <Text style={{fontWeight:'bold'}}>Rain water (Green water): </Text>
-            <Text>The amount of rainwater required to make an item</Text>
+            <Text>
+              Rain water (Green water): The amount of rainwater required to make an item
+            </Text>
           </View>
         )
       case 'Irrigation':
         return (
           <View style={{marginTop: 10}}>
-            <Text style={{fontWeight:'bold'}}>Irrigated water (Blue water): </Text>
-            <Text>The amount of surface water and groundwater required to produce an item</Text>
+            <Text>
+              Irrigated water (Blue water): The amount of surface water and groundwater required to produce an item
+            </Text>
           </View>
         )
       case 'Cleaning':
         return (
           <View style={{marginTop: 10}}>
-            <Text style={{fontWeight:'bold'}}>Cleaning water (Gray water): </Text>
-            <Text>The amount of freshwater required to dilute the wastewater generated in manufacturing, in order to maintain water quality, as determined by state and local standards </Text>
-            <Text style={{textAlign: 'left', marginTop: '3%'}}>Definitions: <Text onPress={() => WebBrowser.openBrowserAsync('https://www.watercalculator.org')} style={{color: '#00ADEF'}}>www.watercalculator.org</Text></Text>
+            <Text>
+              Cleaning water (Gray water): The amount of freshwater required to dilute the wastewater
+              generated in manufacturing, in order to maintain water quality, as determined by state and local standards
+            </Text>
+            <Text style={{textAlign: 'left', marginTop: '3%'}}>
+              Definitions: <Text onPress={() => WebBrowser.openBrowserAsync('https://www.watercalculator.org')} style={{color: '#00ADEF'}}>www.watercalculator.org</Text>
+            </Text>
           </View>
         )
     }
@@ -709,6 +715,15 @@ export default function ComparePage ({navigation, route}) {
               alignItems: 'center',
             }}>
             <View style={styles.modalView}>
+              <Text
+                style={{
+                  marginTop: 10,
+                  fontSize: 22,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                }}>
+                {waterCategory}
+              </Text>
               {getContent(waterCategory)}
               <TouchableHighlight
                 style={{...styles.openButton, backgroundColor: '#70BF41'}}
