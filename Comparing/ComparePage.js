@@ -407,6 +407,9 @@ export default function ComparePage ({navigation, route}) {
             onPress={()=>{
               setWaterCategory('Rain')
               setWaterVisible(true)
+              analytics().logEvent('Compare_info_pressed',{
+                contextName: 'Rain'
+              })
             }}>
             <Text style={comparePageStyle.waterTitle}>Rain</Text>
             <Image source={Profiles['white water']} style={{height: 25, width: 25}} />
@@ -416,6 +419,9 @@ export default function ComparePage ({navigation, route}) {
             onPress={()=>{
               setWaterCategory('Irrigation')
               setWaterVisible(true)
+              analytics().logEvent('Compare_info_pressed',{
+                contextName: 'Irrigation'
+              })
             }}>
             <Text style={comparePageStyle.waterTitle}>Irrigation</Text>
             <Image source={Profiles['white water']} style={{height: 25, width: 25}} />
@@ -425,6 +431,9 @@ export default function ComparePage ({navigation, route}) {
             onPress={()=>{
               setWaterCategory('Cleaning')
               setWaterVisible(true)
+              analytics().logEvent('Compare_info_pressed',{
+                contextName: 'Cleaning'
+              })
             }}>
             <Text style={comparePageStyle.waterTitle}>Cleaning</Text>
             <Image source={Profiles['white water']} style={{height: 25, width: 25}} />

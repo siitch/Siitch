@@ -4,6 +4,7 @@ const {width} = Dimensions.get('screen');
 import {View, Text, Dimensions, ScrollView, TouchableOpacity, Share} from 'react-native';
 
 import {MenuItem} from "./MenuItem";
+import analytics from "@react-native-firebase/analytics";
 
 export const MenuMain = ({ navigation }) => {
   return (
@@ -96,8 +97,9 @@ export const MenuMain = ({ navigation }) => {
         }}
           onPress={()=>{
             Share.share({
-              message: "https://testflight.apple.com/join/0HGzm3Xo"
+              url: "https://testflight.apple.com/join/0HGzm3Xo"
             })
+            analytics().logEvent('Share_public_link')
           }}>
         <Text style={{fontSize: 26, fontWeight: '600', color: 'white'}}>SHARE</Text>
       </TouchableOpacity>
