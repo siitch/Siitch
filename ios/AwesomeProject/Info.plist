@@ -47,6 +47,10 @@
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow microphone access to enjoy</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow photo access to save your results</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow photo access to save your results</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
