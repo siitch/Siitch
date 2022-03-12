@@ -24,6 +24,7 @@ import SpecialItem from "./SpecialItem";
 export default function ItemDetail({ route, navigation }) {
     // Get item name passed from other screen
     const { itemName } = route.params;
+    const { localQuantity } = route.params;
     // Item data fetched from the database, only used to show the raw data for debug and UI design, can be removed later
     const [ item, setItem ] = useState({});
 
@@ -94,7 +95,7 @@ export default function ItemDetail({ route, navigation }) {
     const DeviceWidth = Dimensions.get('window').width;
     let itemQuantity;
     let itemFrequency;
-    const [quantity, setQuantity] = useState(null);
+    const [quantity, setQuantity] = useState(localQuantity === undefined ? null: localQuantity.toString());
     const [frequency, setFrequency] = useState(null);
     const [selectOpened, setSelect] = useState(false);
     const [computed, setComputed] = useState(false);

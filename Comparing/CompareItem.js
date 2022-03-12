@@ -54,7 +54,7 @@ export default function CompareItem({navigation, name, itemInfo, metric, minItem
         </View>
       )) ||  <Text style={{marginBottom: 23}}>  </Text>}
 
-      <TouchableOpacity onPress={()=>{navigation.navigate('Detail', {itemName: name})}}>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Detail', {itemName: name, localQuantity: localCount})}}>
         <Image
           source={Profiles[name]}
           style={itemStyle.image}
