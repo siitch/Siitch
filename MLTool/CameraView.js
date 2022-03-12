@@ -75,6 +75,7 @@ function CameraView({navigation}) {
         setGranted(false)
       } else {
         setGranted(true)
+        prepareModal()
       }
     })
   }
@@ -122,7 +123,6 @@ function CameraView({navigation}) {
   useEffect(() => {
     if(init){ // After all the functions are called when this screen is initializing, don't call them again when
       getCameraPermission()
-      prepareModal()
       setInit(false)
     }
   })
@@ -197,7 +197,7 @@ function CameraView({navigation}) {
                             alignItems: 'center',
                             borderRadius: 100,
                         }}
-                        onPress={isModelReady ? takePicture : ()=>{Alert.alert('Model loading')}}>
+                        onPress={isModelReady ? takePicture : ()=>{Alert.alert('Tool loading')}}>
                         {/* Camera button image*/}
                         <Image style={{
                             width: 80,
