@@ -5,13 +5,13 @@ import * as tf from "@tensorflow/tfjs";
 import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
   Alert,
-  AsyncStorage,
   Dimensions, Image,
   Linking,
   SafeAreaView,
   TouchableOpacity,
   View
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Camera} from "expo-camera";
 // Third party loading indicator, looks great
 import {ActivityIndicator} from "react-native-paper";
@@ -45,8 +45,6 @@ function CameraView({navigation}) {
   const [granted, setGranted] = useState(null);
   // Status of model loading
   const [isModelReady, setIsModelReady] = useState(false);
-  // Reference of model, used for debug
-  const [myModel, setMyModel] = useState(null);
 
   // Instance of device camera
   const [camera, setCamera] = useState(null);
@@ -54,117 +52,103 @@ function CameraView({navigation}) {
   const [loadingColor, setLoadingColor] = useState('grey');
 
   // Device's dimension, used to set the size of camera preview and the size of image
-    let Height = Dimensions.get('screen').height;
-    let Width = Dimensions.get('screen').width;
+  let Height = Dimensions.get('screen').height;
+  let Width = Dimensions.get('screen').width;
 
   // If this screen is the current screen on top. Used to un-mount camera when this screen is not focused
-    let isFocused = useIsFocused();
+  let isFocused = useIsFocused();
 
-  useEffect(() => {
-    // Initialize tensorflow.js
-    const initializeTfAsync = async () => {
-      await tf.ready();
-    };
-
-    // Load our model from resource folder
-    const initializeModelAsync = async () => {
-      const model = require("./Siitch_model/model.json");
-      const weights = require("./Siitch_model/group1-shard1of1.bin");
-      const loadedModel = await tf.loadGraphModel(
-        bundleResourceIO(model, weights)
-      );
-      // Set model reference for debug
-      setMyModel(loadedModel);
-      // Set the model as a global variable so that ResultsScreen can use it to do prediction
-      global.siitchmodel = loadedModel
-      // Set model loading status
-      setIsModelReady(true);
-      setLoadingColor('red'); // Useless for now, but it might come in handy in the future
-    };
-
-    // Get camera permission status. When first launch, ask for permission.
-    const getCameraPermissionAsync = async () => {
-      // If permission is asked before, this screen will be recorded as visited.
-      AsyncStorage.getItem('permissionAsked').then(value => {
-        if(value == null){ // If permission is not asked before
-          AsyncStorage.setItem('permissionAsked', 'true');
-          setVisited(false); // , app won't lead user to setting.
-        }
-      });
-
-      // Get the status of camera permission
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      if (status !== 'granted') {
+  // Get camera permission status. When first launch, ask for permission.
+  function getCameraPermission() {
+    // If permission is asked before, this screen will be recorded as visited.
+    AsyncStorage.getItem('permissionAsked').then(value => {
+      if(value == null){ // If permission is not asked before
+        AsyncStorage.setItem('permissionAsked', 'true');
+        setVisited(false) // , app won't lead user to setting.
+      } else {
+        setVisited(true)
+      }
+    });
+    // Get the status of camera permission
+    Camera.requestCameraPermissionsAsync().then((response) => {
+      if (response.status !== 'granted') {
         setGranted(false)
       } else {
         setGranted(true)
       }
-    };
+    })
+  }
 
+  function prepareModal() {
+    // Initialize tensorflow.js
+    tf.ready().then(()=>{
+      // Load our model from resource folder
+      const model = require("./Siitch_model/model.json");
+      const weights = require("./Siitch_model/group1-shard1of1.bin");
+      tf.loadGraphModel(bundleResourceIO(model, weights)).then((GraphModel) => {
+        global.siitchmodel = GraphModel
+      }).then(()=>{
+        setIsModelReady(true);
+        setLoadingColor('red'); // Useless for now, but it might come in handy in the future
+      })
+    })
+  }
+
+  useEffect(() => {
     // After the first time user visits this screen, if permission is declined or turned off,
     // shows message to lead user to grant camera permission in setting.
-    const checkPermissionAsync = () => {
-      if(granted !== null && visited !== null){
-        if(isFocused && !granted && visited){
-          Alert.alert(
-            "Permission denied",
-            "Do you want to go to settings to grant camera permission?",
-            [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"), // Useless log, can be null
-                style: "cancel"
-              },
-              { text: "OK", onPress: () => Linking.openURL('app-settings:') }
-            ]
-          );
-          navigation.goBack(null); // Block user from entering this screen if permission not granted.
-        } else if(isFocused && !granted && !visited) {
-          setVisited(true); // App will lead user to setting next time if permission is not granted.
-          navigation.goBack(null); // Block user from entering this screen if permission not granted for the first time.
-        }
+    if(granted !== null && visited !== null){
+      if(isFocused && !granted && visited){
+        Alert.alert(
+          "Permission denied",
+          "Do you want to go to settings to grant camera permission?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"), // Useless log, can be null
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => Linking.openURL('app-settings:') }
+          ]
+        );
+        navigation.goBack(null); // Block user from entering this screen if permission not granted.
+      } else if(isFocused && !granted && !visited) {
+        setVisited(true); // App will lead user to setting next time if permission is not granted.
+        navigation.goBack(null); // Block user from entering this screen if permission not granted for the first time.
       }
     }
+  }, [granted, isFocused]) // changes of isFocused, granted, update this screen
+
+  useEffect(() => {
     if(init){ // After all the functions are called when this screen is initializing, don't call them again when
-      // changes of isFocused, granted, visited update this screen
-      getCameraPermissionAsync();
-      checkPermissionAsync();
-      initializeTfAsync();
-      initializeModelAsync();
+      getCameraPermission()
+      prepareModal()
       setInit(false)
-    } else {
-      checkPermissionAsync();
     }
-  }, [isFocused, granted, visited]); // Update when isFocused, granted, visited change
+  })
 
   // User taps the camera button, do this
-  const takePictureAsync = async () => {
-    try {
-      camera.pausePreview()
-      // Get the photo user took
-      await camera.takePictureAsync({onPictureSaved: async (picture) => {
-          // Resize image to avoid out of memory crashes, also set it to the size of the screen so that we
-          // can display it as background in the Result Screen
-          const manipulateResponse = await ImageManipulator.manipulateAsync(
-            picture.uri,
-            [{resize: {width: Width, height: Height}}],
-            {compress: 1, format: ImageManipulator.SaveFormat.JPEG}
-          );
-          await FileSystem.deleteAsync(picture.uri)
-          // Pass the image to 'ResultsScreen.js' to do prediction
-          navigation.push('Confirm', {image: manipulateResponse})
-        }});
-      await analytics().logEvent('take_photo', {
+  function takePicture() {
+    camera.pausePreview()
+    camera.takePictureAsync({onPictureSaved: picture => {
+        ImageManipulator.manipulateAsync(
+          picture.uri,
+          [{resize: {width: Width, height: Height}}],
+          {compress: 1, format: ImageManipulator.SaveFormat.JPEG}
+        ).then(ImageResult => {
+          navigation.push('Confirm', {image: ImageResult})
+          FileSystem.deleteAsync(picture.uri)
+        })
+      }}).then(()=>{
+      analytics().logEvent('take_photo', {
         userAction: 'User took a photo'
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      })
+    })
+  }
 
   return(
     // Only if camera permission is granted and this screen is focused, show camera preview and buttons
-    (isFocused && granted &&
+    (isFocused && granted === true &&
       <Camera
         ref={(ref) => setCamera(ref)}
         type={Camera.Constants.Type.back}
@@ -213,7 +197,7 @@ function CameraView({navigation}) {
               alignItems: 'center',
               borderRadius: 100,
             }}
-            onPress={isModelReady ? takePictureAsync : ()=>{Alert.alert('Model loading')}}>
+            onPress={isModelReady ? takePicture : ()=>{Alert.alert('Model loading')}}>
             {/* Camera button image*/}
             <Image style={{
               width: 80,

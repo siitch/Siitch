@@ -21,7 +21,7 @@ let itemsToBeCompared = [];
 let availableSlots = [0, 1]
 
 export default function Compare ({navigation}) {
-  const slotsNum = 18
+  const slotsNum = 16
   let [refresh, setRefresh] = useState(false)
 
   useEffect(()=>{
