@@ -197,7 +197,7 @@ function CameraView({navigation}) {
               alignItems: 'center',
               borderRadius: 100,
             }}
-            onPress={isModelReady ? takePicture : ()=>{Alert.alert('Model loading')}}>
+            onPress={isModelReady ? takePicture : ()=>{Alert.alert('Tool loading')}}>
             {/* Camera button image*/}
             <Image style={{
               width: 80,
