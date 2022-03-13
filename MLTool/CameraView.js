@@ -6,8 +6,8 @@ import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
   Alert,
   Dimensions, Image,
-  Linking,
-  SafeAreaView,
+  Linking, Modal,
+  SafeAreaView, Text,
   TouchableOpacity,
   View
 } from "react-native";
@@ -35,6 +35,7 @@ import Profiles from "../ImageDB";
 import analytics from '@react-native-firebase/analytics';
 // Expo's filesystem library to delete temp photo
 import * as FileSystem from 'expo-file-system';
+import sloth from "../images/sloth.png"
 
 function CameraView({navigation}) {
   // init status
@@ -75,24 +76,18 @@ function CameraView({navigation}) {
         setGranted(false)
       } else {
         setGranted(true)
-        prepareModal()
+        prepareModal().then(r => setIsModelReady(true))
       }
     })
   }
 
-  function prepareModal() {
+  async function prepareModal() {
     // Initialize tensorflow.js
-    tf.ready().then(()=>{
-      // Load our model from resource folder
-      const model = require("./Siitch_model/model.json");
-      const weights = require("./Siitch_model/group1-shard1of1.bin");
-      tf.loadGraphModel(bundleResourceIO(model, weights)).then((GraphModel) => {
-        global.siitchmodel = GraphModel
-      }).then(()=>{
-        setIsModelReady(true);
-        setLoadingColor('red'); // Useless for now, but it might come in handy in the future
-      })
-    })
+    await tf.ready()
+    // Load our model from resource folder
+    const model = require("./Siitch_model/model.json");
+    const weights = require("./Siitch_model/group1-shard1of1.bin");
+    global.siitchmodel = await tf.loadGraphModel(bundleResourceIO(model, weights))
   }
 
   useEffect(() => {
@@ -197,7 +192,9 @@ function CameraView({navigation}) {
               alignItems: 'center',
               borderRadius: 100,
             }}
-            onPress={isModelReady ? takePicture : ()=>{Alert.alert('Tool loading')}}>
+            onPress={()=>{
+              takePicture()
+            }}>
             {/* Camera button image*/}
             <Image style={{
               width: 80,
@@ -228,6 +225,63 @@ function CameraView({navigation}) {
             )}
           </TouchableOpacity>
         </SafeAreaView>
+        {!isModelReady && (
+          <View
+            style={{
+              flex: 1,
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              opacity: 0.5,
+              backgroundColor: 'black',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Modal animationType="fade" transparent={true} visible={true}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'white',
+                    borderRadius: 20,
+                    height: 244,
+                    width: 244,
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 4,
+                    elevation: 5,
+                  }}>
+                  <View style={{
+                    width: 244,
+                    height: 244,
+                    borderColor: 'black',
+                    borderWidth: 1.5,
+                    borderRadius: 20,
+                    overflow: 'hidden'
+                  }}>
+                    <Text style={{textAlign: 'center', fontSize: 17, marginVertical: '10%'}}>
+                      Hang tight.{'\n'}
+                      Eco-Cam is loading.
+                    </Text>
+                    <Image source={sloth} style={{width: 244, height: 244 * 228 / 480}}/>
+                  </View>
+                </View>
+              </View>
+            </Modal>
+          </View>
+        )}
       </Camera>
     )
   )
