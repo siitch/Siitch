@@ -4,12 +4,12 @@ import * as tf from "@tensorflow/tfjs";
 // Used to import .bin model file
 import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
-    Alert,
-    Dimensions, Image,
-    Linking,
-    SafeAreaView,
-    TouchableOpacity,
-    View
+  Alert,
+  Dimensions, Image,
+  Linking, Modal,
+  SafeAreaView, Text,
+  TouchableOpacity,
+  View
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Camera} from "expo-camera";
@@ -35,28 +35,29 @@ import Profiles from "../ImageDB";
 import * as Analytics from "expo-firebase-analytics";
 // Expo's filesystem library to delete temp photo
 import * as FileSystem from 'expo-file-system';
+import sloth from "../images/sloth.png"
 
 function CameraView({navigation}) {
-    // init status
-    const [init, setInit] = useState(true);
-    // Get the status if the camera screen is the first time visited
-    const [visited, setVisited] = useState(null);
-    // Status of camera permission
-    const [granted, setGranted] = useState(null);
-    // Status of model loading
-    const [isModelReady, setIsModelReady] = useState(false);
+  // init status
+  const [init, setInit] = useState(true);
+  // Get the status if the camera screen is the first time visited
+  const [visited, setVisited] = useState(null);
+  // Status of camera permission
+  const [granted, setGranted] = useState(null);
+  // Status of model loading
+  const [isModelReady, setIsModelReady] = useState(false);
 
-    // Instance of device camera
-    const [camera, setCamera] = useState(null);
-    // Set different color according to the model loading status
-    const [loadingColor, setLoadingColor] = useState('grey');
+  // Instance of device camera
+  const [camera, setCamera] = useState(null);
+  // Set different color according to the model loading status
+  const [loadingColor, setLoadingColor] = useState('grey');
 
-    // Device's dimension, used to set the size of camera preview and the size of image
-    let Height = Dimensions.get('screen').height;
-    let Width = Dimensions.get('screen').width;
+  // Device's dimension, used to set the size of camera preview and the size of image
+  let Height = Dimensions.get('screen').height;
+  let Width = Dimensions.get('screen').width;
 
-    // If this screen is the current screen on top. Used to un-mount camera when this screen is not focused
-    let isFocused = useIsFocused();
+  // If this screen is the current screen on top. Used to un-mount camera when this screen is not focused
+  let isFocused = useIsFocused();
 
   // Get camera permission status. When first launch, ask for permission.
   function getCameraPermission() {
@@ -75,24 +76,18 @@ function CameraView({navigation}) {
         setGranted(false)
       } else {
         setGranted(true)
-        prepareModal()
+        prepareModal().then(r => setIsModelReady(true))
       }
     })
   }
 
-  function prepareModal() {
+  async function prepareModal() {
     // Initialize tensorflow.js
-    tf.ready().then(()=>{
-      // Load our model from resource folder
-      const model = require("./Siitch_model/model.json");
-      const weights = require("./Siitch_model/group1-shard1of1.bin");
-      tf.loadGraphModel(bundleResourceIO(model, weights)).then((GraphModel) => {
-        global.siitchmodel = GraphModel
-      }).then(()=>{
-        setIsModelReady(true);
-        setLoadingColor('red'); // Useless for now, but it might come in handy in the future
-      })
-    })
+    await tf.ready()
+    // Load our model from resource folder
+    const model = require("./Siitch_model/model.json");
+    const weights = require("./Siitch_model/group1-shard1of1.bin");
+    global.siitchmodel = await tf.loadGraphModel(bundleResourceIO(model, weights))
   }
 
   useEffect(() => {
@@ -146,91 +141,174 @@ function CameraView({navigation}) {
     })
   }
 
-    return(
-        // Only if camera permission is granted and this screen is focused, show camera preview and buttons
-        (isFocused && granted === true &&
-            <Camera
-                ref={(ref) => setCamera(ref)}
-                type={Camera.Constants.Type.back}
-                style={{
-                    aspectRatio: Width / Height,// Change this value to change the ratio of camera preview area
-                }}
-            >
-                {/* Use SafeAreaView to make sure go-back button and camera button lay inside the safe area */}
-                <SafeAreaView
-                    style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'flex-end',
-                        marginLeft: '2%',
-                        marginRight: '2%',
-                        marginBottom: '2%',
-                    }}>
-                    {/* Go-back button on the top left */}
-                    <TouchableOpacity
-                        style={{
-                            position: "absolute",
-                            top: '6%',
-                            left: '0%',
-                            width: 70,
-                            height: 70,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: 10,
-                            borderRadius: 100,
-                            borderColor: 'black',
-                            borderWidth: 3,
-                            backgroundColor: 'white',
-                        }}
-                        onPress={() => {
-                            navigation.goBack(null)
-                        }}>
-                        <MaterialCommunityIcons name="arrow-left-thick" size={40}/>
-                    </TouchableOpacity>
+  return(
+    // Only if camera permission is granted and this screen is focused, show camera preview and buttons
+    (isFocused && granted === true &&
+      <Camera
+        ref={(ref) => setCamera(ref)}
+        type={Camera.Constants.Type.back}
+        style={{
+          aspectRatio: Width / Height,// Change this value to change the ratio of camera preview area
+        }}
+      >
+        {/* Use SafeAreaView to make sure go-back button and camera button lay inside the safe area */}
+        <SafeAreaView
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            marginLeft: '2%',
+            marginRight: '2%',
+            marginBottom: '2%',
+          }}>
+          {/* Go-back button on the top left */}
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              top: '6%',
+              left: '0%',
+              width: 70,
+              height: 70,
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 10,
+              borderRadius: 100,
+              borderColor: 'black',
+              borderWidth: 3,
+              backgroundColor: 'white',
+            }}
+            onPress={() => {
+              navigation.goBack(null)
+            }}>
+            <MaterialCommunityIcons name="arrow-left-thick" size={40}/>
+          </TouchableOpacity>
 
-                    {/* Camera button on the bottom center */}
-                    <TouchableOpacity
-                        style={{
-                            width: 80,
-                            height: 80,
-                            alignSelf: 'center',
-                            alignItems: 'center',
-                            borderRadius: 100,
-                        }}
-                        onPress={isModelReady ? takePicture : ()=>{Alert.alert('Tool loading')}}>
-                        {/* Camera button image*/}
-                        <Image style={{
-                            width: 80,
-                            height: 80,
-                            alignSelf: 'center',
-                            alignItems: 'center',
-                        }} source={Profiles.camera}/>
-                        {/* When model is loading, show loading indicator */}
-                        {!isModelReady && (
-                            <View style={{
-                                position: 'absolute',
-                                left: 0,
-                                right: 0,
-                                top: 0,
-                                bottom: 0,
-                                borderRadius: 100,
-                                width: 80,
-                                height: 80,
-                                borderColor: 'black',
-                                borderWidth: 6,
-                                backgroundColor: loadingColor,
-                                alignItems: 'center',
-                                alignSelf: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                <ActivityIndicator animating={true} size={'large'} color={'black'}/>
-                            </View>
-                        )}
-                    </TouchableOpacity>
-                </SafeAreaView>
-            </Camera>
-        )
+          {/* Camera button on the bottom center */}
+          <TouchableOpacity
+            style={{
+              width: 80,
+              height: 80,
+              alignSelf: 'center',
+              alignItems: 'center',
+              borderRadius: 100,
+            }}
+            onPress={()=>{
+              takePicture()
+            }}>
+            {/* Camera button image*/}
+            <Image style={{
+              width: 80,
+              height: 80,
+              alignSelf: 'center',
+              alignItems: 'center',
+            }} source={Profiles.camera}/>
+            {/* When model is loading, show loading indicator */}
+            {!isModelReady && (
+              <View style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                borderRadius: 100,
+                width: 80,
+                height: 80,
+                borderColor: 'black',
+                borderWidth: 6,
+                backgroundColor: loadingColor,
+                alignItems: 'center',
+                alignSelf: 'center',
+                justifyContent: 'center'
+              }}>
+                <ActivityIndicator animating={true} size={'large'} color={'black'}/>
+              </View>
+            )}
+          </TouchableOpacity>
+        </SafeAreaView>
+        {!isModelReady && (
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                opacity: 0.5,
+                backgroundColor: 'black',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Modal animationType="fade" transparent={true} visible={true}>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      borderRadius: 20,
+                      height: 244,
+                      width: 244,
+                      shadowColor: '#000',
+                      shadowOffset: {
+                        width: 0,
+                        height: 2,
+                      },
+                      shadowOpacity: 0.25,
+                      shadowRadius: 4,
+                      elevation: 5,
+                    }}>
+                    <View style={{
+                      width: 244,
+                      height: 244,
+                      borderColor: 'black',
+                      borderWidth: 1.5,
+                      borderRadius: 20,
+                      overflow: 'hidden'
+                    }}>
+                      <Text style={{textAlign: 'center', fontSize: 17, marginVertical: '10%'}}>
+                        Hang tight.{'\n'}
+                        Eco-Cam is loading.
+                      </Text>
+                      <Image source={sloth} style={{width: 244, height: 244 * 228 / 480}}/>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+          )}
+      </Camera>
+        /*{!isModelReady && (
+          <View style={{height: '100%', width: '100%', backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
+            <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../images2/HomepageIcons/EcoCam.png')}
+                style={{
+                  height: 70,
+                  width: 75,
+                  marginBottom: 10
+                }}
+              />
+              <Video
+                ref={video}
+                style={{width: Width, height: Width * 1048 / 884}}
+                isLooping={true}
+                onReadyForDisplay={()=>{video.current.playAsync()}}
+                source={require('../images/Loading.mp4')}/>
+              <Text style={{textAlign: 'center', fontSize: 20}}>
+                Hang tight.{'\n'}
+                <Text style={{color: '#70BF41', fontWeight: 'bold'}}>Eco-Cam</Text> is loading.
+              </Text>
+            </SafeAreaView>
+          </View>
+        )}*/
     )
+  )
 }
 
 // Create screen stack for tab 'Camera'
@@ -238,311 +316,311 @@ const CameraScreenStack = createStackNavigator();
 
 // Leveraged from Ranking
 const Meats = () => {
-    return (
-        <CategoryPage category='Meat' />
-    )
+  return (
+    <CategoryPage category='Meat' />
+  )
 }
 const Fruits = () => {
-    return (
-        <CategoryPage category='Fruit' />
-    )
+  return (
+    <CategoryPage category='Fruit' />
+  )
 }
 const Vegetables = () => {
-    return (
-        <CategoryPage category='Vegetables' />
-    )
+  return (
+    <CategoryPage category='Vegetables' />
+  )
 }
 const EverydayFoods = () => {
-    return (
-        <CategoryPage category='EDF' />
-    )
+  return (
+    <CategoryPage category='EDF' />
+  )
 }
 const EverydayItems = () => {
-    return (
-        <CategoryPage category='EDI' />
-    )
+  return (
+    <CategoryPage category='EDI' />
+  )
 }
 const NutsBeans = () => {
-    return (
-        <CategoryPage category='Nuts & Beans' />
-    )
+  return (
+    <CategoryPage category='Nuts & Beans' />
+  )
 }
 const Grains = () => {
-    return (
-        <CategoryPage category='Grains' />
-    )
+  return (
+    <CategoryPage category='Grains' />
+  )
 }
 const Seeds = () => {
-    return (
-        <CategoryPage category='Seeds' />
-    )
+  return (
+    <CategoryPage category='Seeds' />
+  )
 }
 const Oils = () => {
-    return (
-        <CategoryPage category='Oils' />
-    )
+  return (
+    <CategoryPage category='Oils' />
+  )
 }
 const DrinksAll = () => {
-    return (
-        <CategoryPage category='Drinks - All' />
-    )
+  return (
+    <CategoryPage category='Drinks - All' />
+  )
 }
 const DrinksAlcoholic = () => {
-    return (
-        <CategoryPage category='Drinks - Alc' />
-    )
+  return (
+    <CategoryPage category='Drinks - Alc' />
+  )
 }
 const DrinksNonAlcoholic = () => {
-    return (
-        <CategoryPage category='Drinks - NA' />
-    )
+  return (
+    <CategoryPage category='Drinks - NA' />
+  )
 }
 
 // Screen stack navigation
 export const CameraScreen = () => (
-    <CameraScreenStack.Navigator>
-        {/* This screen */}
-        <CameraScreenStack.Screen
-            name="CameraView"
-            component={CameraView}
-            options={{
-                headerShown: false,
+  <CameraScreenStack.Navigator>
+    {/* This screen */}
+    <CameraScreenStack.Screen
+      name="CameraView"
+      component={CameraView}
+      options={{
+        headerShown: false,
+      }}
+    />
+    {/* Result screen */}
+    <CameraScreenStack.Screen
+      name="Confirm"
+      component={ResultsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    {/* Item detail screen */}
+    <CameraScreenStack.Screen
+      name="Detail"
+      component={ItemDetail}
+      options={({navigation}) => ({
+        headerBackTitleVisible: false,
+        headerRight: () => (
+          <MaterialCommunityIcons
+            name="home"
+            size={25}
+            color={'grey'}
+            style={{
+              paddingRight: 15
             }}
-        />
-        {/* Result screen */}
-        <CameraScreenStack.Screen
-            name="Confirm"
-            component={ResultsScreen}
-            options={{
-                headerShown: false,
+            onPress={() => navigation.navigate('Home')}
+          />
+        ),
+      })}
+    />
+    {/* Nope, see catalogue */}
+    <CameraScreenStack.Screen
+      name="Catalogue"
+      component={Catalogue}
+      options={({navigation}) => ({
+        headerBackTitleVisible: false,
+        headerRight: () => (
+          <MaterialCommunityIcons
+            name="home"
+            size={25}
+            color={'grey'}
+            style={{
+              paddingRight: 15
             }}
-        />
-        {/* Item detail screen */}
-        <CameraScreenStack.Screen
-            name="Detail"
-            component={ItemDetail}
-            options={({navigation}) => ({
-                headerBackTitleVisible: false,
-                headerRight: () => (
-                    <MaterialCommunityIcons
-                        name="home"
-                        size={25}
-                        color={'grey'}
-                        style={{
-                            paddingRight: 15
-                        }}
-                        onPress={() => navigation.navigate('Home')}
-                    />
-                ),
-            })}
-        />
-        {/* Nope, see catalogue */}
-        <CameraScreenStack.Screen
-            name="Catalogue"
-            component={Catalogue}
-            options={({navigation}) => ({
-                headerBackTitleVisible: false,
-                headerRight: () => (
-                    <MaterialCommunityIcons
-                        name="home"
-                        size={25}
-                        color={'grey'}
-                        style={{
-                            paddingRight: 15
-                        }}
-                        onPress={() => navigation.navigate('Home')}
-                    />
-                ),
-            })}
-        />
-        {/* Virtual Water screen */}
-        <CameraScreenStack.Screen
-            name="Virtual Water"
-            component={Virtual}
-            options={({navigation}) => ({
-                headerBackTitleVisible: false,
-                headerRight: () => (
-                    <MaterialCommunityIcons
-                        name="home"
-                        size={25}
-                        color={'grey'}
-                        style={{
-                            paddingRight: 15
-                        }}
-                        onPress={() => navigation.navigate('Home')}
-                    />
-                ),
-            })}
-        />
+            onPress={() => navigation.navigate('Home')}
+          />
+        ),
+      })}
+    />
+    {/* Virtual Water screen */}
+    <CameraScreenStack.Screen
+      name="Virtual Water"
+      component={Virtual}
+      options={({navigation}) => ({
+        headerBackTitleVisible: false,
+        headerRight: () => (
+          <MaterialCommunityIcons
+            name="home"
+            size={25}
+            color={'grey'}
+            style={{
+              paddingRight: 15
+            }}
+            onPress={() => navigation.navigate('Home')}
+          />
+        ),
+      })}
+    />
 
-        {/* Different category screen */}
-        <CameraScreenStack.Screen name="Meats" component={Meats} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Fruits" component={Fruits} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Vegetables" component={Vegetables} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Everyday Foods" component={EverydayFoods} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Everyday Items" component={EverydayItems} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15,
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Nuts, Beans" component={NutsBeans} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Grains" component={Grains} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Seeds" component={Seeds} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Oils" component={Oils} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Drinks-All" component={DrinksAll} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Drinks-Alcoholic" component={DrinksAlcoholic} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-        <CameraScreenStack.Screen name="Drinks-NonAlcoholic" component={DrinksNonAlcoholic} options={({navigation}) => ({
-            headerBackTitleVisible: false,
-            headerRight: () => (
-                <MaterialCommunityIcons
-                    name="home"
-                    size={25}
-                    color={'grey'}
-                    style={{
-                        paddingRight: 15
-                    }}
-                    onPress={() => navigation.navigate('Home')}
-                />
-            ),
-        })}/>
-    </CameraScreenStack.Navigator>
+    {/* Different category screen */}
+    <CameraScreenStack.Screen name="Meats" component={Meats} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Fruits" component={Fruits} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Vegetables" component={Vegetables} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Everyday Foods" component={EverydayFoods} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Everyday Items" component={EverydayItems} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15,
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Nuts, Beans" component={NutsBeans} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Grains" component={Grains} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Seeds" component={Seeds} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Oils" component={Oils} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Drinks-All" component={DrinksAll} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Drinks-Alcoholic" component={DrinksAlcoholic} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+    <CameraScreenStack.Screen name="Drinks-NonAlcoholic" component={DrinksNonAlcoholic} options={({navigation}) => ({
+      headerBackTitleVisible: false,
+      headerRight: () => (
+        <MaterialCommunityIcons
+          name="home"
+          size={25}
+          color={'grey'}
+          style={{
+            paddingRight: 15
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    })}/>
+  </CameraScreenStack.Navigator>
 );

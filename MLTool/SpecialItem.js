@@ -106,17 +106,6 @@ const SpecialItem = ({navigation, globalUnit}) => {
         }
     }, [recipeVideoPlayed]);
 
-    // Prepare to pass item names to Compare Details
-    const makearray = (productarr) => {
-        let resarray = []
-        for ( let item in productarr){
-            if (productarr[item] !== ""){
-                resarray.push(productarr[item])
-            }
-        }
-        return resarray
-    }
-
     return(
         <View>
             {/* In Season? */}
@@ -497,7 +486,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
                     <TouchableOpacity
                         onPress={()=>{
                             navigation.navigate('Compare Details', {
-                                prodarray : makearray(['Oranges', 'Grapefruit', '', '', '', ''])
+                              itemsArray: ['Oranges', 'Grapefruit']
                             })
                         }}
                         style={{
@@ -527,7 +516,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
                     <TouchableOpacity
                         onPress={()=>{
                             navigation.navigate('Compare Details', {
-                                prodarray : makearray(['Oranges', 'Lemons', '', '', '', ''])
+                              itemsArray: ['Oranges', 'Lemons']
                             })
                         }}
                         style={{
@@ -557,7 +546,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
                     <TouchableOpacity
                         onPress={()=>{
                             navigation.navigate('Compare Details', {
-                                prodarray : makearray(['Oranges', 'Mandarins', '', '', '', ''])
+                              itemsArray : ['Oranges', 'Mandarins']
                             })
                         }}
                         style={{

@@ -59,7 +59,7 @@ import { color } from 'react-native-reanimated';
 import { OnboardingScreen } from './OnboardingScreen';
 import {CameraScreen} from "./MLTool/CameraView";
 import ItemDetail from "./MLTool/ItemDetail";
-import ComparePage from "./Comparing/ComparePage";
+import ComparePage from "./Comparing/ComparePageFunctional";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
