@@ -43,6 +43,7 @@ let itemMeasurementListG = [];
 let itemIndividualUnitListL = [];
 let itemIndividualUnitListG = [];
 
+let nonWater = false
 let itemName;
 let itemCost;
 let itemCostL;
@@ -282,6 +283,7 @@ function CalculateScreen({ navigation }) {
   }
 
   const fetchData = () => {
+    nonWater = false
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
@@ -289,41 +291,32 @@ function CalculateScreen({ navigation }) {
 
     firebase
       .database()
-      .ref('/')
+      .ref('/' + item)
       .once('value', (data) => {
         fetchedData = data.val();
-
-        if (item in fetchedData) {
-          id = fetchedData[item]['Category'];
-          itemMeasurementL = fetchedData[item]['Display Unit Metric'];
-          itemMeasurementG = fetchedData[item]['Display Unit Imperial'];
-          itemIndividualUnitG = fetchedData[item]['Individiual Unit Gal'];
-          itemIndividualUnitL = fetchedData[item]['Individiual Unit L'];
+        if (fetchedData !== null) {
+          id = fetchedData['Category'];
+          itemMeasurementL = fetchedData['Display Unit Metric'];
+          itemMeasurementG = fetchedData['Display Unit Imperial'];
+          itemIndividualUnitG = fetchedData['Individiual Unit Gal'];
+          itemIndividualUnitL = fetchedData['Individiual Unit L'];
         }
         itemName=item;
 
-        if (!(item in fetchedData)) {
-          setError({status: true, message: 'This item does not exist'});
-        } else if (!fetchedData[item][waterParameter(id,'G')]) {
-          setError({
-            status: true,
-            message: 'Water unit does not exist. Try the compare tool.',
-          });
-        } else if (
-          item in fetchedData &&
-          fetchedData[item][waterParameter(id,'G')]
-        ) {
-          itemCost=fetchedData[item][waterParameter(id,'G')];
-          itemCostL=fetchedData[item][waterParameter(id,'L')];
-          addtoList(fetchedData[item][waterParameter(id,'G')]);
-          setError({status: false, message: ''});
+        if (fetchedData === null) {
+          Alert.alert('This item does not exist')
+        } else if (fetchedData[waterParameter(id,'G')] === '') {
+          nonWater = true
+          Alert.alert('Water unit does not exist. Try the compare tool.')
+        } else {
+          itemCost=fetchedData[waterParameter(id,'G')];
+          itemCostL=fetchedData[waterParameter(id,'L')];
+          addtoList(fetchedData[waterParameter(id,'G')]);
           setComputed(true);
         }
       })
       .then(()=>{
-        console.log(loading)
-
-        if(loading)
+        if(loading && !nonWater)
         {
           setComputed(false);
           selectedItem.push(item);
@@ -353,16 +346,23 @@ function CalculateScreen({ navigation }) {
           clickToScroll();
           upgradePages();
           loading=false;
+          nonWater = false
+        } else if(loading) {
+          loading=false;
+          nonWater = false
         }
       })
   };
 
   const calculate = () => {
     if (!item) {
+      Alert.alert('Please select an item')
       setError({status: true, message: 'Please select an item'});
     } else if (!frequency) {
+      Alert.alert('Please select a frequency')
       setError({status: true, message: 'Please select a frequency'});
     } else if(!quantity) {
+      Alert.alert('Please select a quantity')
       setError({status: true, message: 'Please select a quantity'});
     }
     else {
@@ -948,7 +948,7 @@ function CalculateScreen({ navigation }) {
           </View>
         )}
 
-        {error.status && Alert.alert(error.message)}
+        {/*{error.status && Alert.alert(error.message)}*/}
 
         <View
           style={{
@@ -1092,7 +1092,9 @@ function CalculateScreen({ navigation }) {
           {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
-                onPress={() => {setShowlist(true);
+                onPress={() => {
+                  if(!nonWater){
+                    setShowlist(true);
 
                   setComputed(false);
                   selectedItem.push(item);
@@ -1134,6 +1136,13 @@ function CalculateScreen({ navigation }) {
                   // console.log("yearlyCostTotal",yearlyCostTotal)
                   // console.log("mixCostTotal",mixCostTotal)
                   upgradePages();
+                  } else {
+                    setItem('');
+                    setFrequency(null)
+                    setQuantity(null)
+                    nonWater = false
+                  }
+
                   if(itemNameList.length !==0)
                     setShowAnotherRunningtotal(true);
                   analytics().logEvent('Add_to_running_total')
