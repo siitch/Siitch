@@ -485,7 +485,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
         }}>
           <TouchableOpacity
             onPress={()=>{
-              navigation.navigate('Compare Details', {
+              navigation.push('Compare Details', {
                 itemsArray: ['Oranges', 'Grapefruit']
               })
             }}
@@ -515,7 +515,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
 
           <TouchableOpacity
             onPress={()=>{
-              navigation.navigate('Compare Details', {
+              navigation.push('Compare Details', {
                 itemsArray: ['Oranges', 'Lemons']
               })
             }}
@@ -545,7 +545,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
 
           <TouchableOpacity
             onPress={()=>{
-              navigation.navigate('Compare Details', {
+              navigation.push('Compare Details', {
                 itemsArray : ['Oranges', 'Mandarins']
               })
             }}
