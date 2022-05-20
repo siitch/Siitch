@@ -283,6 +283,7 @@ export default function Catalogue ({navigation}){
     return(
         <ScrollView
             style={{backgroundColor: '#FFFFFF'}}
+            scrollIndicatorInsets={{ right: 1 }}
             contentContainerStyle={{alignItems: 'center'}}>
             <Text style={{
                 color: 'black',

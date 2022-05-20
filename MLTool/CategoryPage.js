@@ -58,6 +58,7 @@ export const CategoryPage = ( {category} ) => {
     return(
         <ScrollView
             style={{backgroundColor: '#FFFFFF'}}
+            scrollIndicatorInsets={{ right: 1 }}
             contentContainerStyle={{alignItems: 'center'}}>
             <Text style={{
                 color: 'black',
