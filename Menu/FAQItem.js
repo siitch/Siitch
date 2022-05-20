@@ -221,7 +221,7 @@ export const FAQItem = ({question, navigation, color}) => {
             fontSize: 17,
             paddingTop: 20,
             marginLeft: '3%',
-            paddingRight: 15,
+            paddingRight: 33,
             paddingBottom: 10,
             fontWeight: 'bold',
             color: fontColor
