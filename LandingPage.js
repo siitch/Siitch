@@ -141,7 +141,7 @@ function HomeScreen({navigation}) {
                       flex: 1
                     }}
                     onPress={()=>{
-                      navigation.navigate('Compare')
+                      navigation.navigate('CompareTab')
                     }}>
                     <Image
                       source={require('./images2/HomepageIcons/Compare.png')}
