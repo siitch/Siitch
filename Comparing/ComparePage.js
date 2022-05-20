@@ -296,7 +296,9 @@ export default function ComparePage ({navigation, route}) {
 
   return (
     (renderedList.length !== 0 && (
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView
+        style={{backgroundColor:'white'}}
+        scrollIndicatorInsets={{ right: 1 }}>
         <ViewShot
           children={View}
           ref={refCaptureCompare}
