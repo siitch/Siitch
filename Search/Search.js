@@ -2,22 +2,15 @@ import 'react-native-gesture-handler';
 import firebase from 'firebase';
 import {useState, useEffect} from 'react';
 import * as React from 'react';
-import {Searchbar, Avatar} from 'react-native-paper';
-import {NavigationContainer} from '@react-navigation/native';
+import {Searchbar} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profiles from './SearchDB';
 
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  Pressable,
   TouchableHighlight,
   Alert,
   Dimensions,
@@ -27,7 +20,8 @@ import {
 import {styles} from './Style';
 const DeviceWidth = Dimensions.get('window').width;
 
-const Search = ({searchData, navigation}) => {
+const Search = ({searchData}) => {
+  const navigation = useNavigation();
   const [line, setLine] = useState(1);
   const [index, setIndex] = useState(0);
   const [keyword, setKeyword] = useState('');

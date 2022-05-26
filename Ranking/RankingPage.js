@@ -15,7 +15,7 @@ let max = 0;
 
 const DeviceWidth = Dimensions.get('window').width;
 
-export const RankingPage = ({category, id, navigation}) => {
+export const RankingPage = ({category, id}) => {
 
   const [fetched, handleFetch] = useState(false);
   const [currentCategory, changeCategory] = useState('');
@@ -204,7 +204,7 @@ export const RankingPage = ({category, id, navigation}) => {
           {
             sortable.map((item, index) => {
               return(
-                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]} navigation={navigation}/>
+                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]}/>
               )
             })
           }
@@ -242,8 +242,7 @@ export const RankingPage = ({category, id, navigation}) => {
       <RankingInfoModal
         infoVisible={infoVisible}
         specialCategory={specialCategory}
-        handler={closeRankingInfoModal}
-        navigation={navigation}/>
+        handler={closeRankingInfoModal}/>
     </View>
   );
 }

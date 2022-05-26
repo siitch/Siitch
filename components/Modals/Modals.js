@@ -5,6 +5,7 @@ import {openSourceLink} from "../../util/common";
 import React from "react";
 import {styles} from "../../Comparing/Styles";
 import Profiles from "../../ImageDB";
+import { useNavigation } from "@react-navigation/native";
 
 const CloseModalCross = ({handler}) => {
   return (
@@ -66,7 +67,8 @@ export const VirtualWaterInfoModal = ({infoVisible, handler, navigation}) => {
 }
 
 // Modals of Ranking Tool
-export const RankingInfoModal = ({infoVisible, specialCategory, handler, navigation}) => {
+export const RankingInfoModal = ({infoVisible, specialCategory, handler}) => {
+  const navigation = useNavigation();
   return (
     <Modal animationType="slide" transparent={true} visible={infoVisible}>
       {infoVisible && <ReactNavigationOverlay/>}

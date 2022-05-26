@@ -321,8 +321,8 @@ const LandingDetails = () => {
   const [status, setStatus] = useState(true);
   const [getData, setGetData] = useState({});
   const [keyword, setKeyword] = useState('');
-  const GoToSearch = ({navigation}) => {
-    return <Search searchData={searchData} navigation={navigation} />;
+  const GoToSearch = () => {
+    return <Search searchData={searchData} />;
   };
   const ToWhat = () => {
     if (keyword === 'Beef') {
@@ -610,10 +610,10 @@ const LandingDetails = () => {
           // If there is a modal shown, try to open the global modal again when it's closed
           let retry = setInterval(()=>{
             if (!occupied) {
-              Overlay.show(GlobalModal)
+              setTimeout(()=>Overlay.show(GlobalModal), 1500)
               clearInterval(retry)
             }
-          },3000)
+          }, 1500)
         }
       }
     });

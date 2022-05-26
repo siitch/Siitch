@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import * as Progress from 'react-native-progress';
+import { useNavigation } from "@react-navigation/native";
 
 const DeviceWidth = Dimensions.get('window').width;
 const DeviceHeight = Dimensions.get('window').height;
 
-export const RankingItem = ({ max, cost, item, image, unit, category, displayUnit, navigation }) => {
+export const RankingItem = ({ max, cost, item, image, unit, category, displayUnit }) => {
+
+  const navigation = useNavigation();
 
   const percentage = 1-(max-parseInt(cost))/max < 0.01 ? 0.01 : 1-(max-parseInt(cost))/max;
 
@@ -42,7 +45,7 @@ export const RankingItem = ({ max, cost, item, image, unit, category, displayUni
         </View>
       </Modal>
       <View style = {rankStyles.container}>
-        <TouchableOpacity onPress={()=>{navigation.push('Detail', {itemName: item})}}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Detail', {itemName: item})}}>
           <View style={rankStyles.itemCol}>
             <Image
               style={rankStyles.itemImg}
