@@ -2,10 +2,14 @@ import * as WebBrowser from "expo-web-browser";
 import analytics from "@react-native-firebase/analytics";
 
 export const openLink = (link) => {
-  global.occupied = true
-  WebBrowser.openBrowserAsync(link).then(r => {
-    global.occupied = false
-  })
+  if (global.occupied) {
+    WebBrowser.openBrowserAsync(link)
+  } else {
+    global.occupied = true
+    WebBrowser.openBrowserAsync(link).then(r => {
+      global.occupied = false
+    })
+  }
 }
 
 export const openSourceLink = (link, logContent) => {
