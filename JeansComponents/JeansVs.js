@@ -18,7 +18,7 @@ const arr = [
   {name: 'socks', water: 244, picture: Profiles.Socks},
 ];
 
-const JeansVs = ({inputData, navigation}) => {
+const JeansVs = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -99,7 +99,7 @@ const JeansVs = ({inputData, navigation}) => {
         </View>
       ))}
 
-      <JeansBrands navigation={navigation} currentTab={'Jeans - Vs'}/>
+      <JeansBrands currentTab={'Jeans - Vs'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

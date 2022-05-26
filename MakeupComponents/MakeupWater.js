@@ -13,7 +13,7 @@ import {MakeupBrands} from "./MakeupBrands/MakeupBrands";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const MakeupWater = ({inputData, navigation}) => {
+const MakeupWater = () => {
   const [expand, setExpand] = useState(false);
   return (
     <ScrollView
@@ -114,7 +114,7 @@ const MakeupWater = ({inputData, navigation}) => {
         </Text>
       </View>
 
-      <MakeupBrands navigation={navigation} currentTab={'Makeup - Water'}/>
+      <MakeupBrands currentTab={'Makeup - Water'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

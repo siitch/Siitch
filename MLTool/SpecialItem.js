@@ -20,8 +20,10 @@ import ResultImage from "./ResultImage";
 import Profiles from "../ImageDB";
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import {openSourceLink} from "../util/common";
+import { useNavigation } from "@react-navigation/native";
 
-const SpecialItem = ({navigation, globalUnit}) => {
+const SpecialItem = ({globalUnit}) => {
+  const navigation = useNavigation();
   // Set info for the popup modal
   const [infoVisible, setInfoVisible] = useState(false);
   const [infoShown, setInfoShown] = useState('');

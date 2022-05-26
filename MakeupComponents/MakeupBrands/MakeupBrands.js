@@ -4,9 +4,11 @@ import {ImageIcon} from "../../ImageIcon";
 import {images} from "../../ImageURL";
 import React from "react";
 import {openBrandLink, openSourceLink} from "../../util/common";
+import { useNavigation } from "@react-navigation/native";
 const Width = Dimensions.get('window').width;
 
-export const MakeupBrands = ({navigation, currentTab}) => {
+export const MakeupBrands = ({currentTab}) => {
+  const navigation = useNavigation();
   const brandsList = {
     'AXIOLOGY beauty': 'https://axiologybeauty.com/',
     'Dab Herb Makeup': 'https://www.etsy.com/market/dab_herb_makeup/',

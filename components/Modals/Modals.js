@@ -27,7 +27,8 @@ const CloseModalCross = ({handler}) => {
 }
 
 // General Modals
-export const VirtualWaterInfoModal = ({infoVisible, handler, navigation}) => {
+export const VirtualWaterInfoModal = ({infoVisible, handler}) => {
+  const navigation = useNavigation();
   return (
     <Modal animationType="slide" transparent={true} visible={infoVisible}>
       {infoVisible && <ReactNavigationOverlay/>}
@@ -184,7 +185,8 @@ export const RankingLearnMore = ({modalVisible, handler}) => {
 }
 
 // Modals of Detail View
-export const DetailPageWaterCardModal = ({waterCardModalVisible, waterType, navigation, handler}) => {
+export const DetailPageWaterCardModal = ({waterCardModalVisible, waterType, handler}) => {
+  const navigation = useNavigation();
   const CloseModalButton = () => {
     return (
       <TouchableOpacity

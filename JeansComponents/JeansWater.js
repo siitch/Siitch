@@ -12,7 +12,7 @@ import {JeansBrands} from "./JeansBrands/JeansBrands";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const JeansWater = ({inputData, navigation}) => {
+const JeansWater = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -312,7 +312,7 @@ const JeansWater = ({inputData, navigation}) => {
         </ImageBackground>
       </View>
 
-      <JeansBrands navigation={navigation} currentTab={'Jeans - Water'}/>
+      <JeansBrands currentTab={'Jeans - Water'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

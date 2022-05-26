@@ -2,10 +2,12 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Profiles from "../ImageDB";
 import Counter from "react-native-counters";
 import React, {useEffect, useState} from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export default function CompareItem({navigation, name, itemInfo, metric, minItems,
+export default function CompareItem({name, itemInfo, metric, minItems,
                                       selectedMetricToDisplay, selectedMeasurement,
                                       selectedSize, updateParent}) {
+  const navigation = useNavigation();
   let [localCount, setLocalCount] = useState(1);
   const [nonWaterUnit] = useState(metric.localeCompare('Time to decompose') === 0)
 

@@ -5,8 +5,10 @@ import { CategoryIcon } from './CategoryIcon';
 import { styles } from './Styles';
 import Profiles from '../ImageDB';
 import { RankingPage } from './RankingPage';
+import { useNavigation } from "@react-navigation/native";
 
-function RankScreen({navigation}) {
+function RankScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.rankingPage}>
       <ScrollView>

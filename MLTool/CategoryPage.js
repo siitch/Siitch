@@ -72,7 +72,7 @@ export const CategoryPage = ( {category} ) => {
                     {row.map(url => (
                         <TouchableHighlight
                             key={url.name}
-                            onPress={() => navigation.push('Detail', {itemName: url.name})}
+                            onPress={() => navigation.navigate('Detail', {itemName: url.name})}
                             activeOpacity={1}
                             underlayColor="transparent"
                             style={{marginLeft: 10}}>

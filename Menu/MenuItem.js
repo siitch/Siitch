@@ -1,8 +1,10 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export const MenuItem = ({navigation, menuItemName}) => {
+export const MenuItem = ({menuItemName}) => {
+    const navigation = useNavigation();
     function icon() {
         switch (menuItemName) {
             case "Tutorial":

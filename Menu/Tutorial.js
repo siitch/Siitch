@@ -15,9 +15,11 @@ import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
 
 import Onboarding from 'react-native-onboarding-swiper';
+import { useNavigation } from "@react-navigation/native";
 
 
-const Tutorial = ({navigation}) => {
+const Tutorial = () => {
+  const navigation = useNavigation();
 
   return(
     <Onboarding

@@ -4,9 +4,11 @@ import {ImageIcon} from "../../ImageIcon";
 import {images} from "../../ImageURL";
 import React from "react";
 import {openBrandLink, openSourceLink} from "../../util/common";
+import { useNavigation } from "@react-navigation/native";
 const Width = Dimensions.get('window').width;
 
-export const JeansBrands = ({navigation, currentTab}) => {
+export const JeansBrands = ({currentTab}) => {
+  const navigation = useNavigation();
   const brandsList = {
     'ASKET': 'https://www.asket.com/',
     'OUTLAND DENIM': 'https://www.outlanddenim.com/',

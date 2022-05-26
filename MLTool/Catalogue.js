@@ -25,13 +25,15 @@ import {Searchbar} from "react-native-paper";
 import {CategoryIcon} from "../Ranking/CategoryIcon";
 // Dropdown picker to pick category
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from "@react-navigation/native";
 
 const DeviceWidth = Dimensions.get('window').width;
 
 
 
 // Leveraged from Search
-export default function Catalogue ({navigation}){
+export default function Catalogue (){
+    const navigation = useNavigation();
     // Used to get the searchbar input
     const [keyword, setKeyword] = useState('');
     // Used to set the searching status
@@ -436,7 +438,7 @@ export default function Catalogue ({navigation}){
                         <TouchableOpacity onPress={() => navigation.navigate('Meats')} >
                             <CategoryIcon category='Meats' image={Profiles.meats} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.push('Everyday Foods')} >
+                        <TouchableOpacity onPress={() => navigation.navigate('Everyday Foods')} >
                             <CategoryIcon category='Everyday Foods' image={Profiles.everyday_food} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('Seeds')} >
@@ -483,7 +485,7 @@ export default function Catalogue ({navigation}){
                     {row.map(url => (
                         <TouchableHighlight
                             key={url.name}
-                            onPress={() => navigation.push('Detail', {itemName: url.name})}
+                            onPress={() => navigation.navigate('Detail', {itemName: url.name})}
                             activeOpacity={1}
                             underlayColor="transparent"
                             style={{marginLeft: 10}}>

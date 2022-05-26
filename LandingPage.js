@@ -62,11 +62,13 @@ import {ReactNavigationOverlay} from './components/ReactNavigationOverlay'
 import {Overlay} from './components/overlay'
 import {GlobalModal} from "./components/GlobalModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 const DeviceHeight = Dimensions.get('window').height;
 const DeviceWidth = Dimensions.get('window').width;
 
 
-function HomeScreen({navigation}) {
+function HomeScreen() {
+  const navigation = useNavigation();
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
       <View style={styles.MainContainer}>
@@ -426,49 +428,49 @@ const LandingDetails = () => {
       </Tab.Navigator>
     );
   };
-  const WaterPage = ({navigation}) => {
+  const WaterPage = () => {
     if (keyword === 'Beef') {
-      return <Water inputData={getData} navigation={navigation} />;
+      return <Water inputData={getData}/>;
     } else if (keyword === 'Jeans') {
-      return <JeansWater inputData={getData} navigation={navigation} />;
+      return <JeansWater/>;
     } else {
-      return <MakeupWater navigation={navigation} />;
+      return <MakeupWater/>;
     }
   };
-  const HeartPage = ({navigation}) => {
+  const HeartPage = () => {
     if (keyword === 'Beef') {
-      return <Heart inputData={getData} navigation={navigation} />;
+      return <Heart/>;
     } else if (keyword === 'Jeans') {
-      return <JeansHeart inputData={getData} navigation={navigation} />;
+      return <JeansHeart/>;
     } else {
-      return <MakeupHeart navigation={navigation} />;
+      return <MakeupHeart/>;
     }
   };
-  const VsPage = ({navigation}) => {
+  const VsPage = () => {
     if (keyword === 'Beef') {
-      return <Vs inputData={getData} navigation={navigation} />;
+      return <Vs/>;
     } else if (keyword === 'Jeans') {
-      return <JeansVs inputData={getData} navigation={navigation} />;
+      return <JeansVs/>;
     } else {
-      return <MakeupVs navigation={navigation} />;
+      return <MakeupVs/>;
     }
   };
-  const RecyclePage = ({navigation}) => {
+  const RecyclePage = () => {
     if (keyword === 'Beef') {
-      return <Recycle inputData={getData} navigation={navigation} />;
+      return <Recycle/>;
     } else if (keyword === 'Jeans') {
-      return <JeansRecycle inputData={getData} navigation={navigation} />;
+      return <JeansRecycle/>;
     } else {
-      return <MakeupRecycle navigation={navigation} />;
+      return <MakeupRecycle/>;
     }
   };
-  const GrassPage = ({navigation}) => {
+  const GrassPage = () => {
     if (keyword === 'Beef') {
-      return <Grass inputData={getData} navigation={navigation} />;
+      return <Grass/>;
     } else if (keyword === 'Jeans') {
-      return <JeansGrass inputData={getData} navigation={navigation} />;
+      return <JeansGrass/>;
     } else {
-      return <MakeupGrass navigation={navigation} />;
+      return <MakeupGrass/>;
     }
   };
 
@@ -605,10 +607,12 @@ const LandingDetails = () => {
     AsyncStorage.getItem('surprisedYet').then(value => {
       if(value == null){
         if(currentSurpriseModal !== null && !occupied) {
+          console.log('open surprise modal')
           Overlay.show(GlobalModal)
         } else if (occupied) {
           // If there is a modal shown, try to open the global modal again when it's closed
           let retry = setInterval(()=>{
+            console.log('retrying')
             if (!occupied) {
               setTimeout(()=>Overlay.show(GlobalModal), 1500)
               clearInterval(retry)

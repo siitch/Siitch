@@ -10,7 +10,7 @@ import {
 import {MakeupBrands} from "./MakeupBrands/MakeupBrands";
 const Height = Dimensions.get('window').height;
 
-const MakeupRecycle = ({inputData, navigation}) => {
+const MakeupRecycle = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -45,7 +45,7 @@ const MakeupRecycle = ({inputData, navigation}) => {
         </Text>
         </View>
 
-      <MakeupBrands navigation={navigation} currentTab={'Makeup - Recycle'}/>
+      <MakeupBrands currentTab={'Makeup - Recycle'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

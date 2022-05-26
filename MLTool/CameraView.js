@@ -28,7 +28,7 @@ import {Virtual} from "../Menu/Virtual";
 // Used to show arrow <- image inside the go back button
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // Used to unmount the camera when this screen is not focused
-import {useIsFocused} from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 // Get camera button image from here
 import Profiles from "../ImageDB";
 // React native's firebase analytics library
@@ -38,7 +38,8 @@ import * as FileSystem from 'expo-file-system';
 import sloth from "../images/sloth.png"
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 
-function CameraView({navigation}) {
+function CameraView() {
+  const navigation = useNavigation();
   // init status
   const [init, setInit] = useState(true);
   // Get the status if the camera screen is the first time visited

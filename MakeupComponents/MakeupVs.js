@@ -21,7 +21,7 @@ const itemArr = [
   },
 ];
 
-const MakeupVs = ({inputData, navigation}) => {
+const MakeupVs = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -65,7 +65,7 @@ const MakeupVs = ({inputData, navigation}) => {
         </View>
       </View>
 
-      <MakeupBrands navigation={navigation} currentTab={'Makeup - Vs'}/>
+      <MakeupBrands currentTab={'Makeup - Vs'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

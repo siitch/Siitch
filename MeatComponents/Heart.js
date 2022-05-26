@@ -11,7 +11,7 @@ import {
 import {MeatBrands} from "./MeatBrands/MeatBrands";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
-const Heart = ({navigation, inputData}) => {
+const Heart = () => {
   return (
     <ScrollView style={{backgroundColor:'white'}}>
     <View style={{paddingTop: Height / 20,width:Width}}>
@@ -56,7 +56,7 @@ const Heart = ({navigation, inputData}) => {
         </View>
       </View>
 
-      <MeatBrands navigation={navigation} currentTab={'Beef - Health'}/>
+      <MeatBrands currentTab={'Beef - Health'}/>
     </View>
     <View style={{height:Height/10}}/>
   </ScrollView>

@@ -13,7 +13,7 @@ import {MakeupBrands} from "./MakeupBrands/MakeupBrands";
 import {openSourceLink} from "../util/common";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
-const MakeupHeart = ({inputData, navigation}) => {
+const MakeupHeart = () => {
   const [expand1, setExpand1] = useState(false);
   const [expand2, setExpand2] = useState(false);
   const [expand3, setExpand3] = useState(false);
@@ -259,7 +259,7 @@ const MakeupHeart = ({inputData, navigation}) => {
         </View>
       </View>
 
-      <MakeupBrands navigation={navigation} currentTab={'Makeup - Health'}/>
+      <MakeupBrands currentTab={'Makeup - Health'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

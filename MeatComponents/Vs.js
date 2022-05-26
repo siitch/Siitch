@@ -17,7 +17,7 @@ const arr = [
   {water: 518, picture: images.chicken},
   {water: 302, picture: Profiles.Tofu},
 ];
-const Vs = ({navigation}) => {
+const Vs = () => {
   return (
     <ScrollView style={{backgroundColor:'#FFFFFF'}}>
       <View
@@ -92,7 +92,7 @@ const Vs = ({navigation}) => {
         </View>
       ))}
 
-        <MeatBrands navigation={navigation} currentTab={'Beef - Vs'}/>
+        <MeatBrands currentTab={'Beef - Vs'}/>
         <View style={{height:Height/10}}/>
       </ScrollView>
   );

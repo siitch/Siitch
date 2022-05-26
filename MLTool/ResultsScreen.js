@@ -26,8 +26,10 @@ import analytics from '@react-native-firebase/analytics';
 // Expo's filesystem library to delete temp photo
 import * as FileSystem from 'expo-file-system';
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
+import { useNavigation } from "@react-navigation/native";
 
-export default function ResultsScreen({route, navigation}) {
+export default function ResultsScreen({route}) {
+  const navigation = useNavigation();
   // Get the image from Camera Screen
   const {image} = route.params;
   // Store prediction results
@@ -410,7 +412,7 @@ export default function ResultsScreen({route, navigation}) {
                 fontSize: 22,
               }}
               onPress={() => {
-                navigation.push('Catalogue');
+                navigation.navigate('Catalogue')
                 analytics().logEvent('Nope_see_catalogue')
               }}>
               Nope, see catalogue

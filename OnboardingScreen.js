@@ -1,9 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  View,
   Text,
-  Button,
   Image,
   StyleSheet,
   Dimensions,
@@ -11,14 +8,14 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
-import Profiles from './ImageDB';
 
 import Onboarding from 'react-native-onboarding-swiper';
+import { useNavigation } from "@react-navigation/native";
 
 
-const OnboardingScreen = ({navigation}) => {
+const OnboardingScreen = () => {
+  const navigation = useNavigation();
 
     return(
         <Onboarding

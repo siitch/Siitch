@@ -13,7 +13,7 @@ import {images} from '../ImageURL';
 import { MeatBrands } from "./MeatBrands/MeatBrands";
 const Height = Dimensions.get('window').height;
 
-const Grass = ({inputData, navigation}) => {
+const Grass = () => {
   return (
     <View style={{backgroundColor:'#FFFFFF'}}>
       <ScrollView>
@@ -125,7 +125,7 @@ const Grass = ({inputData, navigation}) => {
           </View>
         </View>
 
-        <MeatBrands navigation={navigation} currentTab={'Beef - Env'}/>
+        <MeatBrands currentTab={'Beef - Env'}/>
         <View style={{height:Height/10}}/>
       </ScrollView>
     </View>

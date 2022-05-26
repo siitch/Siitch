@@ -15,12 +15,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import RNPicker from "../components/RNModalPicker/RNModalPicker";
 import ComparePage from "./ComparePage";
 import analytics from '@react-native-firebase/analytics';
+import { useNavigation } from "@react-navigation/native";
 
 const {width} = Dimensions.get('screen');
 let itemsToBeCompared = [];
 let availableSlots = [0, 1]
 
-export default function Compare ({navigation}) {
+export default function Compare () {
+  const navigation = useNavigation()
   const slotsNum = 16
   let [refresh, setRefresh] = useState(false)
 

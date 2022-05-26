@@ -85,7 +85,7 @@ const Quantity_values ={
 
 let fetchedData = {};
 
-function CalculateScreen({ navigation }) {
+function CalculateScreen() {
   let selectedItem = [];
 
   const config = {
@@ -1581,7 +1581,7 @@ function CalculateScreen({ navigation }) {
       </View>
 
       {/* Info button modal */}
-      <VirtualWaterInfoModal infoVisible={infoVisible} navigation={navigation} handler={closeInfoModal}/>
+      <VirtualWaterInfoModal infoVisible={infoVisible} handler={closeInfoModal}/>
 
       {/*Running total list Export modal*/}
       <Modal

@@ -20,7 +20,7 @@ import SpecialItem from "./SpecialItem";
 import {openSourceLink} from "../util/common";
 import {ContextAndChallengeModal, DetailPageInfoModal, DetailPageWaterCardModal} from "../components/Modals/Modals";
 
-export default function ItemDetail({ route, navigation }) {
+export default function ItemDetail({ route }) {
   // Get item name passed from other screen
   const { itemName } = route.params;
   const { localQuantity } = route.params;
@@ -703,7 +703,7 @@ export default function ItemDetail({ route, navigation }) {
       />
 
       {itemName === 'Oranges' && (
-        <SpecialItem navigation={navigation} globalUnit={globalUnit}/>
+        <SpecialItem globalUnit={globalUnit}/>
       )}
 
       {/* Simple calculator */}
@@ -1032,8 +1032,7 @@ export default function ItemDetail({ route, navigation }) {
       <DetailPageWaterCardModal
         waterCardModalVisible={waterCardModalVisible}
         waterType={waterType}
-        handler={closeWaterCardModal}
-        navigation={navigation}/>
+        handler={closeWaterCardModal}/>
 
       {/* Info button modal */}
       <DetailPageInfoModal

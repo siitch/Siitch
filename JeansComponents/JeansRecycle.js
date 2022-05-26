@@ -11,7 +11,7 @@ import {JeansBrands} from "./JeansBrands/JeansBrands";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-const JeansRecycle = ({inputData, navigation}) => {
+const JeansRecycle = () => {
   return (
     <ScrollView
       style={{flexDirection: 'column', flex: 1, backgroundColor: '#FFFFFF'}}
@@ -127,7 +127,7 @@ const JeansRecycle = ({inputData, navigation}) => {
         </Text>
       </View>
 
-      <JeansBrands navigation={navigation} currentTab={'Jeans - Recycle'}/>
+      <JeansBrands currentTab={'Jeans - Recycle'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

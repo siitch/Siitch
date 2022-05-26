@@ -28,9 +28,11 @@ import {styles} from "./Styles";
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import {openSourceLink} from "../util/common";
 import {VirtualWaterInfoModal} from "../components/Modals/Modals";
+import { useNavigation } from "@react-navigation/native";
 
 let parentList = []
-export default function ComparePage ({navigation, route}) {
+export default function ComparePage ({route}) {
+  const navigation = useNavigation();
   const { itemsArray } = route.params;
   let items = []
   let counter = 0
@@ -367,7 +369,6 @@ export default function ComparePage ({navigation, route}) {
                 {row.map((item, i) => (
                   <CompareItem
                     key={i}
-                    navigation={navigation}
                     name={item.name}
                     itemInfo={item.info}
                     metric={setMetric(item.info)}
@@ -536,7 +537,7 @@ export default function ComparePage ({navigation, route}) {
         </FlipCard>
 
         {/* Info Modal */}
-        <VirtualWaterInfoModal infoVisible={infoVisible} navigation={navigation} handler={closeInfoModal}/>
+        <VirtualWaterInfoModal infoVisible={infoVisible} handler={closeInfoModal}/>
 
         {/* Export Modal */}
         <Modal

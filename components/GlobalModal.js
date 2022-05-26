@@ -1,14 +1,11 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import React, {useEffect} from "react";
+import React from "react";
 import {Overlay} from "./overlay"
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import surpriseSloth from "../images/surpriseSloth.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const GlobalModal = () => {
-  useEffect(()=> {
-    AsyncStorage.setItem('surprisedYet', 'true')
-  })
   return (
     <View style={{
       position: 'absolute',
@@ -34,6 +31,7 @@ export const GlobalModal = () => {
         <TouchableOpacity
           onPress={() => {
             Overlay.close()
+            AsyncStorage.setItem('surprisedYet', 'true')
           }}
           style={{
             zIndex: 10,
@@ -83,6 +81,7 @@ export const GlobalModal = () => {
               }}
               onPress={() => {
                 Overlay.close()
+                AsyncStorage.setItem('surprisedYet', 'true')
               }}
             >
               <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>

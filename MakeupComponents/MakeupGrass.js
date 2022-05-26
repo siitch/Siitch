@@ -11,7 +11,7 @@ import {MakeupBrands} from "./MakeupBrands/MakeupBrands";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const MakeupGrass = ({inputData, navigation}) => {
+const MakeupGrass = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -51,7 +51,7 @@ const MakeupGrass = ({inputData, navigation}) => {
         </View>
       </View>
 
-      <MakeupBrands navigation={navigation} currentTab={'Makeup - Env'}/>
+      <MakeupBrands currentTab={'Makeup - Env'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

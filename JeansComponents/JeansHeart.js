@@ -12,7 +12,7 @@ import {openSourceLink} from "../util/common";
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const JeansHeart = ({inputData, navigation}) => {
+const JeansHeart = () => {
   return (
     <ScrollView
       style={{backgroundColor: '#FFFFFF'}}
@@ -61,7 +61,7 @@ const JeansHeart = ({inputData, navigation}) => {
         </Text>
       </View>
 
-      <JeansBrands navigation={navigation} currentTab={'Jeans - Health'}/>
+      <JeansBrands currentTab={'Jeans - Health'}/>
       <View style={{height: Height / 10}} />
     </ScrollView>
   );

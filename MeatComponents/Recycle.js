@@ -11,7 +11,7 @@ import {MeatBrands} from "./MeatBrands/MeatBrands";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
-const Recycle = ({navigation}) => {
+const Recycle = () => {
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
       <View
@@ -131,7 +131,7 @@ const Recycle = ({navigation}) => {
           </Text>
         </View>
 
-        <MeatBrands navigation={navigation} currentTab={'Beef - Recycle'}/>
+        <MeatBrands currentTab={'Beef - Recycle'}/>
       </View>
       <View style={{height: Height / 10}} />
     </ScrollView>

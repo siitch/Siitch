@@ -3,9 +3,11 @@ import {Dimensions, Text, TouchableHighlight, View} from "react-native";
 import analytics from "@react-native-firebase/analytics";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {openSourceLink} from "../util/common";
+import { useNavigation } from "@react-navigation/native";
 const {width} = Dimensions.get('screen');
 
-export const FAQItem = ({question, navigation, color}) => {
+export const FAQItem = ({question, color}) => {
+  const navigation = useNavigation();
 
   const Width = width;
   const [expand, setExpand] = useState(false);

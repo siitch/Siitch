@@ -5,38 +5,19 @@ import {View, Text, Dimensions, ScrollView, TouchableOpacity, Share} from 'react
 
 import {MenuItem} from "./MenuItem";
 import analytics from "@react-native-firebase/analytics";
+import { useNavigation } from "@react-navigation/native";
 
-export const MenuMain = ({ navigation }) => {
+export const MenuMain = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'Tutorial'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'Sources'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'Mission'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'About'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'Virtual'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'Feedback'}
-      />
-      <MenuItem
-        navigation={navigation}
-        menuItemName={'FAQ'}
-      />
+      <MenuItem menuItemName={'Tutorial'}/>
+      <MenuItem menuItemName={'Sources'}/>
+      <MenuItem menuItemName={'Mission'}/>
+      <MenuItem menuItemName={'About'}/>
+      <MenuItem menuItemName={'Virtual'}/>
+      <MenuItem menuItemName={'Feedback'}/>
+      <MenuItem menuItemName={'FAQ'}/>
 
       <View
         style={{

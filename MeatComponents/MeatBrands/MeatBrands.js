@@ -4,9 +4,11 @@ import {ImageIcon} from "../../ImageIcon";
 import {images} from "../../ImageURL";
 import React from "react";
 import { openBrandLink } from "../../util/common";
+import { useNavigation } from "@react-navigation/native";
 const Width = Dimensions.get('window').width;
 
-export const MeatBrands = ({navigation, currentTab}) => {
+export const MeatBrands = ({currentTab}) => {
+  const navigation = useNavigation();
   const brandsList = {
     'IMPOSSIBLE foods': 'https://impossiblefoods.com/grocery/',
     'BEYOND MEAT': 'https://www.beyondmeat.com/',
