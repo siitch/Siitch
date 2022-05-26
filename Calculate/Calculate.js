@@ -15,7 +15,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {styles} from '../Comparing/Styles';
 import Profiles from '../ImageDB.js';
 import firebase from 'firebase';
-import RNPicker from 'rn-modal-picker';
+import RNPicker from "../components/RNModalPicker/RNModalPicker";
 import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 
@@ -28,7 +28,9 @@ import header from '../images/header.png'
 import watermark from '../images/watermark_running_total.png'
 import {BlurView} from "expo-blur";
 import {FloatingButton, Button} from "react-native-ui-lib";
-import CalculateContainer from "../util/CalculateContainer";
+import CalculateContainer from "../components/CalculateContainer";
+import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
+import { ContextAndChallengeModal, VirtualWaterInfoModal } from "../components/Modals/Modals";
 
 // var pages=[];
 let itemNameList = [];
@@ -111,6 +113,9 @@ function CalculateScreen({ navigation }) {
   const [sOutputOpened,setOutputOpened] = useState(false);
   const [error, setError] = useState({status: false, message: ''});
   const [modalVisible, setModalVisible] = useState(false);
+  function closeContextChallengeModal() {
+    setModalVisible(false)
+  }
   const [inputValue, setInputValue] = useState('');
   const [unit, setUnit] = useState('G');
   const [unitG,setUnitG] = useState(true);
@@ -127,6 +132,9 @@ function CalculateScreen({ navigation }) {
   const [itemOpenList, setItemOpenList] = useState([]);
 
   const [infoVisible, setInfoVisible] = useState(false);
+  function closeInfoModal() {
+    setInfoVisible(false)
+  }
 
   // Export a photo of the current running total list
   const [modalShareVisible, setModalShareVisible] = useState(false)
@@ -709,165 +717,11 @@ function CalculateScreen({ navigation }) {
           </View>
         </View>
 
-        <Modal animationType="slide" transparent={true} visible={modalVisible}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 22,
-            }}>
-            {!context && (
-              <View style={styles.modalView}>
-                <Text style={{textAlign: 'center', marginTop: 30}}>
-                  Challenges specific to the item
-                </Text>
-                <Text style={{marginBottom: 15, textAlign: 'center'}}>
-                  to appear in the future.
-                </Text>
-                <TouchableHighlight
-                  style={{...styles.openButton, backgroundColor: '#70BF41'}}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}>
-                  <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
-                </TouchableHighlight>
-              </View>
-            )}
-            {context && (
-              <ScrollView style={{backgroundColor: 'white'}}>
-                <View style={{
-                  margin: '3%',
-                  paddingHorizontal: '3%',
-                  marginTop: '8%',
-                  paddingBottom: '5%',
-                  backgroundColor: 'white',
-                  borderRadius: 20,
-                  alignItems: 'center',
-                  shadowColor: '#000',
-                  shadowOffset: {
-                    width: 0,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 3.84,
-                }}>
-                  <Text style={{textAlign: 'center', marginTop: 30}}>
-                    Each person on average in the US{'\n'}
-                    uses about 1,800 gallons (6,820 Liters) of virtual water per day.
-                  </Text>
-                  <Text style={{marginBottom: 15, textAlign: 'center'}}>
-                    Or over 657,000 gallons (2.48M Liters) per year.
-                  </Text>
-                  <View style={{alignItems: 'center'}}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: 300,
-                        height: 100,
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '2%',
-                      }}>
-                      <Text style={{fontSize: 20, marginRight: '12%', color: 'black',}}>
-                        {' '}80 gal.{'\n'}(302 L.)
-                      </Text>
-                      <Image
-                        source={require('./../images2/80Gal.jpeg')}
-                        style={{width: 150, height: 150, marginTop: 2}}
-                        resizeMode="contain"
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: 300,
-                        height: 100,
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '2%',
-                      }}>
-                      <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
-                        2,000 gal.{'\n'}(7,570 L.)
-                      </Text>
-                      <Image
-                        source={require('./../images2/2000Gal.jpeg')}
-                        style={{width: 160, height: 160, marginTop: 2}}
-                        resizeMode="contain"
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: 300,
-                        height: 100,
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '2%',
-                      }}>
-                      <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
-                        12,000 gal.{'\n'}(45,425 L.)
-                      </Text>
-                      <Image
-                        source={require('./../images2/12000Gal.jpeg')}
-                        style={{width: 180, height: 180, marginTop: 2}}
-                        resizeMode="contain"
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: 300,
-                        height: 100,
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '2%',
-                      }}>
-                      <Text style={{fontSize: 20, marginRight: '10%', color: 'black',}}>
-                        100,000 gal.{'\n'}(378,541 L.)
-                      </Text>
-                      <Image
-                        source={require('./../images2/100000Gal.jpeg')}
-                        style={{width: 175, height: 175, marginTop: 2}}
-                        resizeMode="contain"
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        width: 300,
-                        height: 100,
-                        borderRadius: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '2%',
-                      }}>
-                      <Text style={{fontSize: 20, marginRight: '10%', marginLeft: '-2%', color: 'black',}}>
-                        660,000 gal.{'\n'}{'  '}(2.5 mil L.){'\n'}Olympic Pool
-                      </Text>
-                      <Image
-                        source={require('./../images2/660000Gal.jpeg')}
-                        style={{width: 160, height: 160, marginTop: 2}}
-                        resizeMode="contain"
-                      />
-                    </View>
-                  </View>
-                  <TouchableHighlight
-                    style={{...styles.openButton, backgroundColor: '#70BF41'}}
-                    onPress={() => {
-                      setModalVisible(!modalVisible);
-                    }}>
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
-                  </TouchableHighlight>
-                </View>
-              </ScrollView>
-            )}
-          </View>
-        </Modal>
+        {/* Pop up window of 'Context' and 'Challenge' */}
+        <ContextAndChallengeModal
+          modalVisible={modalVisible}
+          showContext={context}
+          handler={closeContextChallengeModal}/>
 
         {computed && !showAnotherRunningtotal && (
           <View style={{alignItems: 'center', marginBottom: 20}}>
@@ -1262,7 +1116,8 @@ function CalculateScreen({ navigation }) {
         <View>
           { pages.map((elem,index)=>{
             let i = index;
-            return (<View>
+            return (
+              <View key={index}>
               <View style={{flexDirection: 'row',
                 marginTop: 5,
                 marginBottom: 5,
@@ -1287,153 +1142,155 @@ function CalculateScreen({ navigation }) {
                 marginLeft:20,
                 marginRight:10}}>
                 {/* <Text style={{fontSize: 20, fontWeight: '400',marginLeft:10}}>{itemQuantityList[i]}</Text> */}
-                <DropDownPicker defaultValue={itemQuantityList[index]}
-                                items={[
-                                  {label: '1', value: '1'},
-                                  {label: '2', value: '2'},
-                                  {label: '3', value: '3'},
-                                  {label: '4', value: '4'},
-                                  {label: '5', value: '5'},
-                                  {label: '6', value: '6'},
-                                  {label: '7', value: '7'},
-                                  {label: '8', value: '8'},
-                                  {label: '9', value: '9'},
-                                  {label: '10', value: '10'},
-                                  {label: '20', value: '20'},
-                                  {label: '30', value: '30'},
-                                  {label: '40', value: '40'},
-                                  {label: '50', value: '50'},
-                                ]}
-                                placeholder="Select"
-                                placeholderStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                  color: 'lightgray',
-                                }}
-                                itemStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                }}
-                                labelStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                }}
-                                defaultNull
-                                containerStyle={{
-                                  height: 50,
-                                  borderRadius: 20,
-                                }}
-                                style={{
-                                  backgroundColor: 'white',
-                                  width: DeviceWidth * 0.2,
-                                  marginTop: 0,
-                                  borderWidth: 2,
-                                  borderTopLeftRadius: 20,
-                                  borderTopRightRadius: 20,
-                                  borderBottomLeftRadius: 20,
-                                  borderBottomRightRadius: 20,
-                                  borderColor: '#80CAFF',
-                                }}
-                                dropDownStyle={{
-                                  backgroundColor: 'white',
-                                  opacity: 1,
-                                  width: DeviceWidth * 0.2,
-                                  height:180,
-                                  marginTop: 0,
-                                  borderBottomLeftRadius: 20,
-                                  borderBottomRightRadius: 20,
-                                  borderWidth: 2,
-                                  borderColor: '#80CAFF',
-                                }}
-                                dropDownMaxHeight={250}
-                                setValue={itemQuantityList[i]}
+                <DropDownPicker
+                  defaultValue={itemQuantityList[index]}
+                  items={[
+                    {label: '1', value: '1'},
+                    {label: '2', value: '2'},
+                    {label: '3', value: '3'},
+                    {label: '4', value: '4'},
+                    {label: '5', value: '5'},
+                    {label: '6', value: '6'},
+                    {label: '7', value: '7'},
+                    {label: '8', value: '8'},
+                    {label: '9', value: '9'},
+                    {label: '10', value: '10'},
+                    {label: '20', value: '20'},
+                    {label: '30', value: '30'},
+                    {label: '40', value: '40'},
+                    {label: '50', value: '50'},
+                  ]}
+                  placeholder="Select"
+                  placeholderStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                    color: 'lightgray',
+                  }}
+                  itemStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                  }}
+                  labelStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                  }}
+                  defaultNull
+                  containerStyle={{
+                    height: 50,
+                    borderRadius: 20,
+                  }}
+                  style={{
+                    backgroundColor: 'white',
+                    width: DeviceWidth * 0.2,
+                    marginTop: 0,
+                    borderWidth: 2,
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                    borderColor: '#80CAFF',
+                  }}
+                  dropDownStyle={{
+                    backgroundColor: 'white',
+                    opacity: 1,
+                    width: DeviceWidth * 0.2,
+                    height:180,
+                    marginTop: 0,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                    borderWidth: 2,
+                    borderColor: '#80CAFF',
+                  }}
+                  dropDownMaxHeight={250}
+                  setValue={itemQuantityList[i]}
 
-                                onChangeItem={(currentQuantity) => {
-                                  itemQuantityList[index] = currentQuantity.label;
-                                  itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
-                                  itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
-                                  updateYearlyCostTotal();
-                                  updateMixCostTotal();
-                                }}
-                                onOpen={() => {
-                                  // setComputed(false);
-                                  setSelectopen(true);
-                                  itemOpenList[index]=true;
-                                  setError({status: false, message: ''});
-                                }}
-                                onClose={() => {
-                                  setSelectopen(false);
-                                  itemOpenList[index]=false;
-                                }}
+                  onChangeItem={(currentQuantity) => {
+                    itemQuantityList[index] = currentQuantity.label;
+                    itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
+                    itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
+                    updateYearlyCostTotal();
+                    updateMixCostTotal();
+                  }}
+                  onOpen={() => {
+                    // setComputed(false);
+                    setSelectopen(true);
+                    itemOpenList[index]=true;
+                    setError({status: false, message: ''});
+                  }}
+                  onClose={() => {
+                    setSelectopen(false);
+                    itemOpenList[index]=false;
+                  }}
                 />
 
                 {/* <Text style={{fontSize: 20, fontWeight: '400',marginLeft:10}}>{itemFrequencyList[i]}</Text> */}
-                <DropDownPicker defaultValue={itemFrequencyList[index]}
-                                items={[
-                                  {label: 'D', value: 'per_day'},
-                                  {label: 'W', value: 'per_week'},
-                                  {label: 'M', value: 'per_month'},
-                                  {label: 'Y', value: 'per_year'},
-                                ]}
-                                placeholder="Select"
-                                placeholderStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                  color: 'lightgray',
-                                }}
-                                itemStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                }}
-                                labelStyle={{
-                                  textAlign: 'center',
-                                  fontSize: 20,
-                                }}
-                                defaultNull
-                                containerStyle={{
-                                  height: 50,
-                                  borderRadius: 20,
-                                }}
-                                style={{
-                                  backgroundColor: 'white',
-                                  width: DeviceWidth * 0.2,
-                                  marginTop: 0,
-                                  marginLeft:10,
-                                  borderWidth: 2,
-                                  borderTopLeftRadius: 20,
-                                  borderTopRightRadius: 20,
-                                  borderBottomLeftRadius: 20,
-                                  borderBottomRightRadius: 20,
-                                  borderColor: '#80CAFF',
-                                }}
-                                dropDownStyle={{
-                                  backgroundColor: 'white',
-                                  width: DeviceWidth * 0.2,
-                                  height: 180,
-                                  marginLeft:10,
-                                  marginTop: 0,
-                                  borderBottomLeftRadius: 20,
-                                  borderBottomRightRadius: 20,
-                                  borderWidth: 2,
-                                  borderColor: '#80CAFF',
-                                }}
-                                dropDownMaxHeight={250}
-                                onChangeItem={(currentFrequency) => {
-                                  itemFrequencyList[index]=currentFrequency.value;
-                                  itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
-                                  itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
-                                  updateYearlyCostTotal();
-                                }}
-                                onOpen={() => {
-                                  // setComputed(false);
-                                  setSelectopen(true);
-                                  setError({status: false, message: ''});
-                                  itemOpenList[index]=true;
-                                }}
-                                onClose={() => {
-                                  setSelectopen(false);
-                                  itemOpenList[index]=false;
-                                }}
+                <DropDownPicker
+                  defaultValue={itemFrequencyList[index]}
+                  items={[
+                    {label: 'D', value: 'per_day'},
+                    {label: 'W', value: 'per_week'},
+                    {label: 'M', value: 'per_month'},
+                    {label: 'Y', value: 'per_year'},
+                  ]}
+                  placeholder="Select"
+                  placeholderStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                    color: 'lightgray',
+                  }}
+                  itemStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                  }}
+                  labelStyle={{
+                    textAlign: 'center',
+                    fontSize: 20,
+                  }}
+                  defaultNull
+                  containerStyle={{
+                    height: 50,
+                    borderRadius: 20,
+                  }}
+                  style={{
+                    backgroundColor: 'white',
+                    width: DeviceWidth * 0.2,
+                    marginTop: 0,
+                    marginLeft:10,
+                    borderWidth: 2,
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                    borderColor: '#80CAFF',
+                  }}
+                  dropDownStyle={{
+                    backgroundColor: 'white',
+                    width: DeviceWidth * 0.2,
+                    height: 180,
+                    marginLeft:10,
+                    marginTop: 0,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
+                    borderWidth: 2,
+                    borderColor: '#80CAFF',
+                  }}
+                  dropDownMaxHeight={250}
+                  onChangeItem={(currentFrequency) => {
+                    itemFrequencyList[index]=currentFrequency.value;
+                    itemYearlyCostList[index]= itemCostList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
+                    itemYearlyLCostList[index] = itemCostLList[index] * frequency_values[itemFrequencyList[index]]*Quantity_values[itemQuantityList[index]]
+                    updateYearlyCostTotal();
+                  }}
+                  onOpen={() => {
+                    // setComputed(false);
+                    setSelectopen(true);
+                    setError({status: false, message: ''});
+                    itemOpenList[index]=true;
+                  }}
+                  onClose={() => {
+                    setSelectopen(false);
+                    itemOpenList[index]=false;
+                  }}
                 />
                 <View style={{flexDirection: 'row',position: 'absolute', right:0 }}>
                   {unitG && (<Text style={{fontSize: 20, fontWeight: '400',marginTop:10}}>{numberWithCommas(itemCostList[i]*itemQuantityList[i])}</Text>)}
@@ -1551,65 +1408,66 @@ function CalculateScreen({ navigation }) {
               </Text>
             </View>
 
-            <DropDownPicker defaultValue='yearly'
-                            items={[
-                              {label: 'Daily', value: 'daily'},
-                              {label: 'Weekly', value: 'weekly'},
-                              {label: 'Monthly', value: 'monthly'},
-                              {label: 'Yearly', value: 'yearly'},
-                            ]}
-                            placeholder="Select"
-                            placeholderStyle={{
-                              textAlign: 'center',
-                              fontSize: 20,
-                              color: 'lightgray',
-                            }}
-                            itemStyle={{
-                              textAlign: 'center',
-                              fontSize: 20,
-                            }}
-                            labelStyle={{
-                              textAlign: 'center',
-                              fontSize: 20,
-                            }}
-                            defaultNull
-                            containerStyle={{
-                              height: 50,
-                              borderRadius: 20,
-                            }}
-                            style={{
-                              backgroundColor: 'white',
-                              width: DeviceWidth * 0.8,
-                              marginTop: 5,
-                              borderWidth: 2,
-                              borderTopLeftRadius: 20,
-                              borderTopRightRadius: 20,
-                              borderBottomLeftRadius: 20,
-                              borderBottomRightRadius: 20,
-                              borderColor: '#80CAFF',
-                            }}
-                            dropDownStyle={{
-                              backgroundColor: 'white',
-                              width: DeviceWidth * 0.8,
-                              height: 180,
-                              marginTop: 5,
-                              borderBottomLeftRadius: 20,
-                              borderBottomRightRadius: 20,
-                              borderWidth: 2,
-                              borderColor: '#80CAFF',
-                            }}
-                            dropDownMaxHeight={250}
-                            onChangeItem={(currentUnit) => {
-                              setImpactUnit(currentUnit.value)
-                            }}
-                            onOpen={() => {
-                              // setComputed(false);
-                              setError({status: false, message: ''});
-                              setOutputOpened(true)
-                            }}
-                            onClose={() => {
-                              setOutputOpened(false)
-                            }}
+            <DropDownPicker
+              defaultValue='yearly'
+              items={[
+                {label: 'Daily', value: 'daily'},
+                {label: 'Weekly', value: 'weekly'},
+                {label: 'Monthly', value: 'monthly'},
+                {label: 'Yearly', value: 'yearly'},
+              ]}
+              placeholder="Select"
+              placeholderStyle={{
+                textAlign: 'center',
+                fontSize: 20,
+                color: 'lightgray',
+              }}
+              itemStyle={{
+                textAlign: 'center',
+                fontSize: 20,
+              }}
+              labelStyle={{
+                textAlign: 'center',
+                fontSize: 20,
+              }}
+              defaultNull
+              containerStyle={{
+                height: 50,
+                borderRadius: 20,
+              }}
+              style={{
+                backgroundColor: 'white',
+                width: DeviceWidth * 0.8,
+                marginTop: 5,
+                borderWidth: 2,
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                borderColor: '#80CAFF',
+              }}
+              dropDownStyle={{
+                backgroundColor: 'white',
+                width: DeviceWidth * 0.8,
+                height: 180,
+                marginTop: 5,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+                borderWidth: 2,
+                borderColor: '#80CAFF',
+              }}
+              dropDownMaxHeight={250}
+              onChangeItem={(currentUnit) => {
+                setImpactUnit(currentUnit.value)
+              }}
+              onOpen={() => {
+                // setComputed(false);
+                setError({status: false, message: ''});
+                setOutputOpened(true)
+              }}
+              onClose={() => {
+                setOutputOpened(false)
+              }}
             />
 
               <View style={{flexDirection: 'row', justifyContent: 'center', width: DeviceWidth}}>
@@ -1723,201 +1581,135 @@ function CalculateScreen({ navigation }) {
       </View>
 
       {/* Info button modal */}
-      <Modal animationType="slide" transparent={true} visible={infoVisible}>
-        <View
+      <VirtualWaterInfoModal infoVisible={infoVisible} navigation={navigation} handler={closeInfoModal}/>
+
+      {/*Running total list Export modal*/}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalShareVisible}
+      >
+        {modalShareVisible && <ReactNavigationOverlay/>}
+        <BlurView
+          intensity={90}
+          tint="light"
           style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 22,
-          }}>
-          <View style={{
-            marginLeft: 20,
-            marginRight: 20,
-            backgroundColor: 'white',
-            borderColor: '#00ADEF',
-            borderWidth: 1.5,
-            borderRadius: 20,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-          }}>
-            <TouchableOpacity
-              onPress={() => {
-                setInfoVisible(false);
-              }}
-              style={{
-                zIndex: 10,
-                alignSelf: 'flex-end',
-                position: 'absolute'
-              }}>
-              <Image
-                source={itemDetailImages.closeInfoModal}
-                style={{
-                  width: 50,
-                  height: 50
-                }}/>
-            </TouchableOpacity>
-            <View style={{
-              marginHorizontal: 15,
-              marginBottom: 15,
-              marginTop: 20,
-              padding: 15
+            flex: 1
+          }}
+        >
+          <ScrollView
+            contentContainerStyle={{
+              justifyContent: "center",
+              alignItems: "center",
             }}>
-              <Text>
-                Virtual Water is the total volume of water used in the production of a good or service.
-                See our
-                <Text
-                  onPress={() => {
-                    navigation.navigate('Virtual Water')
-                    setInfoVisible(false)
+            <View
+              style={{
+                marginTop: '8%',
+                marginBottom: '8%',
+                borderRadius: 20,
+                padding: 35,
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5
+              }}>
+              <ViewShot
+                ref={refShareRunningTotal}
+                options={{
+                  format: "jpg",
+                  quality: 1
+                }}>
+                <ImageBackground
+                  style={{
+                    height: headerHeight + listHeight,
+                    width: Dimensions.get('screen').width * 0.9,
                   }}
-                  style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information. Most
-                numbers shown represent the Virtual Water totals. Where Virtual water amounts are
-                unknown, we’ve sourced statistics found on our
-                <Text
-                  onPress={() => {
-                    navigation.navigate('Sources & Resources')
-                    setInfoVisible(false)
+                  imageStyle={{
+                    position: 'absolute',
+                    top: headerHeight + 50,
+                    left: '47%',
+                    height: watermarkHeight,
+                    width: Dimensions.get('screen').width * 0.3,
+                    zIndex: 1
                   }}
-                  style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
-              </Text>
+                  source={watermark}>
+                  <Image
+                    source={{uri: headerImage}}
+                    style={{
+                      height: headerHeight,
+                      width: Dimensions.get('screen').width * 0.9,
+                    }}/>
+                  <Image
+                    source={{uri: listPhoto}}
+                    style={{
+                      height: listHeight,
+                      width: Dimensions.get('screen').width * 0.9,
+                    }}/>
+                </ImageBackground>
+              </ViewShot>
+            </View>
+          </ScrollView>
+          <FloatingButton
+            visible={true}
+            button={{
+              disabled: true,
+              disabledBackgroundColor: 'transparent'
+            }}
+            secondaryButton={{
+              label: 'Cancel',
+              onPress: ()=>{
+                setModalShareVisible(!modalShareVisible)
+              },
+              color: 'black'
+            }}
+            bottomMargin={40}
+            // hideBackgroundOverlay
+            // withoutAnimation
+          />
+          <View style={{
+            width: Dimensions.get('screen').width * 0.8,
+            position: 'absolute',
+            bottom: 80,
+            alignSelf: 'center',
+          }}>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
+              <Button
+                label={"Share"}
+                backgroundColor={"#00ADEF"}
+                enableShadow={true}
+                onPress={()=>{
+                  Share.share(
+                    {
+                      url: sharePhoto
+                    }
+                  )
+                  analytics().logEvent('Share_Running_Total_List')
+                }}
+              />
+              <Button
+                label={"Save to Photo"}
+                backgroundColor={"#70BF41"}
+                enableShadow={true}
+                onPress={()=>{
+                  MediaLibrary.saveToLibraryAsync(sharePhoto).then(() => {
+                    setModalShareVisible(!modalShareVisible)
+                    saveSuccessful()
+                    analytics().logEvent('Save_Running_Total_List')
+                  })
+                }}
+              />
             </View>
           </View>
-        </View>
+        </BlurView>
       </Modal>
-
-        {/*Running total list Export modal*/}
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalShareVisible}
-        >
-          <BlurView
-            intensity={90}
-            tint="light"
-            style={{
-              flex: 1
-            }}
-          >
-            <ScrollView
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}>
-              <View
-                style={{
-                  marginTop: '8%',
-                  marginBottom: '8%',
-                  borderRadius: 20,
-                  padding: 35,
-                  alignItems: "center",
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 2
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 4,
-                  elevation: 5
-                }}>
-                <ViewShot
-                  ref={refShareRunningTotal}
-                  options={{
-                    format: "jpg",
-                    quality: 1
-                  }}>
-                  <ImageBackground
-                    style={{
-                      height: headerHeight + listHeight,
-                      width: Dimensions.get('screen').width * 0.9,
-                    }}
-                    imageStyle={{
-                      position: 'absolute',
-                      top: headerHeight + 50,
-                      left: '47%',
-                      height: watermarkHeight,
-                      width: Dimensions.get('screen').width * 0.3,
-                      zIndex: 1
-                    }}
-                    source={watermark}>
-                    <Image
-                      source={{uri: headerImage}}
-                      style={{
-                        height: headerHeight,
-                        width: Dimensions.get('screen').width * 0.9,
-                      }}/>
-                    <Image
-                      source={{uri: listPhoto}}
-                      style={{
-                        height: listHeight,
-                        width: Dimensions.get('screen').width * 0.9,
-                      }}/>
-                  </ImageBackground>
-                </ViewShot>
-              </View>
-            </ScrollView>
-            <FloatingButton
-              visible={true}
-              button={{
-                disabled: true,
-                disabledBackgroundColor: 'transparent'
-              }}
-              secondaryButton={{
-                label: 'Cancel',
-                onPress: ()=>{
-                  setModalShareVisible(!modalShareVisible)
-                },
-                color: 'black'
-              }}
-              bottomMargin={40}
-              // hideBackgroundOverlay
-              // withoutAnimation
-            />
-            <View style={{
-              width: Dimensions.get('screen').width * 0.8,
-              position: 'absolute',
-              bottom: 80,
-              alignSelf: 'center',
-            }}>
-              <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-                <Button
-                  label={"Share"}
-                  backgroundColor={"#00ADEF"}
-                  enableShadow={true}
-                  onPress={()=>{
-                    Share.share(
-                      {
-                        url: sharePhoto
-                      }
-                    )
-                    analytics().logEvent('Share_Running_Total_List')
-                  }}
-                />
-                <Button
-                  label={"Save to Photo"}
-                  backgroundColor={"#70BF41"}
-                  enableShadow={true}
-                  onPress={()=>{
-                    MediaLibrary.saveToLibraryAsync(sharePhoto).then(() => {
-                      setModalShareVisible(!modalShareVisible)
-                      saveSuccessful()
-                      analytics().logEvent('Save_Running_Total_List')
-                    })
-                  }}
-                />
-              </View>
-            </View>
-          </BlurView>
-        </Modal>
 
     </ScrollView>
   );

@@ -16,7 +16,6 @@ import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import Profiles from "../ImageDB";
 import FlipCard from "react-native-flip-card";
-import * as WebBrowser from "expo-web-browser";
 import * as FileSystem from "expo-file-system";
 import {showMessage} from "react-native-flash-message";
 import header from "../images/header.png";
@@ -26,6 +25,9 @@ import {BlurView} from "expo-blur";
 import {Button, FloatingButton} from "react-native-ui-lib";
 import * as MediaLibrary from "expo-media-library";
 import {styles} from "./Styles";
+import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
+import {openSourceLink} from "../util/common";
+import {VirtualWaterInfoModal} from "../components/Modals/Modals";
 
 let parentList = []
 export default function ComparePage ({navigation, route}) {
@@ -202,6 +204,9 @@ export default function ComparePage ({navigation, route}) {
   }
 
   let [infoVisible, setInfoVisible] = useState(false)
+  function closeInfoModal() {
+    setInfoVisible(false)
+  }
   let [waterVisible, setWaterVisible] = useState(false)
   let [waterCategory, setWaterCategory] = useState('')
   function getContent(waterCategory) {
@@ -230,7 +235,11 @@ export default function ComparePage ({navigation, route}) {
               generated in manufacturing, in order to maintain water quality, as determined by state and local standards
             </Text>
             <Text style={{textAlign: 'left', marginTop: '3%'}}>
-              Definitions: <Text onPress={() => WebBrowser.openBrowserAsync('https://www.watercalculator.org')} style={{color: '#00ADEF'}}>www.watercalculator.org</Text>
+              Definitions: <Text onPress={() => {
+              openSourceLink(
+                'https://www.watercalculator.org',
+                {name: 'Water Calculator', url: 'https://www.watercalculator.org'})
+            }} style={{color: '#00ADEF'}}>www.watercalculator.org</Text>
             </Text>
           </View>
         )
@@ -506,7 +515,11 @@ export default function ComparePage ({navigation, route}) {
               The water footprint of a product (also known as the Virtual Water content) is the volume of freshwater
               used to produce the product, measured in the place it was actually made.{'\n'}
               - <Text
-              onPress={() => WebBrowser.openBrowserAsync('https://www.watercalculator.org')}
+              onPress={() => {
+                openSourceLink(
+                  'https://www.watercalculator.org',
+                  {name: 'Water Calculator', url: 'https://www.watercalculator.org'})
+              }}
               style={{color: '#00ADEF'}}>Waterfootprint.org</Text>
               {'\n'}
             </Text>
@@ -523,80 +536,14 @@ export default function ComparePage ({navigation, route}) {
         </FlipCard>
 
         {/* Info Modal */}
-        <Modal animationType="slide" transparent={true} visible={infoVisible}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 22,
-            }}>
-            <View style={{
-              marginLeft: 20,
-              marginRight: 20,
-              backgroundColor: 'white',
-              borderColor: '#00ADEF',
-              borderWidth: 1.5,
-              borderRadius: 20,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}>
-              <TouchableOpacity
-                onPress={() => {
-                  setInfoVisible(false);
-                }}
-                style={{
-                  zIndex: 10,
-                  alignSelf: 'flex-end',
-                  position: 'absolute'
-                }}>
-                <Image
-                  source={itemDetailImages.closeInfoModal}
-                  style={{
-                    width: 50,
-                    height: 50
-                  }}/>
-              </TouchableOpacity>
-              <View style={{
-                marginTop: 20,
-                marginHorizontal: 15,
-                marginBottom: 15,
-                padding: 15
-              }}>
-                <Text>
-                  Virtual Water is the total volume of water used in the production of a good or service.
-                  See our
-                  <Text
-                    onPress={() => {
-                      navigation.navigate('Virtual Water')
-                      setInfoVisible(false)
-                    }}
-                    style={{color: '#00ADEF'}}> Virtual Water</Text> page for more information. Most
-                  numbers shown represent the Virtual Water totals. Where Virtual water amounts are
-                  unknown, we’ve sourced statistics found on our
-                  <Text
-                    onPress={() => {
-                      navigation.navigate('Sources & Resources')
-                      setInfoVisible(false)
-                    }}
-                    style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
-                </Text>
-              </View>
-            </View>
-          </View>
-        </Modal>
+        <VirtualWaterInfoModal infoVisible={infoVisible} navigation={navigation} handler={closeInfoModal}/>
 
         {/* Export Modal */}
         <Modal
           animationType="fade"
           transparent={true}
           visible={modalShareVisible}>
+          {modalShareVisible && <ReactNavigationOverlay/>}
           <BlurView
             intensity={90}
             tint="light"
@@ -719,6 +666,7 @@ export default function ComparePage ({navigation, route}) {
 
         {/* Water Card modal */}
         <Modal animationType="slide" transparent={true} visible={waterVisible}>
+          {waterVisible && <ReactNavigationOverlay/>}
           <View
             style={{
               flex: 1,

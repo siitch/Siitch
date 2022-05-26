@@ -11,7 +11,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import {Button as NewButton} from "react-native-ui-lib";
 import analytics from "@react-native-firebase/analytics";
-import * as WebBrowser from "expo-web-browser";
 import LottieView from 'lottie-react-native';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Audio } from 'expo-av';
@@ -19,6 +18,8 @@ import { Audio } from 'expo-av';
 import itemDetailImages from "./ItemDetailImages/itemDetailImages";
 import ResultImage from "./ResultImage";
 import Profiles from "../ImageDB";
+import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
+import {openSourceLink} from "../util/common";
 
 const SpecialItem = ({navigation, globalUnit}) => {
   // Set info for the popup modal
@@ -133,10 +134,10 @@ const SpecialItem = ({navigation, globalUnit}) => {
           There are over 600 varieties or oranges grown worldwide. Seasons vary.
           Check the
           <Text onPress={() => {
-            WebBrowser.openBrowserAsync('https://www.seasonalfoodguide.org')
-            analytics().logEvent('Source_click',{
-              source_name: 'Seasonal Food Guide',
-              source_url: 'https://www.seasonalfoodguide.org'
+            openSourceLink(
+              'https://www.seasonalfoodguide.org', {
+                name: 'Seasonal Food Guide',
+                url: 'https://www.seasonalfoodguide.org'
             })
           }}
                 style={{color: '#00ADEF'}}> Seasonal Food Guide </Text>
@@ -585,6 +586,7 @@ const SpecialItem = ({navigation, globalUnit}) => {
 
       {/* Modal */}
       <Modal animationType="slide" transparent={true} visible={infoVisible}>
+        {infoVisible && <ReactNavigationOverlay/>}
         <View
           style={{
             flex: 1,
@@ -694,10 +696,10 @@ const SpecialItem = ({navigation, globalUnit}) => {
                   One Navel Orange (140 g){'\n'}
                   Source:
                   <Text onPress={() => {
-                    WebBrowser.openBrowserAsync('https://fdc.nal.usda.gov')
-                    analytics().logEvent('Source_click',{
-                      source_name: 'USDA',
-                      source_url: 'https://fdc.nal.usda.gov'
+                    openSourceLink(
+                      'https://fdc.nal.usda.gov', {
+                        name: 'USDA',
+                        url: 'https://fdc.nal.usda.gov'
                     })
                   }}
                         style={{color: '#00ADEF'}}> USDA</Text>
@@ -778,11 +780,11 @@ const SpecialItem = ({navigation, globalUnit}) => {
                   Good Siitch:{'\n'}
                   Source:
                   <Text onPress={() => {
-                    WebBrowser.openBrowserAsync('https://www.webmd.com/food-recipes/health-benefits-oranges')
-                    analytics().logEvent('Source_click',{
-                      source_name: 'WebMD',
-                      source_url: 'https://www.webmd.com/food-recipes/health-benefits-oranges'
-                    })
+                    openSourceLink(
+                      'https://www.webmd.com/food-recipes/health-benefits-oranges', {
+                        name: 'WebMD',
+                        url: 'https://www.webmd.com/food-recipes/health-benefits-oranges'
+                      })
                   }}
                         style={{color: '#00ADEF'}}> WebMD{'\n'}</Text>
                 </Text>
@@ -844,20 +846,20 @@ const SpecialItem = ({navigation, globalUnit}) => {
                   Fun Siitch (fun facts!):{'\n'}
                   Source:
                   <Text onPress={() => {
-                    WebBrowser.openBrowserAsync('https://www.abetterchoice.com.au/seasonal-choice/10-fun-facts-you-didnt-know-about-oranges/')
-                    analytics().logEvent('Source_click',{
-                      source_name: 'A Better Choice',
-                      source_url: 'https://www.abetterchoice.com.au/seasonal-choice/10-fun-facts-you-didnt-know-about-oranges/'
-                    })
+                    openSourceLink(
+                      'https://www.abetterchoice.com.au/seasonal-choice/10-fun-facts-you-didnt-know-about-oranges/', {
+                        name: 'A Better Choice',
+                        url: 'https://www.abetterchoice.com.au/seasonal-choice/10-fun-facts-you-didnt-know-about-oranges/'
+                      })
                   }}
                         style={{color: '#00ADEF'}}> A Better Choice</Text>
                   ,
                   <Text onPress={() => {
-                    WebBrowser.openBrowserAsync('https://www.floridacitrus.org')
-                    analytics().logEvent('Source_click',{
-                      source_name: 'Florida Citrus',
-                      source_url: 'https://www.floridacitrus.org'
-                    })
+                    openSourceLink(
+                      'https://www.floridacitrus.org', {
+                        name: 'Florida Citrus',
+                        url: 'https://www.floridacitrus.org'
+                      })
                   }}
                         style={{color: '#00ADEF'}}> Florida Citrus{'\n'}</Text>
                 </Text>

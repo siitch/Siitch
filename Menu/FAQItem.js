@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Dimensions, Text, TouchableHighlight, View} from "react-native";
 import analytics from "@react-native-firebase/analytics";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import * as WebBrowser from "expo-web-browser";
+import {openSourceLink} from "../util/common";
 const {width} = Dimensions.get('screen');
 
 export const FAQItem = ({question, navigation, color}) => {
@@ -77,13 +77,12 @@ export const FAQItem = ({question, navigation, color}) => {
       (<Text>
         According to <Text
         onPress={() => {
-          WebBrowser.openBrowserAsync(
+          openSourceLink(
             'https://www.watercalculator.org',
-          )
-          Analytics.logEvent('Source_click',{
-            source_name: 'Water Calculator',
-            source_url: 'https://www.watercalculator.org/'
-          })
+            {
+              name: 'Water Calculator',
+              url: 'https://www.watercalculator.org'
+            })
         }}
         style={{
           color: 'blue',
@@ -106,11 +105,12 @@ export const FAQItem = ({question, navigation, color}) => {
         The 1,802 gallons per day statistic is broad. We are not affiliated with the GRACE Communications Foundation,
         but their terrific
         <Text onPress={() => {
-          WebBrowser.openBrowserAsync('https://www.watercalculator.org')
-          Analytics.logEvent('Source_click',{
-            source_name: 'Water Calculator',
-            source_url: 'https://www.watercalculator.org/'
-          })
+          openSourceLink(
+            'https://www.watercalculator.org',
+            {
+              name: 'Water Calculator',
+              url: 'https://www.watercalculator.org'
+            })
         }}
               style={{color: '#00ADEF'}}> Water Calculator </Text>
         can help you see how you compare.
@@ -159,12 +159,12 @@ export const FAQItem = ({question, navigation, color}) => {
         links. {'\n'} {'\n'}
         A few other terrific sites, this for water: <Text
         onPress={() => {
-          WebBrowser.openBrowserAsync(
-            'https://wateruseitwisely.com/100-ways-to-conserve-water')
-          Analytics.logEvent('Source_click',{
-            source_name: '100 ways to conserve water',
-            source_url: 'https://wateruseitwisely.com/100-ways-to-conserve-water'
-          })
+          openSourceLink(
+            'https://wateruseitwisely.com/100-ways-to-conserve-water',
+            {
+              name: '100 ways to conserve water',
+              url: 'https://wateruseitwisely.com/100-ways-to-conserve-water'
+            })
         }}
         style={{
           color: 'blue',
@@ -178,12 +178,12 @@ export const FAQItem = ({question, navigation, color}) => {
         www.wateruseitwisely.com
       </Text> {'\n'}And this for reducing your waste: <Text
         onPress={() => {
-          WebBrowser.openBrowserAsync(
-            'https://zerowastehome.com/tips/')
-          Analytics.logEvent('Source_click',{
-            source_name: 'Tips for reducing waste',
-            source_url: 'https://zerowastehome.com/tips/'
-          })
+          openSourceLink(
+            'https://zerowastehome.com/tips/',
+            {
+              name: 'Tips for reducing waste',
+              url: 'https://zerowastehome.com/tips/'
+            })
         }}
         style={{
           color: 'blue',

@@ -36,6 +36,7 @@ import analytics from '@react-native-firebase/analytics';
 // Expo's filesystem library to delete temp photo
 import * as FileSystem from 'expo-file-system';
 import sloth from "../images/sloth.png"
+import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 
 function CameraView({navigation}) {
   // init status
@@ -240,6 +241,7 @@ function CameraView({navigation}) {
               justifyContent: 'center',
             }}>
             <Modal animationType="fade" transparent={true} visible={true}>
+              {!isModelReady && <ReactNavigationOverlay/>}
               <View
                 style={{
                   flex: 1,

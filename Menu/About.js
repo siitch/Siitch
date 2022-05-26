@@ -1,16 +1,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {useState} from 'react';
-const {width, height} = Dimensions.get('screen');
-import { WebView } from 'react-native-webview';
-import {View, Text, Image, Dimensions, Linking, Pressable, Button, TouchableOpacity, TouchableHighlight, ScrollView, StyleSheet} from 'react-native';
-import { styles } from '../Ranking/Styles';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScreenContainer } from 'react-native-screens';
-const Width = width;
+
+const {width} = Dimensions.get('screen');
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {openLink} from "../util/common";
 
 
 export const About = ({ navigation }) => {
@@ -57,7 +57,7 @@ export const About = ({ navigation }) => {
           But we absolutely can make things much better by being good citizens. {'\n'}
 
           {'\n'} <Text style={{fontWeight: 'bold',}}>- Emma Marris {'\n'}
-          (Contributer, National Geographic)</Text>{' '}
+          (Contributor, National Geographic)</Text>{' '}
           {'\n'}</Text>
       </View>
       <Text
@@ -99,18 +99,15 @@ export const About = ({ navigation }) => {
         12,000 gallons of water.
       </Text>
       <Text
-        onPress={() =>
-          Linking.openURL(
-            'siitch.com',
-          )
-        }
+        onPress={() => {
+          openLink('https://www.siitch.com')
+        }}
         style={{
           color: '#00ADEF',
           fontSize: 20,
           textAlign: 'center',
           marginTop: 50
-        }
-        }>
+        }}>
         www.siitch.com
       </Text>
       <Image
@@ -189,11 +186,9 @@ export const About = ({ navigation }) => {
         contact@siitch.com
       </Text>
       <Text
-        onPress={() =>
-          Linking.openURL(
-            'https://www.siitch.com/privacy-policy',
-          )
-        }
+        onPress={() => {
+          openLink('https://www.siitch.com/privacy-policy')
+        }}
         style={{
           color: '#00ADEF',
           fontSize: 20,
@@ -205,11 +200,9 @@ export const About = ({ navigation }) => {
         Privacy Policy{' '}
       </Text>
       <Text
-        onPress={() =>
-          Linking.openURL(
-            'https://www.siitch.com/termsofuse',
-          )
-        }
+        onPress={() => {
+          openLink('https://www.siitch.com/termsofuse')
+        }}
         style={{
           color: '#00ADEF',
           fontSize: 20,

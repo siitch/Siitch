@@ -12,7 +12,7 @@ import {
   Dimensions
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import RNPicker from 'rn-modal-picker';
+import RNPicker from "../components/RNModalPicker/RNModalPicker";
 import ComparePage from "./ComparePage";
 import analytics from '@react-native-firebase/analytics';
 

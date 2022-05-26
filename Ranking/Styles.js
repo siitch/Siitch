@@ -54,8 +54,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 22,
     color: 'black',
-    marginTop: DeviceHeight * 0.01,
-    marginBottom: DeviceHeight * -0.01
+    marginTop: DeviceHeight * 0.01
   },
   bottomtext: {
     position: 'relative',
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   meatsText: {
     flexDirection: 'row',
   },
-  
+
   modalView: {
     marginLeft: 20,
     marginRight: 20,
