@@ -1,24 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {Appbar} from 'react-native-paper';
+import React, {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {images} from '../ImageURL';
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  Pressable,
   TouchableHighlight,
   Image,
   Dimensions,
 } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
-import analytics from '@react-native-firebase/analytics';
+import {openSourceLink} from "../util/common";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -154,15 +145,14 @@ const WhatMakeUp = () => {
         emissions and energy consumption.
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync(
-                  'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328',
-              )
-              analytics().logEvent('Source_click',{
-                  source_name: 'Blue gold Water in cosmetics',
-                  source_url: 'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328'
-              })
-          }
-          }
+            openSourceLink(
+              'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328',
+              {
+                name: 'Blue gold Water in cosmetics',
+                url: 'https://www.cosmeticsbusiness.com/news/article_page/Blue_gold_Water_in_cosmetics/156328'
+              }
+            )
+          }}
           style={{color: '#00ADEF'}}>
           {' '}
           more info
@@ -224,23 +214,26 @@ const WhatMakeUp = () => {
               </Text>
               <Text
                 onPress={() => {
-                    WebBrowser.openBrowserAsync('https://www.goingzerowaste.com/')
-                    analytics().logEvent('Source_click',{
-                        source_name: 'Going Zero Waste',
-                        source_url: 'https://www.goingzerowaste.com/'
-                    })
-                }
-                }
+                  openSourceLink(
+                    'https://www.goingzerowaste.com/',
+                    {
+                      name: 'Going Zero Waste',
+                      url: 'https://www.goingzerowaste.com/'
+                    }
+                  )
+                }}
                 style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Going Zero Waste
               </Text>
               <Text
                 onPress={() => {
-                    WebBrowser.openBrowserAsync('https://packagefreeshop.com/')
-                    analytics().logEvent('Source_click',{
-                        source_name: 'Package Free Shop',
-                        source_url: 'https://packagefreeshop.com/'
-                    })
+                  openSourceLink(
+                    'https://packagefreeshop.com/',
+                    {
+                      name: 'Package Free Shop',
+                      url: 'https://packagefreeshop.com/'
+                    }
+                  )
                 }}
                 style={{marginLeft: 20, marginRight: 20, color: 'black', textDecorationLine: 'underline'}}>
                 Package Free Shop
@@ -308,13 +301,14 @@ const WhatMakeUp = () => {
       <Text style={{marginLeft: '10%', marginRight: '10%'}}>
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync('https://www.ewg.org/californiacosmetics/toxic12')
-              analytics().logEvent('Source_click',{
-                  source_name: 'Toxic 12 Chemicals and Contaminants',
-                  source_url: 'https://www.ewg.org/californiacosmetics/toxic12'
-              })
-          }
-          }
+            openSourceLink(
+              'https://www.ewg.org/californiacosmetics/toxic12',
+              {
+                name: 'Toxic 12 Chemicals and Contaminants',
+                url: 'https://www.ewg.org/californiacosmetics/toxic12'
+              }
+            )
+          }}
           style={{color: '#00ADEF'}}>
           The Toxic 12 Chemicals and Contaminants in Your Cosmetics
         </Text>
@@ -348,13 +342,14 @@ const WhatMakeUp = () => {
         nail polish to liven up old glasses. Here’s
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync('https://homehacks.co/upcycle-old-perfume-bottles/')
-              analytics().logEvent('Source_click',{
-                  source_name: '15 ways to upcycle old perfume bottles',
-                  source_url: 'https://homehacks.co/upcycle-old-perfume-bottles/'
-              })
-          }
-          }
+            openSourceLink(
+              'https://homehacks.co/upcycle-old-perfume-bottles/',
+              {
+                name: '15 ways to upcycle old perfume bottles',
+                url: 'https://homehacks.co/upcycle-old-perfume-bottles/'
+              }
+            )
+          }}
           style={{color: '#00ADEF'}}>
           {' '}
           15 ways to upcycle old perfume bottles by HomeHacks.
@@ -407,11 +402,13 @@ const WhatMakeUp = () => {
         <Text>2. Sign up for </Text>
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync('https://www.terracycle.com/en-US/')
-              analytics().logEvent('Source_click',{
-                  source_name: 'Terrancycle',
-                  source_url: 'https://www.terracycle.com/en-US/'
-              })
+            openSourceLink(
+              'https://www.terracycle.com/en-US/',
+              {
+                name: 'Terrancycle',
+                url: 'https://www.terracycle.com/en-US/'
+              }
+            )
           }}
           style={{color: '#00ADEF'}}>
           Terracycle.
@@ -445,15 +442,14 @@ const WhatMakeUp = () => {
         what is real vs. fake. To learn more, check out
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync(
-                  'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/',
-              )
-              analytics().logEvent('Source_click',{
-                  source_name: 'How to Read a Cosmetic Label',
-                  source_url: 'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/'
-              })
-          }
-          }
+            openSourceLink(
+              'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/',
+              {
+                name: 'How to Read a Cosmetic Label',
+                url: 'https://www.schoolofnaturalskincare.com/how-to-read-a-cosmetic-label/'
+              }
+            )
+          }}
           style={{color: '#00ADEF'}}>
           {' '}
           How to Read a Cosmetic Label

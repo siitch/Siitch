@@ -1,23 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {Appbar} from 'react-native-paper';
+import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  Pressable,
-  TouchableHighlight,
   Image,
   Dimensions,
 } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import {images} from '../ImageURL';
-import analytics from '@react-native-firebase/analytics';
+import {openSourceLink} from "../util/common";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -48,11 +38,13 @@ const WhatJeans = () => {
           <Text
             style={{color: 'blue'}}
             onPress={() => {
-                WebBrowser.openBrowserAsync('https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$')
-                analytics().logEvent('Source_click',{
-                    source_name: '15 ways to repurpose old jeans',
-                    source_url: 'https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$'
-                })
+              openSourceLink(
+                'https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$',
+                {
+                  name: '15 ways to repurpose old jeans',
+                  url: 'https://urldefense.com/v3/__https://www.treehugger.com/sustainable-fashion/15-ways-repurpose-old-jeans.html__;!!LIr3w8kk_Xxm!90fFPjQZ0TDFYSOZmx5Xl9qyowxJpJUrrZs2TbXhTq-u3DAdizRT1WKojMcjBg$'
+                }
+              )
             }}>
             15 ways to repurpose old jeans.
           </Text>
@@ -134,11 +126,13 @@ const WhatJeans = () => {
         <Text style={{fontSize: 16}}>Recycle them:</Text>
         <Text
           onPress={() => {
-              WebBrowser.openBrowserAsync('https://bluejeansgogreen.org/')
-              analytics().logEvent('Source_click',{
-                  source_name: 'Blue jeans go green',
-                  source_url: 'https://bluejeansgogreen.org/'
-              })
+            openSourceLink(
+              'https://bluejeansgogreen.org/',
+              {
+                name: 'Blue jeans go green',
+                url: 'https://bluejeansgogreen.org/'
+              }
+            )
           }}
           style={{color: 'blue'}}>
           bluejeansgogreen.org

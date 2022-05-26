@@ -1,23 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {Appbar} from 'react-native-paper';
+import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  Pressable,
-  TouchableHighlight,
   Image,
   Dimensions,
 } from 'react-native';
 import {images} from '../ImageURL';
-import * as WebBrowser from "expo-web-browser";
-import analytics from '@react-native-firebase/analytics';
+import {openSourceLink} from "../util/common";
 const Height = Dimensions.get('window').height;
 const Width = Dimensions.get('window').width;
 
@@ -101,10 +91,11 @@ const What = () => {
 
       <Text style={{fontSize:14,marginTop:'5%',marginLeft:'10%', marginRight:'10%'}}>
       <Text onPress={() => {
-          WebBrowser.openBrowserAsync('https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413')
-          analytics().logEvent('Source_click',{
-              source_name: 'The beginners guide to meal planning - What to know, how to succeed, and what to skip',
-              source_url: 'https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413'
+        openSourceLink(
+          'https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413',
+          {
+            name: 'The beginners guide to meal planning - What to know, how to succeed, and what to skip',
+            url: 'https://www.thekitchn.com/the-beginners-guide-to-meal-planning-what-to-know-how-to-succeed-and-what-to-skip-242413'
           })
       }}
             style={{color:'#00ADEF'}}>Plan your meals, </Text>

@@ -1,31 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {Appbar} from 'react-native-paper';
+import React from 'react';
 import {Dimensions} from 'react-native';
-const {width, height} = Dimensions.get('screen');
-import {ImageIcon} from '../ImageIcon';
-import What from './What';
-import {createStackNavigator} from '@react-navigation/stack';
+const {width} = Dimensions.get('screen');
 import {ArrowIcon} from './ArrowIcon';
 
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
-  TouchableOpacity,
   View,
   Image,
-  Text,
-  StatusBar,
-  Linking,
-  TextInput,
-  TouchableHighlight,
-  Button,
+  Text
 } from 'react-native';
 import {images} from '../ImageURL';
-import * as WebBrowser from "expo-web-browser";
-import analytics from '@react-native-firebase/analytics';
-const Stack = createStackNavigator();
-const Width = Dimensions.get('window').width;
+import { MeatBrands } from "./MeatBrands/MeatBrands";
 const Height = Dimensions.get('window').height;
 
 const Grass = ({inputData, navigation}) => {
@@ -139,150 +124,8 @@ const Grass = ({inputData, navigation}) => {
             </Text>
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
-        <TouchableHighlight
-          onPress={() => {
-              navigation.navigate('What')
-              analytics().logEvent('What_can_I_do',{
-                  item: 'Beef - Env'
-              })
-          }}
-          activeOpacity={1}
-          underlayColor="#8DC73F"
-          style={{
-            backgroundColor: '#8DC73F',
-            height: 50,
-            borderWidth: 2,
-            borderColor: '#8DC73F',
-            borderRadius: 30,
-            width: Width*0.9,
-            textAlign: 'center',
-            fontSize: 20,
-            marginTop:'10%',
-            alignItems:'center',
-            justifyContent:'center'
-          }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold',color:'white'}}>What Can I Do?</Text>
-        </TouchableHighlight>
-        </View>
-        <View style={{flexDirection:'column',alignItems:'center',marginTop:'6%'}}>
-          <Text style={{fontSize:20,fontWeight:'bold'}}>Doing good</Text>
-          <Text style={{fontSize: 16, marginTop: 5, textAlign: 'center'}}>
-            Ranked in no particular order.{'\n'}
-            Click on these companies to see{'\n'}
-            how they're making a difference.
-          </Text>
-          <Image source={images.down_arrow} style={{width: 60, height: 60}}/>
-        </View>
-          <View style={{flexDirection: 'column', alignItems: 'center'}}>
-              <View style={{flexDirection: 'row'}}>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://impossiblefoods.com/grocery/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'IMPOSSIBLE foods'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.impossible} />
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.beyondmeat.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'BEYOND MEAT'
-                          })
-                      }}>
-                      <Image
-                          source={images.beyond_meat}
-                          style={{width: 130, height: 130}}
-                      />
-                  </TouchableHighlight>
-              </View>
-              <View style={{flexDirection: 'row', marginTop: '5%'}}>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://lightlife.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'Lightlife'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.lightlife} />
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.hungryplanetfoods.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'HUNGRY PLANET foods'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.hungry_planet} />
-                  </TouchableHighlight>
-              </View>
-              <View style={{flexDirection: 'row', marginTop: '5%'}}>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.nextlevelburger.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'Next Level Burger'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.nextlevel} />
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.quorn.us/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'Quorn'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.quorn} />
-                  </TouchableHighlight>
-              </View>
-              <View style={{flexDirection: 'row', marginTop: '5%'}}>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.bocaburger.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'BOCA burger'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.boca} />
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                      activeOpacity={1}
-                      underlayColor="transperant"
-                      style={{width: Width / 2, alignItems: 'center'}}
-                      onPress={() => {
-                          WebBrowser.openBrowserAsync('https://www.gardein.com/');
-                          analytics().logEvent('Doing_good',{
-                              brandName: 'gardein'
-                          })
-                      }}>
-                      <ImageIcon category="brand" image={images.gardein} />
-                  </TouchableHighlight>
-              </View>
-          </View>
+
+        <MeatBrands navigation={navigation} currentTab={'Beef - Env'}/>
         <View style={{height:Height/10}}/>
       </ScrollView>
     </View>
