@@ -14,6 +14,8 @@ import firebase from "firebase";
 
 const AppStack = createStackNavigator();
 global.globalList = []
+global.currentSurpriseModal = null
+global.occupied = false
 const App = () => {
 
   const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
