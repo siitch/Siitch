@@ -96,9 +96,10 @@ export const MenuMain = ({ navigation }) => {
           width: 270
         }}
           onPress={()=>{
+            global.occupied = true
             Share.share({
               url: "https://testflight.apple.com/join/0HGzm3Xo"
-            })
+            }).then(r => {global.occupied = false})
             analytics().logEvent('Share_public_link')
           }}>
         <Text style={{fontSize: 26, fontWeight: '600', color: 'white'}}>SHARE</Text>
