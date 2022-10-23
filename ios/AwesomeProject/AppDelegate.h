@@ -6,6 +6,4 @@
 
 @interface AppDelegate : EXAppDelegateWrapper <RCTBridgeDelegate>
 
-@property (nonatomic, strong) UIWindow *window;
-
 @end
