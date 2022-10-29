@@ -30,7 +30,7 @@ import {BlurView} from "expo-blur";
 import {FloatingButton, Button} from "react-native-ui-lib";
 import CalculateContainer from "../components/CalculateContainer";
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
-import { ContextAndChallengeModal, VirtualWaterInfoModal } from "../components/Modals/Modals";
+import { CalculatorInfoModal, ContextAndChallengeModal, VirtualWaterInfoModal } from "../components/Modals/Modals";
 
 // var pages=[];
 let itemNameList = [];
@@ -131,6 +131,10 @@ function CalculateScreen() {
 
   const [itemOpenList, setItemOpenList] = useState([]);
 
+  const [calculatorInfoVisible, setCalculatorInfoVisible] = useState(false);
+  function closeCalculatorInfoModal() {
+    setCalculatorInfoVisible(false)
+  }
   const [infoVisible, setInfoVisible] = useState(false);
   function closeInfoModal() {
     setInfoVisible(false)
@@ -501,7 +505,7 @@ function CalculateScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{alignItems: 'center', marginTop: 10}}>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
           <Text
             style={{
               fontWeight: 'bold',
@@ -509,11 +513,21 @@ function CalculateScreen() {
               marginTop: '21%',
               paddingTop: 30,
               paddingLeft: '12%',
-              paddingRight: 10,
+              // paddingRight: 10,
               paddingBottom: 10,
             }}>
             Calculator
           </Text>
+          <TouchableOpacity
+            style={{marginTop: '21%', paddingTop: 22}}
+            onPress={()=>{
+              setCalculatorInfoVisible(true)
+              analytics().logEvent('Info_button_pressed',{
+                infoName: 'Calculator'
+              })
+            }}>
+            <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.rankingPage}>
@@ -1581,6 +1595,7 @@ function CalculateScreen() {
       </View>
 
       {/* Info button modal */}
+      <CalculatorInfoModal infoVisible={calculatorInfoVisible} handler={closeCalculatorInfoModal}/>
       <VirtualWaterInfoModal infoVisible={infoVisible} handler={closeInfoModal}/>
 
       {/*Running total list Export modal*/}

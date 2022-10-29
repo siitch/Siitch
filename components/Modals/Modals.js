@@ -1,11 +1,14 @@
 import {ReactNavigationOverlay} from "../ReactNavigationOverlay";
-import {Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import { Dimensions, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import itemDetailImages from "../../MLTool/ItemDetailImages/itemDetailImages";
 import {openSourceLink} from "../../util/common";
 import React from "react";
 import {styles} from "../../Comparing/Styles";
 import Profiles from "../../ImageDB";
 import { useNavigation } from "@react-navigation/native";
+import NumberTicker from "../NumberTicker";
+
+let deviceWidth = Dimensions.get('screen').width
 
 const CloseModalCross = ({handler}) => {
   return (
@@ -60,6 +63,85 @@ export const VirtualWaterInfoModal = ({infoVisible, handler}) => {
                 }}
                 style={{color: '#00ADEF'}}> Sources & Resources</Text> page.
             </Text>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  )
+}
+
+// Modals of Calculator Tool
+export const CalculatorInfoModal = ({infoVisible, handler}) => {
+  return (
+    <Modal animationType="slide" transparent={true} visible={infoVisible}>
+      {infoVisible && <ReactNavigationOverlay/>}
+      <View
+        style={modalStyle.virtualWaterInfoModalContainer}>
+        <View style={modalStyle.virtualWaterInfoModalContent}>
+          <CloseModalCross handler={handler}/>
+          <View style={{
+            marginTop: 20,
+            marginHorizontal: 15,
+            marginBottom: 5,
+            paddingVertical: 15,
+            paddingHorizontal: 7,
+            alignItems: 'center',
+          }}>
+            <Text>
+              Why do we show quantities up to 5,000 units? Professional and Corporate Chefs, restaurants and big
+              companies order in bulk.
+              {'\n\n'}
+              For example, if they feed 2,000 people breakfast and lunch every day, they’ll often order 2,500 pounds of
+              chicken every week. That’s 1.259 million gallons (4.76 million liters) of virtual water, in chicken,
+              every week. Or just under 2 Olympic sized swimming pools of water.
+            </Text>
+
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 25}}>
+              <Image style={{height: 56, width: 56}} source={Profiles.Chicken} resizeMode='contain' />
+              <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 16}}>
+                2,500 lbs of chicken:
+                {'\n'}
+                (1,134 kilograms)
+              </Text>
+            </View>
+
+            <View style={{flexDirection: 'row', alignItems: 'flex-start', marginTop: -5}}>
+              <Text style={{fontSize: 40, fontWeight: 'bold'}}>
+                =
+              </Text>
+              <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 16, marginTop: 17}}>
+                2 Olympic size swimming pools
+                {'\n'}
+                of virtual water
+              </Text>
+            </View>
+
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 16}}>
+              <View style={{
+                height: deviceWidth * 0.35,
+                width: deviceWidth * 0.6
+              }}>
+                <Image
+                  source={require('../../images2/660000Gal.jpeg')}
+                  style={[modalStyle.containerImage, {height: deviceWidth * 0.35, width: deviceWidth * 0.6}]}/>
+                <Text style={modalStyle.imageContext}>660,000 gal. (2.5 mil L.){'\n'}Olympic pool</Text>
+              </View>
+              <Text style={[modalStyle.timesMark, {color: 'black'}]}> &times; </Text>
+              <NumberTicker
+                style={{marginBottom: 5}}
+                number={2}
+                textSize={30}
+                duration={1000}
+                textStyle={{fontWeight: 'bold', color: 'black'}}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={{ ...styles.openButton, backgroundColor: "#70BF41", marginTop: 50 }}
+              onPress={() => handler()}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -524,6 +606,20 @@ const modalStyle = StyleSheet.create({
     marginBottom: 15,
     marginTop: 15,
     textAlign: 'left',
+  },
+
+  containerImage: {
+    borderRadius: 20,
+    resizeMode: 'cover'
+  },
+  imageContext: {
+    textAlign: 'center',
+    fontWeight: '500',
+    fontSize: 16
+  },
+  timesMark: {
+    fontWeight: 'bold',
+    fontSize: 20
   },
 
   contextAndChallengeModalContainer: {
