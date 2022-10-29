@@ -861,76 +861,6 @@ function CalculateScreen() {
             <View>
               <TouchableOpacity
                 onPress={() => {
-                  computed ? clearElement() : calculate();
-                  // calculate(item,frequency);
-                }}
-                style={{
-                  padding: 15,
-                  borderRadius: 30,
-                  backgroundColor: 'orange',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <View style={{alignItems: 'center'}}>
-                  <Text
-                    style={{
-                      textAlign: 'center',
-                      width: computed ? 90 : DeviceWidth * 0.4,
-                      fontWeight: 'bold',
-                      fontSize: 20,
-                      color: 'white',
-                      alignItems: 'center',
-                    }}>
-                    Clear
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {computed && !showAnotherRunningtotal && (
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  setContext(false)
-                  setModalVisible(true)
-                  analytics().logEvent('Challenge_pressed')
-                }}
-                style={{
-                  padding: 15,
-                  borderRadius: 30,
-                  marginLeft: 10,
-                  backgroundColor: '#29A3FE',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <View style={{alignItems: 'center'}}>
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      fontSize: 20,
-                      color: 'white',
-                      alignItems: 'center',
-                    }}>
-                    Challenge
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: selectOpened ? 20 : 20,
-            marginBottom: 20,
-          }}>
-          {computed && !showAnotherRunningtotal && (
-            <View>
-              <TouchableOpacity
-                onPress={() => {
                   setContext(true)
                   setModalVisible(true)
                   analytics().logEvent('Context_pressed')
@@ -938,7 +868,6 @@ function CalculateScreen() {
                 style={{
                   padding: 15,
                   borderRadius: 30,
-                  marginLeft: 10,
                   backgroundColor: '#404040',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -957,6 +886,7 @@ function CalculateScreen() {
               </TouchableOpacity>
             </View>
           )}
+
           {computed && !showAnotherRunningtotal && (
             <View>
               <TouchableOpacity
@@ -964,46 +894,46 @@ function CalculateScreen() {
                   if(!nonWater){
                     setShowlist(true);
 
-                  setComputed(false);
-                  selectedItem.push(item);
+                    setComputed(false);
+                    selectedItem.push(item);
 
-                  //Add those
-                  itemNameList.push(itemName);
-                  itemMeasurementListG.push(itemMeasurementG);
-                  itemMeasurementListL.push(itemMeasurementL);
-                  itemIndividualUnitListL.push(itemIndividualUnitL);
-                  itemIndividualUnitListG.push(itemIndividualUnitG);
-                  itemFrequencyList.push(frequency);
-                  itemQuantityList.push(quantity);
-                  itemCostList.push(itemCost);
-                  itemCostLList.push(itemCostL);
+                    //Add those
+                    itemNameList.push(itemName);
+                    itemMeasurementListG.push(itemMeasurementG);
+                    itemMeasurementListL.push(itemMeasurementL);
+                    itemIndividualUnitListL.push(itemIndividualUnitL);
+                    itemIndividualUnitListG.push(itemIndividualUnitG);
+                    itemFrequencyList.push(frequency);
+                    itemQuantityList.push(quantity);
+                    itemCostList.push(itemCost);
+                    itemCostLList.push(itemCostL);
 
-                  itemYearlyCost = itemCost * frequency_values[frequency]*Quantity_values[quantity];
-                  itemYearlyLCost = itemCostL * frequency_values[frequency]*Quantity_values[quantity];
-                  itemYearlyCostList.push(itemYearlyCost);
-                  itemYearlyLCostList.push(itemYearlyLCost);
-                  itemOpenList.push(false);
-                  setYearlyCostTotal(yearlyCostTotal+itemYearlyCost);
-                  setYearlyCostLTotal(yearlyCostLTotal+itemYearlyLCost);
-                  setMixCostTotal(mixCostTotal+itemCost*Quantity_values[quantity]);
-                  setMixCostLTotal(mixCostLTotal+itemCostL*Quantity_values[quantity]);
-                  setItem('');
-                  setFrequency(null)
-                  setQuantity(null)
-                  clickToScroll();
-                  // console.log("---------")
-                  // console.log("itemCost",itemCost)
-                  // console.log("itemQuantity",quantity)
-                  // console.log("itemFrequency",frequency)
-                  // console.log("itemNameList",itemNameList)
-                  // console.log("itemQuantityList",itemQuantityList)
-                  // console.log("itemFrequencyList",itemFrequencyList)
-                  // console.log("itemCostList",itemCostList)
-                  // console.log("itemYearlyCostList",itemYearlyCostList)
-                  // console.log("itemYearlyCost",itemYearlyCost)
-                  // console.log("yearlyCostTotal",yearlyCostTotal)
-                  // console.log("mixCostTotal",mixCostTotal)
-                  upgradePages();
+                    itemYearlyCost = itemCost * frequency_values[frequency]*quantity;
+                    itemYearlyLCost = itemCostL * frequency_values[frequency]*quantity;
+                    itemYearlyCostList.push(itemYearlyCost);
+                    itemYearlyLCostList.push(itemYearlyLCost);
+                    itemOpenList.push(false);
+                    setYearlyCostTotal(yearlyCostTotal+itemYearlyCost);
+                    setYearlyCostLTotal(yearlyCostLTotal+itemYearlyLCost);
+                    setMixCostTotal(mixCostTotal+itemCost*quantity);
+                    setMixCostLTotal(mixCostLTotal+itemCostL*quantity);
+                    setItem('');
+                    setFrequency(null)
+                    setQuantity(null)
+                    clickToScroll();
+                    // console.log("---------")
+                    // console.log("itemCost",itemCost)
+                    // console.log("itemQuantity",quantity)
+                    // console.log("itemFrequency",frequency)
+                    // console.log("itemNameList",itemNameList)
+                    // console.log("itemQuantityList",itemQuantityList)
+                    // console.log("itemFrequencyList",itemFrequencyList)
+                    // console.log("itemCostList",itemCostList)
+                    // console.log("itemYearlyCostList",itemYearlyCostList)
+                    // console.log("itemYearlyCost",itemYearlyCost)
+                    // console.log("yearlyCostTotal",yearlyCostTotal)
+                    // console.log("mixCostTotal",mixCostTotal)
+                    upgradePages();
                   } else {
                     setItem('');
                     setFrequency(null)
@@ -1032,6 +962,76 @@ function CalculateScreen() {
                       alignItems: 'center',
                     }}>
                     Add to Running Total
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: selectOpened ? 20 : 20,
+            marginBottom: 20,
+          }}>
+          {computed && !showAnotherRunningtotal && (
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  computed ? clearElement() : calculate();
+                  // calculate(item,frequency);
+                }}
+                style={{
+                  padding: 15,
+                  borderRadius: 30,
+                  marginLeft: 12,
+                  backgroundColor: 'orange',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      width: computed ? 90 : DeviceWidth * 0.4,
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                    }}>
+                    Clear
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+          {computed && !showAnotherRunningtotal && (
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  setContext(false)
+                  setModalVisible(true)
+                  analytics().logEvent('Challenge_pressed')
+                }}
+                style={{
+                  padding: 15,
+                  borderRadius: 30,
+                  marginLeft: 10,
+                  backgroundColor: '#29A3FE',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View style={{alignItems: 'center'}}>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                      color: 'white',
+                      alignItems: 'center',
+                    }}>
+                    Challenge
                   </Text>
                 </View>
               </TouchableOpacity>
