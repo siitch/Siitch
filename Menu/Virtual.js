@@ -80,10 +80,10 @@ export const Virtual = () => {
           marginRight: '7%',
         }}>
         Simply put, virtual water is the volume of water used to
-        produce consumer products. It’s complicated, but in basic terms,
-        green water is rain water; blue water is irrigated water
-        (water from aquifers, lakes, rivers); and gray water is water
-        required to clean pollutants in the production process.
+        produce consumer products. Green water is rain water; blue
+        water is irrigated water (water from aquifers, lakes, rivers);
+        and gray water is water required to clean pollutants in the
+        production process.
         {'\n'}{'\n'}
         Here’s a great site if you want to learn more.
       </Text>
