@@ -1,23 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {StyleSheet, Image, Text, View, Dimensions} from "react-native";
 import NumberTicker from "./NumberTicker";
+import {WaterContainerCounterNumberFormatter} from "../Calculate/NumberFormatter";
 
 let deviceWidth = Dimensions.get('screen').width
 
-export default function CalculateContainer ({impactUnit, yearlyCostTotal}) {
-  const [cost, setCost] = useState(yearlyCostTotal)
+export default function CalculateContainer ({numberCost}) {
+  const [cost, setCost] = useState(numberCost)
   useEffect(() => {
-    switch (impactUnit) {
-      case 'yearly':
-        return setCost(yearlyCostTotal)
-      case 'monthly':
-        return setCost(~~(yearlyCostTotal/12))
-      case 'weekly':
-        return setCost(~~(yearlyCostTotal/365)*7)
-      case 'daily':
-        return setCost(~~(yearlyCostTotal/365))
-    }
-  },[impactUnit, yearlyCostTotal])
+    setCost(numberCost);
+  },[numberCost]);
 
   return (
     <Counter cost={cost}/>
@@ -100,7 +92,6 @@ function Counter ({cost}) {
       <View style={{
         height: containerType.size.height,
         width: containerType.size.width,
-        //marginLeft: (deviceWidth - containerType.size.width) / 2
       }}>
         <Image
           source={containerType.image}
@@ -109,9 +100,10 @@ function Counter ({cost}) {
       </View>
       <Text style={[styles.timesMark, {color: color}]}> &times; </Text>
       <NumberTicker
-        number={(cost / containerType.metric).toFixed(1)}
-        textSize={30}
+        number={WaterContainerCounterNumberFormatter(cost / containerType.metric, 1)}
+        textSize={25}
         duration={1500}
+        style={{marginBottom: 7}}
         textStyle={{fontWeight: 'bold', color: color}}
       />
     </View>
@@ -123,7 +115,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 45,
   },
   fillUpText: {
     fontSize: 20,

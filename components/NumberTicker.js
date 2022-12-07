@@ -3,12 +3,20 @@ import {Animated, Easing, StyleSheet, Text, View} from "react-native";
 import PropTypes from "prop-types";
 
 const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
-
+  let unit = '';
+  if (number.length > 1) {
+    unit = number.slice(-1);
+  }
   const mapToDigits = () => {
+    if (unit !== '' && isNaN(unit)) {
+      number = number.substring(0, number.length - 2);
+    } else {
+      unit = '';
+    }
     return (number + '').split('').map((data, index) => {
       if (data === '.' || data === ',') {
         return (
-          <Text key={data} style={[textStyle, {fontSize: textSize}]}>{data}</Text>
+          <Text key={index} style={[textStyle, {fontSize: textSize, height: textSize}]}>{data}</Text>
         );
       }
       return (
@@ -24,10 +32,23 @@ const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
   };
 
   return (
-    <View style={style}>
+    <View style={{
+      ...style,
+      flexDirection: 'row',
+      alignItems: 'center',
+    }}>
       <View style={{flexDirection: 'row'}}>
         {mapToDigits()}
       </View>
+      {unit !== '' && (
+        <Text style={{
+          ...textStyle,
+          height: textSize,
+          fontSize: textSize
+        }}>
+          {' ' + unit}
+        </Text>
+      )}
     </View>
   );
 };
@@ -134,6 +155,7 @@ const generateStyles = (textSize) => StyleSheet.create({
   text: {
     fontSize: textSize,
     lineHeight: textSize,
+    textAlign: 'center',
   },
 });
 

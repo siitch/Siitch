@@ -72,6 +72,7 @@ export const VirtualWaterInfoModal = ({infoVisible, handler}) => {
 
 // Modals of Calculator Tool
 export const CalculatorInfoModal = ({infoVisible, handler}) => {
+  const navigation = useNavigation();
   return (
     <Modal animationType="slide" transparent={true} visible={infoVisible}>
       {infoVisible && <ReactNavigationOverlay/>}
@@ -81,65 +82,66 @@ export const CalculatorInfoModal = ({infoVisible, handler}) => {
           <CloseModalCross handler={handler}/>
           <View style={{
             marginTop: 20,
-            marginHorizontal: 15,
+            marginHorizontal: 10,
             marginBottom: 5,
             paddingVertical: 15,
-            paddingHorizontal: 7,
+            paddingHorizontal: 5,
             alignItems: 'center',
           }}>
-            <Text>
-              Why do we show quantities up to 5,000 units? Professional and Corporate Chefs, restaurants and big
-              companies order in bulk.
+            <Text
+              style={{
+                fontSize: 22,
+                fontWeight: '600',
+                marginTop: 10,
+                marginBottom: 20
+              }}>
+              PLAY WITH QUANTITIES
+            </Text>
+            <Text style={{fontSize: 17}}>
+              Imagine you’re a Corporate Chef. If you feed 2,000 people every day, you’ll need to buy 2,500 pounds of chicken EVERY WEEK!
               {'\n\n'}
-              For example, if they feed 2,000 people breakfast and lunch every day, they’ll often order 2,500 pounds of
-              chicken every week. That’s 1.259 million gallons (4.76 million liters) of virtual water, in chicken,
-              every week. Or just under 2 Olympic sized swimming pools of water.
+              That’s the equivalent of two Olympic swimming pools of virtual water.
+              {'\n'}
+              What is virtual water? Click
+              <Text
+                onPress={() => {
+                  navigation.navigate('Virtual Water')
+                  handler()
+                }}
+                style={{color: '#00ADEF', fontWeight: '600'}}> here</Text> to learn more.
             </Text>
 
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 25}}>
-              <Image style={{height: 56, width: 56}} source={Profiles.Chicken} resizeMode='contain' />
-              <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 16}}>
-                2,500 lbs of chicken:
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 0}}>
+              <Text style={{textAlign: 'center', fontWeight: '600', fontSize: 22}}>
+                2,500 pounds
                 {'\n'}
-                (1,134 kilograms)
+                of chicken
               </Text>
+              <Image
+                style={{height: 122, width: 122, marginHorizontal: -10}}
+                source={require('../../images2/chicken_cartoon.png')}
+                resizeMode='contain' />
             </View>
 
             <View style={{flexDirection: 'row', alignItems: 'flex-start', marginTop: -5}}>
-              <Text style={{fontSize: 40, fontWeight: 'bold'}}>
-                =
-              </Text>
-              <Text style={{textAlign: 'center', fontWeight: '500', fontSize: 16, marginTop: 17}}>
-                2 Olympic size swimming pools
+
+              <Text style={{textAlign: 'center', fontWeight: '600', fontSize: 16, marginTop: 17}}>
+                = 2 Olympic swimming pools
                 {'\n'}
                 of virtual water
               </Text>
             </View>
-
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 16}}>
-              <View style={{
-                height: deviceWidth * 0.35,
-                width: deviceWidth * 0.6
-              }}>
-                <Image
-                  source={require('../../images2/660000Gal.jpeg')}
-                  style={[modalStyle.containerImage, {height: deviceWidth * 0.35, width: deviceWidth * 0.6}]}/>
-                <Text style={modalStyle.imageContext}>660,000 gal. (2.5 mil L.){'\n'}Olympic pool</Text>
-              </View>
-              <Text style={[modalStyle.timesMark, {color: 'black'}]}> &times; </Text>
-              <NumberTicker
-                style={{marginBottom: 5}}
-                number={2}
-                textSize={30}
-                duration={1000}
-                textStyle={{fontWeight: 'bold', color: 'black'}}
-              />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{height: 111, width: 153}}
+                source={require('../../images2/Olympic_pool_cartoon.png')}/>
+              <Image
+                style={{height: 111, width: 153}}
+                source={require('../../images2/Olympic_pool_cartoon.png')}/>
             </View>
-
             <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: "#70BF41", marginTop: 50 }}
-              onPress={() => handler()}
-            >
+              style={{ ...styles.openButton, backgroundColor: "#70BF41"}}
+              onPress={() => handler()}>
               <Text style={{ color: 'white', fontWeight: 'bold' }}>Close</Text>
             </TouchableOpacity>
           </View>
