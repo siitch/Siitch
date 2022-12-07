@@ -1,8 +1,4 @@
 import React, {useEffect, useState} from "react";
-// Tensorflow.js
-import * as tf from "@tensorflow/tfjs";
-// Used to import .bin model file
-import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 import { // Native components
   Alert,
   Dimensions, Image,
@@ -37,6 +33,7 @@ import analytics from '@react-native-firebase/analytics';
 import * as FileSystem from 'expo-file-system';
 import sloth from "../images/sloth.png"
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
+import {Asset} from "expo-asset";
 
 function CameraView() {
   const navigation = useNavigation();
@@ -84,12 +81,10 @@ function CameraView() {
   }
 
   async function prepareModal() {
-    // Initialize tensorflow.js
-    await tf.ready()
-    // Load our model from resource folder
-    const model = require("./Siitch_model/model.json");
-    const weights = require("./Siitch_model/group1-shard1of1.bin");
-    global.siitchmodel = await tf.loadGraphModel(bundleResourceIO(model, weights))
+    // Initialize tensorflow lite
+    const modelAsset = Asset.fromModule(require('./Siitch_model/siitch_model.tflite'))
+    if (!modelAsset.downloaded) { await modelAsset.downloadAsync() }
+    global.tfliteModel = modelAsset;
   }
 
   useEffect(() => {

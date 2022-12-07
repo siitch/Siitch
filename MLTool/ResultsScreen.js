@@ -1,7 +1,6 @@
 import {
   ActivityIndicator,
   Dimensions,
-  Image,
   ImageBackground,
   Modal,
   SafeAreaView,
@@ -12,8 +11,6 @@ import React, {useEffect, useState} from 'react';
 // Great button with flexible config
 import {Button as MaterialButton} from 'react-native-paper';
 // Used for image preparation
-import * as jpeg from 'jpeg-js';
-import * as tf from '@tensorflow/tfjs';
 import * as ImageManipulator from 'expo-image-manipulator';
 // Used to map index results to item names
 import {CLASSES} from './Siitch_model/class_names';
@@ -27,6 +24,7 @@ import analytics from '@react-native-firebase/analytics';
 import * as FileSystem from 'expo-file-system';
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import { useNavigation } from "@react-navigation/native";
+import TensorflowLite from "@switt/react-native-tensorflow-lite";
 
 export default function ResultsScreen({route}) {
   const navigation = useNavigation();
@@ -201,39 +199,25 @@ export default function ResultsScreen({route}) {
         },
       ]);
 
-      // Pass the edited image to next function
-      const source = {uri: manipResponse.uri};
-      await classifyImageAsync(source);
-      await FileSystem.deleteAsync(manipResponse.uri)
+      await classifyImageAsync(manipResponse);
     } catch (error) {
-      console.log('Image error: ', error);
+      console.log('Image processing error: ', error);
     }
   };
 
   const classifyImageAsync = async source => {
     try {
-      // Get the image from ClassifyAsync and turn it into tensor
-      const imageAssetPath = Image.resolveAssetSource(source);
-      const fileUri = imageAssetPath.uri;
-      const imgB64 = await FileSystem.readAsStringAsync(fileUri, {
-        encoding: FileSystem.EncodingType.Base64,
+      const result = await TensorflowLite.runModelWithFiles({
+        model: tfliteModel.localUri,
+        files: [source.uri],
       });
-      const imgBuffer = tf.util.encodeString(imgB64, 'base64').buffer;
-      const raw = new Uint8Array(imgBuffer);
-      const imageTensor = imageToTensor(raw);
-
-      // Get prediction results from our model
-      const newPredictions = await siitchmodel.predict(imageTensor);
-
-      // Confidence for all items the model can identify
-      const values = newPredictions.dataSync();
-      // Used for debug
-      //console.log(values)
+      // [[{"data": [Array], "shape": [Array]}]]
+      // console.log(result[0][0].data)
 
       // Get the top three results
       let predictionList = [];
-      for (let i = 0; i < values.length; i++) {
-        predictionList.push({value: values[i], index: i});
+      for (let i = 0; i < result[0][0].data.length; i++) {
+        predictionList.push({value: result[0][0].data[i], index: i});
       }
       predictionList = predictionList
         .sort((a, b) => {
@@ -261,37 +245,6 @@ export default function ResultsScreen({route}) {
         error,
       );
     }
-  };
-
-  // Tensor preparation
-  const imageToTensor = rawImageData => {
-    const {width, height, data} = jpeg.decode(rawImageData, {
-      useTArray: true,
-    }); // return as Uint8Array
-
-    // Drop the alpha channel info for mobilenet
-    const buffer = new Uint8Array(width * height * 3);
-    let offset = 0; // offset into original data
-    for (let i = 0; i < buffer.length; i += 3) {
-      buffer[i] = data[offset];
-      buffer[i + 1] = data[offset + 1];
-      buffer[i + 2] = data[offset + 2];
-
-      offset += 4;
-    }
-
-    // Resize image to fit model requirements
-    const img = tf.tensor3d(buffer, [height, width, 3]);
-    const resized_img = tf.image.resizeBilinear(img, [224, 224]);
-
-    // add a fourth batch dimension to the tensor
-    const expanded_img = resized_img.expandDims(0);
-
-    // normalise the rgb values to -1-+1
-    return expanded_img
-      .toFloat()
-      .div(tf.scalar(255))
-      .sub(tf.scalar(0));
   };
 
   return (
