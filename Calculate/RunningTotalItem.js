@@ -324,8 +324,8 @@ export default function RunningTotalItem (
               maxWidth: DeviceWidth / 4,
             }}>
               {unit === 'G' ?
-                NumberFormatter(itemWaterInGallon * quantity, 2) :
-                NumberFormatter(itemWaterInLiter * quantity, 2)}
+                NumberFormatter(itemWaterInGallon * quantity, 1) :
+                NumberFormatter(itemWaterInLiter * quantity, 1)}
             </Text>
             <TouchableOpacity onPress={() => removeItemFromRunningTotalList(itemIndex)}>
               <Image
