@@ -15,7 +15,7 @@ const Width = width;
 export const Feedback = ({ navigation }) => {
     return (
       <WebView
-        source={{ uri: 'https://docs.google.com/forms/d/e/1FAIpQLSfXTM0QORW9VGi7KE6bgNpNM8SGZgzsYu3YS1wZdi0oL6S-4A/viewform?vc=0&c=0&w=1&flr=0' }}
+        source={{ uri: 'https://docs.google.com/forms/d/e/1FAIpQLSeqChRf7XP46G5Dm6fvXrRUS7ucKI140yyTp_CBBxkElXss5g/viewform?usp=sf_link' }}
     />
     );
   }
