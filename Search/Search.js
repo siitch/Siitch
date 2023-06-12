@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import firebase from 'firebase';
+import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import {useState, useEffect} from 'react';
 import * as React from 'react';
 import {Searchbar} from 'react-native-paper';
@@ -32,19 +32,6 @@ const Search = ({searchData}) => {
   var itemArr = [];
   let itemsList = [];
 
-  var config = {
-    apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
-    authDomain: 'siitch-6b176.firebaseapp.com',
-    databaseURL: 'https://siitch-6b176.firebaseio.com',
-    projectId: 'siitch-6b176',
-    storageBucket: 'siitch-6b176.appspot.com',
-    messagingSenderId: '282599031511',
-    appId: '1:282599031511:web:bb4f5ca5c385550d8ee692',
-    measurementId: 'G-13MVLQ6ZPF',
-  };
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
   const toDatabase = () => {
     if (keyword === '') {
       return;
@@ -56,26 +43,23 @@ const Search = ({searchData}) => {
     }
   };
   const readData = image => {
-    firebase
-        .database()
-        .ref(image)
-        .on('value', get => {
-              if (image === 'Beef' || image === 'Jeans' || image === 'Makeup'){
-                navigation.navigate('Search', {name: image, value: get.val()})
-              } else if (get.val() === null) {
-                Alert.alert('Error!', "Can't find result for this keyword")
-              } else {
-                navigation.navigate('Detail', {itemName: image})
-              }
-            }
-            //   get.val() === null && image !== 'Makeup' ? (
-            //     <View>
-            //       {Alert.alert('Error!', "Can't find result for this keyword")}
-            //     </View>
-            //   ) : (
-            //     navigation.navigate('Search', {name: image, value: get.val()})
-            //   ),
-        );
+    const searchRef = ref(FirebaseRealtimeDatabase, image);
+    onValue(searchRef, (get) => {
+      if (image === 'Beef' || image === 'Jeans' || image === 'Makeup'){
+        navigation.navigate('Search', {name: image, value: get.val()})
+      } else if (get.val() === null) {
+        Alert.alert('Error!', "Can't find result for this keyword")
+      } else {
+        navigation.navigate('Detail', {itemName: image})
+      }
+      //   get.val() === null && image !== 'Makeup' ? (
+      //     <View>
+      //       {Alert.alert('Error!', "Can't find result for this keyword")}
+      //     </View>
+      //   ) : (
+      //     navigation.navigate('Search', {name: image, value: get.val()})
+      //   ),
+    });
   };
   useEffect(() => {
     let index = 0;

@@ -15,7 +15,7 @@ import * as ImageManipulator from 'expo-image-manipulator';
 // Used to map index results to item names
 import {CLASSES} from './Siitch_model/class_names';
 // Used to get item category from itemName
-import firebase from 'firebase';
+import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 // For category images, if needed
 import Profiles from '../ImageDB.js';
 // Firebase analytics
@@ -53,23 +53,6 @@ export default function ResultsScreen({route}) {
     CorpY = 0;
   }
 
-  // Setting up firebase to get item category from itemName
-  // When we finish our development, we can remove all the scattered connection init and only do it once
-  // when user opens the app
-  const config = {
-    apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
-    authDomain: 'siitch-6b176.firebaseapp.com',
-    databaseURL: 'https://siitch-6b176.firebaseio.com',
-    projectId: 'siitch-6b176',
-    storageBucket: 'siitch-6b176.appspot.com',
-    messagingSenderId: '282599031511',
-    appId: '1:282599031511:web:bb4f5ca5c385550d8ee692',
-    measurementId: 'G-13MVLQ6ZPF',
-  };
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
-
   useEffect(() => {
     // Only one thing to do, predict!
     ClassifyAsync();
@@ -88,33 +71,31 @@ export default function ResultsScreen({route}) {
   const ChooseCategory = async () => {
     // Set the category state to the category of the most likely item...
     if (predictions) {
-      firebase
-        .database()
-        .ref(predictions[0].label)
-        .on('value', function(get) {
-          if (get.val() === null && predictions[0].label !== 'Makeup') {
-            alert('No info for ' + predictions[0].label + ' now');
-            console.log('No info for this item');
-          } else {
-            const itemObj = get.val();
-            // Give higher priority to more specific categories
-            if (itemObj['Category 3']) {
-              if (Math.random() > 0.4) {
-                setCategory(itemObj['Category 3']);
-              } else {
-                setCategory(itemObj['Category']);
-              }
-            } else if (itemObj['Category 2']) {
-              if (Math.random() > 0.1) {
-                setCategory(itemObj['Category 2']);
-              } else {
-                setCategory(itemObj['Category']);
-              }
+      const getPredictionItemsRef = ref(FirebaseRealtimeDatabase, predictions[0].label);
+      onValue(getPredictionItemsRef, function(get) {
+        if (get.val() === null && predictions[0].label !== 'Makeup') {
+          alert('No info for ' + predictions[0].label + ' now');
+          console.log('No info for this item');
+        } else {
+          const itemObj = get.val();
+          // Give higher priority to more specific categories
+          if (itemObj['Category 3']) {
+            if (Math.random() > 0.4) {
+              setCategory(itemObj['Category 3']);
             } else {
               setCategory(itemObj['Category']);
             }
+          } else if (itemObj['Category 2']) {
+            if (Math.random() > 0.1) {
+              setCategory(itemObj['Category 2']);
+            } else {
+              setCategory(itemObj['Category']);
+            }
+          } else {
+            setCategory(itemObj['Category']);
           }
-        });
+        }
+      });
     }
   };
 

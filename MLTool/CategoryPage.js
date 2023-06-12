@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import { FirebaseRealtimeDatabase, ref, onValue } from "../Firebase/firebase";
 import {useEffect, useState} from "react";
 import { useNavigation } from '@react-navigation/native';
 import * as React from "react";
@@ -25,19 +25,17 @@ export const CategoryPage = ( {category} ) => {
 
     // Firebase is already connected in Catalogue.js, no need to initialize again
     const fetchData = async () => {
-        await firebase
-            .database()
-            .ref('/')
-            .once('value', data => {
-                fetchedData = data.val();
-                for (const item in fetchedData) {
-                    if ((fetchedData[item]["Category"] === category ||
-                        fetchedData[item]["Category 2"] === category ||
-                        fetchedData[item]["Category 3"] === category)) {
-                        itemsList.push(item);
-                    }
+        const fetchDataRef = ref(FirebaseRealtimeDatabase, '/');
+        await onValue(fetchDataRef, (data) => {
+            fetchedData = data.val();
+            for (const item in fetchedData) {
+                if ((fetchedData[item]["Category"] === category ||
+                  fetchedData[item]["Category 2"] === category ||
+                  fetchedData[item]["Category 3"] === category)) {
+                    itemsList.push(item);
                 }
-            });
+            }
+        });
         let index = 0;
         let arr;
         for (let i = index; i < itemsList.length; i++) {

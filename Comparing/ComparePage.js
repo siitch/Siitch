@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import firebase from "firebase";
+import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import {
   Dimensions,
   Image,
@@ -41,38 +41,36 @@ export default function ComparePage ({route}) {
   useEffect(() => {
     parentList = []
     for (let item in itemsArray) {
-      firebase
-        .database()
-        .ref('/' + itemsArray[item])
-        .once('value', data => {
-          let info = data.val()
-          items.push({
-            name: itemsArray[item],
-            info: info
-          })
-          parentList.push({
-            name: itemsArray[item],
-            currentTotal: 0,
-            metric: setMetric(info),
-            'Single item   Gal': setMetric(info) === 'Time to decompose' ? '-': info['Single item   Gal'],
-            'Global Gallon p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Gallon p lb'],
-            'Single item   L': setMetric(info) === 'Time to decompose' ? '-': info['Single item   L'],
-            'Global Liters p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Liters p kg'],
-            'Global Imperial Blue Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Blue Gal p lb'],
-            'Global Imperial Green Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Green Gal p lb'],
-            'Global Imperial Gray Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Gray Gal p lb'],
-            'Global Blue L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Blue L p kg'],
-            'Global Green L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Green L p kg'],
-            'Global Gray L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Gray L p kg'],
-            'Notes to appear': info['Notes to appear']
-          })
-        }).then((r) => {
+      const getItemRef = ref(FirebaseRealtimeDatabase, '/' + itemsArray[item]);
+      onValue(getItemRef, (data) => {
+        let info = data.val();
+        items.push({
+          name: itemsArray[item],
+          info: info
+        });
+        parentList.push({
+          name: itemsArray[item],
+          currentTotal: 0,
+          metric: setMetric(info),
+          'Single item   Gal': setMetric(info) === 'Time to decompose' ? '-': info['Single item   Gal'],
+          'Global Gallon p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Gallon p lb'],
+          'Single item   L': setMetric(info) === 'Time to decompose' ? '-': info['Single item   L'],
+          'Global Liters p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Liters p kg'],
+          'Global Imperial Blue Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Blue Gal p lb'],
+          'Global Imperial Green Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Green Gal p lb'],
+          'Global Imperial Gray Gal p lb': setMetric(info) === 'Time to decompose' ? '-': info['Global Imperial Gray Gal p lb'],
+          'Global Blue L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Blue L p kg'],
+          'Global Green L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Green L p kg'],
+          'Global Gray L p kg': setMetric(info) === 'Time to decompose' ? '-': info['Global Gray L p kg'],
+          'Notes to appear': info['Notes to appear']
+        });
+
         counter++
         if (counter === itemsArray.length){
-          initList()
+          initList();
           setBreakdownInfo(parentList)
         }
-      })
+      });
     }
   },[])
   function initList() {

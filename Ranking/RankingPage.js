@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { styles } from './Styles';
 import { RankingItem } from './RankingItem';
-import firebase from 'firebase';
+import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import {RankingInfoModal, RankingLearnMore} from "../components/Modals/Modals";
@@ -61,17 +61,6 @@ export const RankingPage = ({category, id}) => {
 
   const parameter = waterParameter();
 
-  const config = {
-    apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
-    authDomain: 'siitch-6b176.firebaseapp.com',
-    databaseURL: 'https://siitch-6b176.firebaseio.com',
-    projectId: 'siitch-6b176',
-    storageBucket: 'siitch-6b176.appspot.com',
-    messagingSenderId: '282599031511',
-    appId: '1:282599031511:web:bb4f5ca5c385550d8ee692',
-    measurementId: 'G-13MVLQ6ZPF',
-  };
-
   const processDatabaseValue = (value) => {
     if(typeof value === 'string') {
       return value.replace(',', '');
@@ -82,41 +71,35 @@ export const RankingPage = ({category, id}) => {
   }
 
   const fetchData = () => {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
-    }
+    const getDataRef = ref(FirebaseRealtimeDatabase, '/');
+    onValue(getDataRef, (data) => {
+      fetchedData = data.val();
+      for (let item in fetchedData) {
+        if((fetchedData[item]["Category"] === id || fetchedData[item]["Category 2"] === id || fetchedData[item]["Category 3"] === id) && fetchedData[item][parameter]) {
+          items[item] = fetchedData[item];
+        }
+      }
 
-    firebase
-      .database()
-      .ref('/')
-      .once('value', data => {
-        fetchedData = data.val();
-        for (let item in fetchedData) {
-          if((fetchedData[item]["Category"] === id || fetchedData[item]["Category 2"] === id || fetchedData[item]["Category 3"] === id) && fetchedData[item][parameter]) {
-            items[item] = fetchedData[item];
-          }
+      sortable = [];
+
+      if(Object.keys(items).length > 0) {
+        for (let item in items) {
+          sortable.push([item, processDatabaseValue(items[item][parameter]), (unit === 'G' ? items[item]["Display Unit Imperial"] : items[item]["Display Unit Metric"])]);
         }
 
-        sortable = [];
+        sortable.sort(function(a, b) {
+          return parseInt(a[1]) - parseInt(b[1]);
+        });
 
-        if(Object.keys(items).length > 0) {
-          for (let item in items) {
-            sortable.push([item, processDatabaseValue(items[item][parameter]), (unit === 'G' ? items[item]["Display Unit Imperial"] : items[item]["Display Unit Metric"])]);
-          }
+        min = parseInt(sortable[0][1]);
 
-          sortable.sort(function(a, b) {
-            return parseInt(a[1]) - parseInt(b[1]);
-          });
+        sortable.reverse();
 
-          min = parseInt(sortable[0][1]);
+        max = parseInt(sortable[0][1]);
 
-          sortable.reverse();
-
-          max = parseInt(sortable[0][1]);
-
-          handleFetch(true);
-        }
-      });
+        handleFetch(true);
+      }
+    });
   }
 
   if(!fetched) {

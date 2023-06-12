@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Hyperlink from 'react-native-hyperlink';
 import { Card } from 'react-native-ui-lib';
-import firebase from "firebase";
+import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import React, {useEffect, useState} from "react";
 import ResultImage from "./ResultImage";
 import Profiles from '../ImageDB.js';
@@ -148,23 +148,6 @@ export default function ItemDetail({ route }) {
     50:50,
   }
 
-  // Need config again because user can visit this screen without visiting Catalogue.js
-  // However, when we finish our development, we can remove all the scattered connection init and only do it once
-  // when user opens the app
-  const config = {
-    apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
-    authDomain: 'siitch-6b176.firebaseapp.com',
-    databaseURL: 'https://siitch-6b176.firebaseio.com',
-    projectId: 'siitch-6b176',
-    storageBucket: 'siitch-6b176.appspot.com',
-    messagingSenderId: '282599031511',
-    appId: '1:282599031511:web:bb4f5ca5c385550d8ee692',
-    measurementId: 'G-13MVLQ6ZPF',
-  };
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
-
   useEffect(() => {
     readData(itemName)
     compute()
@@ -246,56 +229,53 @@ export default function ItemDetail({ route }) {
   }
 
   const readData = itemName => {
-    firebase
-      .database()
-      .ref(itemName)
-      .on('value', function(get) {
-          if(get.val() === null && itemName !== 'Makeup'){
-            alert('No info for ' + itemName + ' now')
-            console.log('No info for this item');
-          } else {
-            const itemObj = get.val()
-            // Global
-            setItem(itemObj)
-            setCategory(itemObj['Category'])
-            setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
-            setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
+    const getItemRef = ref(FirebaseRealtimeDatabase, itemName);
+    onValue(getItemRef, function(get) {
+      if(get.val() === null && itemName !== 'Makeup'){
+        alert('No info for ' + itemName + ' now')
+        console.log('No info for this item');
+      } else {
+        const itemObj = get.val()
+        // Global
+        setItem(itemObj)
+        setCategory(itemObj['Category'])
+        setGallons(itemObj[category === 'EDI' ? 'Single item   Gal' : 'Global Gallon p lb'])
+        setLiters(itemObj[category === 'EDI' ? 'Single item   L' : 'Global Liters p kg'])
 
-            // First section
-            setMetricToDisplayG(itemObj['Metric to display'])
-            setMetricToDisplayL(itemObj['Metric to display L'])
-            setMeasurementG(itemObj['Measurement1'])
-            setMeasurementL(itemObj['Measurement L'])
+        // First section
+        setMetricToDisplayG(itemObj['Metric to display'])
+        setMetricToDisplayL(itemObj['Metric to display L'])
+        setMeasurementG(itemObj['Measurement1'])
+        setMeasurementL(itemObj['Measurement L'])
 
-            // Second section
-            setRain(itemObj['Global Imperial Green Gal p lb'])
-            setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
-            setCleaning(itemObj['Global Imperial Gray Gal p lb'])
+        // Second section
+        setRain(itemObj['Global Imperial Green Gal p lb'])
+        setIrrigation(itemObj['Global Imperial Blue Gal p lb'])
+        setCleaning(itemObj['Global Imperial Gray Gal p lb'])
 
-            setRainKg(itemObj['Global Green L p kg'])
-            setIrrigationKg(itemObj['Global Blue L p kg'])
-            setCleaningKg(itemObj['Global Gray L p kg'])
+        setRainKg(itemObj['Global Green L p kg'])
+        setIrrigationKg(itemObj['Global Blue L p kg'])
+        setCleaningKg(itemObj['Global Gray L p kg'])
 
-            // Third section
-            setIndividualUnitG(itemObj['Individiual Unit Gal'])
-            setIndividualUnitL(itemObj['Individiual Unit L'])
+        // Third section
+        setIndividualUnitG(itemObj['Individiual Unit Gal'])
+        setIndividualUnitL(itemObj['Individiual Unit L'])
 
-            // Fourth section
-            setTimetodecompose(itemObj['Time to decompose'])
-            setDecomposetime(itemObj['Decomposition Time'])
+        // Fourth section
+        setTimetodecompose(itemObj['Time to decompose'])
+        setDecomposetime(itemObj['Decomposition Time'])
 
-            // Fifth section
-            setCompostable(itemObj['Compostable'])
+        // Fifth section
+        setCompostable(itemObj['Compostable'])
 
-            // Sixth section
-            setRecyclable(itemObj['Recycle'])
+        // Sixth section
+        setRecyclable(itemObj['Recycle'])
 
-            // Seventh section
-            setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
+        // Seventh section
+        setIndividualTotal(itemObj[waterParameter(itemObj['Category'])]);
 
-          }
-        }
-      );
+      }
+    });
   };
 
   return(

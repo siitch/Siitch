@@ -14,7 +14,7 @@ import {styles} from "../Search/Style";
 import * as React from "react";
 import {useEffect, useState, useRef} from "react";
 // Firebase
-import firebase from "firebase";
+import {FirebaseRealtimeDatabase, ref, onValue, set} from "../Firebase/firebase";
 // Used to display category images
 import Profiles from "../ImageDB";
 // Used to display search result images
@@ -104,20 +104,6 @@ export default function Catalogue (){
         {label:"Not Sure!", value:"Not Sure!"}
     ]
 
-    const config = {
-        apiKey: 'AIzaSyA0mAVUu-4GHPXCdBlqqVaky7ZloyfRARk',
-        authDomain: 'siitch-6b176.firebaseapp.com',
-        databaseURL: 'https://siitch-6b176.firebaseio.com',
-        projectId: 'siitch-6b176',
-        storageBucket: 'siitch-6b176.appspot.com',
-        messagingSenderId: '282599031511',
-        appId: '1:282599031511:web:bb4f5ca5c385550d8ee692',
-        measurementId: 'G-13MVLQ6ZPF',
-    };
-    if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-    }
-
     // Function called when user input changes
     const toDatabase = () => {
         if (keyword === '') { // Search bar is blank
@@ -133,14 +119,11 @@ export default function Catalogue (){
 
     // Function called to search the database using user input and update the screen
     const readData = input => {
-        firebase
-            .database()
-            .ref(input)
-            .on('value', get =>(
-                    // Self refresh and render results
-                    navigation.navigate('Catalogue', {name: input, value: get.val()})
-                ),
-            );
+        const readInputRef = ref(FirebaseRealtimeDatabase, input);
+        onValue(readInputRef, (get) => {
+            // Self refresh and render results
+            navigation.navigate('Catalogue', {name: input, value: get.val()})
+        });
     };
 
     useEffect(() => {
@@ -176,48 +159,42 @@ export default function Catalogue (){
         const freqMap = new Map();
         const sameItemThreshold = 4; //This is the threshold for how "different" a string can be before we consider it a different item
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(config);
-        }
-
         //Get the current "add later" list based on the first letter of the new item
-        firebase
-            .database()
-            .ref('/Future Library/' + category)
-            .once('value', data => {
-                const futureLibrary = data.val();
-                let idx = 0;
-                for (let frequency of futureLibrary) {
-                    //We already have this item
-                    for (let pastItem in frequency) {
-                        if (pastItem !== 'Total') {
-                            freqMap.set(frequency[pastItem], idx);
-                        }
-                        if (editDistance(pastItem.toLowerCase(), cleanItem) <= sameItemThreshold) {
-                            let freq = frequency[pastItem] + 1;
-                            if (freqMap.has(freq)) {
-                                futureLibrary[freqMap.get(freq)][`${pastItem}`] = freq;
-                            } else {
-                                futureLibrary.push({});
-                                futureLibrary[futureLibrary.length-1][`${pastItem}`] = freq;
-                            }
-                            delete frequency[pastItem];
-                            reUploadItems(futureLibrary, category);
-                            return;
-                        }
+        const getCurrentAddLaterListRef = ref(FirebaseRealtimeDatabase, '/Future Library/' + category);
+        onValue(getCurrentAddLaterListRef, (data) => {
+            const futureLibrary = data.val();
+            let idx = 0;
+            for (let frequency of futureLibrary) {
+                //We already have this item
+                for (let pastItem in frequency) {
+                    if (pastItem !== 'Total') {
+                        freqMap.set(frequency[pastItem], idx);
                     }
-                    idx += 1;
+                    if (editDistance(pastItem.toLowerCase(), cleanItem) <= sameItemThreshold) {
+                        let freq = frequency[pastItem] + 1;
+                        if (freqMap.has(freq)) {
+                            futureLibrary[freqMap.get(freq)][`${pastItem}`] = freq;
+                        } else {
+                            futureLibrary.push({});
+                            futureLibrary[futureLibrary.length-1][`${pastItem}`] = freq;
+                        }
+                        delete frequency[pastItem];
+                        reUploadItems(futureLibrary, category);
+                        return;
+                    }
                 }
-                //We don't have this item yet, lets add it
-                if (freqMap.has(1)) {
-                    futureLibrary[freqMap.get(1)][`${cleanItem}`] = 1;
-                } else {
-                    futureLibrary.push({});
-                    futureLibrary[futureLibrary.length-1][`${cleanItem}`] = 1;
-                }
+                idx += 1;
+            }
+            //We don't have this item yet, lets add it
+            if (freqMap.has(1)) {
+                futureLibrary[freqMap.get(1)][`${cleanItem}`] = 1;
+            } else {
+                futureLibrary.push({});
+                futureLibrary[futureLibrary.length-1][`${cleanItem}`] = 1;
+            }
 
-                reUploadItems(futureLibrary, category);
-            });
+            reUploadItems(futureLibrary, category);
+        });
     }
 
     //This function sorts the new list based on occurrences and re-uploads it to the database
@@ -230,7 +207,8 @@ export default function Catalogue (){
         });
 
         //Upload updated list to firebase
-        firebase.database().ref('/Future Library/' + category).set(updatedLibrary);
+        const updateFutureLibraryRef = ref(FirebaseRealtimeDatabase, '/Future Library/' + category);
+        set(updateFutureLibraryRef, updatedLibrary);
     }
 
     //DP Solution to solve the minimum edit distance between 2 strings in O(n*m) time complexity
