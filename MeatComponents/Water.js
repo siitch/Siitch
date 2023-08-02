@@ -46,7 +46,7 @@ const Water = ({inputData}) => {
                 color: '#0091FE',
                 lineHeight: 30,
               }}>
-              {inputData['Global Gallon p lb']}
+              {1847}
             </Text>
             <Text style={{fontSize: 15, marginLeft: '5%', lineHeight: 37}}>
               gal

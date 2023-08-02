@@ -666,6 +666,7 @@ const LandingDetails = () => {
           component={SearchDetail}
           options={({navigation}) => ({
             headerBackTitleVisible: false,
+            title: "Detail",
             headerRight: () => (
               <MaterialCommunityIcons
                 name="home"

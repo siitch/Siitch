@@ -323,7 +323,17 @@ export default function ResultsScreen({route}) {
                   }}
                   onPress={() => {
                     /* When one item button is tapped, forward item name to ItemDetail screen */
-                    navigation.navigate('Detail', {itemName: p.label});
+                    if (
+                      p.label !== 'Beef' &&
+                      p.label !== 'Jeans' &&
+                      p.label !== 'Makeup'
+                    ) {
+                      navigation.navigate('Detail', {itemName: p.label});
+                    }
+                    /* Exclusive item details to be shown using the hardcoded pages */
+                    if (p.label === 'Beef' || p.label === 'Jeans' || p.label === 'Makeup'){
+                      navigation.navigate('Search', {name: p.label});
+                    }
                   }}>
                   {p.label}
                 </MaterialButton>
