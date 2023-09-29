@@ -207,7 +207,8 @@ const WhatJeans = () => {
           Avoid
         </Text>
         <Text style={{fontSize:16}}>
-          Avoid jeans made with regular cotton. Organic cotton is grown without
+          Avoid jeans made with regular cotton where possible and instead,
+          choose jeans made with organic cotton. Organic cotton is grown without
           harmful pesticides leaving the soil healthier. Other Benefits of
           growing organic v.s regular cotton:{' '}
         </Text>
