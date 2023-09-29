@@ -273,7 +273,10 @@ const SpecialItem = ({globalUnit}) => {
             loop={false}
             speed={1.5}
             style={{
+              position: 'absolute',
               zIndex: 1,
+              width: '100%',
+              height: '100%',
             }}
             onAnimationFinish={()=>setConfetti(false)}
           />
