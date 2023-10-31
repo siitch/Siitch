@@ -94,8 +94,8 @@ export const Footer = () => {
           marginTop: '10%',
           textAlign: 'center'
         }}>
-        This app only works on iPhones at this time. {'\n'}
-        It does not work on iPads, iWatches, iPhone zoomed display, or any Android devices.
+        The app only works on iPhones at this time. {'\n'}
+        It does not work on iPads, iWatches, iPhone zoomed displays, or any Android devices.
       </Text>
       <View
         style={{
