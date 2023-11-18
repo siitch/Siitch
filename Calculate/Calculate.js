@@ -23,7 +23,12 @@ import analytics from '@react-native-firebase/analytics';
 import pluralize from 'pluralize';
 import RunningTotalItem from "./RunningTotalItem";
 import CalculateContainer from "../components/CalculateContainer";
-import {CalculatorInfoModal, ContextAndChallengeModal, VirtualWaterInfoModal} from "../components/Modals/Modals";
+import {
+  CalculatorInfoModal,
+  CalculatorWelcomeModal,
+  ContextAndChallengeModal,
+  VirtualWaterInfoModal
+} from "../components/Modals/Modals";
 import ViewShot from "react-native-view-shot";
 import header from "../images/header.png";
 import watermark from "../images/watermark_running_total.png";
@@ -38,10 +43,10 @@ import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import {createStackNavigator} from "@react-navigation/stack";
 import {NumberWithTextLabel, NumberWithThousandSeparation} from "./NumberFormatter";
 import {SearchBar} from "@rneui/themed";
-import { ItemDisplayUnitDictionary } from "./ItemDisplayUnitDict";
 import { getItemDisplayMetric, quantities } from "./CalculatorGeneral";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Calculator () {
+export default function Calculator ({route}) {
   const scrollViewRef = useRef(null);
   const [autoScroll, setAutoScroll] = useState(false);
 
@@ -253,11 +258,17 @@ export default function Calculator () {
           itemWaterInGallon: itemData[getItemWaterParameterLabel(itemData['Category'], 'G')],
           itemWaterInLiter: itemData[getItemWaterParameterLabel(itemData['Category'], 'L')]
         });
-        console.log('Item fetch succeed')
+        console.log('Item fetch succeed');
         return true;
       }
     });
   }
+  useEffect(() => {
+    if (route.params !== undefined) {
+      const { outsideItem } = route.params;
+      addOutsideItemToRunningTotal(outsideItem);
+    }
+  },[route.params]);
   function addNewItemToRunningTotal() {
     let runningItem = {
       itemName: currentItem,
@@ -275,6 +286,23 @@ export default function Calculator () {
       ]);
     resetMainCalculator();
   }
+  function addOutsideItemToRunningTotal(outsideItem) {
+    let runningItem = {
+      itemName: outsideItem.itemName,
+      itemDisplayedMetricInGallon: outsideItem.itemDisplayedMetricInGallon,
+      itemDisplayedMetricInLiter: outsideItem.itemDisplayedMetricInLiter,
+      itemWaterInGallon: outsideItem.itemWaterInGallon,
+      itemWaterInLiter: outsideItem.itemWaterInLiter,
+      itemQuantity: outsideItem.itemQuantity,
+      itemFrequency: outsideItem.itemFrequency,
+    }
+    setRunningTotalList(
+      [
+        ...runningTotalList,
+        runningItem
+      ]);
+  }
+
   function resetMainCalculator() {
     setComputeCompleted(false);
     setCurrentItem('');
@@ -474,6 +502,19 @@ export default function Calculator () {
   function closeCalculatorInfoModal() {
     setCalculatorInfoVisible(false);
   }
+  // Welcome popup
+  const [welcomed, setWelcomed] = useState(true);
+  function startWelcome() {
+    AsyncStorage.getItem('calculatorWelcomed').then(value => {
+      if (value == null) {
+        AsyncStorage.setItem('calculatorWelcomed', 'true');
+        setWelcomed(false);
+      }
+    });
+  }
+  function closeWelcome() {
+    setWelcomed(true);
+  }
   // Virtual water info popup
   const [infoVisible, setInfoVisible] = useState(false);
   function closeInfoModal() {
@@ -644,6 +685,9 @@ export default function Calculator () {
                 setComputeCompleted(false);
               }
               setCurrentItem(currentItem.name);
+              setQuantity(1);
+              setFrequency('single_use');
+              startWelcome();
             }}
           />
 
@@ -787,10 +831,8 @@ export default function Calculator () {
 
           {/* Initial Calculate Button */}
           {!computeCompleted && runningTotalList.length < 1 && (
-            <View style={{
-              alignItems: 'center',
-              marginTop: 30,
-            }}>
+            <View style={{width: '100%', marginTop: 30, flexDirection: 'row', justifyContent: 'center'}}>
+              {/* Calculate button*/}
               <TouchableOpacity
                 onPress={() => {
                   calculate();
@@ -804,6 +846,25 @@ export default function Calculator () {
                     color: 'white',
                   }}>
                   Calculate
+                </Text>
+              </TouchableOpacity>
+              {/* Add to Running Total button*/}
+              <TouchableOpacity
+                onPress={() => fetchAndAddToRunningTotalList()}
+                style={{
+                  padding: 15,
+                  borderRadius: 30,
+                  backgroundColor: '#70BF41',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                    color: 'white',
+                  }}>
+                  Add to Running Total
                 </Text>
               </TouchableOpacity>
             </View>
@@ -1362,6 +1423,8 @@ export default function Calculator () {
       {/* Info button modal */}
       <CalculatorInfoModal infoVisible={calculatorInfoVisible} handler={closeCalculatorInfoModal}/>
       <VirtualWaterInfoModal infoVisible={infoVisible} handler={closeInfoModal}/>
+      {/* Welcome modal */}
+      <CalculatorWelcomeModal welcomeVisible={!welcomed} handler={closeWelcome}/>
       {/* Pop up window of 'Context' and 'Challenge' */}
       <ContextAndChallengeModal
         modalVisible={modalVisible}
@@ -1552,12 +1615,12 @@ export const calculatorStyle = StyleSheet.create({
     borderRadius: 20,
   },
   calculateButton: {
-    paddingVertical: 15,
-    paddingHorizontal: 36,
+    padding: 15,
+    marginRight: 5,
     borderRadius: 30,
+    backgroundColor:'#70BF41',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#70BF41',
   },
   runningTotalBarContainer: {
     height: 40,
