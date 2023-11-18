@@ -171,12 +171,10 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
   modalView: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginHorizontal: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    paddingLeft: 25,
-    paddingRight: 25,
+    paddingHorizontal: 25,
     paddingBottom: 25,
     alignItems: 'center',
     shadowColor: '#000',

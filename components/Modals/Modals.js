@@ -1,5 +1,5 @@
 import {ReactNavigationOverlay} from "../ReactNavigationOverlay";
-import { Dimensions, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import itemDetailImages from "../../MLTool/ItemDetailImages/itemDetailImages";
 import {openSourceLink} from "../../util/common";
 import React from "react";
@@ -147,6 +147,42 @@ export const CalculatorInfoModal = ({infoVisible, handler}) => {
           </View>
         </View>
       </View>
+    </Modal>
+  )
+}
+
+export const CalculatorWelcomeModal = ({welcomeVisible, handler}) => {
+  const navigation = useNavigation();
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={welcomeVisible}
+    >
+      {welcomeVisible && <ReactNavigationOverlay/>}
+      <TouchableWithoutFeedback onPress={handler}>
+        <View style={{ flex: 0.89, justifyContent: "flex-end" }}>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={modalStyle.infoModalStyle}>
+            <CloseModalCross handler={handler}/>
+            <Text style={{
+              marginTop: 40,
+              marginHorizontal: 20,
+              marginBottom: 25,
+              textAlign: "left" }}>
+              Adjust Quantity and Frequency as you prefer. Most items are shown in gallons per pounds
+              (or liters per kilogram) as the facts have been peer reviewed and verified. See our
+              <Text
+                onPress={() => {
+                  navigation.navigate('Sources & Resources')
+                  handler()
+                }}
+                style={{color: '#00ADEF'}}> Sources & Resources</Text> page for more information.
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
     </Modal>
   )
 }
@@ -542,6 +578,48 @@ export const ContextAndChallengeModal = ({modalVisible, showContext, handler}) =
   )
 }
 
+export const ReminderModal = ({reminderVisible, handler}) => {
+  return (
+    <Modal animationType="slide" transparent={true} visible={reminderVisible}>
+      {reminderVisible && (<ReactNavigationOverlay/>)}
+      <View
+        style={modalStyle.contextAndChallengeModalContainer}>
+        <View style={{
+          ...styles.modalView,
+          borderWidth: 1,
+          borderColor: "black",
+          alignItems: "flex-start",
+          paddingHorizontal: 20,
+        }}>
+          <Text style={{marginTop: 30, fontSize: 22}}>
+            These numbers are simply facts. No need for guilt or negativity here. We all need to eat and live our lives.
+          </Text>
+          <Image
+            style={{
+              marginHorizontal: -20,
+              marginVertical: 25,
+              width: deviceWidth - 40,
+              height: 248 * (deviceWidth - 40) / 672,
+            }}
+            source={require('../../images/ReminderSloth.png')}
+            resizeMode="contain" />
+          <Text style={{marginBottom: 15, fontSize: 22}}>
+            We have the power to minimize food waste and reduce our overall eco footprint. What impact do you want to
+            make on the world?
+          </Text>
+          <TouchableOpacity
+            style={{...styles.openButton, backgroundColor: '#70BF41', alignSelf: "center"}}
+            onPress={() => {
+              handler()
+            }}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  )
+}
+
 const modalStyle = StyleSheet.create({
   virtualWaterInfoModalContainer: {
     flex: 1,
@@ -550,8 +628,7 @@ const modalStyle = StyleSheet.create({
     marginTop: 22,
   },
   virtualWaterInfoModalContent: {
-    marginLeft: 20,
-    marginRight: 20,
+    marginHorizontal: 20,
     backgroundColor: 'white',
     borderColor: '#00ADEF',
     borderWidth: 1.5,
