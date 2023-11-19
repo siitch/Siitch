@@ -2,27 +2,23 @@ import {
   Dimensions,
   Image,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
-  Animated, KeyboardAvoidingView,
+  KeyboardAvoidingView,
 } from "react-native";
 import Profiles from "../ImageDB";
 import React, {useEffect, useRef, useState} from "react";
-import {Chevron} from "react-native-shapes";
-import RNPickerSelect from 'react-native-picker-select';
 import {NumberFormatter} from "./NumberFormatter";
-import {calculatorStyle} from "./Calculate";
 import { SearchBar } from '@rneui/themed';
-import { ItemDisplayUnitDictionary } from "./ItemDisplayUnitDict";
 import pluralize from "pluralize";
-import { getItemDisplayMetric, quantities } from "./CalculatorGeneral";
+import { getItemDisplayMetric } from "./CalculatorGeneral";
+import { FrequencyPicker, QuantityPicker } from "./CustomPicker";
 const DeviceWidth = Dimensions.get('window').width;
 
 export default function RunningTotalItem (
   {
     itemIndex,
-    unit,
+    globalUnit,
     itemName,
     itemDisplayedMetricInGallon,
     itemDisplayedMetricInLiter,
@@ -35,9 +31,7 @@ export default function RunningTotalItem (
   }) {
 
   // Main picker
-  const picker = useRef(null);
-  const [pickerValue, setPickerValue] = useState(null);
-  const [dynamicFontSize, setDynamicFontSize] = useState(20);
+  const [quantityPickerValue, setQuantityPickerValue] = useState(null);
   const [quantity, setQuantity] = useState(itemQuantity);
   const [frequency, setFrequency] = useState(itemFrequency);
   useEffect(()=>{
@@ -52,38 +46,10 @@ export default function RunningTotalItem (
   useEffect(()=>{
     updateRunningTotalList(itemIndex, quantity, frequency);
   }, [frequency]);
-  const quantityPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const frequencyPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const liftSelfUp = (pickerName) => {
-    Animated.timing(
-      pickerName === 'frequencyPicker' ? frequencyPickerShadowLift : quantityPickerShadowLift, {
-        toValue: 0.4,
-        duration: 150,
-        useNativeDriver: true
-      }).start();
-  }
-  const dropSelfDown = (pickerName) => {
-    Animated.timing(
-      pickerName === 'frequencyPicker' ? frequencyPickerShadowLift : quantityPickerShadowLift, {
-        toValue: 0,
-        duration: 150,
-        useNativeDriver: true
-      }).start();
-  }
-  const scaleFontSize = width => {
-    const actualWidth = width + dynamicFontSize;
-    const scaledSize = Math.min(20, dynamicFontSize * (DeviceWidth * 0.21 / actualWidth));
-    setDynamicFontSize(scaledSize);
-  };
-  const onContentSizeChange = ({ nativeEvent }) => {
-    const { target, contentSize } = nativeEvent;
-    const { width } = contentSize;
-    scaleFontSize(width);
-  };
 
   function handleQuantityUpdate(newQuantity) {
     setQuantity(newQuantity);
-    setPickerValue(newQuantity);
+    setQuantityPickerValue(newQuantity);
   }
 
   function CustomInputAccessoryView({itemName, initialQuantity, handleQuantityUpdate}) {
@@ -92,7 +58,7 @@ export default function RunningTotalItem (
     const [inputBarText, setInputBarText] = useState(initialQuantity);
     const [displayMetric, setDisplayMetric] = useState('');
     useEffect(() => {
-      let itemDisplayMetricFetched = getItemDisplayMetric(itemName, unit);
+      let itemDisplayMetricFetched = getItemDisplayMetric(itemName, globalUnit);
       if (itemDisplayMetricFetched === 'lb' ||
         itemDisplayMetricFetched === 'kg' ||
         itemDisplayMetricFetched === 'dozen') {
@@ -200,7 +166,7 @@ export default function RunningTotalItem (
             marginTop:10
           }}>
             {itemName}{' '}
-            {unit === 'G' ?
+            {globalUnit === 'G' ?
               itemDisplayedMetricInGallon :
               itemDisplayedMetricInLiter}
           </Text>
@@ -213,140 +179,73 @@ export default function RunningTotalItem (
           alignItems: 'center',
         }}>
           {/* Pickers */}
-          <Animated.View style={{
-            paddingHorizontal: 5,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: 'white',
-            height: 50,
-            width: DeviceWidth * 0.3,
-            borderWidth: 2,
-            borderRadius: 20,
-            borderColor: '#80CAFF',
-            ...calculatorStyle.animatedShadow,
-            shadowOpacity: quantityPickerShadowLift,
-          }}>
-            <TextInput
-              style={{
-                flex: 1,
-                fontSize: dynamicFontSize,
-                maxWidth: '70%',
-              }}
-              onContentSizeChange={onContentSizeChange}
-              numberOfLines={1}
-              textAlign={'center'}
-              placeholder={'Edit'}
-              keyboardType={'decimal-pad'}
-              returnKeyType={'done'}
-              editable={false}
-              value={quantity ? quantity.toString() : ''}
-              onTouchStart={() => {
-                picker.current.togglePicker(true);
-              }}
-            />
-            <TouchableOpacity
-              style={{
-                width: 30,
+          <QuantityPicker
+            itemName={itemName}
+            globalUnit={globalUnit}
+            pickerValue={quantityPickerValue}
+            setQuantityPickerValue={setQuantityPickerValue}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            handleQuantityUpdate={handleQuantityUpdate}
+            customStyle={{
+              paddingHorizontal: 5,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              backgroundColor: 'white',
+              height: 50,
+              width: DeviceWidth * 0.3,
+              borderWidth: 2,
+              borderRadius: 20,
+              borderColor: '#80CAFF',
+            }}
+            customInputComponent={
+            <CustomInputAccessoryView
+              itemName={itemName}
+              initialQuantity={quantity}
+              handleQuantityUpdate={handleQuantityUpdate}/>}
+            inputTextMaxWidth={"70%"}
+            dynamicFontScaleFactor={0.21}
+            hasTitle={false}
+          />
+          <FrequencyPicker
+            frequency={frequency}
+            setFrequency={setFrequency}
+            hasTitle={false}
+            customFrequencies={[
+              {label: 'single use', inputLabel: 'S', value: 'single_use'},
+              {label: 'a day', inputLabel: 'D', value: 'per_day'},
+              {label: 'a week', inputLabel: 'W', value: 'per_week'},
+              {label: 'a month', inputLabel: 'M', value: 'per_month'},
+              {label: 'a year', inputLabel: 'Y', value: 'per_year'},
+            ]}
+            hasPlaceholder={false}
+            customStyle={{
+              inputIOS: {
+                fontSize: 20,
                 height: '100%',
+                textAlign: 'center',
+                marginRight: 30,
+              },
+              inputIOSContainer: {
+                backgroundColor: 'white',
+                overflow: 'hidden',
+                height: 50,
+                width: DeviceWidth * 0.2,
+                marginLeft: 10,
+                borderWidth: 2,
+                borderColor: '#80CAFF',
+                borderRadius: 20,
+              },
+              iconContainer: {
+                height: '100%',
+                width: 30,
+                marginRight: 5,
                 alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              onPress={() => picker.current.togglePicker(true)}>
-              <Chevron type={'thin'} size={1}></Chevron>
-            </TouchableOpacity>
-            <RNPickerSelect
-              ref={picker}
-              items={quantities}
-              value={pickerValue}
-              placeholder={{
-                label: 'Pick a quantity',
-                value: null,
-                color: '#9EA0A4',
-              }}
-              style={{
-                inputIOS: {
-                  display: 'none'
-                }
-              }}
-              InputAccessoryView={() => {
-                return (
-                  <CustomInputAccessoryView
-                    itemName={itemName}
-                    initialQuantity={quantity}
-                    handleQuantityUpdate={handleQuantityUpdate}/>
-              )}}
-              onOpen={() => {
-                global.occupied = true;
-                liftSelfUp("quantityPicker");
-              }}
-              onValueChange={(value) => {
-                if (value !== null) {
-                  setPickerValue(value);
-                  setQuantity(value);
-                }
-              }}
-              onClose={() => {
-                global.occupied = false;
-                setPickerValue(null);
-                dropSelfDown('quantityPicker');
-              }}
-            />
-          </Animated.View>
-          <Animated.View style={[calculatorStyle.animatedShadow, {
-            shadowOpacity: frequencyPickerShadowLift
-          }]}>
-            <RNPickerSelect
-              items={[
-                {label: 'single use', inputLabel: 'S', value: 'single_use'},
-                {label: 'a day', inputLabel: 'D', value: 'per_day'},
-                {label: 'a week', inputLabel: 'W', value: 'per_week'},
-                {label: 'a month', inputLabel: 'M', value: 'per_month'},
-                {label: 'a year', inputLabel: 'Y', value: 'per_year'},
-              ]}
-              value={frequency}
-              placeholder={{}}
-              Icon={() => {
-                return <Chevron type={'thin'} size={1}></Chevron>
-              }}
-              style={{
-                inputIOS: {
-                  fontSize: 20,
-                  height: '100%',
-                  textAlign: 'center',
-                  marginRight: 30,
-                },
-                inputIOSContainer: {
-                  backgroundColor: 'white',
-                  overflow: 'hidden',
-                  height: 50,
-                  width: DeviceWidth * 0.2,
-                  marginLeft: 10,
-                  borderWidth: 2,
-                  borderColor: '#80CAFF',
-                  borderRadius: 20,
-                },
-                iconContainer: {
-                  height: '100%',
-                  width: 30,
-                  marginRight: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                },
-              }}
-              onOpen={() => {
-                global.occupied = true;
-                liftSelfUp("frequencyPicker");
-              }}
-              onValueChange={(frequency) => {
-                setFrequency(frequency);
-              }}
-              onClose={() => {
-                global.occupied = false;
-                dropSelfDown("frequencyPicker");
-              }}
-            />
-          </Animated.View>
+                justifyContent: 'center',
+              },
+            }}
+          />
 
           {/* Item total and clear button */}
           <View style={{
@@ -361,7 +260,7 @@ export default function RunningTotalItem (
               fontWeight: '400',
               maxWidth: DeviceWidth / 4,
             }}>
-              {unit === 'G' ?
+              {globalUnit === 'G' ?
                 NumberFormatter(itemWaterInGallon * quantity, 1) :
                 NumberFormatter(itemWaterInLiter * quantity, 1)}
             </Text>

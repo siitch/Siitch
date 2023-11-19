@@ -57,6 +57,21 @@ export const quantities = [
   {label: '5000', value: 5000},
 ];
 
+export const frequencies = [
+  { label: "single use", value: "single_use" },
+  { label: "a day", value: "per_day" },
+  { label: "a week", value: "per_week" },
+  { label: "a month", value: "per_month" },
+  { label: "a year", value: "per_year" },
+];
+
+export const impactUnits = [
+  { label: "Daily", value: "daily" },
+  { label: "Weekly", value: "weekly" },
+  { label: "Monthly", value: "monthly" },
+  { label: "Yearly", value: "yearly" },
+];
+
 export function getItemDisplayMetric(itemName, unit) {
   let localDisplayUnit;
   if (unit === 'G') {

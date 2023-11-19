@@ -1,16 +1,14 @@
 import {
-  Animated,
-  Dimensions,
-  Image, KeyboardAvoidingView,
+  Image,
   ScrollView,
-  Text, TextInput,
+  Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import Hyperlink from "react-native-hyperlink";
 import { Card } from "react-native-ui-lib";
 import { FirebaseRealtimeDatabase, ref, onValue } from "../Firebase/firebase";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResultImage from "./ResultImage";
 import Profiles from "../ImageDB.js";
 import itemDetailImages from "./ItemDetailImages/itemDetailImages";
@@ -24,20 +22,16 @@ import {
   DetailPageWaterCardModal, ReminderModal,
   VirtualWaterInfoModal,
 } from "../components/Modals/Modals";
-import { getItemDisplayMetric, quantities } from "../Calculate/CalculatorGeneral";
-import { Chevron } from "react-native-shapes";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import RNPickerSelect from "react-native-picker-select";
-import { calculatorStyle } from "../Calculate/Calculate";
-import pluralize from "pluralize";
-import { SearchBar } from "@rneui/themed";
+import { itemDetailStyle } from "../Styles/Style";
 import { NumberWithTextLabel } from "../Calculate/NumberFormatter";
 import CalculateContainer from "../components/CalculateContainer";
 import { useNavigation } from "@react-navigation/native";
+import { GLSwitcher } from "../components/GLSwitcher";
+import { FrequencyPicker, ImpactPicker, QuantityPicker } from "../Calculate/CustomPicker";
 
 export default function ItemDetail({ route }) {
   const navigation = useNavigation();
-  const DeviceWidth = Dimensions.get("window").width;
   // Get item name passed from other screen
   const { itemName } = route.params;
   const { localQuantity } = route.params;
@@ -84,9 +78,9 @@ export default function ItemDetail({ route }) {
   }
 
   // Number formatting util function
-  const numberWithCommas = (x) => {
+  function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  }
 
   // First section - G/L button, item image, item name, a number, a unit
   const [metricToDisplay, setMetricToDisplay] = useState(metricToDisplay);
@@ -113,8 +107,8 @@ export default function ItemDetail({ route }) {
   const [individualUnit, setIndividualUnit] = useState(individualUnitG);
 
   // Fourth section - Time to decompose:
-  const [timetodecompose, setTimetodecompose] = useState("");
-  const [decomposetime, setDecomposetime] = useState("");
+  const [timeToDecompose, setTimeToDecompose] = useState("");
+  const [decomposeTime, setDecomposeTime] = useState("");
 
   // Fifth section - Compostable?
   const [compostable, setCompostable] = useState("");
@@ -133,38 +127,7 @@ export default function ItemDetail({ route }) {
   const [itemDisplayedMetricInGallon, setItemDisplayedMetricInGallon] = useState("");
   const [itemDisplayedMetricInLiter, setItemDisplayedMetricInLiter] = useState("");
 
-  const quantityPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const frequencyPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const impactPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const [dynamicFontSize, setDynamicFontSize] = useState(20);
-  const picker = useRef(null);
-  const liftSelfUp = (pickerName) => {
-    Animated.timing(
-      pickerName === "frequencyPicker" ? frequencyPickerShadowLift : (pickerName === "quantityPicker" ? quantityPickerShadowLift : impactPickerShadowLift), {
-        toValue: 0.4,
-        duration: 150,
-        useNativeDriver: true,
-      }).start();
-  };
-  const dropSelfDown = (pickerName) => {
-    Animated.timing(
-      pickerName === "frequencyPicker" ? frequencyPickerShadowLift : (pickerName === "quantityPicker" ? quantityPickerShadowLift : impactPickerShadowLift), {
-        toValue: 0,
-        duration: 150,
-        useNativeDriver: true,
-      }).start();
-  };
-  const scaleFontSize = (width) => {
-    const actualWidth = width + dynamicFontSize;
-    const scaledSize = Math.min(20, dynamicFontSize * (DeviceWidth * 0.33 / actualWidth));
-    setDynamicFontSize(scaledSize);
-  };
-  const onContentSizeChange = ({ nativeEvent }) => {
-    const { target, contentSize } = nativeEvent;
-    const { width } = contentSize;
-    scaleFontSize(width);
-  };
-  const [pickerValue, setPickerValue] = useState(null);
+  const [quantityPickerValue, setQuantityPickerValue] = useState(null);
   const [quantity, setQuantity] = useState(localQuantity === undefined ? 1 : localQuantity);
   const [frequency, setFrequency] = useState("single_use");
   const [impactUnit, setImpactUnit] = useState("yearly");
@@ -186,7 +149,6 @@ export default function ItemDetail({ route }) {
       "Liter": 0,
     },
   });
-
   function calculateImpact() {
     let yearlyImpactGallon;
     let yearlyImpactLiter;
@@ -224,7 +186,7 @@ export default function ItemDetail({ route }) {
     setVirtualWaterInfoVisible(false);
   }
 
-  const waterParameter = (category) => {
+  function waterParameter(category) {
     if (globalUnit === "L") {
       if (category === "EDI") {
         return "Single item   L";
@@ -238,14 +200,7 @@ export default function ItemDetail({ route }) {
         return "Global Gallon p lb";
       }
     }
-  };
-  const frequencies = [
-    { label: "single use", value: "single_use" },
-    { label: "a day", value: "per_day" },
-    { label: "a week", value: "per_week" },
-    { label: "a month", value: "per_month" },
-    { label: "a year", value: "per_year" },
-  ];
+  }
   const frequency_values = {
     null: 0,
     single_use: 1,
@@ -256,74 +211,7 @@ export default function ItemDetail({ route }) {
   };
   function handleQuantityUpdate(newQuantity) {
     setQuantity(newQuantity);
-    setPickerValue(newQuantity);
-  }
-  function MainPickerInputAccessoryView({ initialQuantity, handleQuantityUpdate }) {
-    // experimental
-    const mainSearchBar = useRef(null);
-    const [inputBarText, setInputBarText] = useState(initialQuantity);
-    const [displayMetric, setDisplayMetric] = useState("");
-    useEffect(() => {
-      if (itemName === "") return;
-      let itemDisplayMetricFetched = getItemDisplayMetric(itemName, globalUnit);
-      if (itemDisplayMetricFetched === "lb" ||
-        itemDisplayMetricFetched === "kg" ||
-        itemDisplayMetricFetched === "dozen") {
-        setDisplayMetric(itemDisplayMetricFetched);
-      } else {
-        setDisplayMetric(pluralize(itemDisplayMetricFetched, inputBarText * 1));
-      }
-    }, [inputBarText]);
-    return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{
-          backgroundColor: "#D2D4D9",
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: -3,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 3,
-        }}>
-        <SearchBar
-          ref={mainSearchBar}
-          keyboardType={"decimal-pad"}
-          placeholder="Pick a quantity or type here..."
-          platform={"ios"}
-          searchIcon={null}
-          clearIcon={itemName !== "" &&
-            (<Text style={{ fontSize: 15 }}>{displayMetric}</Text>)}
-          cancelButtonTitle={"Done"}
-          containerStyle={{
-            backgroundColor: "#D2D4D9",
-          }}
-          inputContainerStyle={{
-            backgroundColor: "white",
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.1,
-            shadowRadius: 3,
-          }}
-          value={inputBarText ? inputBarText.toString() : ""}
-          onChangeText={(value) => {
-            if (!isNaN(value)) {
-              setInputBarText(value);
-            }
-          }}
-          onBlur={() => {
-            handleQuantityUpdate(inputBarText);
-          }}
-          onClear={() => {
-            handleQuantityUpdate(inputBarText);
-          }}
-        />
-      </KeyboardAvoidingView>
-    );
+    setQuantityPickerValue(newQuantity);
   }
 
   useEffect(() => {
@@ -333,7 +221,7 @@ export default function ItemDetail({ route }) {
     checkCompostable();
     checkRecyclable();
     changeColor();
-  }, [globalUnit, gallons, individualUnitG, metricToDisplay, timetodecompose, recyclable, quantity, frequency]);
+  }, [globalUnit, gallons, individualUnitG, metricToDisplay, timeToDecompose, recyclable, quantity, frequency]);
 
   useEffect(() => {
     async function logItemName() {
@@ -341,13 +229,12 @@ export default function ItemDetail({ route }) {
         ItemName: itemName,
       });
     }
-
     // Log the current item name to firebase
     logItemName();
   }, []);
 
   // When the global metric changes, do corresponding changes
-  const changeMetric = () => {
+  function changeMetric() {
     if (globalUnit === "G") {
       setDisplayWater(gallons);
       if (metricToDisplay !== "years") {
@@ -365,19 +252,19 @@ export default function ItemDetail({ route }) {
       setIndividualUnit(individualUnitL);
       setMetricToDisplay(metricToDisplayL);
     }
-  };
+  }
 
   // Used to change the color of the text to RED when the metric is years
-  const changeColor = () => {
+  function changeColor() {
     if (metricToDisplay !== "gallons" && metricToDisplay !== "liters") {
       setColor("#f32133");
     } else {
       setColor("#00ADEF");
     }
-  };
+  }
 
   // Check compostable
-  const checkCompostable = () => {
+  function checkCompostable() {
     if (compostable !== "") {
       const firstWord = compostable.split(" ")[0];
       if (firstWord === "No" || firstWord === "No.") {
@@ -386,10 +273,10 @@ export default function ItemDetail({ route }) {
         setCompostableCheck(true);
       }
     }
-  };
+  }
 
   // Check recyclable
-  const checkRecyclable = () => {
+  function checkRecyclable() {
     if (recyclable !== "") {
       const firstWord = recyclable.split(" ")[0];
       if (firstWord === "No" || firstWord === "No.") {
@@ -398,9 +285,9 @@ export default function ItemDetail({ route }) {
         setRecyclableCheck(true);
       }
     }
-  };
+  }
 
-  const readData = itemName => {
+  function readData(itemName) {
     const getItemRef = ref(FirebaseRealtimeDatabase, itemName);
     onValue(getItemRef, function(get) {
       if (get.val() === null && itemName !== "Makeup") {
@@ -436,8 +323,8 @@ export default function ItemDetail({ route }) {
         setItemDisplayedMetricInLiter(itemObj["Display Unit Metric"]);
 
         // Fourth section
-        setTimetodecompose(itemObj["Time to decompose"]);
-        setDecomposetime(itemObj["Decomposition Time"]);
+        setTimeToDecompose(itemObj["Time to decompose"]);
+        setDecomposeTime(itemObj["Decomposition Time"]);
 
         // Fifth section
         setCompostable(itemObj["Compostable"]);
@@ -450,63 +337,13 @@ export default function ItemDetail({ route }) {
 
       }
     });
-  };
+  }
 
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <View>
         {/* First section */}
-        <View
-          style={{
-            position: "absolute",
-            zIndex: 10,
-            flexDirection: "row",
-            marginTop: "5%",
-            marginLeft: 20,
-            borderColor: "#00ADEF",
-            borderWidth: 2,
-            borderRadius: 10,
-            width: 65,
-            height: 26,
-            paddingLeft: 10,
-            paddingRight: 10,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              setGlobalUnit("G");
-              analytics().logEvent("Use_GL_switch", {
-                switch_to: "Gallons",
-              });
-            }}>
-            <Text
-              style={{
-                color: globalUnit === "G" ? "#00ADEF" : "black",
-                paddingTop: 5,
-                fontSize: 20,
-                fontWeight: globalUnit === "G" ? "bold" : "normal",
-              }}>
-              G
-            </Text>
-          </TouchableOpacity>
-          <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-          <TouchableOpacity
-            onPress={() => {
-              setGlobalUnit("L");
-              analytics().logEvent("Use_GL_switch", {
-                switch_to: "Liters",
-              });
-            }}>
-            <Text
-              style={{
-                color: globalUnit === "L" ? "#00ADEF" : "black",
-                paddingTop: 5,
-                fontSize: 20,
-                fontWeight: globalUnit === "L" ? "bold" : "normal",
-              }}>
-              L
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <GLSwitcher globalUnit={globalUnit} switchHandler={setGlobalUnit}/>
 
         <View style={{ alignItems: "center", marginTop: 25, marginBottom: 12 }}>
           <Image source={ResultImage[itemName]} style={{ width: 220, height: 220 }} />
@@ -525,7 +362,7 @@ export default function ItemDetail({ route }) {
               fontSize: 25,
               fontWeight: "bold",
               color: color,
-            }}>{displayWater !== "" ? numberWithCommas(displayWater) : timetodecompose} {metricToDisplay}</Text>
+            }}>{displayWater !== "" ? numberWithCommas(displayWater) : timeToDecompose} {metricToDisplay}</Text>
           </View>
           <Text>{measurement}</Text>
         </View>
@@ -533,31 +370,10 @@ export default function ItemDetail({ route }) {
         {/* Second section */}
         {(rain !== "" || irrigation !== "" || cleaning !== "") && (
           <View>
-            <Text style={{
-              alignSelf: "center",
-              marginTop: 5,
-              fontSize: 17,
-              fontWeight: "500",
-            }}>Water Breakdown</Text>
-            <View style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              flex: 4,
-              marginLeft: 7,
-              marginRight: 7,
-              marginBottom: 7,
-              padding: 5,
-              height: 90,
-            }}>
+            <Text style={itemDetailStyle.waterBreakdownText}>Water Breakdown</Text>
+            <View style={itemDetailStyle.waterBreakdownContainer}>
               <Card
-                containerStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: 6,
-                  backgroundColor: "#70BF41",
-                  shadowColor: "black",
-                  flex: 1,
-                }}
+                containerStyle={itemDetailStyle.waterCardContainer("#70BF41")}
                 borderRadius={17}
                 flex
                 onPress={() => {
@@ -576,14 +392,7 @@ export default function ItemDetail({ route }) {
               </Card>
 
               <Card
-                containerStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: 6,
-                  backgroundColor: "#00ADEF",
-                  shadowColor: "black",
-                  flex: 1,
-                }}
+                containerStyle={itemDetailStyle.waterCardContainer("#00ADEF")}
                 borderRadius={17}
                 flex
                 onPress={() => {
@@ -602,14 +411,7 @@ export default function ItemDetail({ route }) {
               </Card>
 
               <Card
-                containerStyle={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: 6,
-                  backgroundColor: "#C2C2C2",
-                  shadowColor: "black",
-                  flex: 1,
-                }}
+                containerStyle={itemDetailStyle.waterCardContainer("#C2C2C2")}
                 borderRadius={17}
                 flex
                 onPress={() => {
@@ -632,13 +434,8 @@ export default function ItemDetail({ route }) {
           </View>
         )}
 
-        {/* Divider attached to three cards*/}
-        <View
-          style={{
-            borderBottomColor: "rgba(0,0,0,0.25)",
-            borderBottomWidth: 1,
-          }}
-        />
+        {/* Divider */}
+        <View style={itemDetailStyle.divider} />
 
         {/* To make 1 */}
         {individualUnit !== "" && (
@@ -654,11 +451,7 @@ export default function ItemDetail({ route }) {
                 alignItems: "center",
               }}>
                 <Image source={itemDetailImages.earth} style={{ width: 28, height: 28 }} />
-                <Text style={{
-                  fontSize: 17,
-                  fontWeight: "500",
-                  marginLeft: 5,
-                }}>
+                <Text style={itemDetailStyle.itemPropertyTitle}>
                   To make 1 {individualUnit !== "" ? individualUnit.split("/")[1] : itemName}
                 </Text>
               </View>
@@ -680,12 +473,7 @@ export default function ItemDetail({ route }) {
               </View>
             </View>
             {/* Divider */}
-            <View
-              style={{
-                borderBottomColor: "rgba(0,0,0,0.25)",
-                borderBottomWidth: 1,
-              }}
-            />
+            <View style={itemDetailStyle.divider} />
           </View>
         )}
 
@@ -701,11 +489,7 @@ export default function ItemDetail({ route }) {
               alignItems: "center",
             }}>
               <Image source={itemDetailImages.decompose} style={{ width: 28, height: 28 }} />
-              <Text style={{
-                fontSize: 17,
-                fontWeight: "500",
-                marginLeft: 5,
-              }}>
+              <Text style={itemDetailStyle.itemPropertyTitle}>
                 Time to Decompose
               </Text>
               <TouchableOpacity
@@ -720,20 +504,15 @@ export default function ItemDetail({ route }) {
               </TouchableOpacity>
             </View>
           </View>
-          {decomposetime !== "" && (
+          {decomposeTime !== "" && (
             <Text style={{ marginTop: 10, marginLeft: 5, marginBottom: 5 }}>
-              {decomposetime}
+              {decomposeTime}
             </Text>
           )}
         </View>
 
         {/* Divider */}
-        <View
-          style={{
-            borderBottomColor: "rgba(0,0,0,0.25)",
-            borderBottomWidth: 1,
-          }}
-        />
+        <View style={itemDetailStyle.divider} />
 
         {/* Compostable? */}
         <View style={{ margin: 10 }}>
@@ -747,11 +526,7 @@ export default function ItemDetail({ route }) {
               alignItems: "center",
             }}>
               <Image source={itemDetailImages.compostable} style={{ width: 28, height: 28 }} />
-              <Text style={{
-                fontSize: 17,
-                fontWeight: "500",
-                marginLeft: 5,
-              }}>
+              <Text style={itemDetailStyle.itemPropertyTitle}>
                 Compostable?
               </Text>
               <TouchableOpacity
@@ -786,12 +561,7 @@ export default function ItemDetail({ route }) {
         </View>
 
         {/* Divider */}
-        <View
-          style={{
-            borderBottomColor: "rgba(0,0,0,0.25)",
-            borderBottomWidth: 1,
-          }}
-        />
+        <View style={itemDetailStyle.divider} />
 
         {/* Recyclable? */}
         <View style={{ margin: 10 }}>
@@ -806,11 +576,7 @@ export default function ItemDetail({ route }) {
               alignItems: "center",
             }}>
               <Image source={itemDetailImages.recyclable} style={{ width: 28, height: 28 }} />
-              <Text style={{
-                fontSize: 17,
-                fontWeight: "500",
-                marginLeft: 5,
-              }}>
+              <Text style={itemDetailStyle.itemPropertyTitle}>
                 Recyclable?
               </Text>
               <TouchableOpacity
@@ -846,33 +612,15 @@ export default function ItemDetail({ route }) {
 
         </View>
 
-
       </View>
 
       {/* Divider */}
-      <View
-        style={{
-          borderBottomColor: "rgba(0,0,0,0.25)",
-          borderBottomWidth: 1,
-        }}
-      />
+      <View style={itemDetailStyle.divider} />
 
       {/* What Can I Do Button */}
       <View style={{ marginHorizontal: 10 }}>
         <TouchableOpacity
-          style={{
-            width: "88%",
-            marginTop: 20,
-            padding: 12,
-            borderRadius: 30,
-            backgroundColor: "#70BF41",
-            shadowColor: "rgba(0,0,0,0.4)",
-            shadowOffset: { height: 1, width: 1 },
-            shadowOpacity: 0.5,
-            alignSelf: "center",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={itemDetailStyle.whatCanIDoButton}
           onPress={() => {
             setWhatCanIDoDropdown(!whatCanIDoDropdown);
           }}>
@@ -889,14 +637,7 @@ export default function ItemDetail({ route }) {
           {whatCanIDoDropdown ? (
             <View style={{ width: "100%" }}>
               <Text
-                style={{
-                  marginTop: 15,
-                  alignSelf: "center",
-                  width: "77%",
-                  fontWeight: "600",
-                  fontSize: 16,
-                  color: "white",
-                }}>
+                style={itemDetailStyle.whatCanIDoText}>
                 Information for each item will appear here in the future.
               </Text>
               <MaterialCommunityIcons
@@ -930,131 +671,24 @@ export default function ItemDetail({ route }) {
               justifyContent: "space-between",
             }}>
               {/* Quantity Picker */}
-              <View style={{ alignItems: "center" }}>
-                <Text style={{
-                  fontSize: 25,
-                  fontWeight: "500",
-                }}>
-                  Quantity
-                  {
-                    (getItemDisplayMetric(itemName, globalUnit) === "lb" ||
-                      getItemDisplayMetric(itemName, globalUnit) === "kg") &&
-                    (<Text> ({getItemDisplayMetric(itemName, globalUnit)})</Text>)
-                  }
-                </Text>
-                <Animated.View style={[
-                  calculatorStyle.pickerContainer,
-                  calculatorStyle.animatedShadow, {
-                    shadowOpacity: quantityPickerShadowLift,
-                  }]}>
-                  <TextInput
-                    style={{
-                      flex: 1,
-                      fontSize: dynamicFontSize,
-                      maxWidth: "75%",
-                    }}
-                    onContentSizeChange={onContentSizeChange}
-                    numberOfLines={1}
-                    textAlign={"center"}
-                    placeholder={"Select"}
-                    keyboardType={"decimal-pad"}
-                    returnKeyType={"done"}
-                    editable={false}
-                    value={quantity ? quantity.toString() : ""}
-                    onTouchStart={() => {
-                      picker.current.togglePicker(true);
-                    }}
-                  />
-                  <TouchableOpacity
-                    style={calculatorStyle.chevronIconStyle}
-                    onPress={() => picker.current.togglePicker(true)}>
-                    <Chevron type={"thin"} size={1}></Chevron>
-                  </TouchableOpacity>
-                  <RNPickerSelect
-                    ref={picker}
-                    items={quantities}
-                    value={pickerValue}
-                    placeholder={{
-                      label: "Pick a quantity",
-                      value: null,
-                      color: "#9EA0A4",
-                    }}
-                    style={{
-                      inputIOS: {
-                        display: "none",
-                      },
-                    }}
-                    InputAccessoryView={() => {
-                      return (
-                        <MainPickerInputAccessoryView
-                          initialQuantity={quantity}
-                          handleQuantityUpdate={handleQuantityUpdate} />
-                      );
-                    }}
-                    onOpen={() => {
-                      global.occupied = true;
-                      liftSelfUp("quantityPicker");
-                    }}
-                    onValueChange={(value) => {
-                      if (value !== null) {
-                        setPickerValue(value);
-                        setQuantity(value);
-                      }
-                    }}
-                    onClose={() => {
-                      global.occupied = false;
-                      setPickerValue(null);
-                      dropSelfDown("quantityPicker");
-                    }}
-                  />
-                </Animated.View>
-              </View>
-              <View style={{ alignItems: "center" }}>
-                <Text style={{
-                  fontSize: 25,
-                  fontWeight: "500",
-                }}>
-                  Frequency
-                </Text>
-                <Animated.View style={[calculatorStyle.animatedShadow, {
-                  shadowOpacity: frequencyPickerShadowLift,
-                }]}>
-                  <RNPickerSelect
-                    items={frequencies}
-                    value={frequency}
-                    placeholder={{
-                      label: "Select a frequency",
-                      inputLabel: "Select",
-                      value: null,
-                      color: "#9EA0A4",
-                    }}
-                    Icon={() => {
-                      return <Chevron type={"thin"} size={1}></Chevron>;
-                    }}
-                    style={{
-                      inputIOS: {
-                        marginBottom: 1,
-                        fontSize: 20,
-                        textAlign: "center",
-                        marginRight: 25,
-                      },
-                      inputIOSContainer: calculatorStyle.pickerContainer,
-                      iconContainer: calculatorStyle.chevronIconStyle,
-                    }}
-                    onOpen={() => {
-                      global.occupied = true;
-                      liftSelfUp("frequencyPicker");
-                    }}
-                    onValueChange={(frequency) => {
-                      setFrequency(frequency);
-                    }}
-                    onClose={() => {
-                      global.occupied = false;
-                      dropSelfDown("frequencyPicker");
-                    }}
-                  />
-                </Animated.View>
-              </View>
+              <QuantityPicker
+                itemName={itemName}
+                globalUnit={globalUnit}
+                pickerValue={quantityPickerValue}
+                setQuantityPickerValue={setQuantityPickerValue}
+                quantity={quantity}
+                setQuantity={setQuantity}
+                handleQuantityUpdate={handleQuantityUpdate}
+                hasTitle={true}
+                dynamicFontScaleFactor={0.33}
+              />
+              {/* Frequency Picker */}
+              <FrequencyPicker
+                frequency={frequency}
+                setFrequency={setFrequency}
+                hasTitle={true}
+                hasPlaceholder={true}
+              />
             </View>
           </View>
 
@@ -1139,59 +773,9 @@ export default function ItemDetail({ route }) {
               </Text>
 
               {/* Impact Dropdown */}
-              <Animated.View style={[calculatorStyle.animatedShadow, {
-                width: "100%",
-                shadowOpacity: impactPickerShadowLift,
-              }]}>
-                <RNPickerSelect
-                  items={[
-                    { label: "Daily", value: "daily" },
-                    { label: "Weekly", value: "weekly" },
-                    { label: "Monthly", value: "monthly" },
-                    { label: "Yearly", value: "yearly" },
-                  ]}
-                  value={impactUnit}
-                  placeholder={{}}
-                  Icon={() => {
-                    return <Chevron type={"thin"} size={1}></Chevron>;
-                  }}
-                  style={{
-                    inputIOS: {
-                      height: "100%",
-                      textAlign: "center",
-                      fontSize: 20,
-                    },
-                    viewContainer: {
-                      alignSelf: "center",
-                      backgroundColor: "white",
-                      width: "90%",
-                      height: 45,
-                      marginTop: 5,
-                      borderWidth: 2,
-                      borderRadius: 20,
-                      borderColor: "#80CAFF",
-                    },
-                    iconContainer: {
-                      height: "100%",
-                      width: 30,
-                      marginRight: 5,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    },
-                  }}
-                  onOpen={() => {
-                    global.occupied = true;
-                    liftSelfUp("impactPicker");
-                  }}
-                  onValueChange={(unit) => {
-                    setImpactUnit(unit);
-                  }}
-                  onClose={() => {
-                    global.occupied = false;
-                    dropSelfDown("impactPicker");
-                  }}
-                />
-              </Animated.View>
+              <ImpactPicker
+                impactUnit={impactUnit}
+                setImpactUnit={setImpactUnit} />
 
               {/* Running Total Number */}
               <View style={{

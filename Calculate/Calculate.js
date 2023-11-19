@@ -1,14 +1,12 @@
 import {
-  Alert, Animated,
+  Alert,
   Dimensions,
   Image,
-  ImageBackground, KeyboardAvoidingView,
+  ImageBackground,
   Modal, SafeAreaView,
   ScrollView,
   Share,
-  StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View
 } from "react-native";
@@ -17,10 +15,7 @@ import React, {useEffect, useRef, useState} from "react";
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import {styles} from "../Comparing/Styles";
 import RNPicker from "../components/RNModalPicker/RNModalPicker";
-import {Chevron} from "react-native-shapes";
-import RNPickerSelect from "react-native-picker-select";
 import analytics from '@react-native-firebase/analytics';
-import pluralize from 'pluralize';
 import RunningTotalItem from "./RunningTotalItem";
 import CalculateContainer from "../components/CalculateContainer";
 import {
@@ -42,25 +37,18 @@ import Profiles from "../ImageDB";
 import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import {createStackNavigator} from "@react-navigation/stack";
 import {NumberWithTextLabel, NumberWithThousandSeparation} from "./NumberFormatter";
-import {SearchBar} from "@rneui/themed";
-import { getItemDisplayMetric, quantities } from "./CalculatorGeneral";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {calculatorStyle} from "../Styles/Style"
+import { GLSwitcher } from "../components/GLSwitcher";
+import { FrequencyPicker, ImpactPicker, QuantityPicker } from "./CustomPicker";
 
 export default function Calculator ({route}) {
   const scrollViewRef = useRef(null);
   const [autoScroll, setAutoScroll] = useState(false);
 
   // Global unit setting
-  const [unit, setUnit] = useState('G');
+  const [globalUnit, setGlobalUnit] = useState('G');
 
-  // Picker values
-  const frequencies = [
-    {label: 'single use', value: 'single_use'},
-    {label: 'a day', value: 'per_day'},
-    {label: 'a week', value: 'per_week'},
-    {label: 'a month', value: 'per_month'},
-    {label: 'a year', value: 'per_year'},
-  ];
   const frequency_values = {
     single_use: 1,
     per_day: 365,
@@ -93,113 +81,15 @@ export default function Calculator ({route}) {
   }, [itemDetails]);
 
   // Two pickers of the main calculator
-  const picker = useRef(null);
-  const [pickerValue, setPickerValue] = useState(null);
-  const [dynamicFontSize, setDynamicFontSize] = useState(20);
+  const [quantityPickerValue, setQuantityPickerValue] = useState(null);
   const [quantity, setQuantity] = useState('');
   const [frequency, setFrequency] = useState('');
   const [impactUnit, setImpactUnit] = useState('yearly');
-  const quantityPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const frequencyPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const impactPickerShadowLift = useRef(new Animated.Value(0)).current;
-  const liftSelfUp = (pickerName) => {
-    Animated.timing(
-      pickerName === 'frequencyPicker' ? frequencyPickerShadowLift : (pickerName === 'quantityPicker' ? quantityPickerShadowLift : impactPickerShadowLift), {
-        toValue: 0.4,
-        duration: 150,
-        useNativeDriver: true
-      }).start();
-  }
-  const dropSelfDown = (pickerName) => {
-    Animated.timing(
-      pickerName === 'frequencyPicker' ? frequencyPickerShadowLift : (pickerName === 'quantityPicker' ? quantityPickerShadowLift : impactPickerShadowLift), {
-        toValue: 0,
-        duration: 150,
-        useNativeDriver: true
-      }).start();
-  }
-  const scaleFontSize = (width) => {
-    const actualWidth = width + dynamicFontSize;
-    const scaledSize = Math.min(20, dynamicFontSize * (DeviceWidth * 0.33 / actualWidth));
-    setDynamicFontSize(scaledSize);
-  }
-  const onContentSizeChange = ({ nativeEvent }) => {
-    const { target, contentSize } = nativeEvent;
-    const { width } = contentSize;
-    scaleFontSize(width);
-  }
+
   // Experimental Stuff
-  const [mainQuantityPickerHeight, setMainQuantityPickerHeight] = useState(0);
   function handleQuantityUpdate(newQuantity) {
     setQuantity(newQuantity);
-    setPickerValue(newQuantity);
-  }
-  function MainPickerInputAccessoryView({initialQuantity, handleQuantityUpdate}) {
-    // experimental
-    const mainSearchBar = useRef(null);
-    const [inputBarText, setInputBarText] = useState(initialQuantity);
-    const [displayMetric, setDisplayMetric] = useState('');
-    useEffect(() => {
-      if (currentItem === '') return
-      let itemDisplayMetricFetched = getItemDisplayMetric(currentItem, unit);
-      if (itemDisplayMetricFetched === 'lb' ||
-        itemDisplayMetricFetched === 'kg' ||
-        itemDisplayMetricFetched === 'dozen') {
-        setDisplayMetric(itemDisplayMetricFetched);
-      } else {
-        setDisplayMetric(pluralize(itemDisplayMetricFetched, inputBarText*1));
-      }
-    }, [inputBarText]);
-    return(
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{
-          backgroundColor: '#D2D4D9',
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: -3
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 3,
-        }}>
-        <SearchBar
-          ref={mainSearchBar}
-          keyboardType={'decimal-pad'}
-          placeholder="Pick a quantity or type here..."
-          platform={'ios'}
-          searchIcon={null}
-          clearIcon={currentItem !== '' &&
-            (<Text style={{fontSize: 15}}>{displayMetric}</Text>)}
-          cancelButtonTitle={'Done'}
-          containerStyle={{
-            backgroundColor: '#D2D4D9',
-          }}
-          inputContainerStyle={{
-            backgroundColor: 'white',
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 1
-            },
-            shadowOpacity: 0.1,
-            shadowRadius: 3,
-          }}
-          value={inputBarText ? inputBarText.toString() : ''}
-          onChangeText={(value) => {
-            if (!isNaN(value)) {
-              setInputBarText(value);
-            }
-          }}
-          onBlur={()=>{
-            handleQuantityUpdate(inputBarText);
-          }}
-          onClear={()=>{
-            handleQuantityUpdate(inputBarText);
-          }}
-        />
-      </KeyboardAvoidingView>
-    )
+    setQuantityPickerValue(newQuantity);
   }
   // End
 
@@ -306,7 +196,7 @@ export default function Calculator ({route}) {
   function resetMainCalculator() {
     setComputeCompleted(false);
     setCurrentItem('');
-    setPickerValue(null);
+    setQuantityPickerValue(null);
     setQuantity('');
     setFrequency('');
     setItemDetails({
@@ -588,36 +478,7 @@ export default function Calculator ({route}) {
         {/* G/L switch and Calculator title*/}
         <View style={calculatorStyle.switchAndTitleContainer}>
           {/* G/L switch*/}
-          <View
-            style={calculatorStyle.unitSwitchContainer}>
-            <TouchableOpacity onPress={() => {
-              setUnit('G');
-              analytics().logEvent('Use_GL_switch',{
-                switch_to: 'Gallons'
-              });
-            }}>
-              <Text
-                style={{
-                  color: unit === 'G' ? '#00ADEF' : 'black',
-                  fontSize: 20,
-                  fontWeight: unit === 'G' ? 'bold' : 'normal',
-                }}>G</Text>
-            </TouchableOpacity>
-            <Text style={{fontSize: 20}}> / </Text>
-            <TouchableOpacity onPress={() => {
-              setUnit('L');
-              analytics().logEvent('Use_GL_switch',{
-                switch_to: 'Liters'
-              })
-            }}>
-              <Text
-                style={{
-                  color: unit === 'L' ? '#00ADEF' : 'black',
-                  fontSize: 20,
-                  fontWeight: unit === 'L' ? 'bold' : 'normal',
-                }}>L</Text>
-            </TouchableOpacity>
-          </View>
+          <GLSwitcher globalUnit={globalUnit} switchHandler={setGlobalUnit}/>
           {/* Calculator Title */}
           <View style={calculatorStyle.calculatorTitleContainer}>
             <Text
@@ -680,7 +541,7 @@ export default function Calculator ({route}) {
             selectedValue={(index, currentItem) => {
               if (computeCompleted) {
                 setQuantity(null);
-                setPickerValue(null);
+                setQuantityPickerValue(null);
                 setFrequency(null);
                 setComputeCompleted(false);
               }
@@ -696,135 +557,27 @@ export default function Calculator ({route}) {
             width: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
+            marginTop: 30,
           }}>
             {/* Quantity Picker */}
-            <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 25, marginTop: 30, fontWeight: '500'}}>
-                Quantity
-                { currentItem !== '' &&
-                  (getItemDisplayMetric(currentItem, unit) ==='lb'||
-                    getItemDisplayMetric(currentItem, unit) ==='kg') &&
-                  (<Text> ({getItemDisplayMetric(currentItem, unit)})</Text>)
-                }
-              </Text>
-              <Animated.View style={[
-                calculatorStyle.pickerContainer,
-                calculatorStyle.animatedShadow, {
-                  shadowOpacity: quantityPickerShadowLift
-                }]}>
-                <TextInput
-                  // Experimental stuff
-                  onLayout={(event)=>{
-                    const layout = event.nativeEvent.layout;
-                    setMainQuantityPickerHeight(layout.height);
-                  }}
-                  // End
-                  style={{
-                    flex: 1,
-                    fontSize: dynamicFontSize,
-                    maxWidth: '75%',
-                  }}
-                  onContentSizeChange={onContentSizeChange}
-                  numberOfLines={1}
-                  textAlign={'center'}
-                  placeholder={'Select'}
-                  keyboardType={'decimal-pad'}
-                  returnKeyType={'done'}
-                  editable={false}
-                  value={quantity ? quantity.toString() : ''}
-                  onTouchStart={() => {
-                    picker.current.togglePicker(true);
-                  }}
-                />
-                <TouchableOpacity
-                  style={calculatorStyle.chevronIconStyle}
-                  onPress={() => picker.current.togglePicker(true)}>
-                  <Chevron type={'thin'} size={1}></Chevron>
-                </TouchableOpacity>
-                <RNPickerSelect
-                  ref={picker}
-                  items={quantities}
-                  value={pickerValue}
-                  placeholder={{
-                    label: 'Pick a quantity',
-                    value: null,
-                    color: '#9EA0A4',
-                  }}
-                  style={{
-                    inputIOS: {
-                      display: 'none'
-                    }
-                  }}
-                  InputAccessoryView={() => {
-                    return (
-                      <MainPickerInputAccessoryView
-                        initialQuantity={quantity}
-                        handleQuantityUpdate={handleQuantityUpdate}/>
-                    )
-                  }}
-                  onOpen={() => {
-                    global.occupied = true;
-                    liftSelfUp("quantityPicker");
-                  }}
-                  onValueChange={(value) => {
-                    if (value !== null) {
-                      setPickerValue(value);
-                      setQuantity(value);
-                    }
-                  }}
-                  onClose={() => {
-                    global.occupied = false;
-                    setPickerValue(null);
-                    dropSelfDown('quantityPicker');
-                  }}
-                />
-              </Animated.View>
-            </View>
+            <QuantityPicker
+              itemName={currentItem}
+              globalUnit={globalUnit}
+              pickerValue={quantityPickerValue}
+              setQuantityPickerValue={setQuantityPickerValue}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              handleQuantityUpdate={handleQuantityUpdate}
+              hasTitle={true}
+              dynamicFontScaleFactor={0.33}
+            />
             {/* Frequency Picker */}
-            <View style={{alignItems: 'center'}}>
-              <Text style={{fontSize: 25, marginTop: 30, fontWeight: '500'}}>
-                Frequency
-              </Text>
-              <Animated.View style={[calculatorStyle.animatedShadow, {
-                shadowOpacity: frequencyPickerShadowLift
-              }]}>
-                <RNPickerSelect
-                  items={frequencies}
-                  value={frequency}
-                  placeholder={{
-                    label: 'Select a frequency',
-                    inputLabel: 'Select',
-                    value: null,
-                    color: '#9EA0A4',
-                  }}
-                  Icon={() => {
-                    return <Chevron type={'thin'} size={1}></Chevron>
-                  }}
-                  style={{
-                    inputIOS: {
-                      marginBottom: 1,
-                      fontSize: 20,
-                      textAlign: 'center',
-                      marginRight: 25,
-                    },
-                    inputIOSContainer: calculatorStyle.pickerContainer,
-                    iconContainer: calculatorStyle.chevronIconStyle,
-                  }}
-                  onOpen={() => {
-                    global.occupied = true;
-                    liftSelfUp("frequencyPicker");
-                  }}
-                  onValueChange={(frequency) => {
-                    setFrequency(frequency);
-                  }}
-                  onClose={() => {
-                    global.occupied = false;
-                    dropSelfDown("frequencyPicker");
-                  }}
-                />
-              </Animated.View>
-
-            </View>
+            <FrequencyPicker
+              frequency={frequency}
+              setFrequency={setFrequency}
+              hasTitle={true}
+              hasPlaceholder={true}
+            />
           </View>
 
           {/* Buttons and Result Display Area*/}
@@ -899,7 +652,7 @@ export default function Calculator ({route}) {
                   fontSize: 20,
                   fontWeight: 'bold',
                 }}>
-                  {unit === 'G' ?
+                  {globalUnit === 'G' ?
                     NumberWithThousandSeparation(itemDetails.itemWaterInGallon) + ' ' + itemDetails.itemDisplayedUnitLabelInGallon :
                     NumberWithThousandSeparation(itemDetails.itemWaterInLiter) + ' ' + itemDetails.itemDisplayedUnitLabelInLiter}
                 </Text>
@@ -939,7 +692,7 @@ export default function Calculator ({route}) {
                     fontWeight: 'bold',
                     maxWidth: '95%'
                   }}>
-                  {unit === 'G' ?
+                  {globalUnit === 'G' ?
                     NumberWithTextLabel(itemDetails.itemWaterInGallon * frequency_values[frequency] * quantity) + ' gal.' :
                     NumberWithTextLabel(itemDetails.itemWaterInLiter * frequency_values[frequency] * quantity) + ' L.'}
                 </Text>
@@ -1136,7 +889,7 @@ export default function Calculator ({route}) {
                 >
                   <RunningTotalItem
                     itemIndex={index}
-                    unit={unit}
+                    globalUnit={globalUnit}
                     itemName={runningItem.itemName}
                     itemDisplayedMetricInGallon={runningItem.itemDisplayedMetricInGallon}
                     itemDisplayedMetricInLiter={runningItem.itemDisplayedMetricInLiter}
@@ -1171,30 +924,30 @@ export default function Calculator ({route}) {
                   <View
                     style={calculatorStyle.summaryBarSwitchContainer}>
                     <TouchableOpacity onPress={() => {
-                      setUnit('G');
+                      setGlobalUnit('G');
                       analytics().logEvent('Use_GL_switch',{
                         switch_to: 'Gallons'
                       })
                     }}>
                       <Text
                         style={{
-                          color: unit === 'G' ? '#00ADEF' : 'black',
+                          color: globalUnit === 'G' ? '#00ADEF' : 'black',
                           fontSize: 20,
-                          fontWeight: unit === 'G' ? 'bold' : 'normal',
+                          fontWeight: globalUnit === 'G' ? 'bold' : 'normal',
                         }}>G</Text>
                     </TouchableOpacity>
                     <Text style={{fontSize: 20}}> / </Text>
                     <TouchableOpacity onPress={() => {
-                      setUnit('L');
+                      setGlobalUnit('L');
                       analytics().logEvent('Use_GL_switch',{
                         switch_to: 'Liters'
                       })
                     }}>
                       <Text
                         style={{
-                          color: unit === 'L' ? '#00ADEF' : 'black',
+                          color: globalUnit === 'L' ? '#00ADEF' : 'black',
                           fontSize: 20,
-                          fontWeight: unit === 'L' ? 'bold' : 'normal',
+                          fontWeight: globalUnit === 'L' ? 'bold' : 'normal',
                         }}>L</Text>
                     </TouchableOpacity>
                   </View>
@@ -1216,7 +969,7 @@ export default function Calculator ({route}) {
                       maxWidth: DeviceWidth * 3 / 7
                     }}
                           numberOfLines={1}>
-                      {unit === 'G' ?
+                      {globalUnit === 'G' ?
                         NumberWithTextLabel(impactNumber['subTotalGallon']) + ' G' :
                         NumberWithTextLabel(impactNumber['subTotalLiter']) + ' L'}
                     </Text>
@@ -1248,60 +1001,15 @@ export default function Calculator ({route}) {
                   </Text>
 
                   {/* Impact Dropdown */}
-                  <Animated.View style={[calculatorStyle.animatedShadow, {
-                    width: '100%',
-                    shadowOpacity: impactPickerShadowLift
-                  }]}>
-                    <RNPickerSelect
-                      items={[
-                        //{label: 'Single Use', value: 'single use'},
-                        {label: 'Daily', value: 'daily'},
-                        {label: 'Weekly', value: 'weekly'},
-                        {label: 'Monthly', value: 'monthly'},
-                        {label: 'Yearly', value: 'yearly'},
-                      ]}
-                      value={impactUnit}
-                      placeholder={{}}
-                      Icon={() => {
-                        return <Chevron type={'thin'} size={1}></Chevron>
-                      }}
-                      style={{
-                        inputIOS: {
-                          height: '100%',
-                          textAlign: 'center',
-                          fontSize: 20,
-                        },
-                        viewContainer: {
-                          alignSelf: 'center',
-                          backgroundColor: 'white',
-                          width: '90%',
-                          height: 45,
-                          marginTop: 5,
-                          borderWidth: 2,
-                          borderRadius: 20,
-                          borderColor: '#80CAFF',
-                        },
-                        iconContainer: {
-                          height: '100%',
-                          width: 30,
-                          marginRight: 5,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        },
-                      }}
-                      onOpen={() => {
-                        global.occupied = true;
-                        liftSelfUp("impactPicker");
-                      }}
-                      onValueChange={(unit) => {
-                        setImpactUnit(unit)
-                      }}
-                      onClose={() => {
-                        global.occupied = false;
-                        dropSelfDown("impactPicker");
-                      }}
-                    />
-                  </Animated.View>
+                  <ImpactPicker
+                    impactUnit={impactUnit}
+                    setImpactUnit={setImpactUnit}
+                    customUnits={[
+                      {label: 'Daily', value: 'daily'},
+                      {label: 'Weekly', value: 'weekly'},
+                      {label: 'Monthly', value: 'monthly'},
+                      {label: 'Yearly', value: 'yearly'},
+                    ]} />
 
                   {/* Running Total Number */}
                   <View style={{
@@ -1322,7 +1030,7 @@ export default function Calculator ({route}) {
                         fontWeight: '500',
                         marginTop: 20
                       }}>
-                      {unit === 'G' ?
+                      {globalUnit === 'G' ?
                         NumberWithTextLabel(impactNumber[impactUnit]['Gallon']) + ' Gal' :
                         NumberWithTextLabel(impactNumber[impactUnit]['Liter']) + ' L'}
                     </Text>
@@ -1566,92 +1274,3 @@ export const CalculateStackScreen = () => (
 
 const DeviceWidth = Dimensions.get('window').width;
 const DeviceHeight = Dimensions.get('window').height;
-export const calculatorStyle = StyleSheet.create({
-  switchAndTitleContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 80
-  },
-  unitSwitchContainer: {
-    position: 'absolute',
-    alignSelf: 'flex-start',
-    marginLeft: DeviceWidth * 0.05,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 65,
-    height: 44,
-    paddingHorizontal: 10,
-    borderColor: '#00ADEF',
-    borderWidth: 2,
-    borderRadius: 10,
-  },
-  calculatorTitleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 50,
-  },
-  calculatorImageContainer: {
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  chevronIconStyle: {
-    width: 30,
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 5
-  },
-  pickerContainer: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 50,
-    width: DeviceWidth * 0.4,
-    marginTop: 10,
-    borderWidth: 2,
-    borderColor: '#80CAFF',
-    borderRadius: 20,
-  },
-  calculateButton: {
-    padding: 15,
-    marginRight: 5,
-    borderRadius: 30,
-    backgroundColor:'#70BF41',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  runningTotalBarContainer: {
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#C6C6C633'
-  },
-  waterDropIcon: {
-    width: 30,
-    height: 30,
-    position: 'absolute',
-    right: 45,
-    marginTop: 5
-  },
-  summaryBarSwitchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 65,
-    height: 44,
-    paddingHorizontal: 10,
-    borderColor: '#00ADEF',
-    borderWidth: 2,
-    borderRadius: 10,
-  },
-  animatedShadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowRadius: 2,
-  },
-});
