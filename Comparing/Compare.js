@@ -193,13 +193,11 @@ function CompareItemPicker ({slotNumber, closeSelf}) {
         style={styles.selectItemText}>
         Select Item {slotNumber + 1}
       </Text>
-      <View style={styles.container}>
         <View
           style={{
-            width: 200,
             flexDirection: 'row',
             alignItems: 'center',
-            alignContent: 'center',
+            justifyContent: 'center',
           }}>
           <RNPicker
             dataSource={globalList}
@@ -230,7 +228,7 @@ function CompareItemPicker ({slotNumber, closeSelf}) {
               name="close"
               color={'gray'}
               size={40}
-              style={{marginLeft: -18}}
+              style={styles.compareItemSlotDeleteCross}
               onPress={() => {
                 closeSelf()
                 setUpdateSelf(!updateSelf)
@@ -239,7 +237,6 @@ function CompareItemPicker ({slotNumber, closeSelf}) {
           )}
         </View>
       </View>
-    </View>
   )
 }
 

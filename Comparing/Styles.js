@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
     elevation:3,
     marginTop: 10,
     paddingRight: 25,
-    marginRight: 50,
     marginBottom: 2,
     height: 50,
     borderWidth:2,
@@ -219,6 +218,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: DeviceWidth * 0.7,
     borderColor: '#80CAFF',
+  },
+  compareItemSlotDeleteCross: {
+    position: "absolute",
+    right: -40,
+    top: 15
   },
   bottomBorderLine: {
     borderBottomColor: 'lightgray',
