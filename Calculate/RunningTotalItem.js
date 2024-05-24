@@ -27,7 +27,12 @@ export default function RunningTotalItem (
     itemQuantity,
     itemFrequency,
     updateRunningTotalList,
-    removeItemFromRunningTotalList,
+    removeItemFromRunningTotalList = () => {},
+    removable = true,
+    customQuantityPickerStyle = null,
+    dynamicFontScaleFactor = null,
+    customFrequencies = null,
+    customFrequencyPickerStyle = null
   }) {
 
   // Main picker
@@ -187,7 +192,7 @@ export default function RunningTotalItem (
             quantity={quantity}
             setQuantity={setQuantity}
             handleQuantityUpdate={handleQuantityUpdate}
-            customStyle={{
+            customStyle={customQuantityPickerStyle ? customQuantityPickerStyle : {
               paddingHorizontal: 5,
               flexDirection: 'row',
               alignItems: 'center',
@@ -205,14 +210,14 @@ export default function RunningTotalItem (
               initialQuantity={quantity}
               handleQuantityUpdate={handleQuantityUpdate}/>}
             inputTextMaxWidth={"70%"}
-            dynamicFontScaleFactor={0.21}
+            dynamicFontScaleFactor={dynamicFontScaleFactor ? dynamicFontScaleFactor : 0.21}
             hasTitle={false}
           />
           <FrequencyPicker
             frequency={frequency}
             setFrequency={setFrequency}
             hasTitle={false}
-            customFrequencies={[
+            customFrequencies={customFrequencies ? customFrequencies : [
               {label: 'single use', inputLabel: 'S', value: 'single_use'},
               {label: 'a day', inputLabel: 'D', value: 'per_day'},
               {label: 'a week', inputLabel: 'W', value: 'per_week'},
@@ -220,7 +225,7 @@ export default function RunningTotalItem (
               {label: 'a year', inputLabel: 'Y', value: 'per_year'},
             ]}
             hasPlaceholder={false}
-            customStyle={{
+            customStyle={customFrequencyPickerStyle ? customFrequencyPickerStyle : {
               inputIOS: {
                 fontSize: 20,
                 height: '100%',
@@ -264,15 +269,17 @@ export default function RunningTotalItem (
                 NumberFormatter(itemWaterInGallon * quantity, 1) :
                 NumberFormatter(itemWaterInLiter * quantity, 1)}
             </Text>
-            <TouchableOpacity onPress={() => removeItemFromRunningTotalList(itemIndex)}>
-              <Image
-                style={{
-                  width: 25,
-                  height: 25,
-                  marginLeft:15,
-                }}
-                source={require('./../images/red_x.png')}/>
-            </TouchableOpacity>
+            {removable &&
+              <TouchableOpacity onPress={() => removeItemFromRunningTotalList(itemIndex)}>
+                <Image
+                  style={{
+                    width: 25,
+                    height: 25,
+                    marginLeft:15,
+                  }}
+                  source={require('./../images/red_x.png')}/>
+              </TouchableOpacity>
+            }
           </View>
         </View>
       </View>
