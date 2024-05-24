@@ -7,6 +7,7 @@ import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
 import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import {RankingInfoModal, RankingLearnMore} from "../components/Modals/Modals";
+import { GLSwitcher } from "../components/GLSwitcher";
 
 let fetchedData = {};
 let items = {};
@@ -135,49 +136,21 @@ export const RankingPage = ({category, id}) => {
     <View style={styles.meats}>
       <ScrollView>
 
-        <View style={{flexDirection: 'row'}}>
-          <View style={{
-            flexDirection: 'row',
-            marginTop: '5%',
-            marginLeft: 20,
-            borderColor: '#00ADEF',
-            borderWidth: 2,
-            borderRadius: 10,
-            width: 65,
-            paddingLeft: 10,
-            paddingRight: 10
-          }}>
-            <TouchableOpacity onPress={() => { handleFetch(false); setUnit('G');
-              analytics().logEvent('Use_GL_switch',{
-                switch_to: 'Gallons'
+        <GLSwitcher globalUnit={unit} switchHandler={setUnit}/>
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, paddingTop: 15, paddingLeft: 30, paddingBottom: 10}}>
+            {category}
+          </Text>
+          <TouchableOpacity
+            style={{paddingTop: 8}}
+            onPress={()=>{
+              setInfoVisible(true)
+              analytics().logEvent('Info_button_pressed',{
+                infoName: 'Virtual_Water'
               })
-            }} >
-              <Text style={{ color: unit === 'G' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'G' ? 'bold' : 'normal' }}>G</Text>
-            </TouchableOpacity>
-            <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
-            <TouchableOpacity onPress={() => { handleFetch(false); setUnit('L');
-              analytics().logEvent('Use_GL_switch',{
-                switch_to: 'Liters'
-              })
-            }} >
-              <Text style={{ color: unit === 'L' ? '#00ADEF' : 'black', paddingTop: 5, fontSize: 20, fontWeight: unit === 'L' ? 'bold' : 'normal' }}>L</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, width: DeviceWidth*0.6}}>
-            <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 25, paddingTop: 15, paddingLeft: 10, paddingRight: 0, paddingBottom: 10}}>
-              {category}
-            </Text>
-            <TouchableOpacity
-              style={{paddingTop: 8}}
-              onPress={()=>{
-                setInfoVisible(true)
-                analytics().logEvent('Info_button_pressed',{
-                  infoName: 'Virtual_Water'
-                })
-              }}>
-              <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
-            </TouchableOpacity>
-          </View>
+            }}>
+            <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
+          </TouchableOpacity>
         </View>
 
         <View>
