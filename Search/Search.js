@@ -20,7 +20,7 @@ import {
 import {styles} from './Style';
 const DeviceWidth = Dimensions.get('window').width;
 
-const Search = ({searchData}) => {
+export default function Search() {
   const navigation = useNavigation();
   const [line, setLine] = useState(1);
   const [index, setIndex] = useState(0);
@@ -147,5 +147,3 @@ const Search = ({searchData}) => {
       </View>
   );
 };
-
-export default Search;

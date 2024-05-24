@@ -39,6 +39,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {styles} from './Ranking/Styles';
 import {RankStackScreen} from './Ranking/Ranking';
+import Search from './Search/Search';
 import {CalculateStackScreen} from './Calculate/Calculate';
 
 //Stuff for extra menu
@@ -367,10 +368,9 @@ const LandingDetails = () => {
         />
         <Tab.Screen
           name="Search Tool"
-          component={GoToSearch}
+          component={Search}
           options={{
             tabBarLabel: 'Search',
-            tabBarVisible: true,
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons
                 name="magnify"
