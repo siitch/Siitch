@@ -6,7 +6,6 @@ import React from "react";
 import {styles} from "../../Comparing/Styles";
 import Profiles from "../../ImageDB";
 import { useNavigation } from "@react-navigation/native";
-import NumberTicker from "../NumberTicker";
 
 let deviceWidth = Dimensions.get('screen').width
 
@@ -497,7 +496,7 @@ export const ContextAndChallengeModal = ({modalVisible, showContext, handler}) =
           </View>
         )}
         {showContext && (
-          <ScrollView style={{backgroundColor: 'white'}}>
+          <ScrollView>
             <View style={modalStyle.contextAndChallengeModalContentContainer}>
               <Text style={{textAlign: 'center', marginTop: 30}}>
                 Each person on average in the US{'\n'}
