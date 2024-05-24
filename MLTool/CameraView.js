@@ -8,7 +8,7 @@ import { // Native components
   View
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Camera} from "expo-camera";
+import {Camera} from "expo-camera/legacy";
 // Third party loading indicator, looks great
 import {ActivityIndicator} from "react-native-paper";
 // Used to change the dimension of photo
