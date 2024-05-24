@@ -1,17 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  Button,
   Image,
-  StyleSheet,
   Dimensions,
   TouchableOpacity,
   ScrollView,
   ImageBackground
 } from 'react-native';
-import { Icon } from 'react-native-elements';
 const {width, height} = Dimensions.get('screen');
 
 import Onboarding from 'react-native-onboarding-swiper';
@@ -159,28 +155,3 @@ const Tutorial = () => {
 };
 
 export {Tutorial}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  button: {
-    width: 300,
-    height: 50,
-    color: '#ffffff',
-    alignItems: "center",
-    backgroundColor: "#70BF41",
-    padding: 10,
-    marginBottom: '50%',
-    marginTop: '-10%',
-    borderRadius: 25,
-    justifyContent: 'center'
-
-  },
-  countContainer: {
-    alignItems: "center",
-    padding: 10
-  }
-});
