@@ -1,4 +1,12 @@
-import { Animated, Dimensions, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { frequencies, getItemDisplayMetric, impactUnits, quantities } from "./CalculatorGeneral";
 import { calculatorStyle } from "../Styles/Style";
 import { Chevron } from "react-native-shapes";
@@ -57,6 +65,18 @@ export const QuantityPicker = ({
         calculatorStyle.animatedShadow, {
           shadowOpacity: quantityPickerShadowLift,
         }]}>
+        <TouchableOpacity
+          style={{
+            height: '100%',
+            width: '100%',
+            backgroundColor: 'transparent',
+            position: 'absolute',
+            zIndex: 10,
+          }}
+          onPress={() => {
+            picker.current.togglePicker(true);
+          }}
+        />
         <TextInput
           style={{
             flex: 1,
@@ -71,9 +91,6 @@ export const QuantityPicker = ({
           returnKeyType={"done"}
           editable={false}
           value={quantity ? quantity.toString() : ""}
-          onTouchStart={() => {
-            picker.current.togglePicker(true);
-          }}
         />
         <TouchableOpacity
           style={calculatorStyle.chevronIconStyle}
