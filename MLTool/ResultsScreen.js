@@ -332,7 +332,7 @@ export default function ResultsScreen({route}) {
                     }
                     /* Exclusive item details to be shown using the hardcoded pages */
                     if (p.label === 'Beef' || p.label === 'Jeans' || p.label === 'Makeup'){
-                      navigation.navigate('Search', {name: p.label});
+                      navigation.navigate('SpecialItemTabs', {itemName: p.label});
                     }
                   }}>
                   {p.label}

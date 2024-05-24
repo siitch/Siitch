@@ -46,7 +46,7 @@ export default function Search() {
     const searchRef = ref(FirebaseRealtimeDatabase, image);
     onValue(searchRef, (get) => {
       if (image === 'Beef' || image === 'Jeans' || image === 'Makeup'){
-        navigation.navigate('Search', {name: image, value: get.val()})
+        navigation.navigate('SpecialItemTabs', {itemName: image})
       } else if (get.val() === null) {
         Alert.alert('Error!', "Can't find result for this keyword")
       } else {

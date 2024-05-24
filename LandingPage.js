@@ -58,7 +58,11 @@ import Profiles from './ImageDB';
 import {CameraScreen} from "./MLTool/CameraView";
 import ItemDetail from "./MLTool/ItemDetail";
 import ComparePage from "./Comparing/ComparePage";
-// Don't feel bad Modal
+import { SpecialItemTabs } from "./Search/SpecialItemTabs"; // Beef, Jeans, Makeup Tab Screen
+import What from './MeatComponents/What'; // Beef import
+import WhatJeans from './JeansComponents/WhatJeans'; // Jeans import
+import WhatMakeUp from './MakeupComponents/WhatMakeUp'; // Makeup import
+// Don't feel bad Global Modal
 import {ReactNavigationOverlay} from './components/ReactNavigationOverlay'
 import {Overlay} from './components/overlay'
 import {GlobalModal} from "./components/GlobalModal";
@@ -428,177 +432,6 @@ const LandingDetails = () => {
       </Tab.Navigator>
     );
   };
-  const WaterPage = () => {
-    if (keyword === 'Beef') {
-      return <Water inputData={getData}/>;
-    } else if (keyword === 'Jeans') {
-      return <JeansWater/>;
-    } else {
-      return <MakeupWater/>;
-    }
-  };
-  const HeartPage = () => {
-    if (keyword === 'Beef') {
-      return <Heart/>;
-    } else if (keyword === 'Jeans') {
-      return <JeansHeart/>;
-    } else {
-      return <MakeupHeart/>;
-    }
-  };
-  const VsPage = () => {
-    if (keyword === 'Beef') {
-      return <Vs/>;
-    } else if (keyword === 'Jeans') {
-      return <JeansVs/>;
-    } else {
-      return <MakeupVs/>;
-    }
-  };
-  const RecyclePage = () => {
-    if (keyword === 'Beef') {
-      return <Recycle/>;
-    } else if (keyword === 'Jeans') {
-      return <JeansRecycle/>;
-    } else {
-      return <MakeupRecycle/>;
-    }
-  };
-  const GrassPage = () => {
-    if (keyword === 'Beef') {
-      return <Grass/>;
-    } else if (keyword === 'Jeans') {
-      return <JeansGrass/>;
-    } else {
-      return <MakeupGrass/>;
-    }
-  };
-
-  const SearchDetail = ({route}) => {
-    setGetData(route.params.value);
-    let detail = true;
-    if (
-      route.params.name !== 'Beef' &&
-      route.params.name !== 'Jeans' &&
-      route.params.name !== 'Makeup'
-    ) {
-      detail = false;
-    }
-    setKeyword(route.params.name);
-    if (detail) {
-      return (
-        <Tab.Navigator
-          tabBarOptions={{
-            style: {height: DeviceHeight / 10},
-            showLabel: false,
-          }}>
-          <Tab.Screen
-            name="Water"
-            component={WaterPage}
-            options={{
-              tabBarIcon: ({focused}) =>
-                focused ? (
-                  <Image
-                    source={images.water_drop_click}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ) : (
-                  <Image
-                    source={images.water_drop}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ),
-            }}
-          />
-          <Tab.Screen
-            name="Vs"
-            component={VsPage}
-            options={{
-              tabBarIcon: ({focused}) =>
-                focused ? (
-                  <Image
-                    source={images.vs_select}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ) : (
-                  <Image
-                    source={images.vs}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ),
-            }}
-          />
-          <Tab.Screen
-            name="Env"
-            component={GrassPage}
-            options={{
-              tabBarIcon: ({focused}) =>
-                focused ? (
-                  <Image
-                    source={images.grass_select}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ) : (
-                  <Image
-                    source={images.grass}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ),
-            }}
-          />
-          <Tab.Screen
-            name="Health"
-            component={HeartPage}
-            options={{
-              tabBarIcon: ({focused}) =>
-                focused ? (
-                  <Image
-                    source={images.heart_select}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ) : (
-                  <Image
-                    source={images.heart}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ),
-            }}
-          />
-          <Tab.Screen
-            name="Recycle"
-            component={RecyclePage}
-            options={{
-              tabBarIcon: ({focused}) =>
-                focused ? (
-                  <Image
-                    source={images.recycle_select}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ) : (
-                  <Image
-                    source={images.recycle}
-                    style={{width: DeviceWidth / 9, height: DeviceHeight / 18}}
-                    resizeMode="contain"
-                  />
-                ),
-            }}
-          />
-        </Tab.Navigator>
-      );
-    }
-    return (
-      <NormalSearch name={route.params.name} inputData={route.params.value} />
-    );
-  };
 
   const navigationRef = useNavigationContainerRef();
   const routeNameRef = useRef();
@@ -662,8 +495,8 @@ const LandingDetails = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Search"
-          component={SearchDetail}
+          name="SpecialItemTabs"
+          component={SpecialItemTabs}
           options={({navigation}) => ({
             headerBackTitleVisible: false,
             title: "Detail",
@@ -754,7 +587,19 @@ const LandingDetails = () => {
             ),
           })}
         />
-        <Stack.Screen name="What" component={ToWhat} />
+        <Stack.Screen
+          name="What"
+          component={ToWhat}
+          options={{
+            headerBackTitleVisible: false,
+            title: ''
+          }}
+        />
+        <Stack.Screen
+          name="Onboarding"
+          component={OnboardingScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
       <ReactNavigationOverlay/>
     </NavigationContainer>
