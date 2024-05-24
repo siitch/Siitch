@@ -103,7 +103,6 @@ function Counter ({cost}) {
         number={WaterContainerCounterNumberFormatter(cost / containerType.metric, 1)}
         textSize={25}
         duration={1500}
-        style={{marginBottom: 7}}
         textStyle={{fontWeight: 'bold', color: color}}
       />
     </View>

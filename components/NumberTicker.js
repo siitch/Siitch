@@ -16,7 +16,7 @@ const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
     return (number + '').split('').map((data, index) => {
       if (data === '.' || data === ',') {
         return (
-          <Text key={index} style={[textStyle, {fontSize: textSize, height: textSize}]}>{data}</Text>
+          <Text key={index} style={[textStyle, {fontSize: textSize}]}>{data}</Text>
         );
       }
       return (
@@ -43,7 +43,6 @@ const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
       {unit !== '' && (
         <Text style={{
           ...textStyle,
-          height: textSize,
           fontSize: textSize
         }}>
           {' ' + unit}
