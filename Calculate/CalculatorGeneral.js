@@ -65,6 +65,14 @@ export const frequencies = [
   { label: "a year", value: "per_year" },
 ];
 
+export const frequency_values = {
+  single_use: 1,
+  per_day: 365,
+  per_week: 52,
+  per_month: 12,
+  per_year: 1,
+};
+
 export const impactUnits = [
   { label: "Daily", value: "daily" },
   { label: "Weekly", value: "weekly" },

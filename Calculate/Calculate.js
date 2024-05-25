@@ -41,6 +41,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {calculatorStyle} from "../Styles/Style"
 import { GLSwitcher } from "../components/GLSwitcher";
 import { FrequencyPicker, ImpactPicker, QuantityPicker } from "./CustomPicker";
+import { frequency_values } from "./CalculatorGeneral";
 
 export default function Calculator ({route}) {
   const scrollViewRef = useRef(null);
@@ -48,14 +49,6 @@ export default function Calculator ({route}) {
 
   // Global unit setting
   const [globalUnit, setGlobalUnit] = useState('G');
-
-  const frequency_values = {
-    single_use: 1,
-    per_day: 365,
-    per_week: 52,
-    per_month: 12,
-    per_year: 1,
-  };
 
   // Item values
   const [currentItem, setCurrentItem] = useState('');
