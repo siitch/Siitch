@@ -33,7 +33,7 @@ export const MakeupBrands = ({currentTab}) => {
       {/* What Can I Do */}
       <TouchableHighlight
         onPress={() => {
-          navigation.navigate('What')
+          navigation.navigate('What', {itemName: 'Makeup'})
           analytics().logEvent('What_can_I_do',{
             item: currentTab
           })

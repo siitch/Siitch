@@ -16,7 +16,7 @@ import {MeatBrands} from "./MeatBrands/MeatBrands";
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 const Height = Dimensions.get('window').height;
 
-const Water = ({inputData}) => {
+const Water = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisiblec, setModalVisiblec] = useState(false);
   const [modalVisiblei, setModalVisiblei] = useState(false);

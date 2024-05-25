@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   Image,
-  StyleSheet,
   Dimensions,
   TouchableOpacity,
   ScrollView,
@@ -20,7 +19,7 @@ const OnboardingScreen = () => {
     return(
         <Onboarding
     showDone={false}
-    onSkip={() => navigation.replace("Landing Page")}
+    onSkip={() => navigation.replace("HomeTabs")}
     pages={[
       {
         title: '',
@@ -99,7 +98,7 @@ const OnboardingScreen = () => {
                   justifyContent: 'center'
                 }}
                 onPress={() => {
-                  navigation.replace("Landing Page")
+                  navigation.replace("HomeTabs")
                 }}
               >
                 <Text style={{ color: "white", fontSize:25, fontFamily: 'Arial', fontWeight:'bold'}}>LET'S GET STARTED</Text>
@@ -174,26 +173,3 @@ const OnboardingScreen = () => {
 };
 
 export {OnboardingScreen}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 10,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    button: {
-      width: 300,
-      height: 50,
-      color: '#ffffff',
-      alignItems: "center",
-      backgroundColor: "#70BF41",
-      padding: 10,
-      borderRadius: 25,
-      justifyContent: 'center'
-
-    },
-    countContainer: {
-      alignItems: "center",
-      padding: 10
-    }
-});

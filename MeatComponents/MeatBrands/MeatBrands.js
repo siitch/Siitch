@@ -27,7 +27,7 @@ export const MeatBrands = ({currentTab}) => {
       {/* What Can I Do*/}
       <TouchableHighlight
         onPress={() => {
-          navigation.navigate('What')
+          navigation.navigate('What', {itemName: 'Beef'})
           analytics().logEvent('What_can_I_do',{
             item: currentTab
           })
