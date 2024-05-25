@@ -19,7 +19,7 @@ export const GLSwitcher = ({globalUnit, switchHandler, customStyle}) => {
           G
         </Text>
       </TouchableOpacity>
-      <Text style={{ paddingTop: 5, fontSize: 20 }}> / </Text>
+      <Text style={{ fontSize: 20 }}> / </Text>
       <TouchableOpacity
         onPress={() => switchUnit("L")}>
         <Text

@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
     marginTop: 20,
+    height: '100%',
   },
   title: {
     color: 'black',
