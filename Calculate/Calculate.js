@@ -17,12 +17,10 @@ import {styles} from "../Comparing/Styles";
 import RNPicker from "../components/RNModalPicker/RNModalPicker";
 import analytics from '@react-native-firebase/analytics';
 import RunningTotalItem from "./RunningTotalItem";
-import CalculateContainer from "../components/CalculateContainer";
 import {
   CalculatorInfoModal,
   CalculatorWelcomeModal,
   ContextAndChallengeModal,
-  VirtualWaterInfoModal
 } from "../components/Modals/Modals";
 import ViewShot from "react-native-view-shot";
 import header from "../images/header.png";
@@ -40,8 +38,9 @@ import {NumberWithTextLabel, NumberWithThousandSeparation} from "./NumberFormatt
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {calculatorStyle} from "../Styles/Style"
 import { GLSwitcher } from "../components/GLSwitcher";
-import { FrequencyPicker, ImpactPicker, QuantityPicker } from "./CustomPicker";
+import { FrequencyPicker, QuantityPicker } from "./CustomPicker";
 import { frequency_values } from "./CalculatorGeneral";
+import { RunningTotalImpactArea } from "./RunningTotalImpactArea";
 
 export default function Calculator ({route}) {
   const scrollViewRef = useRef(null);
@@ -77,7 +76,6 @@ export default function Calculator ({route}) {
   const [quantityPickerValue, setQuantityPickerValue] = useState(null);
   const [quantity, setQuantity] = useState('');
   const [frequency, setFrequency] = useState('');
-  const [impactUnit, setImpactUnit] = useState('yearly');
 
   // Experimental Stuff
   function handleQuantityUpdate(newQuantity) {
@@ -240,95 +238,7 @@ export default function Calculator ({route}) {
       scrollViewRef.current.scrollToPosition(0, lastRunningItemPosition + DeviceHeight / 3, true);
     }
   }, [lastRunningItemPosition]);
-  useEffect(() => {
-    function calculateAllTheMath() {
-      if (runningTotalList.length > 0) {
-        let subTotalGallon = 0;
-        let subTotalLiter = 0;
 
-        let singleUseImpactGallon = 0;
-        let singleUseImpactLiter = 0;
-
-        let subYearlyImpactGallon = 0;
-        let subYearlyImpactLiter = 0;
-
-        runningTotalList.forEach((runningItem, i) => {
-          subTotalGallon += runningItem.itemWaterInGallon * runningItem.itemQuantity;
-          subTotalLiter += runningItem.itemWaterInLiter * runningItem.itemQuantity;
-
-          if (runningItem.itemFrequency === 'single_use') {
-            singleUseImpactGallon += runningItem.itemWaterInGallon * runningItem.itemQuantity;
-            singleUseImpactLiter += runningItem.itemWaterInLiter * runningItem.itemQuantity;
-          }
-
-          if (runningItem.itemFrequency !== 'single_use') {
-            subYearlyImpactGallon +=
-              runningItem.itemWaterInGallon *
-              runningItem.itemQuantity *
-              frequency_values[runningItem.itemFrequency];
-            subYearlyImpactLiter +=
-              runningItem.itemWaterInLiter *
-              runningItem.itemQuantity *
-              frequency_values[runningItem.itemFrequency];
-          }
-        });
-
-        setImpactNumber({
-          'subTotalGallon': subTotalGallon,
-          'subTotalLiter': subTotalLiter,
-          'imageCounterSingleUseCount': singleUseImpactGallon,
-          'imageCounterSubYearlyImpact': subYearlyImpactGallon,
-          'yearly': {
-            'Gallon': subYearlyImpactGallon + singleUseImpactGallon,
-            'Liter': subYearlyImpactLiter + singleUseImpactLiter,
-          },
-          'monthly': {
-            'Gallon': subYearlyImpactGallon / 12 + singleUseImpactGallon,
-            'Liter': subYearlyImpactLiter / 12 + singleUseImpactLiter,
-          },
-          'weekly': {
-            'Gallon': (subYearlyImpactGallon / 365) * 7 + singleUseImpactGallon,
-            'Liter': (subYearlyImpactLiter / 365) * 7 + singleUseImpactLiter,
-          },
-          'daily': {
-            'Gallon': subYearlyImpactGallon / 365 + singleUseImpactGallon,
-            'Liter': subYearlyImpactLiter / 365 + singleUseImpactLiter,
-          },
-          'single use': {
-            'Gallon': subTotalGallon,
-            'Liter': subTotalLiter,
-          }
-        });
-      }
-    }
-    calculateAllTheMath();
-  }, [runningTotalList]);
-  const [impactNumber, setImpactNumber] = useState({
-    'subTotalGallon': 0,
-    'subTotalLiter': 0,
-    'imageCounterSingleUseCount': 0,
-    'imageCounterSubYearlyImpact': 0,
-    'yearly': {
-      'Gallon': 0,
-      'Liter': 0,
-    },
-    'monthly': {
-      'Gallon': 0,
-      'Liter': 0,
-    },
-    'weekly': {
-      'Gallon': 0,
-      'Liter': 0,
-    },
-    'daily': {
-      'Gallon': 0,
-      'Liter': 0,
-    },
-    'single use': {
-      'Gallon': 0,
-      'Liter': 0,
-    }
-  });
   const [fetchAndAdd, setFetchAndAdd] = useState(false);
   useEffect(() => {
     async function fetch() {
@@ -397,11 +307,6 @@ export default function Calculator ({route}) {
   }
   function closeWelcome() {
     setWelcomed(true);
-  }
-  // Virtual water info popup
-  const [infoVisible, setInfoVisible] = useState(false);
-  function closeInfoModal() {
-    setInfoVisible(false);
   }
   // Context & Challenge popup
   const [context, setContext] = useState(false);
@@ -890,6 +795,17 @@ export default function Calculator ({route}) {
                     itemWaterInLiter={runningItem.itemWaterInLiter}
                     itemQuantity={runningItem.itemQuantity}
                     itemFrequency={runningItem.itemFrequency}
+                    customFrequencyPickerStyle={{
+                      inputIOS: {
+                        marginRight: 20,
+                      },
+                      inputIOSContainer: {
+                        width: 100,
+                      },
+                      iconContainer: {
+                        marginRight: 3,
+                      },
+                    }}
                     updateRunningTotalList={updateRunningTotalList}
                     removeItemFromRunningTotalList={removeItemFromRunningTotalList}
                     scrollViewRef={scrollViewRef}
@@ -898,143 +814,12 @@ export default function Calculator ({route}) {
                 </View>
               ))}
 
-              {/* Summary Area */}
-              <View style={{paddingHorizontal: '5%'}}>
+              <RunningTotalImpactArea
+                globalUnit={globalUnit}
+                runningTotalList={runningTotalList}
+                GLSwitchHandler={setGlobalUnit}
+              />
 
-                {/* Summary Bar */}
-                <View style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingVertical: 10,
-                }}>
-                  <Text style={{
-                    fontSize: 20,
-                    fontWeight: '500',
-                    marginRight: 10,
-                  }}>
-                    Total
-                  </Text>
-                  <View
-                    style={calculatorStyle.summaryBarSwitchContainer}>
-                    <TouchableOpacity onPress={() => {
-                      setGlobalUnit('G');
-                      analytics().logEvent('Use_GL_switch',{
-                        switch_to: 'Gallons'
-                      })
-                    }}>
-                      <Text
-                        style={{
-                          color: globalUnit === 'G' ? '#00ADEF' : 'black',
-                          fontSize: 20,
-                          fontWeight: globalUnit === 'G' ? 'bold' : 'normal',
-                        }}>G</Text>
-                    </TouchableOpacity>
-                    <Text style={{fontSize: 20}}> / </Text>
-                    <TouchableOpacity onPress={() => {
-                      setGlobalUnit('L');
-                      analytics().logEvent('Use_GL_switch',{
-                        switch_to: 'Liters'
-                      })
-                    }}>
-                      <Text
-                        style={{
-                          color: globalUnit === 'L' ? '#00ADEF' : 'black',
-                          fontSize: 20,
-                          fontWeight: globalUnit === 'L' ? 'bold' : 'normal',
-                        }}>L</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    position: 'absolute',
-                    right: 0,
-                    alignItems: 'center',
-                  }}>
-                    <Image
-                      source={require('./../images/water_drop_150px_wide2.png')}
-                      style={{
-                        width: 30,
-                        height: 30,
-                      }}/>
-                    <Text style={{
-                      fontSize: 20,
-                      fontWeight: '500',
-                      maxWidth: DeviceWidth * 3 / 7
-                    }}
-                          numberOfLines={1}>
-                      {globalUnit === 'G' ?
-                        NumberWithTextLabel(impactNumber['subTotalGallon']) + ' G' :
-                        NumberWithTextLabel(impactNumber['subTotalLiter']) + ' L'}
-                    </Text>
-                  </View>
-                </View>
-
-                {/* Impact Area */}
-                <View style={{
-                  marginTop: 10,
-                  alignItems: 'center',
-                }}>
-
-                  {/* Impact Title and Info Button*/}
-                  <Text style={{
-                    fontSize: 30,
-                    fontWeight: '600',
-                    marginLeft: 25
-                  }}>
-                    Impact
-                    <TouchableOpacity
-                      onPress={()=>{
-                        setInfoVisible(true);
-                        analytics().logEvent('Info_button_pressed',{
-                          infoName: 'Virtual_Water'
-                        });
-                      }}>
-                      <Image source={itemDetailImages.info} style={{width: 30, height: 25}}/>
-                    </TouchableOpacity>
-                  </Text>
-
-                  {/* Impact Dropdown */}
-                  <ImpactPicker
-                    impactUnit={impactUnit}
-                    setImpactUnit={setImpactUnit}
-                    customUnits={[
-                      {label: 'Daily', value: 'daily'},
-                      {label: 'Weekly', value: 'weekly'},
-                      {label: 'Monthly', value: 'monthly'},
-                      {label: 'Yearly', value: 'yearly'},
-                    ]} />
-
-                  {/* Running Total Number */}
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}>
-                    <Image
-                      source={require('./../images/water_drop_150px_wide2.png')}
-                      style={{
-                        width: 30,
-                        height: 30,
-                        marginTop: 23
-                      }}/>
-                    <Text
-                      numberOfLines={1}
-                      style={{
-                        fontSize: 30,
-                        fontWeight: '500',
-                        marginTop: 20
-                      }}>
-                      {globalUnit === 'G' ?
-                        NumberWithTextLabel(impactNumber[impactUnit]['Gallon']) + ' Gal' :
-                        NumberWithTextLabel(impactNumber[impactUnit]['Liter']) + ' L'}
-                    </Text>
-                  </View>
-
-                </View>
-
-              </View>
-
-              {/* Running Total Visualize */}
-              <CalculateContainer numberCost={impactNumber[impactUnit]['Gallon']}/>
             </ViewShot>
 
             {/* Clear and Export buttons */}
@@ -1049,32 +834,6 @@ export default function Calculator ({route}) {
               <TouchableOpacity
                 onPress={() => {
                   setRunningTotalList([]);
-                  setImpactNumber({
-                    'subTotalGallon': 0,
-                    'subTotalLiter': 0,
-                    'imageCounterSingleUseCount': 0,
-                    'imageCounterSubYearlyImpact': 0,
-                    'yearly': {
-                      'Gallon': 0,
-                      'Liter': 0,
-                    },
-                    'monthly': {
-                      'Gallon': 0,
-                      'Liter': 0,
-                    },
-                    'weekly': {
-                      'Gallon': 0,
-                      'Liter': 0,
-                    },
-                    'daily': {
-                      'Gallon': 0,
-                      'Liter': 0,
-                    },
-                    'single use': {
-                      'Gallon': 0,
-                      'Liter': 0,
-                    }
-                  });
                 }}
                 style={{
                   width: 200,
@@ -1123,7 +882,6 @@ export default function Calculator ({route}) {
       {/* Modals */}
       {/* Info button modal */}
       <CalculatorInfoModal infoVisible={calculatorInfoVisible} handler={closeCalculatorInfoModal}/>
-      <VirtualWaterInfoModal infoVisible={infoVisible} handler={closeInfoModal}/>
       {/* Welcome modal */}
       <CalculatorWelcomeModal welcomeVisible={!welcomed} handler={closeWelcome}/>
       {/* Pop up window of 'Context' and 'Challenge' */}
@@ -1177,8 +935,8 @@ export default function Calculator ({route}) {
                   }}
                   imageStyle={{
                     position: 'absolute',
-                    top: headerHeight + 50,
-                    left: '47%',
+                    top: headerHeight + 32,
+                    left: '62%',
                     height: watermarkHeight,
                     width: DeviceWidth * 0.3,
                     zIndex: 1

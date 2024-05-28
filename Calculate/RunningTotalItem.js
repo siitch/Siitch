@@ -192,7 +192,7 @@ export default function RunningTotalItem (
             quantity={quantity}
             setQuantity={setQuantity}
             handleQuantityUpdate={handleQuantityUpdate}
-            customStyle={customQuantityPickerStyle ? customQuantityPickerStyle : {
+            customStyle={{
               paddingHorizontal: 5,
               flexDirection: 'row',
               alignItems: 'center',
@@ -203,6 +203,7 @@ export default function RunningTotalItem (
               borderWidth: 2,
               borderRadius: 20,
               borderColor: '#80CAFF',
+              ...customQuantityPickerStyle
             }}
             customInputComponent={
             <CustomInputAccessoryView
@@ -218,19 +219,20 @@ export default function RunningTotalItem (
             setFrequency={setFrequency}
             hasTitle={false}
             customFrequencies={customFrequencies ? customFrequencies : [
-              {label: 'single use', inputLabel: 'S', value: 'single_use'},
-              {label: 'a day', inputLabel: 'D', value: 'per_day'},
-              {label: 'a week', inputLabel: 'W', value: 'per_week'},
-              {label: 'a month', inputLabel: 'M', value: 'per_month'},
-              {label: 'a year', inputLabel: 'Y', value: 'per_year'},
+              {label: 'single use', inputLabel: 'Single', value: 'single_use'},
+              {label: 'a day', inputLabel: 'Day', value: 'per_day'},
+              {label: 'a week', inputLabel: 'Week', value: 'per_week'},
+              {label: 'a month', inputLabel: 'Month', value: 'per_month'},
+              {label: 'a year', inputLabel: 'Year', value: 'per_year'},
             ]}
             hasPlaceholder={false}
-            customStyle={customFrequencyPickerStyle ? customFrequencyPickerStyle : {
+            customStyle={{
               inputIOS: {
                 fontSize: 20,
                 height: '100%',
                 textAlign: 'center',
                 marginRight: 30,
+                ...customFrequencyPickerStyle.inputIOS
               },
               inputIOSContainer: {
                 backgroundColor: 'white',
@@ -241,6 +243,7 @@ export default function RunningTotalItem (
                 borderWidth: 2,
                 borderColor: '#80CAFF',
                 borderRadius: 20,
+                ...customFrequencyPickerStyle.inputIOSContainer
               },
               iconContainer: {
                 height: '100%',
@@ -248,6 +251,7 @@ export default function RunningTotalItem (
                 marginRight: 5,
                 alignItems: 'center',
                 justifyContent: 'center',
+                ...customFrequencyPickerStyle.iconContainer
               },
             }}
           />
