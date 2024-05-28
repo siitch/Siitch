@@ -179,6 +179,7 @@ export const homepageStyle = StyleSheet.create({
   betaContainer: {
     paddingTop: 8,
     paddingEnd: 16,
+    marginBottom: -8
   },
   betaBox: {
     height: 26,
@@ -365,10 +366,9 @@ export const homepageStyle = StyleSheet.create({
     paddingVertical: 25,
   },
   siitchVideoContainer: {
-    height: (DeviceWidth*0.95 * 9) / 16,
-    width: DeviceWidth*0.95,
-    alignItems: 'center',
-    marginVertical: 30,
+    height: (DeviceWidth*0.96 * 9) / 16,
+    width: DeviceWidth*0.96,
+    marginVertical: 10,
     borderWidth: 0,
     borderRadius: 10,
     backgroundColor: 'black',
@@ -379,6 +379,14 @@ export const homepageStyle = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 1,
     borderColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'white',
+    shadowOpacity: 1,
+    shadowColor: 'rgba(0,0,0,0.25)',
+    shadowRadius: 1,
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
     alignItems: 'center',
     justifyContent: 'flex-end',
   },

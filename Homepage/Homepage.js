@@ -9,23 +9,17 @@ import { FAQ } from "../Menu/FAQ";
 import { Feedback } from "../Menu/Feedback";
 import { Tutorial } from "../Menu/Tutorial";
 import React, { useCallback, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
-  Dimensions,
-  Image,
+  Image, Pressable,
   ScrollView,
   Text,
-  TouchableHighlight,
-  TouchableOpacity,
   View,
 } from "react-native";
-import * as Progress from 'react-native-progress';
 import { DemoEcoCam } from "./DemoEcoCam";
 import { DemoCalculator } from "./DemoCalculator";
 import { DemoCompare } from "./DemoCompare";
 import YoutubePlayer from "react-native-youtube-iframe";
 import analytics from "@react-native-firebase/analytics";
-import Profiles from "../ImageDB";
 import waterDropWorld from "../images/water_drop_world.png";
 import blueWater from "../images2/blue_water.png";
 import carbon from "../images2/HomepageIcons/noun_carbon.png";
@@ -37,13 +31,15 @@ import timelessFashion from "../images2/HomepageIcons/noun_timeless_fashion.png"
 import trees from "../images2/HomepageIcons/noun_trees.png";
 import truck from "../images2/HomepageIcons/noun_truck.png";
 import homeSloth from "../images2/HomepageIcons/home_sloth.png";
-import { styles } from "../Ranking/Styles";
 import { homepageStyle } from "../Styles/Style";
-const DeviceWidth = Dimensions.get('window').width;
+import { DemoRanking } from "./DemoRanking";
+import { DemoTools } from "./DemoTools";
+import { DemoSearch } from "./DemoSearch";
 
 function HomeScreen() {
-  const navigation = useNavigation();
 
+  const [videoTouched, setVideoTouched] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [siitchVideoPlayed, setSiitchVideoPlayed] = useState(false);
   const onSiitchVideoStateChange = useCallback((state) => {
     if (state === "playing") {
@@ -53,21 +49,6 @@ function HomeScreen() {
       }
     }
   }, [siitchVideoPlayed])
-
-  const searchItems = [
-    ['Salad', 'Toast', 'Chocolate'],
-    ['Soy sauce', 'Car', 'Leather shoes'],
-    ['Suede shoes', 'Cotton T shirt', 'Socks']
-  ];
-
-  const rankingItems = [
-    ['Icecream 1 scoop', 42, 'p/scoop'],
-    ['Yogurt', 35, 'p/serving'],
-    ['Cheese slice', 25, 'p/slice'],
-    ['Salad', 20, 'p/serving'],
-    ['Toast', 11, 'p/slice']
-  ]
-  const rankingMax = 42;
 
   const whenWeWasteFood = [
     'We waste all the energy and water it takes to grow, harvest, transport, and package it',
@@ -117,118 +98,22 @@ function HomeScreen() {
       {/* Take a pic */}
       <DemoEcoCam/>
 
-      {/* Compare Items */}
-      <DemoCompare/>
-
-      {/* Explore the tools */}
-      <View style={{ alignItems: 'center' }}>
-        <Text style={homepageStyle.toolsSectionTitleText}>
-          Explore the tools
-        </Text>
-        <View style={{
-          flexDirection: 'row',
-          marginBottom: 20,
-        }}>
-          <TouchableOpacity
-            style={[
-              homepageStyle.toolsContainer,{
-              marginRight: 15,
-            }]}
-            onPress={()=>{
-              navigation.navigate('Rank')
-            }}>
-            <Image
-              source={require('../images2/HomepageIcons/RankingIcon.png')}
-              style={{
-                height: 53,
-                width: 58,
-              }}
-            />
-            <Text style={[homepageStyle.toolsText, {marginTop: 11}]}>Rank</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={homepageStyle.toolsContainer}
-            onPress={()=>{
-              navigation.navigate('CompareTab')
-            }}>
-            <Text style={{
-              fontFamily: 'Lato-Regular',
-              fontSize: 66,
-              textAlign: 'center',
-              color: '#999999',
-            }}>
-              V<Text style={{color: '#EF7A6A'}}>S</Text>
-            </Text>
-            {/*<Image
-              source={require('../images2/HomepageIcons/Compare.png')}
-              style={{
-                height: 49,
-                width: 79
-              }}
-            />*/}
-            <Text style={homepageStyle.toolsText}>Compare</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-          <TouchableOpacity
-            style={[
-              homepageStyle.toolsContainer,{
-                marginRight: 10,
-              }]}
-            onPress={()=>{
-              navigation.navigate('Search Tool')
-            }}>
-            <Image
-              source={require('../images2/HomepageIcons/Search.png')}
-              style={{
-                height: 77,
-                width: 77
-              }}
-            />
-            <Text style={homepageStyle.toolsText}>Search</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              homepageStyle.toolsContainer,{
-                marginRight: 10,
-              }]}
-            onPress={()=>{
-              navigation.navigate('Calculate')
-            }}>
-            <Image
-              source={require('../images2/HomepageIcons/Calculator.png')}
-              style={{
-                height: 55,
-                width: 54,
-                marginLeft: -8
-              }}
-            />
-            <Text style={homepageStyle.toolsText}>Eco{'\n'}Calculator</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={homepageStyle.toolsContainer}
-            onPress={()=>{
-              navigation.navigate('MLTool')
-            }}>
-            <Image
-              source={require('../images2/HomepageIcons/EcoCam.png')}
-              style={{
-                height: 70,
-                width: 75
-              }}
-            />
-            <Text style={homepageStyle.toolsText}>Eco-Cam</Text>
-          </TouchableOpacity>
-        </View>
-        {/* Video */}
-        <View style={homepageStyle.siitchVideoContainer}>
+      {/* Video */}
+      <Pressable
+        onPress={()=>{
+          if (!videoTouched) {
+            setVideoTouched(true);
+            setPlaying(true);
+          }
+        }}
+        style={{alignItems: 'center'}}>
+        <View
+          pointerEvents={videoTouched ? undefined : 'none'}
+          style={homepageStyle.siitchVideoContainer}>
           <YoutubePlayer
             height={'100%'}
             width={'100%'}
+            play={playing}
             onChangeState={onSiitchVideoStateChange}
             webViewStyle={{
               borderWidth: 0,
@@ -237,82 +122,19 @@ function HomeScreen() {
             videoId={"TJcGh43_COo"}
           />
         </View>
+      </Pressable>
 
-      </View>
+      {/* Compare Items */}
+      <DemoCompare/>
+
+      {/* Explore the tools */}
+      <DemoTools/>
 
       {/* See Items Ranked */}
-      <View style={homepageStyle.rankingSectionContainer}>
-        <Text style={homepageStyle.rankingSectionTitleText}>See Items Ranked</Text>
-        <View style={homepageStyle.rankingListContainer}>
-          {
-            rankingItems.map((item, index) => {
-              return(
-                <View key={index} style = {homepageStyle.rankingItemContainer}>
-                  <TouchableOpacity onPress={()=>{navigation.navigate('Detail', {itemName: item[0]})}}>
-                    <View style={homepageStyle.rankingItemCol}>
-                      <Image
-                        style={homepageStyle.rankingItemImage}
-                        source={Profiles[item[0]]}
-                      />
-                      <Text style={homepageStyle.rankingItemText}>
-                        {item[0]}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                  <View style={homepageStyle.progressCol}>
-                    {/* TODO: -adjust the bar length */}
-                    <Progress.Bar
-                      progress={1-(rankingMax-parseInt(item[1]))/rankingMax < 0.01 ? 0.01 : 1-(rankingMax-parseInt(item[1]))/rankingMax}
-                      width={DeviceWidth*0.62}
-                      height={10}
-                      borderWidth={1}
-                      borderRadius={50}
-                      borderColor="#b5b5b5"
-                      color="#81CAFF"
-                    />
-                    <Text style={homepageStyle.progressTxt}>
-                      {item[1]} {'Gallons'} {item[2]}
-                    </Text>
-                  </View>
-                </View>
-              )
-            })
-          }
-        </View>
-      </View>
+      <DemoRanking/>
 
       {/* Search for Items */}
-      <View style={homepageStyle.searchSectionContainer}>
-        <Text style={homepageStyle.searchSectionTitleText}>
-          Search for Items
-        </Text>
-        <View>
-          {searchItems.map((itemRow, i) => (
-            <View key={i} style={styles.avatarView}>
-              {itemRow.map(itemName => (
-                <TouchableHighlight
-                  key={itemName}
-                  onPress={() =>
-                    navigation.navigate('Detail', {itemName: itemName})}
-                  activeOpacity={1}
-                  underlayColor="transparent"
-                  style={{marginLeft: 10}}>
-                  <View style={styles.eachAvatar}>
-                    <Image
-                      source={Profiles[itemName]}
-                      style={homepageStyle.searchItemImage}
-                      resizeMode="contain"
-                    />
-                    <Text style={{width: 90, textAlign: 'center'}}>
-                      {itemName}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              ))}
-            </View>
-          ))}
-        </View>
-      </View>
+      <DemoSearch/>
 
       {/* Use the Eco-Calculator */}
       <DemoCalculator/>

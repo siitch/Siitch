@@ -51,7 +51,7 @@ export const DemoEcoCam = () => {
             <View style={{ height: 105, width: 105 }}>
               <Swiper
                 autoplay
-                autoplayTimeout={2.8}
+                autoplayTimeout={3}
                 loadMinimal
                 showsPagination={false}
                 scrollEnabled={false}
