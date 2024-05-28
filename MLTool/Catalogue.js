@@ -274,21 +274,27 @@ export default function Catalogue (){
             }}>Search or explore categories below</Text>
             <Searchbar
                 placeholder="Search"
+                placeholderTextColor={'#757575'}
                 onChangeText={text => {
                     setSearching(true)
                     setKeyword(text)
                 }}
                 onIconPress={toDatabase}
+                inputStyle={{
+                    minHeight: 0,
+                    textAlign: 'auto',
+                    lineHeight: undefined,
+                    fontSize: 20
+                }}
                 style={{
                     borderColor: '#80CAFF',
+                    backgroundColor: 'transparent',
                     shadowOpacity: 0,
                     marginTop: 20,
                     height: 50,
                     borderWidth: 2,
                     borderRadius: 20,
                     width: DeviceWidth * 0.7,
-                    textAlign: 'center',
-                    fontSize: 20,
                 }} value={undefined}/>
 
             <Text style={{fontSize: 15, marginTop: 30, marginBottom: 10, marginHorizontal: 20, textAlign: 'left'}}>

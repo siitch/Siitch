@@ -272,8 +272,9 @@ export default function ResultsScreen({route}) {
             }}>
             {categoryDisplayName ? (
               <MaterialButton
-                mode="contained"
-                color={'#00ADEF'}
+                mode={'elevated'}
+                buttonColor={'#00ADEF'}
+                textColor={'white'}
                 uppercase={false}
                 style={{
                   marginBottom: '3%',
@@ -285,7 +286,7 @@ export default function ResultsScreen({route}) {
                 labelStyle={{
                   fontWeight: '500',
                   fontSize: 21,
-                  color: 'white',
+                  lineHeight: undefined
                 }}
                 onPress={() => {
                   let categoryNavName = getCategoryNavName(category);
@@ -304,8 +305,9 @@ export default function ResultsScreen({route}) {
               return (
                 <MaterialButton
                   key={index}
-                  mode="contained"
-                  color={'#ffffff'}
+                  mode={'elevated'}
+                  buttonColor={'white'}
+                  textColor={'black'}
                   uppercase={false}
                   style={{
                     marginTop: '3%',
@@ -320,6 +322,7 @@ export default function ResultsScreen({route}) {
                   labelStyle={{
                     fontWeight: '300',
                     fontSize: 22,
+                    lineHeight: undefined
                   }}
                   onPress={() => {
                     /* When one item button is tapped, forward item name to ItemDetail screen */
@@ -340,8 +343,9 @@ export default function ResultsScreen({route}) {
               );
             })}
             <MaterialButton
-              mode="contained"
-              color={'#ffce39'}
+              mode={'elevated'}
+              buttonColor={'#ffce39'}
+              textColor={'black'}
               uppercase={false}
               style={{
                 marginTop: '3%',
@@ -354,6 +358,7 @@ export default function ResultsScreen({route}) {
               labelStyle={{
                 fontWeight: '300',
                 fontSize: 22,
+                lineHeight: undefined
               }}
               onPress={() => {
                 navigation.navigate('Catalogue')
@@ -362,8 +367,9 @@ export default function ResultsScreen({route}) {
               Nope, see catalogue
             </MaterialButton>
             <MaterialButton
-              mode="contained"
-              color={'#8DC73F'}
+              mode={'elevated'}
+              buttonColor={'#8DC73F'}
+              textColor={'white'}
               uppercase={false}
               style={{
                 marginTop: '4.7%',
@@ -378,7 +384,7 @@ export default function ResultsScreen({route}) {
               labelStyle={{
                 fontWeight: '500',
                 fontSize: 22,
-                color: 'white',
+                lineHeight: undefined,
               }}
               onPress={() => {
                 setCategory(''); // Reset Category
