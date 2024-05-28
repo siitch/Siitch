@@ -10,7 +10,6 @@ const config = {
     assetExts: ['tflite', 'txt', 'jpg', 'ttf', 'png', 'jpeg', 'mp3'],
   },
   transformer: {
-    assetPlugins: ['expo-asset/tools/hashAssetFiles'],
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,

@@ -8,6 +8,7 @@ import {LandingDetails} from './LandingPage';
 global.globalList = []
 global.currentSurpriseModal = null
 global.occupied = false
+global.tfliteModel = null
 const App = () => {
 
   const [initialRouteName, setInitialRouteName] = React.useState(null);

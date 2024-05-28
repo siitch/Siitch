@@ -1,26 +1,19 @@
-import React, {useEffect, useState} from "react";
-import { // Native components
-  Alert,
-  Dimensions, Image,
-  Linking, Modal,
-  SafeAreaView, Text,
-  TouchableOpacity,
-  View
-} from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Camera} from "expo-camera/legacy";
+import React, { useEffect, useState } from "react";
+import { Alert, Dimensions, Image, Linking, Modal, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Camera } from "expo-camera/legacy";
 // Third party loading indicator, looks great
-import {ActivityIndicator} from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 // Used to change the dimension of photo
 import * as ImageManipulator from "expo-image-manipulator";
 // Screen stack for tab 'MLTool'
-import {createStackNavigator} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 // Screens included in this stack
 import ItemDetail from "./ItemDetail";
 import Catalogue from "./Catalogue";
 import ResultsScreen from "./ResultsScreen";
-import {CategoryPage} from "./CategoryPage";
-import {Virtual} from "../Menu/Virtual";
+import { CategoryPage } from "./CategoryPage";
+import { Virtual } from "../Menu/Virtual";
 // Used to show arrow <- image inside the go back button
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // Used to unmount the camera when this screen is not focused
@@ -28,12 +21,12 @@ import { useIsFocused, useNavigation } from "@react-navigation/native";
 // Get camera button image from here
 import Profiles from "../ImageDB";
 // React native's firebase analytics library
-import analytics from '@react-native-firebase/analytics';
+import analytics from "@react-native-firebase/analytics";
 // Expo's filesystem library to delete temp photo
-import * as FileSystem from 'expo-file-system';
-import sloth from "../images/sloth.png"
-import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
-import {Asset} from "expo-asset";
+import * as FileSystem from "expo-file-system";
+import sloth from "../images/sloth.png";
+import { ReactNavigationOverlay } from "../components/ReactNavigationOverlay";
+import { loadTensorflowModel } from "react-native-fast-tflite";
 
 function CameraView() {
   const navigation = useNavigation();
@@ -75,16 +68,13 @@ function CameraView() {
         setGranted(false)
       } else {
         setGranted(true)
-        prepareModal().then(r => setIsModelReady(true))
       }
     })
   }
 
   async function prepareModal() {
     // Initialize tensorflow lite
-    const modelAsset = Asset.fromModule(require('./Siitch_model/siitch_model.tflite'))
-    if (!modelAsset.downloaded) { await modelAsset.downloadAsync() }
-    global.tfliteModel = modelAsset;
+    global.tfliteModel = await loadTensorflowModel(require('./Siitch_model/siitch_model.tflite'));
   }
 
   useEffect(() => {
@@ -143,6 +133,11 @@ function CameraView() {
     (isFocused && granted === true &&
       <Camera
         ref={(ref) => setCamera(ref)}
+        onCameraReady={()=>{
+          if (tfliteModel === null) {
+            prepareModal().then(r => setIsModelReady(true))
+          }
+        }}
         type={Camera.Constants.Type.back}
         style={{
           aspectRatio: Width / Height,// Change this value to change the ratio of camera preview area

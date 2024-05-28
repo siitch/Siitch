@@ -24,7 +24,8 @@ import analytics from '@react-native-firebase/analytics';
 import * as FileSystem from 'expo-file-system';
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import { useNavigation } from "@react-navigation/native";
-import TensorflowLite from "@switt/react-native-tensorflow-lite";
+import { toByteArray } from "react-native-quick-base64";
+import * as jpeg from 'jpeg-js';
 
 export default function ResultsScreen({route}) {
   const navigation = useNavigation();
@@ -178,7 +179,16 @@ export default function ResultsScreen({route}) {
             width: CorpSize,
           },
         },
-      ]);
+        {
+          resize: {
+            height: 224,
+            width: 224
+          }
+        }
+      ], {
+        base64: true,
+        compress: 1,
+      });
 
       await classifyImageAsync(manipResponse);
     } catch (error) {
@@ -186,19 +196,40 @@ export default function ResultsScreen({route}) {
     }
   };
 
+  // Convert base64 string to Float32Array
+  function base64ToFloat32Array(base64) {
+    const rawImageData = toByteArray(base64);
+
+    const {width, height, data} = jpeg.decode(rawImageData, {
+      useTArray: true,
+    }); // return as Uint8Array
+
+    // Drop the alpha channel info for mobilenet
+    const float32Data = new Float32Array(width * height * 3);
+    let offset = 0; // offset into original data
+    for (let i = 0; i < float32Data.length; i += 3) {
+      float32Data[i] = data[offset] / 255;
+      float32Data[i + 1] = data[offset + 1] / 255;
+      float32Data[i + 2] = data[offset + 2] / 255;
+
+      offset += 4;
+    }
+
+    return float32Data;
+  }
+
   const classifyImageAsync = async source => {
     try {
-      const result = await TensorflowLite.runModelWithFiles({
-        model: tfliteModel.localUri,
-        files: [source.uri],
-      });
-      // [[{"data": [Array], "shape": [Array]}]]
-      // console.log(result[0][0].data)
+      // Convert the base64 image to Float32Array and feed it to the model
+      const input = base64ToFloat32Array(source.base64);
+      const output = await tfliteModel.run([input]);
+
+      const result = output[0];
 
       // Get the top three results
       let predictionList = [];
-      for (let i = 0; i < result[0][0].data.length; i++) {
-        predictionList.push({value: result[0][0].data[i], index: i});
+      for (let i = 0; i < result.length; i++) {
+        predictionList.push({value: result[i], index: i});
       }
       predictionList = predictionList
         .sort((a, b) => {

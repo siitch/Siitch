@@ -1119,15 +1119,52 @@ PODS:
   - React-Mapbuffer (0.74.1):
     - glog
     - React-debug
+  - react-native-fast-tflite (1.2.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-quick-base64 (2.1.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Codegen
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-safe-area-context (4.10.1):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
-  - react-native-tensorflow-lite (0.5.8):
-    - React-Core
-    - TensorFlowLiteObjC (~> 2.6.0)
-    - TensorFlowLiteObjC/Metal (~> 2.6.0)
-    - TensorFlowLiteSelectTfOps (~> 2.6.0)
   - react-native-view-shot (3.8.0):
     - React-Core
   - react-native-webview (13.10.2):
@@ -1491,19 +1528,6 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SocketRocket (0.7.0)
-  - TensorFlowLiteC (2.6.0):
-    - TensorFlowLiteC/Core (= 2.6.0)
-  - TensorFlowLiteC/Core (2.6.0)
-  - TensorFlowLiteC/Metal (2.6.0):
-    - TensorFlowLiteC/Core
-  - TensorFlowLiteObjC (2.6.0):
-    - TensorFlowLiteObjC/Core (= 2.6.0)
-  - TensorFlowLiteObjC/Core (2.6.0):
-    - TensorFlowLiteC (= 2.6.0)
-  - TensorFlowLiteObjC/Metal (2.6.0):
-    - TensorFlowLiteC/Metal (= 2.6.0)
-    - TensorFlowLiteObjC/Core (= 2.6.0)
-  - TensorFlowLiteSelectTfOps (2.6.0)
   - Yoga (0.0.0)
   - ZXingObjC/Core (3.6.9)
   - ZXingObjC/OneD (3.6.9):
@@ -1560,9 +1584,10 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - react-native-fast-tflite (from `../node_modules/react-native-fast-tflite`)
+  - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
-  - "react-native-tensorflow-lite (from `../node_modules/@switt/react-native-tensorflow-lite`)"
   - react-native-view-shot (from `../node_modules/react-native-view-shot`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1619,9 +1644,6 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
-    - TensorFlowLiteC
-    - TensorFlowLiteObjC
-    - TensorFlowLiteSelectTfOps
     - ZXingObjC
 
 EXTERNAL SOURCES:
@@ -1718,12 +1740,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-fast-tflite:
+    :path: "../node_modules/react-native-fast-tflite"
+  react-native-quick-base64:
+    :path: "../node_modules/react-native-quick-base64"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
-  react-native-tensorflow-lite:
-    :path: "../node_modules/@switt/react-native-tensorflow-lite"
   react-native-view-shot:
     :path: "../node_modules/react-native-view-shot"
   react-native-webview:
@@ -1861,9 +1885,10 @@ SPEC CHECKSUMS:
   React-jsitracing: 3de522f8f794dccd3c54af9160dc992ee65bd494
   React-logger: 7e7403a2b14c97f847d90763af76b84b152b6fce
   React-Mapbuffer: c5844bf3c2206f5475c0fc2340a89b049ea23c97
+  react-native-fast-tflite: d8436c3eaf5400e8473d7ddf29bd73411cc792ca
+  react-native-quick-base64: 3ed6e45cb43ffcb731055db0c2d0955dfd4e6b6a
   react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-tensorflow-lite: 9f8eca0a0332eade09ee2ae5d89e1390c62cd5f4
   react-native-view-shot: 6b7ed61d77d88580fed10954d45fad0eb2d47688
   react-native-webview: bd1c6c2661bb51e45469c7badb02ccdcef93671b
   React-nativeconfig: 21d89c65ca39875fad2c5c465e0e013e514eba21
@@ -1905,9 +1930,6 @@ SPEC CHECKSUMS:
   SDWebImage: dfe95b2466a9823cf9f0c6d01217c06550d7b29a
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
-  TensorFlowLiteC: 869f93708210ed939fc40f40c772a120b7f964d1
-  TensorFlowLiteObjC: f321ffc8d56e1556d4ca0d1dad44763f1e649e78
-  TensorFlowLiteSelectTfOps: a15cd8395c35c8bb64967e120edbb7ee54066ffb
   Yoga: d02ee88821190d82b2daa5cd15640a82ffafaaab
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
