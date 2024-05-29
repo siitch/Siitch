@@ -133,7 +133,7 @@ function CameraView() {
     (isFocused && granted === true &&
       <Camera
         ref={(ref) => setCamera(ref)}
-        onCameraReady={()=>{
+        onLayout={() => {
           if (tfliteModel === null) {
             prepareModal().then(r => setIsModelReady(true))
           }
