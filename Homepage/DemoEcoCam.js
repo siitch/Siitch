@@ -98,7 +98,7 @@ export const DemoEcoCam = () => {
             textSize={22}
             duration={1000}
             style={{
-              marginBottom: currentEcoCamItemIndex === 0 ? 0 : 4
+              marginBottom: -1
             }}
             textStyle={{fontFamily: 'Lato-Bold', color: currentEcoCamItemIndex === 1 ? 'red' : '#00ADEF'}}
           />
