@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Animated, Easing, StyleSheet, Text, View} from "react-native";
 import PropTypes from "prop-types";
 
-const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
+const NumberTicker = ({style, margin = 0, textSize = 35, textStyle, number, duration}) => {
   let unit = '';
   if (number.length > 1) {
     unit = number.slice(-1);
@@ -33,6 +33,7 @@ const NumberTicker = ({style, textSize = 35, textStyle, number, duration}) => {
 
   return (
     <View style={{
+      marginBottom: margin,
       ...style,
       flexDirection: 'row',
       alignItems: 'center',

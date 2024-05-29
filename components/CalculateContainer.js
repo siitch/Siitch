@@ -101,6 +101,7 @@ function Counter ({cost}) {
       <Text style={[styles.timesMark, {color: color}]}> &times; </Text>
       <NumberTicker
         number={WaterContainerCounterNumberFormatter(cost / containerType.metric, 1)}
+        margin={Number.isInteger(1 * WaterContainerCounterNumberFormatter(cost / containerType.metric, 1)) ? 5 : 0}
         textSize={25}
         duration={1500}
         textStyle={{fontWeight: 'bold', color: color}}
