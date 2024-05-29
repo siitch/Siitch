@@ -145,8 +145,8 @@ TextTicker.propTypes = {
 
 const generateStyles = (textSize) => StyleSheet.create({
   container: {
-    // width: textSize * 0.62,
-    height: textSize * 1.2,
+    width: textSize * 0.62,
+    height: textSize,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -154,7 +154,6 @@ const generateStyles = (textSize) => StyleSheet.create({
   text: {
     fontSize: textSize,
     lineHeight: textSize,
-    paddingBottom: textSize * 0.19,
     textAlign: 'center',
   },
 });
