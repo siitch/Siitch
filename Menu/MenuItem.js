@@ -37,7 +37,7 @@ export const MenuItem = ({menuItemName}) => {
             case "About":
                 return "About"
             case "Virtual":
-                return "Virtual Water"
+                return "What is Virtual Water?"
             case "Feedback":
                 return "Feedback"
             case "FAQ":
