@@ -185,35 +185,6 @@ export const About = ({ navigation }) => {
         }}>
         contact@siitch.com
       </Text>
-      <Text
-        onPress={() => {
-          openLink('https://www.siitch.com/privacy-policy')
-        }}
-        style={{
-          color: '#00ADEF',
-          fontSize: 20,
-          marginTop: 15,
-          alignSelf: 'center',
-        }
-        }>
-        {' '}
-        Privacy Policy{' '}
-      </Text>
-      <Text
-        onPress={() => {
-          openLink('https://www.siitch.com/termsofuse')
-        }}
-        style={{
-          color: '#00ADEF',
-          fontSize: 20,
-          marginTop: 10,
-          paddingBottom: 40,
-          alignSelf: 'center',
-        }
-        }>
-        {' '}
-        Terms of Use{' '}
-      </Text>
     </ScrollView>
   );
 }

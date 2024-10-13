@@ -21,6 +21,8 @@ export const MenuItem = ({menuItemName}) => {
                 return require('./../images2/Feedback_PNG.png')
             case "FAQ":
                 return require('./../images2/FAQ_PNG.png')
+            case "PrivacyToU":
+                return require('./../images2/PrivacyToU_PNG.png')
         }
     }
 
@@ -40,6 +42,8 @@ export const MenuItem = ({menuItemName}) => {
                 return "Feedback"
             case "FAQ":
                 return "FAQ"
+            case "PrivacyToU":
+                return "Privacy & Terms of Use"
         }
     }
 

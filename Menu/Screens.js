@@ -15,6 +15,7 @@ export const MenuMain = () => {
       <MenuItem menuItemName={'Virtual'}/>
       <MenuItem menuItemName={'Feedback'}/>
       <MenuItem menuItemName={'FAQ'}/>
+      <MenuItem menuItemName={'PrivacyToU'}/>
       <Footer/>
     </ScrollView>
   );

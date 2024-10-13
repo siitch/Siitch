@@ -35,6 +35,7 @@ import { homepageStyle } from "../Styles/Style";
 import { DemoRanking } from "./DemoRanking";
 import { DemoTools } from "./DemoTools";
 import { DemoSearch } from "./DemoSearch";
+import { PrivacyToU } from "../Menu/PrivacyToU";
 
 function HomeScreen() {
 
@@ -313,6 +314,13 @@ export const HomeStackScreen = () => (
     <HomeStack.Screen
       name = "Tutorial"
       component = {Tutorial}
+    />
+    <HomeStack.Screen
+      name = "PrivacyToU"
+      component = {PrivacyToU}
+      options = {{
+        headerTitle: "Privacy & Terms of Use"
+      }}
     />
   </HomeStack.Navigator>
 );
