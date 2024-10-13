@@ -155,8 +155,8 @@ export const FAQItem = ({question, color}) => {
     "What can I do to reduce my impact?":
       (<Text>
         There are hundreds of small things you can do every day to make a difference.
-        The first step? Know what you’re consuming. And stick to the 8 R's of sustainability:
-        refuse, reduce, reuse, refill, repair, regift, recycle, repeat. {'\n'} {'\n'}
+        The first step? Know what you’re consuming. And stick to the 9 R's of sustainability:
+        rethink, refuse, reduce, rally, reuse, rot (i.e. compost), repair, repurpose, and recycle. {'\n'} {'\n'}
         In the Search pages, you'll see a list of ideas within the 'What Can I Do'
         links. {'\n'} {'\n'}
         A few other terrific sites, this for water: <Text
