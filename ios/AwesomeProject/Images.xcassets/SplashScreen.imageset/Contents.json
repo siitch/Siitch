@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "200x200_00000.png",
+      "filename" : "Siitch_Splash_200x200.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "400x400_00000.png",
+      "filename" : "Siitch_Splash_400x400.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "600x600_00000.png",
+      "filename" : "Siitch_Splash_600x600.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
