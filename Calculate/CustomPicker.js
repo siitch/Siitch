@@ -1,5 +1,4 @@
 import {
-  Animated,
   Dimensions,
   KeyboardAvoidingView,
   Text,
@@ -7,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Animated, { useSharedValue, withTiming } from "react-native-reanimated";
 import { frequencies, getItemDisplayMetric, impactUnits, quantities } from "./CalculatorGeneral";
 import { calculatorStyle } from "../Styles/Style";
 import { Chevron } from "react-native-shapes";
@@ -32,7 +32,7 @@ export const QuantityPicker = ({
                                  dynamicFontScaleFactor
                                }) => {
   const picker = useRef(null);
-  const quantityPickerShadowLift = useRef(new Animated.Value(0)).current;
+  const quantityPickerShadowLift = useSharedValue(0);
   const [dynamicFontSize, setDynamicFontSize] = useState(20);
   const scaleFontSize = (width) => {
     const actualWidth = width + dynamicFontSize;
@@ -81,20 +81,21 @@ export const QuantityPicker = ({
           style={{
             flex: 1,
             fontSize: dynamicFontSize,
+            color: 'black',
             maxWidth: inputTextMaxWidth ? inputTextMaxWidth : "75%",
           }}
           onContentSizeChange={onContentSizeChange}
           numberOfLines={1}
           textAlign={"center"}
           placeholder={"Select"}
+          placeholderTextColor={"#c7c7cd"}
           keyboardType={"decimal-pad"}
           returnKeyType={"done"}
           editable={false}
           value={quantity ? quantity.toString() : ""}
         />
         <TouchableOpacity
-          style={calculatorStyle.chevronIconStyle}
-          onPress={() => picker.current.togglePicker(true)}>
+          style={calculatorStyle.chevronIconStyle}>
           <Chevron type={"thin"} size={1}></Chevron>
         </TouchableOpacity>
         <RNPickerSelect
@@ -149,7 +150,7 @@ export const FrequencyPicker = ({
                                   hasPlaceholder,
                                   customStyle
                                 }) => {
-  const frequencyPickerShadowLift = useRef(new Animated.Value(0)).current;
+  const frequencyPickerShadowLift = useSharedValue(0);
   return (
     <View style={hasTitle ? {alignItems: "center"} : {}}>
       {hasTitle && (
@@ -203,7 +204,7 @@ export const FrequencyPicker = ({
 }
 
 export const ImpactPicker = ({impactUnit, setImpactUnit, customUnits}) => {
-  const impactPickerShadowLift = useRef(new Animated.Value(0)).current;
+  const impactPickerShadowLift = useSharedValue(0);
   return (
     <Animated.View style={[calculatorStyle.animatedShadow, {
       width: "100%",
@@ -257,21 +258,15 @@ export const ImpactPicker = ({impactUnit, setImpactUnit, customUnits}) => {
 }
 
 const liftUp = (pickerShadow) => {
-  Animated.timing(
-    pickerShadow, {
-      toValue: 0.4,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
+  pickerShadow.value = withTiming(0.4, {
+    duration: 150
+  })
 }
 
 const dropDown = (pickerShadow) => {
-  Animated.timing(
-    pickerShadow, {
-      toValue: 0,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
+  pickerShadow.value = withTiming(0, {
+    duration: 150
+  })
 }
 
 function MainPickerInputAccessoryView({ itemName, globalUnit, initialQuantity, handleQuantityUpdate }) {
