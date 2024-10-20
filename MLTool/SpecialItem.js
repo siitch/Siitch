@@ -268,7 +268,7 @@ const SpecialItem = ({globalUnit}) => {
       <View style={{margin: 10}}>
         {confetti && (
           <LottieView
-            source={require('./ItemDetailImages/confetti-partyyy.json')}
+            source={require('./ItemDetailImages/confetti-partyyy.lottie')}
             autoPlay={true}
             loop={false}
             speed={1.5}
@@ -642,9 +642,9 @@ const SpecialItem = ({globalUnit}) => {
                 <Text>
                   The many sustainable benefits of buying local and in-season:{'\n'}
                 </Text>
-                {whyBuyInSeason.map((why) => {
+                {whyBuyInSeason.map((why, index) => {
                   return(
-                    <View style={{flexDirection: 'row'}}>
+                    <View key={index} style={{flexDirection: 'row'}}>
                       <View style={{marginRight: 5}}>
                         <Text style={{fontSize: 8, marginTop: 4}}>●</Text>
                       </View>
@@ -793,9 +793,9 @@ const SpecialItem = ({globalUnit}) => {
                   }}
                         style={{color: '#00ADEF'}}> WebMD{'\n'}</Text>
                 </Text>
-                {goodSiitch.map((good) => {
+                {goodSiitch.map((good, index) => {
                   return(
-                    <View style={{flexDirection: 'row'}}>
+                    <View key={index} style={{flexDirection: 'row'}}>
                       <View style={{marginRight: 5}}>
                         <Text style={{fontSize: 8, marginTop: 4}}>●</Text>
                       </View>
@@ -868,9 +868,9 @@ const SpecialItem = ({globalUnit}) => {
                   }}
                         style={{color: '#00ADEF'}}> Florida Citrus{'\n'}</Text>
                 </Text>
-                {funSiitch.map((fun) => {
+                {funSiitch.map((fun, index) => {
                   return(
-                    <View style={{flexDirection: 'row'}}>
+                    <View key={index} style={{flexDirection: 'row'}}>
                       <View style={{marginRight: 5}}>
                         <Text style={{fontSize: 8, marginTop: 4}}>●</Text>
                       </View>

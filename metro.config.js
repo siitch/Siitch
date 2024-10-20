@@ -7,7 +7,7 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  */
 const config = {
   resolver: {
-    assetExts: ['tflite', 'txt', 'jpg', 'ttf', 'png', 'jpeg', 'mp3'],
+    assetExts: ['tflite', 'txt', 'jpg', 'ttf', 'png', 'jpeg', 'mp3', 'lottie'],
   },
   transformer: {
     assetPlugins: ['expo-asset/tools/hashAssetFiles'],
