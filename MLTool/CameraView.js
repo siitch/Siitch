@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Dimensions, Image, Linking, Modal, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Camera } from "expo-camera/legacy";
+import { Camera, CameraType } from "expo-camera/legacy";
 // Third party loading indicator, looks great
 import { ActivityIndicator } from "react-native-paper";
 // Used to change the dimension of photo
@@ -138,7 +138,7 @@ function CameraView() {
             prepareModal().then(r => setIsModelReady(true))
           }
         }}
-        type={Camera.Constants.Type.back}
+        type={CameraType.back}
         style={{
           aspectRatio: Width / Height,// Change this value to change the ratio of camera preview area
         }}
