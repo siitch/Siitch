@@ -234,7 +234,7 @@ const JeansWater = () => {
                 width: Width / 4,
                 textAlign: 'right',
               }}>
-              238 gal.
+              232 gal.
             </Text>
             <Text
               style={{
@@ -261,7 +261,7 @@ const JeansWater = () => {
                 width: Width / 4,
                 textAlign: 'right',
               }}>
-              36 gal.
+              30 gal.
             </Text>
             <Text
               style={{
