@@ -16,7 +16,7 @@ import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import Profiles from "../ImageDB";
 import FlipCard from "../components/FlipCard/FlipCard"
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import {showMessage} from "react-native-flash-message";
 import header from "../images/header.png";
 import watermark from "../images/watermark_compare.png";

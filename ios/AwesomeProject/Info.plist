@@ -45,6 +45,8 @@
 	<string>Allow photo access to save your results</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow photo access to save your results</string>
+	<key>RCTNewArchEnabled</key>
+	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

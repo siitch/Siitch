@@ -23,7 +23,7 @@ import Profiles from "../ImageDB";
 // React native's firebase analytics library
 import analytics from "@react-native-firebase/analytics";
 // Expo's filesystem library to delete temp photo
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import sloth from "../images/sloth.png";
 import { ReactNavigationOverlay } from "../components/ReactNavigationOverlay";
 import { loadTensorflowModel } from "react-native-fast-tflite";

@@ -25,7 +25,7 @@ import {
 import ViewShot from "react-native-view-shot";
 import header from "../images/header.png";
 import watermark from "../images/watermark_running_total.png";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import {BlurView} from "expo-blur";
 import {Button, FloatingButton} from "react-native-ui-lib";

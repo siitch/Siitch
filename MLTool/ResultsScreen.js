@@ -21,7 +21,7 @@ import Profiles from '../ImageDB.js';
 // Firebase analytics
 import analytics from '@react-native-firebase/analytics';
 // Expo's filesystem library to delete temp photo
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import {ReactNavigationOverlay} from "../components/ReactNavigationOverlay";
 import { useNavigation } from "@react-navigation/native";
 import { toByteArray } from "react-native-quick-base64";
