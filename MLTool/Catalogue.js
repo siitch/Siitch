@@ -14,7 +14,7 @@ import {styles} from "../Search/Style";
 import * as React from "react";
 import {useEffect, useState, useRef} from "react";
 // Firebase
-import {FirebaseRealtimeDatabase, ref, onValue, set} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get, set} from "../Firebase/firebase";
 // Used to display category images
 import Profiles from "../ImageDB";
 // Used to display search result images
@@ -120,9 +120,9 @@ export default function Catalogue (){
     // Function called to search the database using user input and update the screen
     const readData = input => {
         const readInputRef = ref(FirebaseRealtimeDatabase, input);
-        onValue(readInputRef, (get) => {
+        get(readInputRef).then((snapshot) => {
             // Self refresh and render results
-            navigation.navigate('Catalogue', {name: input, value: get.val()})
+            navigation.navigate('Catalogue', {name: input, value: snapshot.val()})
         });
     };
 
@@ -161,7 +161,7 @@ export default function Catalogue (){
 
         //Get the current "add later" list based on the first letter of the new item
         const getCurrentAddLaterListRef = ref(FirebaseRealtimeDatabase, '/Future Library/' + category);
-        onValue(getCurrentAddLaterListRef, (data) => {
+        get(getCurrentAddLaterListRef).then((data) => {
             const futureLibrary = data.val();
             let idx = 0;
             for (let frequency of futureLibrary) {

@@ -32,7 +32,7 @@ import {Button, FloatingButton} from "react-native-ui-lib";
 import * as MediaLibrary from "expo-media-library";
 import {showMessage} from "react-native-flash-message";
 import Profiles from "../ImageDB";
-import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "../Firebase/firebase";
 import {createStackNavigator} from "@react-navigation/stack";
 import {NumberWithTextLabel, NumberWithThousandSeparation} from "./NumberFormatter";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -117,32 +117,31 @@ export default function Calculator ({route}) {
   }
   async function fetchItemFromDatabase() {
     const fetchItemRef = ref(FirebaseRealtimeDatabase, '/' + currentItem);
-    return onValue(fetchItemRef, (data) => {
-      let itemData = data.val();
-      if (itemData === null) {
-        Alert.alert('This item does not exist');
-        setFetchAndAdd(false);
-        return false;
-      }
-      if (itemData[getItemWaterParameterLabel(itemData['Category'], 'G')] === '') {
-        Alert.alert('Water unit does not exist. Try the compare tool.');
-        setFetchAndAdd(false);
-        return false;
-      } else {
-        setItemDetails({
-          itemName: currentItem,
-          itemCategory: itemData['Category'],
-          itemDisplayedMetricInGallon: itemData['Display Unit Imperial'],
-          itemDisplayedMetricInLiter: itemData['Display Unit Metric'],
-          itemDisplayedUnitLabelInGallon: itemData['Individiual Unit Gal'],
-          itemDisplayedUnitLabelInLiter: itemData['Individiual Unit L'],
-          itemWaterInGallon: itemData[getItemWaterParameterLabel(itemData['Category'], 'G')],
-          itemWaterInLiter: itemData[getItemWaterParameterLabel(itemData['Category'], 'L')]
-        });
-        console.log('Item fetch succeed');
-        return true;
-      }
-    });
+    const data = await get(fetchItemRef);
+    let itemData = data.val();
+    if (itemData === null) {
+      Alert.alert('This item does not exist');
+      setFetchAndAdd(false);
+      return false;
+    }
+    if (itemData[getItemWaterParameterLabel(itemData['Category'], 'G')] === '') {
+      Alert.alert('Water unit does not exist. Try the compare tool.');
+      setFetchAndAdd(false);
+      return false;
+    } else {
+      setItemDetails({
+        itemName: currentItem,
+        itemCategory: itemData['Category'],
+        itemDisplayedMetricInGallon: itemData['Display Unit Imperial'],
+        itemDisplayedMetricInLiter: itemData['Display Unit Metric'],
+        itemDisplayedUnitLabelInGallon: itemData['Individiual Unit Gal'],
+        itemDisplayedUnitLabelInLiter: itemData['Individiual Unit L'],
+        itemWaterInGallon: itemData[getItemWaterParameterLabel(itemData['Category'], 'G')],
+        itemWaterInLiter: itemData[getItemWaterParameterLabel(itemData['Category'], 'L')]
+      });
+      console.log('Item fetch succeed');
+      return true;
+    }
   }
   useEffect(() => {
     if (route.params !== undefined) {

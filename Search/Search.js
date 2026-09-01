@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "../Firebase/firebase";
 import {useState, useEffect} from 'react';
 import * as React from 'react';
 import {Searchbar} from 'react-native-paper';
@@ -38,21 +38,14 @@ export default function Search() {
   };
   const readData = image => {
     const searchRef = ref(FirebaseRealtimeDatabase, image);
-    onValue(searchRef, (get) => {
+    get(searchRef).then((snapshot) => {
       if (image === 'Beef' || image === 'Jeans' || image === 'Makeup'){
         navigation.navigate('SpecialItemTabs', {itemName: image})
-      } else if (get.val() === null) {
+      } else if (snapshot.val() === null) {
         Alert.alert('Error!', "Can't find result for this keyword")
       } else {
         navigation.navigate('Detail', {itemName: image})
       }
-      //   get.val() === null && image !== 'Makeup' ? (
-      //     <View>
-      //       {Alert.alert('Error!', "Can't find result for this keyword")}
-      //     </View>
-      //   ) : (
-      //     navigation.navigate('Search', {name: image, value: get.val()})
-      //   ),
     });
   };
   useEffect(() => {

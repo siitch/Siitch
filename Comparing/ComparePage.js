@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "../Firebase/firebase";
 import {
   Dimensions,
   Image,
@@ -42,7 +42,7 @@ export default function ComparePage ({route}) {
     parentList = []
     for (let item in itemsArray) {
       const getItemRef = ref(FirebaseRealtimeDatabase, '/' + itemsArray[item]);
-      onValue(getItemRef, (data) => {
+      get(getItemRef).then((data) => {
         let info = data.val();
         items.push({
           name: itemsArray[item],

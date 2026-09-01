@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Provider as PaperProvider } from 'react-native-paper';
 import FlashMessage from "react-native-flash-message";
-import {FirebaseRealtimeDatabase, ref, onValue} from "./Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "./Firebase/firebase";
 import {LandingDetails} from './LandingPage';
 
 global.globalList = []
@@ -26,7 +26,7 @@ const App = () => {
 
   function getData () {
     const getDataRef = ref(FirebaseRealtimeDatabase, '/');
-    onValue(getDataRef, (data) => {
+    get(getDataRef).then((data) => {
       let fetchedData = data.val();
       for (let item in fetchedData) {
         if (item === 'Future Library') continue;

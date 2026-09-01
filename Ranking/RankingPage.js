@@ -1,22 +1,21 @@
 import Profiles from '../ImageDB.js';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { styles } from './Styles';
 import { RankingItem } from './RankingItem';
-import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "../Firebase/firebase";
 import analytics from '@react-native-firebase/analytics';
 import itemDetailImages from "../MLTool/ItemDetailImages/itemDetailImages";
 import {RankingInfoModal, RankingLearnMore} from "../components/Modals/Modals";
 import { GLSwitcher } from "../components/GLSwitcher";
 
-let fetchedData = {};
-let items = {};
-let sortable = [];
-let max = 0;
-
 const DeviceWidth = Dimensions.get('window').width;
 
 export const RankingPage = ({category, id}) => {
+  const fetchedDataRef = useRef({});
+  const itemsRef = useRef({});
+  const sortableRef = useRef([]);
+  const maxRef = useRef(0);
 
   const [fetched, handleFetch] = useState(false);
   const [currentCategory, changeCategory] = useState('');
@@ -73,15 +72,17 @@ export const RankingPage = ({category, id}) => {
 
   const fetchData = () => {
     const getDataRef = ref(FirebaseRealtimeDatabase, '/');
-    onValue(getDataRef, (data) => {
-      fetchedData = data.val();
+    get(getDataRef).then((data) => {
+      fetchedDataRef.current = data.val();
+      const fetchedData = fetchedDataRef.current;
       for (let item in fetchedData) {
         if((fetchedData[item]["Category"] === id || fetchedData[item]["Category 2"] === id || fetchedData[item]["Category 3"] === id) && fetchedData[item][parameter]) {
-          items[item] = fetchedData[item];
+          itemsRef.current[item] = fetchedData[item];
         }
       }
 
-      sortable = [];
+      const items = itemsRef.current;
+      let sortable = [];
 
       if(Object.keys(items).length > 0) {
         for (let item in items) {
@@ -92,28 +93,33 @@ export const RankingPage = ({category, id}) => {
           return parseInt(a[1]) - parseInt(b[1]);
         });
 
-        min = parseInt(sortable[0][1]);
+        const min = parseInt(sortable[0][1]);
 
         sortable.reverse();
 
-        max = parseInt(sortable[0][1]);
+        maxRef.current = parseInt(sortable[0][1]);
+        sortableRef.current = sortable;
 
         handleFetch(true);
       }
     });
   }
 
-  if(!fetched) {
-    fetchData();
-  }
+  useEffect(() => {
+    if (category !== currentCategory) {
+      changeCategory(category);
+      handleFetch(false);
+      itemsRef.current = {};
+      sortableRef.current = [];
+      maxRef.current = 0;
+    }
+  }, [category, currentCategory]);
 
-  if(category !== currentCategory) {
-    changeCategory(category);
-    handleFetch(false);
-    items = {};
-    sortable = [];
-    max = 0;
-  }
+  useEffect(() => {
+    if (!fetched) {
+      fetchData();
+    }
+  }, [fetched]);
 
   const unitTitle = (category, unit) => {
     if(category === "Everyday Items" || category === "Everyday Foods" || category === "All Drinks" || category === "Alcoholic" || category === "Non-Alcoholic") {
@@ -158,9 +164,9 @@ export const RankingPage = ({category, id}) => {
             unitTitle(category, unit)
           }
           {
-            sortable.map((item, index) => {
+            sortableRef.current.map((item, index) => {
               return(
-                <RankingItem key={index} max={max} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]}/>
+                <RankingItem key={index} max={maxRef.current} cost={parseInt(item[1])} item={item[0]} image={Profiles[item[0]] ? Profiles[item[0]] : Profiles.water_drops} unit={unit} category={id} displayUnit={item[2]}/>
               )
             })
           }

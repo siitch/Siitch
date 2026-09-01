@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Hyperlink from "react-native-hyperlink";
 import { Card } from "react-native-ui-lib";
-import { FirebaseRealtimeDatabase, ref, onValue } from "../Firebase/firebase";
+import { FirebaseRealtimeDatabase, ref, get } from "../Firebase/firebase";
 import React, { useEffect, useState } from "react";
 import ResultImage from "./ResultImage";
 import Profiles from "../ImageDB.js";
@@ -216,6 +216,9 @@ export default function ItemDetail({ route }) {
 
   useEffect(() => {
     readData(itemName);
+  }, [itemName]);
+
+  useEffect(() => {
     calculateImpact();
     changeMetric();
     checkCompostable();
@@ -289,12 +292,12 @@ export default function ItemDetail({ route }) {
 
   function readData(itemName) {
     const getItemRef = ref(FirebaseRealtimeDatabase, itemName);
-    onValue(getItemRef, function(get) {
-      if (get.val() === null && itemName !== "Makeup") {
+    get(getItemRef).then(function(snapshot) {
+      if (snapshot.val() === null && itemName !== "Makeup") {
         alert("No info for " + itemName + " now");
         console.log("No info for this item");
       } else {
-        const itemObj = get.val();
+        const itemObj = snapshot.val();
         // Global
         setItem(itemObj);
         setCategory(itemObj["Category"]);

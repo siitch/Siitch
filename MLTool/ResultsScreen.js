@@ -15,7 +15,7 @@ import * as ImageManipulator from 'expo-image-manipulator';
 // Used to map index results to item names
 import {CLASSES} from './Siitch_model/class_names';
 // Used to get item category from itemName
-import {FirebaseRealtimeDatabase, ref, onValue} from "../Firebase/firebase";
+import {FirebaseRealtimeDatabase, ref, get} from "../Firebase/firebase";
 // For category images, if needed
 import Profiles from '../ImageDB.js';
 // Firebase analytics
@@ -73,12 +73,12 @@ export default function ResultsScreen({route}) {
     // Set the category state to the category of the most likely item...
     if (predictions) {
       const getPredictionItemsRef = ref(FirebaseRealtimeDatabase, predictions[0].label);
-      onValue(getPredictionItemsRef, function(get) {
-        if (get.val() === null && predictions[0].label !== 'Makeup') {
+      get(getPredictionItemsRef).then(function(snapshot) {
+        if (snapshot.val() === null && predictions[0].label !== 'Makeup') {
           alert('No info for ' + predictions[0].label + ' now');
           console.log('No info for this item');
         } else {
-          const itemObj = get.val();
+          const itemObj = snapshot.val();
           // Give higher priority to more specific categories
           if (itemObj['Category 3']) {
             if (Math.random() > 0.4) {
